@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Robot</string>
+
+
+
+    <string name="settings_title">设置</string>
+    <string name="settings_electricity_quantity">回充电量:</string>
+    <string name="settings_language">语言:</string>
+    <string name="settings_volume">音量:</string>
+    <string name="settings_robot_speed">机器人行进速度:</string>
+    <string name="settings_led_brightness">LED亮度:</string>
+    <string name="settings_version_number">版本号:</string>
+
 </resources>
