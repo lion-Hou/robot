@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/robot"
+        android:layout_width="600px"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:background="@drawable/btn_gb_normal">
+
+            <ImageView
+                android:id="@+id/net"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:src="@drawable/batty"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/net"
+                android:layout_marginLeft="400px"
+                android:text="ttttttt"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/robot_img"
+            android:layout_width="match_parent"
+            android:layout_height="700px"
+            android:layout_below="@id/title"
+            android:src="@drawable/batty"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/robot_img"
+            android:background="@drawable/btn_gb_normal"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/robot"
+        >
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
