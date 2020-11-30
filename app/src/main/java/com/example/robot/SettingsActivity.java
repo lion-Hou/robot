@@ -1,6 +1,7 @@
 package com.example.robot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
@@ -28,6 +29,7 @@ public class SettingsActivity extends Activity {
     @BindView(R.id.settings_versionNumber)
     TextView versionNumberTextView;
 
+    private Context mContext;
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
 
@@ -39,6 +41,9 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        mContext = SettingsActivity.this;
+        initView();
+        bindView();
 
         EventBus.getDefault().register(this);
         gsonUtils = new GsonUtils();
@@ -55,6 +60,63 @@ public class SettingsActivity extends Activity {
         ArrayAdapter<String> robotSpeedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languageItems);
         robotSpeedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(robotSpeedAdapter);
+
+    }
+
+    private void bindView() {
+        //electricityQuantity
+        electricityQuantitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        //volume
+        volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        //ledBrightnessSeekBar
+        ledBrightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override

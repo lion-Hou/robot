@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
 
     <RelativeLayout
         android:id="@+id/robot"
@@ -23,7 +24,7 @@
                 android:src="@drawable/wifi"/>
 
             <ImageView
-                android:id="@+id/batty"
+                android:id="@+id/battery"
                 android:layout_width="70px"
                 android:layout_height="70px"
                 android:layout_toRightOf="@+id/net"
@@ -34,7 +35,7 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/batty"/>
+                android:layout_toRightOf="@+id/battery"/>
 
         </RelativeLayout>
 
@@ -55,6 +56,7 @@
 
     <fragment
         android:id="@+id/first_fragment"
+        android:name="com.example.robot.map.FirstFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="50px"

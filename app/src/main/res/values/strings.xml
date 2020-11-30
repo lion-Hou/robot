@@ -1,4 +1,13 @@
 <resources>
+    <string name="app_name">消毒机器人</string>
+    <string name="text_map">地图:</string>
+    <string name="text_task">任务:</string>
+    <string name="run">执行</string>
+    <string name="map">地图</string>
+    <string name="task">任务</string>
+    <string name="history">历史</string>
+    <string name="settings">设置</string>
+
     <string name="settings_title">设置</string>
     <string name="settings_electricity_quantity">回充电量:</string>
     <string name="settings_language">语言:</string>
@@ -6,4 +15,5 @@
     <string name="settings_robot_speed">机器人行进速度:</string>
     <string name="settings_led_brightness">LED亮度:</string>
     <string name="settings_version_number">版本号:</string>
+
 </resources>

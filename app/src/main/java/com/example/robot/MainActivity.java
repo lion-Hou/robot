@@ -16,6 +16,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends FragmentActivity {
 
@@ -27,11 +29,12 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         Fragment fragment = new Fragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,fragment).commit();
         gsonUtils = new GsonUtils();
-        conn();
+        connect();
 
     }
 
@@ -41,7 +44,7 @@ public class MainActivity extends FragmentActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    public void conn(){
+    public void connect(){
         try {
             if(emptyClient == null){
                 emptyClient = new EmptyClient(new URI("ws://10.7.5.176:8887"));

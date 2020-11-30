@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name_en">Robot</string>
+    <string name="text_map_en">Map:</string>
+    <string name="text_task_en">Task:</string>
+    <string name="run_en">Run</string>
+    <string name="map_en">Map</string>
+    <string name="task_en">Task</string>
+    <string name="history_en">History</string>
+    <string name="setting_en">Settings</string>
+
+    <string name="settings_title_en">Settings</string>
+    <string name="settings_electricity_quantity_en">Recharge Capacity:</string>
+    <string name="settings_language_en">Language:</string>
+    <string name="settings_volume_en">Volume:</string>
+    <string name="settings_robot_speed_en">Robot Speed:</string>
+    <string name="settings_led_brightness_en">LED Brightness:</string>
+    <string name="settings_version_number_en">Version Number:</string>
+
+</resources>
