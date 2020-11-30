@@ -16,4 +16,8 @@
     <string name="settings_led_brightness">LED亮度:</string>
     <string name="settings_version_number">版本号:</string>
 
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="new_map_text">Map Name</string>
+
 </resources>
