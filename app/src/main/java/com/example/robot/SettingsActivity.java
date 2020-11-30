@@ -44,23 +44,27 @@ public class SettingsActivity extends Activity {
         mContext = SettingsActivity.this;
         initView();
         bindView();
-
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         gsonUtils = new GsonUtils();
 
     }
 
     private void initView() {
+        languageSpinner = new Spinner(this);
         languageItems = new String[]{"中文", "English"};
         ArrayAdapter<String> languageAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languageItems);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageAdapter);
 
+        robotSpeedSpinner = new Spinner(this);
         robotSpeedItems = new String[]{"低", "高"};
         ArrayAdapter<String> robotSpeedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languageItems);
         robotSpeedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languageSpinner.setAdapter(robotSpeedAdapter);
+        robotSpeedSpinner.setAdapter(robotSpeedAdapter);
 
+        electricityQuantitySeekBar = new SeekBar(this);
+        volumeSeekBar = new SeekBar(this);
+        ledBrightnessSeekBar = new SeekBar(this);
     }
 
     private void bindView() {
@@ -117,12 +121,19 @@ public class SettingsActivity extends Activity {
 
             }
         });
+
+
+
+
+
+
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
     }
 
 
