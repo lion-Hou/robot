@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.robot.content.EventBusMessage;
@@ -26,6 +27,9 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
+
+        Fragment fragment = new Fragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,fragment).commit();
         gsonUtils = new GsonUtils();
         conn();
 

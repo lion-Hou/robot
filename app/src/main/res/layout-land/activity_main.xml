@@ -55,7 +55,6 @@
 
     <fragment
         android:id="@+id/first_fragment"
-        android:name="com.example.robot.map.FirstFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="50px"

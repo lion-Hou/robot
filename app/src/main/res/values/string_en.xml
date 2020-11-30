@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Robot</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_map">Map:</string>
+    <string name="text_task">Task:</string>
+    <string name="run">Run</string>
+    <string name="map">Map</string>
+    <string name="task">Task</string>
+    <string name="history">Histry</string>
+    <string name="setting">Setting</string>
+
+</resources>
