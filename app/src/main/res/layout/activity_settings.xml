@@ -6,16 +6,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="500dp"
+        android:layout_width="400dp"
         android:layout_height="80dp"
+        android:gravity="center"
         android:text="@string/settings_title"
         android:textSize="60dp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="144dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -29,56 +29,92 @@
 
         <TextView
             android:id="@+id/electricityQuantityTV"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             android:text="@string/settings_electricity_quantity"
             android:textSize="38dp" />
 
         <SeekBar
-            android:id="@+id/electricityQuantity"
-            android:layout_width="300dp"
+            android:id="@+id/settings_electricityQuantity"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             app:layout_constraintLeft_toRightOf="@+id/electricityQuantityTV" />
 
         <TextView
             android:id="@+id/languageTV"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             android:text="@string/settings_language"
             android:textSize="38dp"
             app:layout_constraintTop_toBottomOf="@+id/electricityQuantityTV" />
 
+        <Spinner
+            android:id="@+id/settings_language"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            app:layout_constraintLeft_toRightOf="@+id/languageTV"
+            app:layout_constraintTop_toBottomOf="@+id/settings_electricityQuantity" />
+
         <TextView
             android:id="@+id/volumeTV"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             android:text="@string/settings_volume"
             android:textSize="38dp"
             app:layout_constraintTop_toBottomOf="@+id/languageTV" />
 
+        <SeekBar
+            android:id="@+id/settings_volume"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            app:layout_constraintLeft_toRightOf="@+id/electricityQuantityTV"
+            app:layout_constraintTop_toBottomOf="@+id/settings_language" />
+
         <TextView
             android:id="@+id/robotSpeedTV"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             android:text="@string/settings_robot_speed"
             android:textSize="38dp"
             app:layout_constraintTop_toBottomOf="@+id/volumeTV" />
 
+        <Spinner
+            android:id="@+id/settings_robotSpeed"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            app:layout_constraintLeft_toRightOf="@+id/robotSpeedTV"
+            app:layout_constraintTop_toBottomOf="@+id/settings_volume" />
+
         <TextView
             android:id="@+id/ledBrightnessTV"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="45dp"
-            android:text="@string/settings_language"
+            android:text="@string/settings_led_brightness"
             android:textSize="38dp"
             app:layout_constraintTop_toBottomOf="@+id/robotSpeedTV" />
 
+        <SeekBar
+            android:id="@+id/settings_ledBrightness"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            app:layout_constraintLeft_toRightOf="@+id/ledBrightnessTV"
+            app:layout_constraintTop_toBottomOf="@+id/settings_robotSpeed" />
+
         <TextView
             android:id="@+id/versionNumberTV"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             android:text="@string/settings_version_number"
             android:textSize="38dp"
             app:layout_constraintTop_toBottomOf="@+id/ledBrightnessTV" />
+
+        <TextView
+            android:id="@+id/settings_versionNumber"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:textSize="38dp"
+            app:layout_constraintLeft_toRightOf="@+id/versionNumberTV"
+            app:layout_constraintTop_toBottomOf="@+id/settings_ledBrightness" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
