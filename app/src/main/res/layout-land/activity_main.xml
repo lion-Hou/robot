@@ -14,29 +14,34 @@
         <RelativeLayout
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="50px"
-            android:background="@drawable/btn_gb_normal">
+            android:layout_height="100px">
 
             <ImageView
                 android:id="@+id/net"
-                android:layout_width="50px"
-                android:layout_height="50px"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:src="@drawable/wifi"/>
+
+            <ImageView
+                android:id="@+id/batty"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:layout_toRightOf="@+id/net"
+                android:layout_marginLeft="300px"
                 android:src="@drawable/batty"/>
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/net"
-                android:layout_marginLeft="400px"
-                android:text="ttttttt"/>
+                android:layout_toRightOf="@+id/batty"/>
 
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/robot_img"
             android:layout_width="match_parent"
-            android:layout_height="700px"
+            android:layout_height="600px"
             android:layout_below="@id/title"
             android:src="@drawable/batty"/>
 
@@ -48,18 +53,15 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <fragment
+        android:id="@+id/first_fragment"
+        android:name="com.example.robot.map.FirstFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/robot"
-        >
+        android:layout_marginLeft="50px"
+        android:layout_toRightOf="@+id/robot">
 
-    </RelativeLayout>
-
-
-
-
-
+    </fragment>
 
 
 </RelativeLayout>

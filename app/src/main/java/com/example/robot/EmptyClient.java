@@ -110,6 +110,13 @@ public class EmptyClient extends WebSocketClient {
             case Content.SENDGPSPOSITION:
                 EventBus.getDefault().post(new EventBusMessage(10009, message));
 
+            case Content.BATTERY_DATA:
+                System.out.println("GETPOSITION: " + message);
+                jsonObject = new JSONObject(message);
+                String batty = jsonObject.getString(Content.BATTERY_DATA);
+                System.out.println("batty:"+batty.toString());
+
+
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));
         }

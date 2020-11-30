@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="900px"
+        android:layout_height="300px"
+        >
+
+        <TextView
+            android:id="@+id/text_map"
+            android:layout_width="150px"
+            android:layout_height="80px"
+            android:text="@string/text_map"/>
+        <Spinner
+            android:id="@+id/spinner_map"
+            android:layout_width="200px"
+            android:layout_height="80px"
+            android:layout_toRightOf="@+id/text_map"/>
+
+        <TextView
+            android:id="@+id/text_task"
+            android:layout_width="150px"
+            android:layout_height="80px"
+            android:layout_below="@id/text_map"
+            android:text="@string/text_map"/>
+        <Spinner
+            android:id="@+id/spinner_task"
+            android:layout_width="200px"
+            android:layout_height="80px"
+            android:layout_below="@id/text_map"
+            android:layout_toRightOf="@+id/text_task"/>
+
+        <Button
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_marginLeft="700px"
+            android:text="@string/run"/>
+
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/log"
+        android:layout_width="match_parent"
+        android:layout_height="400px"
+        android:layout_below="@+id/title"
+        android:background="@drawable/btn_gb_normal"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/log">
+
+        <Button
+            android:id="@+id/map"
+            android:layout_width="300px"
+            android:layout_height="200px"
+            android:text="@string/map"/>
+
+        <Button
+            android:id="@+id/task"
+            android:layout_width="300px"
+            android:layout_height="200px"
+            android:layout_toRightOf="@+id/map"
+            android:text="@string/task"/>
+
+        <Button
+            android:id="@+id/history"
+            android:layout_width="300px"
+            android:layout_height="200px"
+            android:layout_toRightOf="@+id/task"
+            android:text="@string/history"/>
+
+        <Button
+            android:id="@+id/setting"
+            android:layout_width="300px"
+            android:layout_height="200px"
+            android:layout_toRightOf="@+id/history"
+            android:text="@string/setting"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
