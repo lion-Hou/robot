@@ -4,17 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".map.AddNewMapFragment">
-    
+    tools:context=".map.AddNewMapFragment"
+    tools:ignore="MissingDefaultResource">
+
     <ImageView
         android:id="@+id/new_map_mapImage"
         android:layout_width="match_parent"
-        android:layout_height="750dp"
+        android:layout_height="700px"
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100px"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/new_map_mapImage"
         >
@@ -23,30 +24,35 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
-            android:text="@string/new_map_text"/>
+            android:gravity="center"
+            android:text="@string/new_map_name_text"/>
 
         <EditText
             android:id="@+id/new_map_mapName_editText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
-            android:text="请输入地图名称" />
+            android:text="@string/new_map_name_edit" />
 
         <Button
+            android:id="@+id/new_map_scan"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
-            android:text="开始扫描" />
+            android:text="@string/new_map_scan"/>
+
         <Button
+            android:id="@+id/new_map_save"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
-            android:text="Save" />
+            android:text="@string/new_map_save"/>
 
         <Button
+            android:id="@+id/new_map_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Back"
+            android:text="@string/new_map_back"
             android:textSize="30dp" />
     </LinearLayout>
 

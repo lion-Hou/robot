@@ -17,10 +17,14 @@
     <string name="settings_version_number">版本号:</string>
 
 
-    <string name="new_map_name_text">Map Name:</string>
+    <string name="new_map_name_text">地图名:</string>
+    <string name="new_map_name_edit">请输入地图名称</string>
+    <string name="new_map_scan">开始扫描</string>
+    <string name="new_map_save">保存</string>
+    <string name="new_map_back">返回</string>
 
-    <string name="edit_map_name_text">Map Name:</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="edit_map_name_text">地图名:</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
