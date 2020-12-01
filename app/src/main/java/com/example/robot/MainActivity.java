@@ -8,14 +8,21 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.robot.bean.RobotMapBean;
+import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.map.FirstFragment;
+import com.example.robot.map.MapManagerFragment;
+import com.example.robot.map.SecoundFragment;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -25,6 +32,11 @@ public class MainActivity extends FragmentActivity {
     public static String TAG="MainActivity";
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
+    private FirstFragment firstFragment;
+    private SecoundFragment secoundFragment;
+    private MapManagerFragment mapManagerFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +44,13 @@ public class MainActivity extends FragmentActivity {
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Fragment fragment = new Fragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,fragment).commit();
         gsonUtils = new GsonUtils();
         connect();
-
+        firstFragment = new FirstFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,firstFragment).commit();
+        secoundFragment  = new SecoundFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment,secoundFragment).commit();
+        mapManagerFragment = new MapManagerFragment();
     }
 
     @Override
@@ -66,10 +80,19 @@ public class MainActivity extends FragmentActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
 
-        if (messageEvent.getState() == 10006) {
-            String type = (String) messageEvent.getT();
-            System.out.println("type:" + type);
+        Log.d(TAG, "onEventMsg ： " + messageEvent.getT());
+        if (messageEvent.getState() == 10005) {
+            Log.d(TAG, "onEventMsg ： " + "3");
+            firstFragment.refesh((String) messageEvent.getT());
+        }else if (messageEvent.getState() == 10006) {
+                String type = (String) messageEvent.getT();
+                System.out.println("type:" + type);
+
+        }else if (messageEvent.getState() == 10001){
+
+            mapManagerFragment.refesh((String) messageEvent.getT());
         }
     }
+
 
 }

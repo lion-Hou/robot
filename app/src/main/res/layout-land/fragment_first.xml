@@ -28,7 +28,7 @@
             android:layout_width="150px"
             android:layout_height="80px"
             android:layout_below="@id/main_text_map"
-            android:text="@string/text_map"/>
+            android:text="@string/text_task"/>
         <TextView
             android:id="@+id/main_spinner_task"
             android:layout_width="200px"
