@@ -34,9 +34,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
     Button newMapSave;
     @BindView(R.id.new_map_back)
     Button newMapBack;
-    @BindView(R.id.new_map_scan)
-
-
 
     private GsonUtils gsonUtils;
     public EmptyClient emptyClient;

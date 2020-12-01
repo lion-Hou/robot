@@ -2,12 +2,14 @@ package com.example.robot.map;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,7 +26,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private static final String TAG = "MapManagerFragment";
 
     @BindView(R.id.manager_selected)
-    Spinner managerSelected;
+    TextView managerSelected;
     @BindView(R.id.manager_newMap)
     Button managerNewMap;
     @BindView(R.id.manager_mapImage)
@@ -41,6 +43,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private GsonUtils gsonUtils;
     public EmptyClient emptyClient;
     private Context mContext;
+    private View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,22 +53,16 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map_manager, container, false);
-    }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_map_manager, container, false);
         ButterKnife.bind(this, view);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initView();
         initListener();
+        initView();
+        return view;
     }
 
     private void initView() {
+        managerNewMap.setOnClickListener(this);
 
     }
 
@@ -76,8 +73,13 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.main_settings:
-
+            case R.id.manager_newMap:
+                Log.d(TAG, "onEventMsg ： " + "新建地图");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new AddNewMapFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             default:
                 break;

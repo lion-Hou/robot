@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/new_map_mapImage"
         android:layout_width="match_parent"
-        android:layout_height="700px"
+        android:layout_height="500px"
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
