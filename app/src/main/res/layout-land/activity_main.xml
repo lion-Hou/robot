@@ -46,7 +46,8 @@
             android:layout_below="@id/title"
             android:src="@drawable/batty"/>
 
-        <RelativeLayout
+        <fragment
+            android:id="@+id/second_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/robot_img"

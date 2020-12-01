@@ -122,12 +122,6 @@ public class SettingsActivity extends Activity {
             }
         });
 
-
-
-
-
-
-
     }
 
     @Override

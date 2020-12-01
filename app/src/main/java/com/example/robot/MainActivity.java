@@ -2,6 +2,7 @@ package com.example.robot;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends FragmentActivity {
 
+    public static String TAG="MainActivity";
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
 
@@ -49,8 +51,10 @@ public class MainActivity extends FragmentActivity {
             if(emptyClient == null){
                 emptyClient = new EmptyClient(new URI("ws://10.7.5.176:8887"));
                 emptyClient.connect();
+                Log.d(TAG,"连接成功");
             }else {
                 emptyClient.reconnect();
+                Log.d(TAG,"连接失败");
                 Toast toast = Toast.makeText(MainActivity.this,"连接失败请重新连接",Toast.LENGTH_SHORT);
                 toast.show();
             }

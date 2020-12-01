@@ -9,19 +9,19 @@
     <RelativeLayout
         android:id="@+id/main_title"
         android:layout_width="900px"
-        android:layout_height="300px"
-        >
+        android:layout_height="300px">
 
         <TextView
             android:id="@+id/main_text_map"
             android:layout_width="150px"
             android:layout_height="80px"
             android:text="@string/text_map"/>
-        <Spinner
+        <TextView
             android:id="@+id/main_spinner_map"
             android:layout_width="200px"
             android:layout_height="80px"
-            android:layout_toRightOf="@+id/main_text_map"/>
+            android:layout_toRightOf="@+id/main_text_map"
+            android:background="@drawable/btn_gb_normal"/>
 
         <TextView
             android:id="@+id/main_text_task"
@@ -29,12 +29,13 @@
             android:layout_height="80px"
             android:layout_below="@id/main_text_map"
             android:text="@string/text_map"/>
-        <Spinner
+        <TextView
             android:id="@+id/main_spinner_task"
             android:layout_width="200px"
             android:layout_height="80px"
             android:layout_below="@id/main_text_map"
-            android:layout_toRightOf="@+id/main_text_task"/>
+            android:layout_toRightOf="@+id/main_text_task"
+            android:background="@drawable/btn_gb_normal"/>
 
         <Button
             android:id="@+id/main_execute"
@@ -44,11 +45,12 @@
             android:text="@string/run"/>
 
     </RelativeLayout>
+
     <ListView
         android:id="@+id/main_log"
         android:layout_width="match_parent"
         android:layout_height="400px"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/main_title"
         android:background="@drawable/btn_gb_normal"/>
 
     <RelativeLayout
