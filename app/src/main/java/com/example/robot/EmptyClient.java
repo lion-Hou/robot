@@ -78,6 +78,13 @@ public class EmptyClient extends WebSocketClient {
                 string = jsonObject.getString(Content.SPINNERTIME);
                 EventBus.getDefault().post(new EventBusMessage(10002, string));
                 break;
+            case Content.SENDMAPNAME:
+                //地图列表
+                jsonObject = new JSONObject(message);
+                JSONArray name = jsonObject.getJSONArray(Content.SENDMAPNAME);
+                System.out.println("map_name: " + Content.list.size());
+                EventBus.getDefault().post(new EventBusMessage(10005, Content.list));
+                break;
             case Content.GETPOSITION:
                System.out.println("GETPOSITION: " + message);
             case Content.TEST_SENSOR_CALLBACK:
