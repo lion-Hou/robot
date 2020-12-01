@@ -34,18 +34,15 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
     Button newMapSave;
     @BindView(R.id.new_map_back)
     Button newMapBack;
-    @BindView(R.id.new_map_scan)
-
 
 
     private GsonUtils gsonUtils;
-    public EmptyClient emptyClient;
+    private EmptyClient emptyClient;
     private Context mContext;
-    View view;
+    private  View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
@@ -66,7 +63,11 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initView() {
-
+        newMapMapImage.setOnClickListener(this);
+        newMapMapNameEditText.setOnClickListener(this);
+        newMapScan.setOnClickListener(this);
+        newMapSave.setOnClickListener(this);
+        newMapBack.setOnClickListener(this);
     }
 
     private void initListener() {
@@ -76,7 +77,14 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.main_settings:
+            case R.id.new_map_scan:
+
+                break;
+
+            case R.id.new_map_save:
+                break;
+
+            case R.id.new_map_back:
 
                 break;
             default:
@@ -84,15 +92,4 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    @OnClick({R.id.new_map_scan, R.id.new_map_save, R.id.new_map_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.new_map_scan:
-                break;
-            case R.id.new_map_save:
-                break;
-            case R.id.new_map_back:
-                break;
-        }
-    }
 }
