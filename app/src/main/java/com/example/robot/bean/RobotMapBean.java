@@ -1,5 +1,7 @@
 package com.example.robot.bean;
 
+import android.os.Parcelable;
+
 public class RobotMapBean {
     private String map_Name;
     private int gridWidth;

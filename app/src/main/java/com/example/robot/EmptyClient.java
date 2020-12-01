@@ -2,6 +2,7 @@ package com.example.robot;
 
 import android.util.Log;
 
+import com.example.robot.bean.RobotMapBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -79,11 +80,7 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(10002, string));
                 break;
             case Content.SENDMAPNAME:
-                //地图列表
-                jsonObject = new JSONObject(message);
-                JSONArray name = jsonObject.getJSONArray(Content.SENDMAPNAME);
-                System.out.println("map_name: " + Content.list.size());
-                EventBus.getDefault().post(new EventBusMessage(10005, Content.list));
+                EventBus.getDefault().post(new EventBusMessage(10005, message));
                 break;
             case Content.GETPOSITION:
                System.out.println("GETPOSITION: " + message);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.robot.EmptyClient;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.SettingsActivity;
+import com.example.robot.bean.RobotMapBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -26,6 +28,12 @@ import com.example.robot.content.GsonUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +51,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private Context mContext;
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
-    public static String[] mapName;
+
     public View view;
 
 
@@ -77,7 +85,39 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         settingsButton.setOnClickListener(this);
         mainSpinnerMap.setOnClickListener(this);
 
+
+
     }
+
+    //获取map名称
+    public void refesh(String message){
+        JSONObject jsonObject1 = null;
+        try {
+            jsonObject1 = new JSONObject(message);
+
+            JSONArray name = jsonObject1.getJSONArray(Content.SENDMAPNAME);
+            Content.list = new ArrayList<>();
+            String[] mapName = new String[name.length()];
+            for (int i =0; i <name.length(); i++){
+                JSONObject jsonObject = name.getJSONObject(i);
+                RobotMapBean robotMapBean = new RobotMapBean();
+                robotMapBean.setMap_Name(jsonObject.getString(Content.MAP_NAME));
+                robotMapBean.setGridHeight(jsonObject.getInt(Content.GRID_HEIGHT));
+                robotMapBean.setGridWidth(jsonObject.getInt(Content.GRID_WIDTH));
+                robotMapBean.setOriginX(jsonObject.getDouble(Content.ORIGIN_X));
+                robotMapBean.setOriginY(jsonObject.getDouble(Content.ORIGIN_Y));
+                Log.d("zdzd 666", ""+jsonObject.getDouble(Content.RESOLUTION));
+                robotMapBean.setResolution(jsonObject.getDouble(Content.RESOLUTION));
+                Content.list.add(robotMapBean);
+                mapName[i] = jsonObject.getString(Content.MAP_NAME);
+            }
+            System.out.println("map_name: " + Content.list.size());
+            moreMap(mapName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void initListener() {
 
@@ -97,14 +137,21 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 intent.setClass(getActivity(), SettingsActivity.class);
                 getActivity().startActivity(intent);
                 break;
-
             case R.id.main_spinner_map:
                 Log.d(TAG, "onEventMsg ： " + "1");
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 Log.d(TAG, "onEventMsg ： " + "1");
                 break;
-
             case R.id.main_spinner_task:
+                break;
+
+            case R.id.main_map:
+                Log.d(TAG, "onEventMsg ： " + "ditu");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new MapManagerFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
 
             default:
@@ -112,7 +159,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    //地图列表
     public void moreMap(String[] mapName){
         Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -124,24 +170,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 mainSpinnerMap.setText(mapName[which]);
                 Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);//给上位机传入地图名称
-                emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
             }
         });
         builder.create().show();
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void  onEventMsg(EventBusMessage messageEvent) {
-        Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
-        if (messageEvent.getState() == 10005) {
-            mapName = new String[Content.list.size()];
-            for (int i=0;i< Content.list.size();i++) {
-                mapName[i] =Content.list.get(i).getMap_Name();
-            }
-            moreMap(mapName);
-            Log.d(TAG, "onEventMsg ： " + "3");
-        }
-    }
-
 
 }

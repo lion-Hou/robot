@@ -48,23 +48,21 @@
 
     </RelativeLayout>
 
-    <fragment
+    <FrameLayout
         android:id="@+id/second_fragment"
-        android:name="com.example.robot.map.FirstFragment"
         android:layout_width="600px"
         android:layout_height="match_parent"
         android:layout_below="@id/robot"
         android:background="@drawable/btn_gb_normal"/>
 
-    <fragment
+    <FrameLayout
         android:id="@+id/first_fragment"
-        android:name="com.example.robot.map.FirstFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="50px"
         android:layout_toRightOf="@+id/robot">
 
-    </fragment>
+    </FrameLayout>
 
 
 </RelativeLayout>
