@@ -2,7 +2,6 @@ package com.example.robot.map;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,9 @@ import android.widget.Spinner;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.example.robot.EmptyClient;
 import com.example.robot.R;
 import com.example.robot.content.GsonUtils;
-
-import java.nio.ByteBuffer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,12 +73,10 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.manager_newMap:
-
+            case R.id.main_settings:
 
                 break;
             default:

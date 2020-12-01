@@ -48,6 +48,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     TextView mainSpinnerMap;
     @BindView(R.id.main_spinner_task)
     TextView mainSpinnerTask;
+    @BindView(R.id.main_map)
+    Button mainMap;
+
     private Context mContext;
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
@@ -84,6 +87,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private void initView() {
         settingsButton.setOnClickListener(this);
         mainSpinnerMap.setOnClickListener(this);
+        mainMap.setOnClickListener(this);
 
 
 

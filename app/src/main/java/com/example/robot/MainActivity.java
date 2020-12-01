@@ -12,6 +12,7 @@ import com.example.robot.bean.RobotMapBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.map.AddNewMapFragment;
 import com.example.robot.map.FirstFragment;
 import com.example.robot.map.MapManagerFragment;
 import com.example.robot.map.SecoundFragment;
@@ -35,8 +36,6 @@ public class MainActivity extends FragmentActivity {
     private FirstFragment firstFragment;
     private SecoundFragment secoundFragment;
     private MapManagerFragment mapManagerFragment;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +88,7 @@ public class MainActivity extends FragmentActivity {
                 System.out.println("type:" + type);
 
         }else if (messageEvent.getState() == 10001){
-
-            mapManagerFragment.refesh((String) messageEvent.getT());
+            //mapManagerFragment.refesh((String) messageEvent.getT());
         }
     }
 
