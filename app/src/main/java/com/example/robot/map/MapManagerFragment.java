@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,34 +19,44 @@ import com.example.robot.content.GsonUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddNewMapFragment extends Fragment implements View.OnClickListener {
+public class MapManagerFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "AddNewMapFragment";
-    @BindView(R.id.new_map_mapImage)
-    ImageView newMapMapImage;
-    @BindView(R.id.new_map_mapName_editText)
-    EditText newMapMapNameEditText;
+    private static final String TAG = "MapManagerFragment";
 
+    @BindView(R.id.manager_selected)
+    Spinner managerSelected;
+    @BindView(R.id.manager_newMap)
+    Button managerNewMap;
+    @BindView(R.id.manager_mapImage)
+    ImageView managerMapImage;
+    @BindView(R.id.manager_rename)
+    Button managerRename;
+    @BindView(R.id.manager_delete)
+    Button managerDelete;
+    @BindView(R.id.manager_edit)
+    Button managerEdit;
+    @BindView(R.id.manager_back)
+    Button managerBack;
 
     private GsonUtils gsonUtils;
     public EmptyClient emptyClient;
     private Context mContext;
-    View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_add_new_map, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        return inflater.inflate(R.layout.fragment_map_manager, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ButterKnife.bind(this, view);
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

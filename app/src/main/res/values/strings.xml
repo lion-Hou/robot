@@ -17,7 +17,9 @@
     <string name="settings_version_number">版本号:</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="new_map_text">Map Name</string>
+
+    <string name="new_map_name_text">Map Name:</string>
+
+    <string name="edit_map_name_text">Map Name:</string>
 
 </resources>

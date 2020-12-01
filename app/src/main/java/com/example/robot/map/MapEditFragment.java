@@ -1,30 +1,31 @@
 package com.example.robot.map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
 import com.example.robot.EmptyClient;
 import com.example.robot.R;
+import com.example.robot.SettingsActivity;
 import com.example.robot.content.GsonUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddNewMapFragment extends Fragment implements View.OnClickListener {
+public class MapEditFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "AddNewMapFragment";
-    @BindView(R.id.new_map_mapImage)
-    ImageView newMapMapImage;
-    @BindView(R.id.new_map_mapName_editText)
-    EditText newMapMapNameEditText;
+    private static final String TAG = "MapEditFragment";
 
 
     private GsonUtils gsonUtils;
@@ -34,7 +35,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
     }
 
@@ -45,7 +45,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
         ButterKnife.bind(this, view);
         return view;
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
