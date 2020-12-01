@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
-            android:text="@string/new_map_text"/>
+            android:text="@string/new_map_name_text"/>
 
         <EditText
             android:id="@+id/new_map_mapName_editText"

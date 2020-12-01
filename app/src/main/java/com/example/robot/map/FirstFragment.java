@@ -55,19 +55,22 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //EventBus.getDefault().register(getContext());
-
         view = inflater.inflate(R.layout.fragment_first, container, false);
         ButterKnife.bind(this, view);
+        gsonUtils = new GsonUtils();
+        initView();
+        initListener();
         return view;
+
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
-        initView();
-        initListener();
+
+
     }
 
     private void initView() {
@@ -82,7 +85,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onDestroyView() {
-        //EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }
 
@@ -98,8 +100,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
             case R.id.main_spinner_map:
                 Log.d(TAG, "onEventMsg ： " + "1");
-                emptyClient = MainActivity.emptyClient;
-                emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 Log.d(TAG, "onEventMsg ： " + "1");
                 break;
 
