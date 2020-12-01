@@ -32,7 +32,6 @@ public class MainActivity extends FragmentActivity {
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         Fragment fragment = new Fragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,fragment).commit();
         gsonUtils = new GsonUtils();
@@ -69,7 +68,7 @@ public class MainActivity extends FragmentActivity {
 
         if (messageEvent.getState() == 10006) {
             String type = (String) messageEvent.getT();
-            System.out.println("type111:" + type);
+            System.out.println("type:" + type);
         }
     }
 

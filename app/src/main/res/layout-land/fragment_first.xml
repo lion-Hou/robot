@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/main_title"
-        android:layout_width="900px"
+        android:layout_width="500px"
         android:layout_height="300px">
 
         <TextView
@@ -49,7 +49,7 @@
     <ListView
         android:id="@+id/main_log"
         android:layout_width="match_parent"
-        android:layout_height="400px"
+        android:layout_height="200px"
         android:layout_below="@+id/main_title"
         android:background="@drawable/btn_gb_normal"/>
 
@@ -60,28 +60,28 @@
 
         <Button
             android:id="@+id/main_map"
-            android:layout_width="300px"
-            android:layout_height="200px"
+            android:layout_width="100px"
+            android:layout_height="80px"
             android:text="@string/map"/>
 
         <Button
             android:id="@+id/main_task"
-            android:layout_width="300px"
-            android:layout_height="200px"
+            android:layout_width="100px"
+            android:layout_height="80px"
             android:layout_toRightOf="@+id/main_map"
             android:text="@string/task"/>
 
         <Button
             android:id="@+id/main_history"
-            android:layout_width="300px"
-            android:layout_height="200px"
+            android:layout_width="100px"
+            android:layout_height="80px"
             android:layout_toRightOf="@+id/main_task"
             android:text="@string/history"/>
 
         <Button
             android:id="@+id/main_settings"
-            android:layout_width="300px"
-            android:layout_height="200px"
+            android:layout_width="100px"
+            android:layout_height="80px"
             android:layout_toRightOf="@+id/main_history"
             android:text="@string/settings"/>
 

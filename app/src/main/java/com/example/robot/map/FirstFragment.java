@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.robot.EmptyClient;
+import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.SettingsActivity;
 import com.example.robot.content.Content;
@@ -54,7 +55,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        EventBus.getDefault().register(getContext());
+        //EventBus.getDefault().register(getContext());
+
         view = inflater.inflate(R.layout.fragment_first, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -70,6 +72,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     private void initView() {
         settingsButton.setOnClickListener(this);
+        mainSpinnerMap.setOnClickListener(this);
+
     }
 
     private void initListener() {
@@ -78,7 +82,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onDestroyView() {
-        EventBus.getDefault().unregister(this);
+        //EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }
 
@@ -93,11 +97,15 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.main_spinner_map:
+                Log.d(TAG, "onEventMsg ： " + "1");
+                emptyClient = MainActivity.emptyClient;
                 emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 Log.d(TAG, "onEventMsg ： " + "1");
                 break;
+
             case R.id.main_spinner_task:
                 break;
+
             default:
                 break;
         }
