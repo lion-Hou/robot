@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -17,14 +18,24 @@ import com.example.robot.content.GsonUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AddNewMapFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "AddNewMapFragment";
+
     @BindView(R.id.new_map_mapImage)
     ImageView newMapMapImage;
     @BindView(R.id.new_map_mapName_editText)
     EditText newMapMapNameEditText;
+    @BindView(R.id.new_map_scan)
+    Button newMapScan;
+    @BindView(R.id.new_map_save)
+    Button newMapSave;
+    @BindView(R.id.new_map_back)
+    Button newMapBack;
+    @BindView(R.id.new_map_scan)
+
 
 
     private GsonUtils gsonUtils;
@@ -43,6 +54,8 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_new_map, container, false);
         ButterKnife.bind(this, view);
+        initView();
+        initListener();
         return view;
     }
 
@@ -50,8 +63,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
-        initListener();
     }
 
     private void initView() {
@@ -69,6 +80,18 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener 
 
                 break;
             default:
+                break;
+        }
+    }
+
+    @OnClick({R.id.new_map_scan, R.id.new_map_save, R.id.new_map_back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.new_map_scan:
+                break;
+            case R.id.new_map_save:
+                break;
+            case R.id.new_map_back:
                 break;
         }
     }
