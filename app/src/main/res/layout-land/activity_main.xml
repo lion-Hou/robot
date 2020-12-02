@@ -7,6 +7,10 @@
     tools:ignore="MissingDefaultResource">
 
     <RelativeLayout
+            android:id="@+id/main_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <RelativeLayout
         android:id="@+id/robot"
         android:layout_width="250dp"
         android:layout_height="300dp"
@@ -68,8 +72,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/robot">
-
     </FrameLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
