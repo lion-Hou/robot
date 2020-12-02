@@ -42,7 +42,8 @@ public class EmptyClient extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshake) {
-
+        isConnected = true;
+        EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         System.out.println("connect state new connection opened"+isConnected);
     }
 
@@ -78,6 +79,10 @@ public class EmptyClient extends WebSocketClient {
     public void differentiateType(String message) throws JSONException {
         Log.d("gsonUtils.getType  : ", ""+ gsonUtils.getType(message));
         switch (gsonUtils.getType(message)) {
+            case Content.CONN_NO:
+                isConnected = false;
+                EventBus.getDefault().post(new EventBusMessage<>(11110,"1111"));
+                break;
             case Content.CONN_OK:
                 isConnected = true;
                 EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
@@ -146,6 +151,7 @@ public class EmptyClient extends WebSocketClient {
                 String batty = jsonObject.getString(Content.BATTERY_DATA);
                 System.out.println("batty:"+batty.toString());
                 break;
+
 
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));

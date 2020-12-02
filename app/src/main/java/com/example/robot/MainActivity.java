@@ -46,6 +46,7 @@ public class MainActivity extends FragmentActivity {
 
     private ProgressDialog waitingDialog;
     private AlertDialog.Builder disConnectDialog;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +100,16 @@ public class MainActivity extends FragmentActivity {
             }else if (messageEvent.getState() == 10001){
                 Log.d(TAG, "图片 ： " + messageEvent.getT());
 
-            }else if (messageEvent.getState() == 11111){
-                Log.d(TAG, "connect state：connect " + messageEvent.getT());
+            }else if (messageEvent.getState() == 11111) {
+                Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
                 waitingDialog.dismiss();
-
+                dialog.dismiss();
+            }else if (messageEvent.getState() == 11110){
+                    Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
+                    waitingDialog.dismiss();
+                    showDisconnectDialog();
             }else if (messageEvent.getState() == 11119){
-                Log.d(TAG, "connect state：connect " + messageEvent.getT());
+                Log.d(TAG, "connect state：connect 1119" + messageEvent.getT());
                 showDisconnectDialog();
         }
     }
@@ -130,11 +135,13 @@ public class MainActivity extends FragmentActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //...To-do
                         showWaitingDialog();
-                        connect();
+                        emptyClient.reconnect();
                     }
                 });
         // 显示
-        disConnectDialog.show();
+
+        dialog = disConnectDialog.show();
+
     }
 
 
@@ -148,9 +155,11 @@ public class MainActivity extends FragmentActivity {
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
         waitingDialog.show();
-    }
-
+        };
 
 }
+
+
+
 
 
