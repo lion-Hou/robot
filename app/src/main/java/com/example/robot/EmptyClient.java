@@ -36,13 +36,13 @@ public class EmptyClient extends WebSocketClient {
 
     public EmptyClient(URI serverURI) {
         super(serverURI);
+        gsonUtils = new GsonUtils();
     }
 
 
     @Override
     public void onOpen(ServerHandshake handshake) {
-        isConnected = true;
-        EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
+
         System.out.println("connect state new connection opened"+isConnected);
     }
 
@@ -76,7 +76,12 @@ public class EmptyClient extends WebSocketClient {
     }
 
     public void differentiateType(String message) throws JSONException {
+        Log.d("gsonUtils.getType  : ", ""+ gsonUtils.getType(message));
         switch (gsonUtils.getType(message)) {
+            case Content.CONN_OK:
+                isConnected = true;
+                EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
+                break;
             case Content.TV_TIME:
                 String string = null;
                 jsonObject = new JSONObject(message);
@@ -85,8 +90,10 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.SENDMAPNAME:
                 //地图列表
+                Log.d("zdzd 666", "qqqqq");
                 jsonObject = new JSONObject(message);
                 JSONArray name = jsonObject.getJSONArray(Content.SENDMAPNAME);
+                Log.d("zdzd 666", ""+name.toString());
                 Content.list = new ArrayList<>();
                 for (int i =0; i <name.length(); i++){
                     JSONObject jsonObject = name.getJSONObject(i);
@@ -130,17 +137,15 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(10008, message));
                 break;
 
-            case Content.CONN_TYPE:
-                EventBus.getDefault().post(new EventBusMessage(10006, message));
             case Content.SENDGPSPOSITION:
                 EventBus.getDefault().post(new EventBusMessage(10009, message));
-
+                break;
             case Content.BATTERY_DATA:
                 System.out.println("GETPOSITION: " + message);
                 jsonObject = new JSONObject(message);
                 String batty = jsonObject.getString(Content.BATTERY_DATA);
                 System.out.println("batty:"+batty.toString());
-
+                break;
 
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));

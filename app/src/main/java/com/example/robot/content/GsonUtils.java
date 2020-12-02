@@ -98,6 +98,7 @@ public class GsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d(TAG, "getType message is " + type);
         return type;
     }
 

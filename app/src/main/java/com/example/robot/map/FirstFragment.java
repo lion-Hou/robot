@@ -145,7 +145,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             case R.id.main_spinner_map:
                 Log.d(TAG, "onEventMsg ： " + "1");
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
-                moreMap(mapName);
                 Log.d(TAG, "onEventMsg ： " + "1");
                 break;
             case R.id.main_spinner_task:
@@ -195,6 +194,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             for (int i=0;i< Content.list.size();i++) {
                 mapName[i] =Content.list.get(i).getMap_Name();
             }
+            Log.d(TAG,mapName[1]);
             moreMap(mapName);
             Log.d(TAG, "onEventMsg ： " + "3");
         }
