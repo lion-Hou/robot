@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    tools:ignore="MissingDefaultResource">
+
+        <ImageView
+            android:id="@+id/forward_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/darker_gray"
+            android:src="@drawable/ic_forward" />
+
+        <ImageView
+            android:id="@+id/to_left_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/forward_img"
+            android:background="@android:color/darker_gray"
+            android:src="@drawable/ic_to_left" />
+
+        <ImageView
+            android:id="@+id/to_right_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/forward_img"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/darker_gray"
+            android:src="@drawable/ic_to_right" />
+
+        <ImageView
+            android:id="@+id/fallback_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/to_left_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/darker_gray"
+            android:src="@drawable/ic_fallback" />
+
+</RelativeLayout>
+
+

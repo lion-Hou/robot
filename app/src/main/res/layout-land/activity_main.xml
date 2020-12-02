@@ -8,8 +8,10 @@
 
     <RelativeLayout
         android:id="@+id/robot"
-        android:layout_width="600px"
-        android:layout_height="600px">
+        android:layout_width="250dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
 
 
         <RelativeLayout
@@ -21,37 +23,39 @@
                 android:id="@+id/net"
                 android:layout_width="70px"
                 android:layout_height="70px"
-                android:src="@drawable/wifi"/>
+                android:src="@drawable/wifi" />
 
             <ImageView
                 android:id="@+id/battery"
                 android:layout_width="70px"
                 android:layout_height="70px"
-                android:layout_toRightOf="@+id/net"
                 android:layout_marginLeft="300px"
-                android:src="@drawable/batty"/>
+                android:layout_toRightOf="@+id/net"
+                android:src="@drawable/batty" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/battery"/>
+                android:layout_toRightOf="@+id/battery" />
 
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/robot_img"
             android:layout_width="match_parent"
-            android:layout_height="400px"
+            android:layout_height="250dp"
             android:layout_below="@id/title"
-            android:src="@drawable/batty"/>
+            android:src="@drawable/batty" />
 
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/second_fragment"
-        android:layout_width="600px"
-        android:layout_height="match_parent"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@id/robot"
         android:background="@drawable/btn_gb_normal"/>
 
@@ -59,7 +63,10 @@
         android:id="@+id/first_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="50px"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/robot">
 
     </FrameLayout>

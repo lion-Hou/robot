@@ -136,7 +136,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_settings:
-                Log.d(TAG, "onEventMsg ： " + "ssssss");
+                Log.d(TAG, "onEventMsg ： " + "21");
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), SettingsActivity.class);
                 getActivity().startActivity(intent);
@@ -154,6 +154,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new MapManagerFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.second_fragment, new RobotControlPanelFragment(), null)
                         .addToBackStack(null)
                         .commit();
                 break;
