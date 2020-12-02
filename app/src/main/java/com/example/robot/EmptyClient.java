@@ -28,6 +28,8 @@ public class EmptyClient extends WebSocketClient {
     private JSONObject jsonObject;
     private final String TAG = "EmptyClient";
 
+    private boolean isConnected = false;
+
     public EmptyClient(URI serverUri, Draft draft) {
         super(serverUri, draft);
     }
@@ -38,15 +40,17 @@ public class EmptyClient extends WebSocketClient {
 
 
     @Override
-    public void onOpen(ServerHandshake handshakedata) {
-        send("Hello, it is me. Mario");
-        System.out.println("new connection opened");
-        gsonUtils = new GsonUtils();
+    public void onOpen(ServerHandshake handshake) {
+        isConnected = true;
+        EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
+        System.out.println("connect state new connection opened"+isConnected);
     }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        System.out.println("closed with exit code " + code + " additional info: " + reason);
+        isConnected = false;
+        EventBus.getDefault().post(new EventBusMessage<>(11119,isConnected));
+        System.out.println("connect state closed with exit code " + code + " additional info: " + reason+"boolean"+isConnected);
     }
 
     @Override
