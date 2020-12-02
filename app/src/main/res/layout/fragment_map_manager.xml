@@ -23,7 +23,7 @@
             android:id="@+id/manager_selected"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            />
+            android:text="@string/please_select_map"/>
 
         <Button
             android:id="@+id/manager_newMap"

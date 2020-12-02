@@ -1,6 +1,8 @@
 package com.example.robot.map;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +13,28 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.robot.EmptyClient;
+import com.example.robot.MainActivity;
 import com.example.robot.R;
+import com.example.robot.bean.RobotMapBean;
+import com.example.robot.content.Content;
+import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,10 +62,13 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     public EmptyClient emptyClient;
     private Context mContext;
     private View view;
+    private String[] mapName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
 
@@ -56,19 +77,33 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
         view = inflater.inflate(R.layout.fragment_map_manager, container, false);
         ButterKnife.bind(this, view);
+        gsonUtils = new GsonUtils();
         initListener();
         initView();
+        mContext  = view.getContext();
         return view;
     }
 
     private void initView() {
         managerNewMap.setOnClickListener(this);
+        managerSelected.setOnClickListener(this);
 
     }
 
     private void initListener() {
 
     }
+
+    //获取map名称
+    public void refeshMapManage( ){
+        mapName = new String[Content.list.size()];
+            for (int i =0; i <Content.list.size(); i++){
+                mapName[i] =   Content.list.get(i).getMap_Name();
+            }
+            System.out.println("MG_map_name: " + Content.list.size());
+            moreMap(mapName);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -81,8 +116,51 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .addToBackStack(null)
                         .commit();
                 break;
+            case R.id.manager_selected:
+                refeshMapManage();
+                Log.d(TAG,"查看地图请求地图链表");
+                break;
             default:
                 break;
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void moreMap(String[] mapName){
+        Log.d(TAG, "onEventMsg ： " + "2");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        System.out.println("which" + mapName.length);
+        builder.setItems(mapName, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("which" + which);
+                managerSelected.setText(mapName[which]);
+                //Content.map_Name = mapName[which];
+                gsonUtils.setMapName(mapName[which]);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                Log.d(TAG,mapName[which]);
+            }
+        });
+        builder.create().show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMsg(EventBusMessage messageEvent) {
+        Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
+        if (messageEvent.getState() == 10001) {
+            Log.d(TAG, "图片 ： " + messageEvent.getT());
+            ByteBuffer bytes = (ByteBuffer) messageEvent.getT();
+            int len = bytes.limit() - bytes.position();
+            byte[] bytes1 = new byte[len];
+            bytes.get(bytes1);
+            Log.d(TAG, "图片11111 ： " + bytes1);
+            Glide.with(mContext).load(bytes1).into(managerMapImage);
+        }
+    }
+
 }

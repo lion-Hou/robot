@@ -88,24 +88,23 @@ public class MainActivity extends FragmentActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getT());
-        if (messageEvent.getState() == 10005) {
-            Log.d(TAG, "onEventMsg ： " + "3");
-            firstFragment.refesh((String) messageEvent.getT());
-        }else if (messageEvent.getState() == 10006) {
-            String type = (String) messageEvent.getT();
-            System.out.println("type:" + type);
+            if (messageEvent.getState() == 10005) {
+                Log.d(TAG, "onEventMsg ： " + "3");
+                //firstFragment.refesh((String) messageEvent.getT());
+            }else if (messageEvent.getState() == 10006) {
+                String type = (String) messageEvent.getT();
+                System.out.println("type:" + type);
 
-        }else if (messageEvent.getState() == 10001){
-            Log.d(TAG, "图片 ： " + messageEvent.getT());
-            AddNewMapFragment.refresh((String) messageEvent.getT());
+            }else if (messageEvent.getState() == 10001){
+                Log.d(TAG, "图片 ： " + messageEvent.getT());
 
-        }else if (messageEvent.getState() == 11111){
-            Log.d(TAG, "connect state：connect " + messageEvent.getT());
-            waitingDialog.dismiss();
+            }else if (messageEvent.getState() == 11111){
+                Log.d(TAG, "connect state：connect " + messageEvent.getT());
+                waitingDialog.dismiss();
 
-        }else if (messageEvent.getState() == 11119){
-            Log.d(TAG, "connect state：connect " + messageEvent.getT());
-            showDisconnectDialog();
+            }else if (messageEvent.getState() == 11119){
+                Log.d(TAG, "connect state：connect " + messageEvent.getT());
+                showDisconnectDialog();
         }
     }
 

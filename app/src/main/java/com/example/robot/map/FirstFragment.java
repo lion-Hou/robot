@@ -56,11 +56,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private GsonUtils gsonUtils;
 
     public View view;
+    private String[] mapName;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
 
@@ -88,10 +91,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         settingsButton.setOnClickListener(this);
         mainSpinnerMap.setOnClickListener(this);
         mainMap.setOnClickListener(this);
-
-
+        //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
     }
-
+/**
     //获取map名称
     public void refesh(String message){
         JSONObject jsonObject1 = null;
@@ -100,7 +102,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
             JSONArray name = jsonObject1.getJSONArray(Content.SENDMAPNAME);
             Content.list = new ArrayList<>();
-            String[] mapName = new String[name.length()];
+             mapName = new String[name.length()];
             for (int i =0; i <name.length(); i++){
                 JSONObject jsonObject = name.getJSONObject(i);
                 RobotMapBean robotMapBean = new RobotMapBean();
@@ -115,20 +117,20 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 mapName[i] = jsonObject.getString(Content.MAP_NAME);
             }
             System.out.println("map_name: " + Content.list.size());
-            moreMap(mapName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
+*/
 
     private void initListener() {
 
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -143,6 +145,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             case R.id.main_spinner_map:
                 Log.d(TAG, "onEventMsg ： " + "1");
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+                moreMap(mapName);
                 Log.d(TAG, "onEventMsg ： " + "1");
                 break;
             case R.id.main_spinner_task:
@@ -182,6 +185,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             }
         });
         builder.create().show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void  onEventMsg(EventBusMessage messageEvent) {
+        Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
+        if (messageEvent.getState() == 10005) {
+            mapName = new String[Content.list.size()];
+            for (int i=0;i< Content.list.size();i++) {
+                mapName[i] =Content.list.get(i).getMap_Name();
+            }
+            moreMap(mapName);
+            Log.d(TAG, "onEventMsg ： " + "3");
+        }
     }
 
 }

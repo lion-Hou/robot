@@ -84,7 +84,24 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(10002, string));
                 break;
             case Content.SENDMAPNAME:
-                EventBus.getDefault().post(new EventBusMessage(10005, message));
+                //地图列表
+                jsonObject = new JSONObject(message);
+                JSONArray name = jsonObject.getJSONArray(Content.SENDMAPNAME);
+                Content.list = new ArrayList<>();
+                for (int i =0; i <name.length(); i++){
+                    JSONObject jsonObject = name.getJSONObject(i);
+                    RobotMapBean robotMapBean = new RobotMapBean();
+                    robotMapBean.setMap_Name(jsonObject.getString(Content.MAP_NAME));
+                    robotMapBean.setGridHeight(jsonObject.getInt(Content.GRID_HEIGHT));
+                    robotMapBean.setGridWidth(jsonObject.getInt(Content.GRID_WIDTH));
+                    robotMapBean.setOriginX(jsonObject.getDouble(Content.ORIGIN_X));
+                    robotMapBean.setOriginY(jsonObject.getDouble(Content.ORIGIN_Y));
+                    Log.d("zdzd 666", ""+jsonObject.getDouble(Content.RESOLUTION));
+                    robotMapBean.setResolution(jsonObject.getDouble(Content.RESOLUTION));
+                    Content.list.add(robotMapBean);
+                }
+                System.out.println("map_name: " + Content.list.size());
+                EventBus.getDefault().post(new EventBusMessage(10005, Content.list));
                 break;
             case Content.GETPOSITION:
                System.out.println("GETPOSITION: " + message);

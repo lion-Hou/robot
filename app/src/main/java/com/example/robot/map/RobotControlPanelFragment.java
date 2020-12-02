@@ -52,6 +52,8 @@ public class RobotControlPanelFragment extends Fragment implements View.OnTouchL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_robot_control_panel, container, false);
         ButterKnife.bind(this, view);
+        gsonUtils = new GsonUtils();
+
         initView();
         initListener();
         return view;
@@ -82,38 +84,38 @@ public class RobotControlPanelFragment extends Fragment implements View.OnTouchL
         switch (view.getId()) {
             case R.id.forward_img:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STARTUP));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTUP));
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
                     Log.d(TAG, "抬起事件:上");
                 }
                 break;
             case R.id.to_left_img:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STARTLEFT));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTLEFT));
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
                     Log.d(TAG, "抬起事件:左");
                 }
                 break;
             case R.id.to_right_img:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STARTRIGHT));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTRIGHT));
 
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
                     Log.d(TAG, "抬起事件:右");
                 }
                 break;
             case R.id.fallback_img:
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STARTDOWN));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTDOWN));
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
                     Log.d(TAG, "抬起事件:下");
                 }
                 break;
