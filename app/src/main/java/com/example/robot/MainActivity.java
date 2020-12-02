@@ -61,6 +61,7 @@ public class MainActivity extends FragmentActivity {
         secoundFragment  = new SecoundFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment,secoundFragment).commit();
         mapManagerFragment = new MapManagerFragment();
+
         waitingDialog = new ProgressDialog(MainActivity.this);
     }
 
@@ -75,7 +76,7 @@ public class MainActivity extends FragmentActivity {
             if(emptyClient == null){
                 emptyClient = new EmptyClient(new URI("ws://10.7.5.176:8887"));
                 emptyClient.connect();
-                Log.d(TAG,"连接成功");
+                Log.d(TAG,"开始连接");
             }else {
                 emptyClient.reconnect();
             }
