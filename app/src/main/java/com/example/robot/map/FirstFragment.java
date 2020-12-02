@@ -90,7 +90,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainMap.setOnClickListener(this);
 
 
-
     }
 
     //获取map名称

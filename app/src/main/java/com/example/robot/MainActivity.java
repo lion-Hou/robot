@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.robot.bean.RobotMapBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
@@ -23,6 +24,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -60,9 +62,9 @@ public class MainActivity extends FragmentActivity {
 
     public void connect(){
         try {
-            if(emptyClient == null){
-                emptyClient = new EmptyClient(new URI("ws://10.7.5.176:8887"));
-                emptyClient.connect();
+            emptyClient = new EmptyClient(new URI("ws://10.7.5.176:8887"));
+            emptyClient.connect();
+            if(emptyClient.isConnecting()){
                 Log.d(TAG,"连接成功");
             }else {
                 emptyClient.reconnect();
@@ -88,9 +90,12 @@ public class MainActivity extends FragmentActivity {
                 System.out.println("type:" + type);
 
         }else if (messageEvent.getState() == 10001){
-            //mapManagerFragment.refesh((String) messageEvent.getT());
+                    Log.d(TAG, "图片 ： " + messageEvent.getT());
+                    AddNewMapFragment.refresh((String) messageEvent.getT());
+
         }
     }
 
-
 }
+
+
