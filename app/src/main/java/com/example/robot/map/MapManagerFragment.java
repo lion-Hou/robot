@@ -63,6 +63,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private Context mContext;
     private View view;
     private String[] mapName;
+    private String selectedMapName = "selectedMapName";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,16 +108,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     }
 
-    //获取map名称
-    public void refeshMapManage( ){
-        mapName = new String[Content.list.size()];
-            for (int i =0; i <Content.list.size(); i++){
-                mapName[i] =   Content.list.get(i).getMap_Name();
-            }
-            System.out.println("MG_map_name: " + Content.list.size());
-            moreMap(mapName);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -129,10 +120,25 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .commit();
                 break;
             case R.id.manager_selected:
-                refeshMapManage();
+                refreshMapManage();
                 Log.d(TAG,"查看地图请求地图链表");
                 break;
 
+
+            case R.id.manager_rename:
+                if (!selectedMapName.equals("selectedMapName")){
+                    gsonUtils.setOldMapName(selectedMapName);
+                    gsonUtils.setNewMapName("gaozhihanqqqqqqqqq");
+                    selectedMapName = "gaozhihanqqqqqqqqq";
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_MAP));
+                }
+                break;
+            case R.id.manager_delete:
+                if (!selectedMapName.equals("selectedMapName")){
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
+                    selectedMapName = "selectedMapName";
+                }
+                break;
             case R.id.manager_edit:
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
@@ -152,6 +158,17 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    //获取map名称
+    public void refreshMapManage( ){
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+        mapName = new String[Content.list.size()];
+        for (int i =0; i <Content.list.size(); i++){
+            mapName[i] =   Content.list.get(i).getMap_Name();
+        }
+        System.out.println("MG_map_name: " + Content.list.size());
+        moreMap(mapName);
+    }
+
     public void moreMap(String[] mapName){
         Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -163,8 +180,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 managerSelected.setText(mapName[which]);
                 //Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-                //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
+                selectedMapName = mapName[which];
+//                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                 Log.d(TAG,"AAAAAAAA");
             }
         });
