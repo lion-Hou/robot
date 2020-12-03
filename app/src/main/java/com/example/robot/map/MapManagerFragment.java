@@ -99,6 +99,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         managerNewMap.setOnClickListener(this);
         managerSelected.setOnClickListener(this);
         managerEdit.setOnClickListener(this);
+        managerBack.setOnClickListener(this);
 
     }
 
@@ -138,6 +139,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .replace(R.id.first_fragment, new MapEditFragment(), null)
                         .addToBackStack(null)
                         .commit();
+                break;
+            case R.id.manager_back:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new FirstFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
             default:
                 break;
         }

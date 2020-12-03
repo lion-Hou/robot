@@ -18,6 +18,7 @@
             android:text="@string/edit_map_name_text"/>
 
         <TextView
+            android:id="@+id/edit_"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
@@ -39,21 +40,21 @@
         >
 
         <Button
-            android:id="@+id/rename_btn"
+            android:id="@+id/wall_btn"
             android:layout_width="250px"
             android:layout_height="match_parent"
             android:textSize="30dp"
             android:text="Add Virtual Wall" />
 
         <Button
-            android:id="@+id/delete_btn"
+            android:id="@+id/mark_btn"
             android:layout_width="250px"
             android:layout_height="match_parent"
             android:textSize="30dp"
             android:text="Mark Current Position" />
 
         <Button
-            android:id="@+id/edit_btn"
+            android:id="@+id/save_btn"
             android:layout_width="250px"
             android:layout_height="match_parent"
             android:textSize="30dp"

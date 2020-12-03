@@ -112,6 +112,9 @@ public final class Content {
     public static final String TEST_LIGHTSTART = "test_lightstart";
     public static final String TEST_LIGHTSTOP = "test_lightstop";
 
+    //fragment见传递
+    public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";
+
 
 
 }
