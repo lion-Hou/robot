@@ -66,10 +66,22 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         Log.d("hhhh",  "add_create");
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+        Log.d("hhhh",  "add_start");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+        Log.d("hhhh",  "add_stop");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,7 +115,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
         Log.d("hhhh",  "add_destory");
     }
 
@@ -121,7 +132,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
                 break;
             case R.id.new_map_back:
-                emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP_NO));//取消保存
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP_NO));//取消保存
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new MapManagerFragment(), null)
@@ -140,7 +151,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
             int len = bytes.limit() - bytes.position();
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
-            Log.d(TAG, "新建地图 ： " + bytes1);
+            Log.d(TAG, "新建地图 ： " + bytes1.length);
             Glide.with(mContext).load(bytes1).into(newMapMapImage);
         }
     }

@@ -7,11 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".map.MapManagerFragment">
     <LinearLayout
+        android:id="@+id/add_point_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@+id/new_map_mapImage"
-        >
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -26,42 +25,43 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/manager_mapImage"
+        android:id="@+id/edit_map_Image"
         android:layout_width="match_parent"
-        android:layout_height="750dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="400dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@+id/add_point_title"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/manager_mapImage"
+        app:layout_constraintTop_toBottomOf="@+id/edit_map_Image"
         >
 
         <Button
-            android:id="@+id/manager_rename"
-            android:layout_width="wrap_content"
+            android:id="@+id/rename_btn"
+            android:layout_width="250px"
             android:layout_height="match_parent"
             android:textSize="30dp"
             android:text="Add Virtual Wall" />
 
         <Button
-            android:id="@+id/manager_delete"
-            android:layout_width="wrap_content"
+            android:id="@+id/delete_btn"
+            android:layout_width="250px"
             android:layout_height="match_parent"
             android:textSize="30dp"
             android:text="Mark Current Position" />
 
         <Button
-            android:id="@+id/manager_edit"
-            android:layout_width="wrap_content"
+            android:id="@+id/edit_btn"
+            android:layout_width="250px"
             android:layout_height="match_parent"
             android:textSize="30dp"
             android:text="Save" />
 
         <Button
-            android:id="@+id/manager_back"
-            android:layout_width="wrap_content"
+            android:id="@+id/back_btn"
+            android:layout_width="250px"
             android:layout_height="match_parent"
             android:text="Back"
             android:textSize="30dp" />

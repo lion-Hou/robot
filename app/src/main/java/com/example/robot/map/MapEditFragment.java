@@ -41,7 +41,7 @@ public class MapEditFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_add_new_map, container, false);
+        view = inflater.inflate(R.layout.fragment_map_edit, container, false);
         ButterKnife.bind(this, view);
         return view;
     }

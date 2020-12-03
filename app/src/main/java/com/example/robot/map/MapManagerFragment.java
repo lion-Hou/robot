@@ -66,11 +66,22 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+        Log.d("hhhh",  "manger_start");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+        Log.d("hhhh",  "manger_stop");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,13 +91,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         gsonUtils = new GsonUtils();
         initListener();
         initView();
-        mContext  = view.getContext();
+        mContext = view.getContext();
         return view;
     }
 
     private void initView() {
         managerNewMap.setOnClickListener(this);
         managerSelected.setOnClickListener(this);
+        managerEdit.setOnClickListener(this);
 
     }
 
@@ -104,7 +116,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             moreMap(mapName);
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -120,15 +131,16 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 refeshMapManage();
                 Log.d(TAG,"查看地图请求地图链表");
                 break;
+
+            case R.id.manager_edit:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new MapEditFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
             default:
                 break;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     public void moreMap(String[] mapName){
@@ -143,7 +155,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 //Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-                Log.d(TAG,mapName[which]);
+                //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
+                Log.d(TAG,"AAAAAAAA");
             }
         });
         builder.create().show();
@@ -158,9 +171,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             int len = bytes.limit() - bytes.position();
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
-            Log.d(TAG, "图片11111 ： " + bytes1);
+            Log.d(TAG, "新建地图 ： " + bytes1.length);
             Glide.with(mContext).load(bytes1).into(managerMapImage);
         }
     }
-
 }

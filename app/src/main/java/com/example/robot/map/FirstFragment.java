@@ -61,12 +61,23 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         Log.d("hhhh",  "first_creat");
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+        Log.d("hhhh",  "first_start");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+        Log.d("hhhh",  "first_stop");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,18 +87,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         initView();
         initListener();
         return view;
-
-
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-
         super.onActivityCreated(savedInstanceState);
 
-
     }
-
 
 
     private void initView() {
@@ -131,11 +137,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDetach() {
-        EventBus.getDefault().unregister(this);
+    public void onDestroy() {
+        super.onDestroy();
         Log.d("hhhh",  "first_destory");
-        super.onDetach();
     }
+
 
     @Override
     public void onClick(View view) {

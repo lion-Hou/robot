@@ -103,7 +103,10 @@ public class MainActivity extends FragmentActivity {
             }else if (messageEvent.getState() == 11111) {
                 Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
                 waitingDialog.dismiss();
-                dialog.dismiss();
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+
             }else if (messageEvent.getState() == 11110){
                     Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
                     waitingDialog.dismiss();
@@ -118,6 +121,7 @@ public class MainActivity extends FragmentActivity {
     //Dialog
     private void showDisconnectDialog(){
         disConnectDialog = new AlertDialog.Builder(MainActivity.this);
+        dialog = disConnectDialog.create();
         disConnectDialog.setTitle("连接中断");
         disConnectDialog.setMessage("请确保网络连通并点击重新连接");
         disConnectDialog.setCancelable(false);
@@ -139,8 +143,7 @@ public class MainActivity extends FragmentActivity {
                     }
                 });
         // 显示
-
-        dialog = disConnectDialog.show();
+        disConnectDialog.show();
 
     }
 
