@@ -143,7 +143,7 @@ public class EmptyClient extends WebSocketClient {
                 break;
 
             case Content.SENDGPSPOSITION:
-                EventBus.getDefault().post(new EventBusMessage(10009, message));
+                //EventBus.getDefault().post(new EventBusMessage(10009, message));
                 break;
             case Content.BATTERY_DATA:
                 System.out.println("GETPOSITION: " + message);

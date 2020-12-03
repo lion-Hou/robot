@@ -60,18 +60,20 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     private GsonUtils gsonUtils;
     public EmptyClient emptyClient;
     private Context mContext;
-    View view;
+    private View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        Log.d("hhhh",  "add_create");
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_add_new_map, container, false);
         ButterKnife.bind(this, view);
         gsonUtils = new GsonUtils();
@@ -102,6 +104,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        Log.d("hhhh",  "add_destory");
     }
 
     @Override
@@ -141,7 +144,5 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
             Glide.with(mContext).load(bytes1).into(newMapMapImage);
         }
     }
-
-
 
 }

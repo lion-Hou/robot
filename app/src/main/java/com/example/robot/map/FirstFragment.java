@@ -64,6 +64,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+        Log.d("hhhh",  "first_creat");
     }
 
 
@@ -86,6 +87,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
 
     }
+
+
 
     private void initView() {
         settingsButton.setOnClickListener(this);
@@ -128,9 +131,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDetach() {
         EventBus.getDefault().unregister(this);
+        Log.d("hhhh",  "first_destory");
+        super.onDetach();
     }
 
     @Override
@@ -197,6 +201,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             Log.d(TAG,mapName[1]);
             moreMap(mapName);
             Log.d(TAG, "onEventMsg ： " + "3");
+            //EventBus.getDefault().cancelEventDelivery(10005);
         }
     }
 
