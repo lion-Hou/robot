@@ -151,6 +151,12 @@ public class EmptyClient extends WebSocketClient {
                 String batty = jsonObject.getString(Content.BATTERY_DATA);
                 System.out.println("batty:"+batty.toString());
                 break;
+            case Content.ROBOT_TASK_HISTORY:
+                EventBus.getDefault().post(new EventBusMessage(40001, message));
+                break;
+            case Content.SEND_VIRTUAL:
+                EventBus.getDefault().post(new EventBusMessage(40002, message));
+                break;
 
 
             default:

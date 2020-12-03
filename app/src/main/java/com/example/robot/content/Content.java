@@ -7,7 +7,7 @@ import java.util.List;
 public final class Content {
 
     public static final double ROBOT_SIZE = 0.215;
-    public static String map_Name = "test00";
+    public static String map_Name = null;
 
     /**
      * robotState：
@@ -111,6 +111,29 @@ public final class Content {
     public static final String TEST_WARINGSTOP = "test_waringstop";
     public static final String TEST_LIGHTSTART = "test_lightstart";
     public static final String TEST_LIGHTSTOP = "test_lightstop";
+
+    public static final String ROBOT_HEALTHY = "robot_healthy";//机器人健康
+    public static final String ROBOT_TASK_STATE = "robot_task_state";//机器人任务状态
+    public static final String ROBOT_TASK_HISTORY = "robot_task_history";//机器人历史任务
+
+    public static final String GET_VIRTUAL = "get_virtual";//获取虚拟墙数据
+    public static final String UPDATA_VIRTUAL = "updata_virtual";//更新虚拟墙
+    public static final String SEND_VIRTUAL = "send_virtual";//返回虚拟墙数据
+    public static final String VIRTUAL_X = "virtual_x";//虚拟墙数据
+    public static final String VIRTUAL_Y = "virtual_y";//虚拟墙数据
+    //db Name
+    public static final String dbName = "dbName";
+    public static final String tableName = "taskHistory";//历史数据
+    public static final String dbTaskName = "taskName";
+    public static final String dbTaskMapName = "dbTaskMapName";
+    public static final String dbTime = "time";
+    public static final String dbData = "data";
+    public static final String alarmName = "alarmName";//定时数据
+    public static final String dbAlarmName = "dbAlarmName";//表名
+    public static final String dbAlarmMapName = "dbAlarmMapName";
+    public static final String dbAlarmTaskName = "dbAlarmTaskName";//任务名
+    public static final String dbAlarmTime = "dbAlarmTime";//时间
+    public static final String dbAlarmCycle = "dbAlarmCycle";//周期
 
     //fragment见传递
     public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";

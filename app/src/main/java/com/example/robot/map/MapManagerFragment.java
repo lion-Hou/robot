@@ -95,6 +95,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Content.map_Name != null) {
+            managerSelected.setText(Content.map_Name);
+        }
+    }
+
     private void initView() {
         managerNewMap.setOnClickListener(this);
         managerSelected.setOnClickListener(this);
@@ -161,10 +169,10 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             public void onClick(DialogInterface dialog, int which) {
                 System.out.println("which" + which);
                 managerSelected.setText(mapName[which]);
-                //Content.map_Name = mapName[which];
+                Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-                //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
                 Log.d(TAG,"AAAAAAAA");
             }
         });
