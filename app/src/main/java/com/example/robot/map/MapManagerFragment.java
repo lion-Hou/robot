@@ -58,6 +58,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     @BindView(R.id.manager_back)
     Button managerBack;
 
+    
     private GsonUtils gsonUtils;
     public EmptyClient emptyClient;
     private Context mContext;
@@ -127,6 +128,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
             case R.id.manager_rename:
                 if (!selectedMapName.equals("selectedMapName")){
+
                     gsonUtils.setOldMapName(selectedMapName);
                     gsonUtils.setNewMapName("gaozhihanqqqqqqqqq");
                     selectedMapName = "gaozhihanqqqqqqqqq";
