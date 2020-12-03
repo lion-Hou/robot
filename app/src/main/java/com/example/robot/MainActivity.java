@@ -1,35 +1,25 @@
 package com.example.robot;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.bumptech.glide.Glide;
-import com.example.robot.bean.RobotMapBean;
-import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
-import com.example.robot.map.AddNewMapFragment;
 import com.example.robot.map.FirstFragment;
 import com.example.robot.map.MapManagerFragment;
 import com.example.robot.map.SecoundFragment;
+import com.example.robot.util.NormalDialogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.java_websocket.WebSocket;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -44,9 +34,11 @@ public class MainActivity extends FragmentActivity {
     private MapManagerFragment mapManagerFragment;
 
 
+    private NormalDialogUtil disconnectDialog;
+
     private ProgressDialog waitingDialog;
-    private AlertDialog.Builder disConnectDialog;
-    private AlertDialog dialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +95,7 @@ public class MainActivity extends FragmentActivity {
             }else if (messageEvent.getState() == 11111) {
                 Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
                 waitingDialog.dismiss();
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-
+                disconnectDialog.dismiss();
             }else if (messageEvent.getState() == 11110){
                     Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
                     waitingDialog.dismiss();
@@ -120,31 +109,21 @@ public class MainActivity extends FragmentActivity {
 
     //Dialog
     private void showDisconnectDialog(){
-        disConnectDialog = new AlertDialog.Builder(MainActivity.this);
-        dialog = disConnectDialog.create();
-        disConnectDialog.setTitle("连接中断");
-        disConnectDialog.setMessage("请确保网络连通并点击重新连接");
-        disConnectDialog.setCancelable(false);
-        disConnectDialog.setPositiveButton("退出",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
-                        finish();
-                    }
-                });
-        disConnectDialog.setNegativeButton("重新连接",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
-                        showWaitingDialog();
-                        emptyClient.reconnect();
-                    }
-                });
-        // 显示
-        disConnectDialog.show();
-
+        disconnectDialog = new NormalDialogUtil();
+        disconnectDialog.showDialog(this, "网络错误","网络连接错误，请确认当前网络状态","退出","重新连接" , new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //取消
+                finish();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //确定逻辑
+                showWaitingDialog();
+                emptyClient.reconnect();
+            }
+        });
     }
 
 
