@@ -180,7 +180,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
             String[] point = (String[]) messageEvent.getT();
             point_name = new String[point.length];
             pointList(point);
-            Log.d(TAG, "收到点的数据大小 ： " + point.length);
+            //Log.d(TAG, "收到点的数据大小 ： " + point.length);
         }
     }
 
