@@ -193,8 +193,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 selectedMapName = mapName[which];
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
-//                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                 Log.d(TAG,"AAAAAAAA");
             }
         });

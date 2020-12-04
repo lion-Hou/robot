@@ -135,6 +135,10 @@ public final class Content {
     public static final String dbAlarmTaskName = "dbAlarmTaskName";//任务名
     public static final String dbAlarmTime = "dbAlarmTime";//时间
     public static final String dbAlarmCycle = "dbAlarmCycle";//周期
+    public static final String SET_SPEED_LEVEL = "set_speed_level";//设置导航速度
+    public static final String RENAME_POSITION = "RENAME_POSITION";//重命名点
+    public static final String OLD_POSITION_NAME = "old_position_name";//原始点
+    public static final String NEW_POSITION_NAME = "new_position_name";//新点
 
     //fragment见传递
     public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";
