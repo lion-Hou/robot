@@ -17,4 +17,10 @@
     <string name="settings_led_brightness_en">LED Brightness:</string>
     <string name="settings_version_number_en">Version Number:</string>
 
+    <string name="task_name">Task_name:</string>
+    <string name="task_deit">EDIT</string>
+    <string name="task_delete">DELETE</string>
+    <string name="task_back">BACK</string>
+    <string name="task_add">Add New</string>
+
 </resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
+
+    <RelativeLayout
+        android:id="@+id/title1"
+        android:layout_width="500px"
+        android:layout_height="100px">
+
+        <TextView
+            android:id="@+id/add_task_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:text="@string/task_name"/>
+        <EditText
+            android:id="@+id/new_map_mapName_editText"
+            android:layout_width="200px"
+            android:layout_height="100px"
+            android:textSize="18dp"
+            android:gravity="bottom"
+            android:hint="请输入任务名"
+            android:layout_toRightOf="@id/add_task_name"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/title2"
+        android:layout_width="500px"
+        android:layout_height="200px"
+        android:layout_below="@+id/title1">
+        <TextView
+            android:id="@+id/task_type"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:text="@string/task_name"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/title3"
+        android:layout_width="500px"
+        android:layout_height="200px"
+        android:layout_below="@+id/title2">
+        <Button
+            android:id="@+id/addtask_select_point"
+            android:layout_width="200px"
+            android:layout_height="100px"
+            android:text="SelectPoint"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_task"
+            android:layout_width="800px"
+            android:layout_height="500px"
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/addtask_select_point"
+            android:background="@drawable/btn_gb_normal">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/task_save"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_below="@+id/title3"
+        android:text="SAVE"/>
+    <Button
+        android:id="@id/task_back"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_below="@+id/title3"
+        android:layout_toRightOf="@id/task_save"
+        android:text="BACK"/>
+
+</RelativeLayout>

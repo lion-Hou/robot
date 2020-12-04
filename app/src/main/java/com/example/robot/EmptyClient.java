@@ -132,6 +132,12 @@ public class EmptyClient extends WebSocketClient {
             case Content.SENDTASKQUEUE:
                 //当前任务列表
                 EventBus.getDefault().post(new EventBusMessage(10017, message));
+                jsonObject = new JSONObject(message);
+                JSONObject list = jsonObject.getJSONObject(Content.DATATIME);
+                String[] taskList = new String[list.length()];
+                for (int i = 0; i < list.length(); i++){
+                    JSONObject jsonObject = list.getJSONObject(String.valueOf(i));
+                }
                 break;
 
             case Content.SENDPOINTPOSITION:
@@ -164,7 +170,6 @@ public class EmptyClient extends WebSocketClient {
             case Content.SEND_VIRTUAL:
                 EventBus.getDefault().post(new EventBusMessage(40002, message));
                 break;
-
 
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));

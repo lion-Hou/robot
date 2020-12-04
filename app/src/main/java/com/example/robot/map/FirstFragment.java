@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.example.robot.EmptyClient;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.SettingsActivity;
-import com.example.robot.bean.RobotMapBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -28,12 +26,6 @@ import com.example.robot.content.GsonUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +42,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     TextView mainSpinnerTask;
     @BindView(R.id.main_map)
     Button mainMap;
+    @BindView(R.id.main_task)
+    Button mainTask;
 
     private Context mContext;
     public static EmptyClient emptyClient;
@@ -62,21 +56,21 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("hhhh",  "first_creat");
+        Log.d("hhhh", "first_creat");
     }
 
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        Log.d("hhhh",  "first_start");
+        Log.d("hhhh", "first_start");
     }
 
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-        Log.d("hhhh",  "first_stop");
+        Log.d("hhhh", "first_stop");
     }
 
     @Override
@@ -86,6 +80,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         gsonUtils = new GsonUtils();
         initView();
         initListener();
+        MainActivity.emptyClient.send("{\n" +
+                " \"type\": \"task_alarm\",\n" +
+                " \"dbAlarmMapName\": \"test00\",\n" +
+                " \"dbAlarmTaskName\": \"task11\",\n" +
+                " \"dbAlarmTime\": \"11\",\n" +
+                "   \"task_type\":true,\n" +
+                " \"task_alarm\": [\"星期1\",\"星期2\"]\n" +
+                "}");
         return view;
     }
 
@@ -100,37 +102,39 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         settingsButton.setOnClickListener(this);
         mainSpinnerMap.setOnClickListener(this);
         mainMap.setOnClickListener(this);
+        mainTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
     }
-/**
-    //获取map名称
-    public void refesh(String message){
-        JSONObject jsonObject1 = null;
-        try {
-            jsonObject1 = new JSONObject(message);
 
-            JSONArray name = jsonObject1.getJSONArray(Content.SENDMAPNAME);
-            Content.list = new ArrayList<>();
-             mapName = new String[name.length()];
-            for (int i =0; i <name.length(); i++){
-                JSONObject jsonObject = name.getJSONObject(i);
-                RobotMapBean robotMapBean = new RobotMapBean();
-                robotMapBean.setMap_Name(jsonObject.getString(Content.MAP_NAME));
-                robotMapBean.setGridHeight(jsonObject.getInt(Content.GRID_HEIGHT));
-                robotMapBean.setGridWidth(jsonObject.getInt(Content.GRID_WIDTH));
-                robotMapBean.setOriginX(jsonObject.getDouble(Content.ORIGIN_X));
-                robotMapBean.setOriginY(jsonObject.getDouble(Content.ORIGIN_Y));
-                Log.d("zdzd 666", ""+jsonObject.getDouble(Content.RESOLUTION));
-                robotMapBean.setResolution(jsonObject.getDouble(Content.RESOLUTION));
-                Content.list.add(robotMapBean);
-                mapName[i] = jsonObject.getString(Content.MAP_NAME);
-            }
-            System.out.println("map_name: " + Content.list.size());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-*/
+    /**
+     * //获取map名称
+     * public void refesh(String message){
+     * JSONObject jsonObject1 = null;
+     * try {
+     * jsonObject1 = new JSONObject(message);
+     * <p>
+     * JSONArray name = jsonObject1.getJSONArray(Content.SENDMAPNAME);
+     * Content.list = new ArrayList<>();
+     * mapName = new String[name.length()];
+     * for (int i =0; i <name.length(); i++){
+     * JSONObject jsonObject = name.getJSONObject(i);
+     * RobotMapBean robotMapBean = new RobotMapBean();
+     * robotMapBean.setMap_Name(jsonObject.getString(Content.MAP_NAME));
+     * robotMapBean.setGridHeight(jsonObject.getInt(Content.GRID_HEIGHT));
+     * robotMapBean.setGridWidth(jsonObject.getInt(Content.GRID_WIDTH));
+     * robotMapBean.setOriginX(jsonObject.getDouble(Content.ORIGIN_X));
+     * robotMapBean.setOriginY(jsonObject.getDouble(Content.ORIGIN_Y));
+     * Log.d("zdzd 666", ""+jsonObject.getDouble(Content.RESOLUTION));
+     * robotMapBean.setResolution(jsonObject.getDouble(Content.RESOLUTION));
+     * Content.list.add(robotMapBean);
+     * mapName[i] = jsonObject.getString(Content.MAP_NAME);
+     * }
+     * System.out.println("map_name: " + Content.list.size());
+     * } catch (JSONException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     */
 
     private void initListener() {
 
@@ -147,7 +151,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("hhhh",  "first_destory");
+        Log.d("hhhh", "first_destory");
     }
 
 
@@ -182,12 +186,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         .commit();
                 break;
 
+            case R.id.main_task:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new TaskManagerFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
             default:
                 break;
         }
     }
 
-    public void moreMap(String[] mapName){
+    public void moreMap(String[] mapName) {
         Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         System.out.println("which" + mapName.length);
@@ -199,21 +210,21 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);//给上位机传入地图名称
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
-                EventBus.getDefault().post(new EventBusMessage(30001,mapName[which]));//30001给编辑点页面传所选中的地图名
+                EventBus.getDefault().post(new EventBusMessage(30001, mapName[which]));//30001给编辑点页面传所选中的地图名
             }
         });
         builder.create().show();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void  onEventMsg(EventBusMessage messageEvent) {
+    public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
         if (messageEvent.getState() == 10005) {
             mapName = new String[Content.list.size()];
-            for (int i=0;i< Content.list.size();i++) {
-                mapName[i] =Content.list.get(i).getMap_Name();
+            for (int i = 0; i < Content.list.size(); i++) {
+                mapName[i] = Content.list.get(i).getMap_Name();
             }
-            Log.d(TAG,mapName[1]);
+            Log.d(TAG, mapName[1]);
             moreMap(mapName);
             Log.d(TAG, "onEventMsg ： " + "3");
             //EventBus.getDefault().cancelEventDelivery(10005);

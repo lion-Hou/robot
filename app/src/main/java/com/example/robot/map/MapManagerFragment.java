@@ -64,7 +64,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private Context mContext;
     private View view;
     private String[] mapName;
-
+    private String selectedMapName = "selectedMapName";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
