@@ -81,6 +81,7 @@ public final class Content {
     public static final String DEVELOP_MAP = "develop_map";//扩展扫描地图
     public static final String DELETE_POSITION = "delete_position";//删除点
     public static final String DELETE_MAP = "delete_map";//删除地图
+    public static final String RENAME_MAP = "rename_map";//删除地图
     public static final String BATTERY_DATA = "battery_data";//电量
     public static final String USE_MAP = "use_map";//应用地图
     public static final String REQUEST_MSG = "request_msg";//返回失败结果

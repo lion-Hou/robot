@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.PropertyResourceBundle;
 
 public class GsonUtils {
     private static final String TAG = "GsonUtils";
@@ -23,6 +24,24 @@ public class GsonUtils {
     private String positionName;
     private String taskName;
     private List<SaveTaskBean> list;
+    private String oldMapName;
+    private String newMapName;
+
+    public String getOldMapName() {
+        return oldMapName;
+    }
+
+    public void setOldMapName(String oldMapName) {
+        this.oldMapName = oldMapName;
+    }
+
+    public String getNewMapName() {
+        return newMapName;
+    }
+
+    public void setNewMapName(String newMapName) {
+        this.newMapName = newMapName;
+    }
 
     public List<SaveTaskBean> getList() {
         return list;
