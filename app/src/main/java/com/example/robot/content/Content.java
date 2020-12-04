@@ -32,7 +32,11 @@ public final class Content {
     public static int taskIndex = 0;
 
     public static final String MAP_NAME = "map_Name";//地图名字
+
+    public static final String OLD_MAP_NAME = "old_map_name";//老地图名字
+    public static final String NEW_MAP_NAME = "new_map_name";//新地图名字
     public static final String TASK_NAME = "task_Name";//任务名字
+    public static final String CHARGING = "charging";
     //type id
     public static final String STARTUP = "startUp";//前进
     public static final String STOPUP = "stopUp";//停止后退

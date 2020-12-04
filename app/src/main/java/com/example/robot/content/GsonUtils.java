@@ -88,6 +88,8 @@ public class GsonUtils {
             jsonObject.put(Content.MAP_NAME, mapName);
             jsonObject.put(Content.POINT_NAME, positionName);
             jsonObject.put(Content.TASK_NAME, taskName);
+            jsonObject.put(Content.OLD_MAP_NAME,oldMapName);
+            jsonObject.put(Content.NEW_MAP_NAME,newMapName);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {

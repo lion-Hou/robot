@@ -172,6 +172,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                             index = k;
                         }
                     }
+                    Log.d("zdzd5111", "" + index);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonItem = jsonArray.getJSONObject(i);
                         Log.d("zdzd111 ", "pointName : " + jsonItem.toString());
@@ -195,12 +196,16 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         double mapHeight = (double) editMapImage.getHeight();
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
+                        double layoutW = (double) mapRelative.getWidth();
+                        double layoutH = (double) mapRelative.getHeight();
+                        Log.d("W H", "RW:"+layoutW/mapWidth+"MW:"+layoutH/mapHeight);
                         double coefficientX = mapWidth/gridWidth;
                         double coefficientY = mapHeight/gridHeight;
                         Log.d("zdzd999", "x"+coefficientX+"Y"+coefficientY);
 
 
                         double pointX = jsonItem.getDouble(Content.POINT_X);
+                        int pointType = jsonItem.getInt(Content.POINT_TYPE);
                         double pointY = jsonItem.getDouble(Content.POINT_Y);
                         double originX = Content.list.get(index).getOriginX();
                         double originY = Content.list.get(index).getOriginY();
@@ -208,10 +213,15 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         double angleY = Math.sin(jsonItem.getDouble(Content.ANGLE));
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
-                        imageView.setPaddingRelative((int) (mapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                (int) (mapHeight - (mapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
-                                0, 0);
-                        mapRelative.addView(imageView);
+                        if (pointType == 2) {
+                            imageView.setPaddingRelative((int) (mapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                    (int) (mapHeight - (mapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                                    0, 0);
+                            mapRelative.addView(imageView);
+                        }else if (pointType == 1){
+
+                        }
+
                     }
                 }
             } catch (JSONException e) {

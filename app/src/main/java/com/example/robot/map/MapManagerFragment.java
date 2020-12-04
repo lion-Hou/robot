@@ -64,7 +64,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private Context mContext;
     private View view;
     private String[] mapName;
-    private String selectedMapName = "selectedMapName";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         managerSelected.setOnClickListener(this);
         managerEdit.setOnClickListener(this);
         managerBack.setOnClickListener(this);
-
+        managerDelete.setOnClickListener(this);
+        managerRename.setOnClickListener(this);
     }
 
     private void initListener() {
@@ -129,27 +130,33 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .commit();
                 break;
             case R.id.manager_selected:
-                refreshMapManage();
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 Log.d(TAG,"查看地图请求地图链表");
                 break;
 
 
             case R.id.manager_rename:
-                if (!selectedMapName.equals("selectedMapName")){
-
-                    gsonUtils.setOldMapName(selectedMapName);
+                if (!Content.map_Name.equals(null)){
+                    gsonUtils.setOldMapName(Content.map_Name);
                     gsonUtils.setNewMapName("gaozhihanqqqqqqqqq");
-                    selectedMapName = "gaozhihanqqqqqqqqq";
+                    Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_MAP));
+                    Content.map_Name = "gaozhihanqqqqqqqqq";
                 }
                 break;
             case R.id.manager_delete:
-                if (!selectedMapName.equals("selectedMapName")){
+                Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
+                if (!Content.map_Name.equals(null)){
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
-                    selectedMapName = "selectedMapName";
+                    managerSelected.setText(R.string.please_select_map);
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                    Content.map_Name = null;
+                    Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                 }
                 break;
             case R.id.manager_edit:
+                gsonUtils.setMapName(Content.map_Name);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new MapEditFragment(), null)
@@ -169,8 +176,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     }
 
     //获取map名称
-    public void refreshMapManage( ){
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+    public void refreshMapManage(String[] mapName){
+
         mapName = new String[Content.list.size()];
         for (int i =0; i <Content.list.size(); i++){
             mapName[i] =   Content.list.get(i).getMap_Name();
@@ -190,11 +197,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 managerSelected.setText(mapName[which]);
                 Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);
-                selectedMapName = mapName[which];
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
-//                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-
                 Log.d(TAG,"AAAAAAAA");
             }
         });
@@ -212,6 +215,15 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             bytes.get(bytes1);
             Log.d(TAG, "新建地图 ： " + bytes1.length);
             Glide.with(mContext).load(bytes1).into(managerMapImage);
+        }else if (messageEvent.getState() == 10005) {
+            mapName = new String[Content.list.size()];
+            for (int i=0;i< Content.list.size();i++) {
+                mapName[i] =Content.list.get(i).getMap_Name();
+            }
+            Log.d(TAG,mapName[1]);
+            refreshMapManage(mapName);
+            Log.d(TAG, "onEventMsg ： " + "3");
+            //EventBus.getDefault().cancelEventDelivery(10005);
         }
     }
 }
