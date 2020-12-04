@@ -43,6 +43,13 @@ public class EmptyClient extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshake) {
         isConnected = true;
+        send("{\n" +
+                " \"type\": \"task_alarm\",\n" +
+                " \"dbAlarmMapTaskName\": \"test00\",\n" +
+                " \"dbAlarmTime\": \"11\",\n" +
+                "   \"task_type\":true,\n" +
+                " \"dbAlarmCycle\": [\"星期1\",\"星期2\"]\n" +
+                "}");
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         System.out.println("connect state new connection opened"+isConnected);
     }

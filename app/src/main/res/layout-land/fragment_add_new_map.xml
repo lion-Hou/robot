@@ -7,18 +7,29 @@
     tools:context=".map.AddNewMapFragment"
     tools:ignore="MissingDefaultResource">
 
-    <ImageView
-        android:id="@+id/new_map_mapImage"
-        android:layout_width="match_parent"
-        android:layout_height="600px"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/btn_gb_normal"/>
 
+
+    <RelativeLayout
+        android:id="@+id/new_map_relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/add_point_title"
+        android:layout_above="@+id/line1"
+        tools:ignore="MissingConstraints">
+        <ImageView
+            android:id="@+id/new_map_mapImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints"
+            android:scaleType="fitCenter"
+            android:background="@drawable/btn_gb_normal"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/new_map_mapImage"
+        app:layout_constraintTop_toBottomOf="@+id/new_map_relativeLayout"
         >
 
         <TextView

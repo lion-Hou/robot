@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,6 +72,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
     TextView editMapname;
     @BindView(R.id.map_relative)
     RelativeLayout mapRelative;
+    @BindView(R.id.map_relative_border)
+    RelativeLayout mapRelativeBorder;
 
 
     private GsonUtils gsonUtils;
@@ -76,6 +81,9 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
     private ImageView robot_Img;
     private View view;
     private int index = 0;
+    double mBitmapHeight;
+    double mBitmapWidth;
+
     private List<List<DrawLineBean>> lists = new ArrayList<>();
 
     @Override
@@ -105,7 +113,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
         initView();
-
         return view;
     }
 
@@ -157,7 +164,26 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
             Log.d(TAG, "图片11111 ： " + bytes1);
-            Glide.with(mContext).load(bytes1).into(editMapImage);
+
+            Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            mBitmapHeight =mBitmap.getHeight();
+            mBitmapWidth = mBitmap.getWidth();
+
+            if (mBitmapHeight >= mBitmapWidth){
+                mBitmapWidth = mapRelativeBorder.getHeight()/mBitmapHeight*mBitmapWidth;
+                mBitmapHeight = mapRelativeBorder.getHeight();
+            }else if (mBitmapHeight > mBitmapWidth){
+                mBitmapHeight = mapRelativeBorder.getWidth()/mBitmapWidth*mBitmapHeight;
+                mBitmapWidth = mapRelativeBorder.getWidth();
+            }
+            editMapImage.setImageBitmap(mBitmap);
+
+
+            mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
+            RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+            editMapImage.setLayoutParams(layoutParams);
+            mapRelative.addView(editMapImage);
+
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
         } else if (messageEvent.getState() == 10008) {
             String message = (String) messageEvent.getT();
@@ -180,7 +206,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         ImageView imageView = new ImageView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
 
-
                         Log.d("zdzd222", "" + (editMapImage.getWidth() / Content.list.get(index).getGridWidth() * jsonItem.getDouble(Content.POINT_X)
                                 + Content.list.get(index).getOriginX() - (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE)))));
                         Log.d("zdzd222", "" + (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE))));
@@ -194,14 +219,18 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         Log.d("zdzd222", "      \n");
                         double mapWidth = (double) editMapImage.getWidth();
                         double mapHeight = (double) editMapImage.getHeight();
+//                        double mapWidthFront = (double) editMapImageFront.getWidth();
+//                        double mapHeightFront = (double) editMapImageFront.getHeight();
+
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
                         double layoutW = (double) mapRelative.getWidth();
                         double layoutH = (double) mapRelative.getHeight();
+
+//                        double coefficientX = mapWidth/mapWidthFront;
+//                        double coefficientY = mapHeight/mapHeightFront;
                         Log.d("W H", "RW:"+layoutW/mapWidth+"MW:"+layoutH/mapHeight);
-                        double coefficientX = mapWidth/gridWidth;
-                        double coefficientY = mapHeight/gridHeight;
-                        Log.d("zdzd999", "x"+coefficientX+"Y"+coefficientY);
+//                        Log.d("zdzd999", "RW:x"+coefficientX+"Y"+coefficientY);
 
 
                         double pointX = jsonItem.getDouble(Content.POINT_X);
@@ -214,8 +243,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
                         if (pointType == 2) {
-                            imageView.setPaddingRelative((int) (mapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                    (int) (mapHeight - (mapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
                             mapRelative.addView(imageView);
                         }else if (pointType == 1){
@@ -252,6 +281,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                             (int) (mapHeight - (mapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
                             0, 0);
                     mapRelative.addView(robot_Img);
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
