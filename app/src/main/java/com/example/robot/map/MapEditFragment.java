@@ -243,7 +243,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
                         if (pointType == 2) {
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX + originX - (Content.ROBOT_SIZE / resolution * angleX))),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
                             mapRelative.addView(imageView);
@@ -277,8 +277,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                     double angleY = Math.sin(jsonObject.getDouble(Content.ANGLE));
                     double angleX = Math.cos(jsonObject.getDouble(Content.ANGLE));
 
-                    robot_Img.setPaddingRelative((int) (mapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
-                            (int) (mapHeight - (mapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                    robot_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX + originX - (Content.ROBOT_SIZE / resolution * angleX))),
+                            (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
                             0, 0);
                     mapRelative.addView(robot_Img);
 
@@ -311,11 +311,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                     float startX = 0, startY = 0, endX = 0, endY = 0;
                     for (int k = 0; k < lineBeans.size(); k++) {
                         if (k == 0) {
-                            startX = (float) ((mapWidth / (lineBeans.get(k).getX() * gridWidth)) + originX);
-                            startY = (float) (mapHeight / (gridHeight * (mapHeight - lineBeans.get(k).getY())) + originY);
+                            startX = (float) ((mBitmapWidth / (lineBeans.get(k).getX() * gridWidth)) + originX);
+                            startY = (float) (mBitmapHeight / (gridHeight * (mBitmapHeight - lineBeans.get(k).getY())) + originY);
                         } else {
-                            endX = (float) ((mapWidth / (lineBeans.get(k).getX() * gridWidth)) + originX);
-                            endY = (float) (mapHeight / (gridHeight * (mapHeight - lineBeans.get(k).getY())) + originY);
+                            endX = (float) ((mBitmapWidth / (lineBeans.get(k).getX() * gridWidth)) + originX);
+                            endY = (float) (mBitmapHeight / (gridHeight * (mBitmapHeight - lineBeans.get(k).getY())) + originY);
                         }
                     }
                     //划线：点连线 连接start和end
