@@ -195,6 +195,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener {
                         double mapHeight = (double) editMapImage.getHeight();
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
+                        double coefficientX = mapWidth/gridWidth;
+                        double coefficientY = mapHeight/gridHeight;
+                        Log.d("zdzd999", "x"+coefficientX+"Y"+coefficientY);
+
+
                         double pointX = jsonItem.getDouble(Content.POINT_X);
                         double pointY = jsonItem.getDouble(Content.POINT_Y);
                         double originX = Content.list.get(index).getOriginX();

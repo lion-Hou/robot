@@ -27,18 +27,18 @@
 
     <RelativeLayout
         android:id="@+id/map_relative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
         android:layout_below="@+id/add_point_title"
         android:layout_above="@+id/line1"
         >
             <ImageView
                 android:id="@+id/edit_map_Image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="fitCenter"
-
+                android:src="@mipmap/ic_launcher_round"
                 tools:ignore="MissingConstraints" />
     </RelativeLayout>
 

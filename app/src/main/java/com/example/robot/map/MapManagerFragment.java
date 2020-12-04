@@ -190,10 +190,9 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 managerSelected.setText(mapName[which]);
                 Content.map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);
+                selectedMapName = mapName[which];
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
-
-                selectedMapName = mapName[which];
 //                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
 
                 Log.d(TAG,"AAAAAAAA");

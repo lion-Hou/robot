@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
 import com.example.robot.EmptyClient;
@@ -126,6 +127,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
             case R.id.new_map_scan:
                 Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
                 Log.d(TAG, "onEventMsg ： " + "开始扫描");
+                addNewMapDialog = new NormalDialogUtil();
                 addNewMapDialog.showDialog(mContext, "","是否开始扫描","取消","开始扫描" , new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -139,10 +141,12 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         gsonUtils.setMapName(newMapMapNameEditText.getText().toString());
                         Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
+                        dialog.dismiss();
                     }
                 });
                 break;
             case R.id.new_map_save:
+                addNewMapDialog = new NormalDialogUtil();
                 addNewMapDialog.showDialog(mContext, "","是否结束扫描并保存地图","取消","保存地图" , new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -154,10 +158,17 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
+                        dialog.dismiss();
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.first_fragment, new MapManagerFragment(), null)
+                                .addToBackStack(null)
+                                .commit();
                     }
                 });
                 break;
             case R.id.new_map_back:
+                addNewMapDialog = new NormalDialogUtil();
                 addNewMapDialog.showDialog(mContext, "","是否结束当前扫描","取消","结束扫描" , new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -169,6 +180,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
+                        dialog.dismiss();
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.first_fragment, new MapManagerFragment(), null)

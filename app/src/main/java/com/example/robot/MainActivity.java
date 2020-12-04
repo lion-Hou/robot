@@ -95,13 +95,15 @@ public class MainActivity extends FragmentActivity {
             }else if (messageEvent.getState() == 11111) {
                 Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
                 waitingDialog.dismiss();
-                disconnectDialog.dismiss();
+                if (disconnectDialog!=null){
+                    disconnectDialog.dismiss();
+                }
             }else if (messageEvent.getState() == 11110){
                     Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
                     waitingDialog.dismiss();
                     showDisconnectDialog();
             }else if (messageEvent.getState() == 11119){
-                Log.d(TAG, "connect state：connect 1119" + messageEvent.getT());
+                Log.d(TAG, "connect state：connect 11119" + messageEvent.getT());
                 showDisconnectDialog();
         }
     }
@@ -121,7 +123,10 @@ public class MainActivity extends FragmentActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //确定逻辑
                 showWaitingDialog();
+
+
                 emptyClient.reconnect();
+                disconnectDialog.dismiss();
             }
         });
     }

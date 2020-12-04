@@ -81,7 +81,7 @@ public class EmptyClient extends WebSocketClient {
         switch (gsonUtils.getType(message)) {
             case Content.CONN_NO:
                 isConnected = false;
-                EventBus.getDefault().post(new EventBusMessage<>(11110,"1111"));
+                EventBus.getDefault().post(new EventBusMessage<>(11110,"11110"));
                 break;
             case Content.CONN_OK:
                 isConnected = true;
@@ -143,7 +143,7 @@ public class EmptyClient extends WebSocketClient {
                 break;
 
             case Content.SENDGPSPOSITION:
-                //EventBus.getDefault().post(new EventBusMessage(10009, message));
+                EventBus.getDefault().post(new EventBusMessage(10009, message));
                 break;
             case Content.BATTERY_DATA:
                 System.out.println("GETPOSITION: " + message);
