@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,7 @@ import com.example.robot.SettingsActivity;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.run.RunFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,17 +46,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     Button mainMap;
     @BindView(R.id.main_task)
     Button mainTask;
-
     @BindView(R.id.main_history)
     Button mainHistory;
+    @BindView(R.id.main_execute)
+    Button mainExecute;
 
 
     private Context mContext;
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
-
+    private String[] taskNameList;
     public View view;
     private String[] mapName;
+    private String task_name;
 
 
     @Override
@@ -84,14 +88,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         gsonUtils = new GsonUtils();
         initView();
         initListener();
-//        MainActivity.emptyClient.send("{\n" +
-//                " \"type\": \"task_alarm\",\n" +
-//                " \"dbAlarmMapName\": \"test00\",\n" +
-//                " \"dbAlarmTaskName\": \"task11\",\n" +
-//                " \"dbAlarmTime\": \"11\",\n" +
-//                "   \"task_type\":true,\n" +
-//                " \"task_alarm\": [\"星期1\",\"星期2\"]\n" +
-//                "}");
+        mContext = view.getContext();
         return view;
     }
 
@@ -108,6 +105,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainMap.setOnClickListener(this);
         mainTask.setOnClickListener(this);
         mainHistory.setOnClickListener(this);
+        mainExecute.setOnClickListener(this);
+        mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
     }
 
@@ -155,7 +154,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("hhhh", "first_destory");
     }
 
 
@@ -163,21 +161,30 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_settings:
-//                Log.d(TAG, "onEventMsg ： " + "21");
-//                Intent intent = new Intent();
-//                intent.setClass(getActivity(), SettingsActivity.class);
-//                getActivity().startActivity(intent);
-
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPTASKQUEUE));
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), SettingsActivity.class);
+                getActivity().startActivity(intent);
                 break;
             case R.id.main_spinner_map:
-                Log.d(TAG, "onEventMsg ： " + "1");
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
-                Log.d(TAG, "onEventMsg ： " + "1");
+                break;
+            case R.id.main_execute:
+                if (task_name == null) {
+                    Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    gsonUtils.setTaskName(task_name);
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.first_fragment, new RunFragment(), null)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 break;
             case R.id.main_spinner_task:
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 break;
-
             case R.id.main_map:
                 Log.d(TAG, "onEventMsg ： " + "ditu");
                 getActivity().getSupportFragmentManager()
@@ -191,11 +198,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         .addToBackStack(null)
                         .commit();
                 break;
-
             case R.id.main_task:
-                gsonUtils.setMapName("houbo");
-                gsonUtils.setTaskName("qwer");
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new TaskManagerFragment(), null)
@@ -203,9 +206,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         .commit();
                 break;
             case R.id.main_history:
-
                 Log.d(TAG, "点击历史任务");
-
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new TaskHistoryFragment(), null)
@@ -215,6 +216,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    //首页获取所有地图名称
     public void moreMap(String[] mapName) {
         Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -233,6 +235,21 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         builder.create().show();
     }
 
+    //首页获取当前选定的地图的所有任务列表
+    public void requestTaskList(String[] taskNameList) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        System.out.println("which" + taskNameList.length);
+        builder.setItems(taskNameList, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("which" + which);
+                task_name = taskNameList[which];
+                mainSpinnerTask.setText(taskNameList[which]);
+            }
+        });
+        builder.create().show();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
@@ -245,6 +262,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             moreMap(mapName);
             Log.d(TAG, "onEventMsg ： " + "3");
             //EventBus.getDefault().cancelEventDelivery(10005);
+        } else if (messageEvent.getState() == 10017) {
+            taskNameList = (String[]) messageEvent.getT();
+            Log.d("task_name", taskNameList[0]);
+            requestTaskList(taskNameList);
         }
     }
 

@@ -133,16 +133,13 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             case R.id.manager_selected:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 Log.d(TAG,"查看地图请求地图链表");
-
                 break;
 
             case R.id.manager_rename:
                 if (!Content.map_Name.equals(null)){
                     gsonUtils.setOldMapName(Content.map_Name);
-                    gsonUtils.setNewMapName("gaozhihanqqqqqqqqq");
                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_MAP));
-                    Content.map_Name = "gaozhihanqqqqqqqqq";
                 }
                 break;
             case R.id.manager_delete:

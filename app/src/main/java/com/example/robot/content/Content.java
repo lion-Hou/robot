@@ -8,6 +8,7 @@ public final class Content {
 
     public static final double ROBOT_SIZE = 0.215;
     public static String map_Name = null;
+    public static String task_Mame = null;
 
     /**
      * robotState：
@@ -104,10 +105,6 @@ public final class Content {
     public static final String POINT_Y = "point_y";//点y坐标
     public static final String ANGLE = "angle";//角度
 
-
-
-
-
     public static final String TEST_UVCSTART = "test_uvcstart";
     public static final String TEST_UVCSTOP = "test_uvcstop";
     public static final String TEST_SENSOR = "test_sensor";
@@ -146,6 +143,8 @@ public final class Content {
 
     //fragment见传递
     public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";
+
+
 
 
 
