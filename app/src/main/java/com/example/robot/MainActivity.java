@@ -48,13 +48,12 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(this);
         gsonUtils = new GsonUtils();
         connect();
-
+        disconnectDialog = new NormalDialogUtil();
         firstFragment = new FirstFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,firstFragment).commit();
         secoundFragment  = new SecoundFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment,secoundFragment).commit();
         mapManagerFragment = new MapManagerFragment();
-
         waitingDialog = new ProgressDialog(MainActivity.this);
     }
 
@@ -111,7 +110,6 @@ public class MainActivity extends FragmentActivity {
 
     //Dialog
     private void showDisconnectDialog(){
-        disconnectDialog = new NormalDialogUtil();
         disconnectDialog.showDialog(this, "网络错误","网络连接错误，请确认当前网络状态","退出","重新连接" , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -123,8 +121,6 @@ public class MainActivity extends FragmentActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //确定逻辑
                 showWaitingDialog();
-
-
                 emptyClient.reconnect();
                 disconnectDialog.dismiss();
             }

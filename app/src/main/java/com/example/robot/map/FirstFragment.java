@@ -80,14 +80,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         gsonUtils = new GsonUtils();
         initView();
         initListener();
-        MainActivity.emptyClient.send("{\n" +
-                " \"type\": \"task_alarm\",\n" +
-                " \"dbAlarmMapName\": \"test00\",\n" +
-                " \"dbAlarmTaskName\": \"task11\",\n" +
-                " \"dbAlarmTime\": \"11\",\n" +
-                "   \"task_type\":true,\n" +
-                " \"task_alarm\": [\"星期1\",\"星期2\"]\n" +
-                "}");
         return view;
     }
 

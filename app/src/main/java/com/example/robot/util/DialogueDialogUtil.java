@@ -16,11 +16,20 @@ public class DialogueDialogUtil {
 
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
+    private String answer;
     public void dismiss(){
         dialog.dismiss();
     }
 
-    public synchronized AlertDialog showDialog(Context context, String title, String content,
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public synchronized AlertDialog showDialog(Context context, String title,
                                                String btnCancelText, String btnSureText, DialogInterface.OnClickListener cancleListener,
                                                DialogInterface.OnClickListener sureListener) {
         builder = new AlertDialog.Builder(context);
@@ -37,6 +46,7 @@ public class DialogueDialogUtil {
         TextView tvTitle = view.findViewById(R.id.tv_alert_question);
         //内容
         EditText tvContent = view.findViewById(R.id.tv_alert_answer);
+        answer = tvContent.getText().toString();
         //取消按钮
         TextView buttonCancel = view.findViewById(R.id.tv_dialog_cancel);
         //确定按钮
@@ -48,8 +58,6 @@ public class DialogueDialogUtil {
         } else {
             tvTitle.setText(title);
         }
-
-        tvContent.setText(TextUtils.isEmpty(content) ? "" : content);
 
         if (TextUtils.isEmpty(btnCancelText)) {
             buttonCancel.setVisibility(View.GONE);

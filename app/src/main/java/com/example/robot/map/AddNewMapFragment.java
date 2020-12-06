@@ -126,7 +126,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.new_map_scan:
                 Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
-                Log.d(TAG, "onEventMsg ： " + "开始扫描");
                 addNewMapDialog = new NormalDialogUtil();
                 addNewMapDialog.showDialog(mContext, "","是否开始扫描","取消","开始扫描" , new DialogInterface.OnClickListener() {
                     @Override
@@ -138,6 +137,8 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
+                        Log.d(TAG, "onEventMsg ： " + "开始扫描");
+                        newMapMapNameEditText.setEnabled(false);
                         gsonUtils.setMapName(newMapMapNameEditText.getText().toString());
                         Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
@@ -157,6 +158,9 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
+                        /**
+                         * houbo
+                         */
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
                         dialog.dismiss();
                         getActivity().getSupportFragmentManager()

@@ -87,7 +87,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_map_manager, container, false);
         ButterKnife.bind(this, view);
         gsonUtils = new GsonUtils();
@@ -169,21 +168,18 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .replace(R.id.first_fragment, new FirstFragment(), null)
                         .addToBackStack(null)
                         .commit();
+                /**
+                 * houbo
+                 */
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.second_fragment, new SecoundFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             default:
                 break;
         }
-    }
-
-    //获取map名称
-    public void refreshMapManage(String[] mapName){
-
-        mapName = new String[Content.list.size()];
-        for (int i =0; i <Content.list.size(); i++){
-            mapName[i] =   Content.list.get(i).getMap_Name();
-        }
-        System.out.println("MG_map_name: " + Content.list.size());
-        moreMap(mapName);
     }
 
     public void moreMap(String[] mapName){
@@ -221,7 +217,12 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 mapName[i] =Content.list.get(i).getMap_Name();
             }
             Log.d(TAG,mapName[1]);
-            refreshMapManage(mapName);
+            if (mapName.length == 1){
+                System.out.println("MG_map_nameSSSS: " + Content.list.size());
+                managerSelected.setText(mapName[0]);
+            }else{
+                moreMap(mapName);
+            }
             Log.d(TAG, "onEventMsg ： " + "3");
             //EventBus.getDefault().cancelEventDelivery(10005);
         }
