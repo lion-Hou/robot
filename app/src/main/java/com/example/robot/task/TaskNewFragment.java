@@ -30,6 +30,7 @@ import com.example.robot.bean.SaveTaskBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.map.TaskManagerFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -59,10 +60,10 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     Button addtaskSelectPoint;
     @BindView(R.id.title3)
     RelativeLayout title3;
-    @BindView(R.id.task_save)
-    Button taskSave;
-    @BindView(R.id.task_back)
-    Button taskBack;
+    @BindView(R.id.task_new_save)
+    Button taskNewSave;
+    @BindView(R.id.task_new_back)
+    Button taskNewBack;
     @BindView(R.id.new_map_mapName_editText)
     EditText newMapMapNameEditText;
 
@@ -119,39 +120,43 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     }
 
     private void initView() {
-        taskSave.setOnClickListener(this);
+        taskNewSave.setOnClickListener(this);
         addtaskSelectPoint.setOnClickListener(this);
     }
 
     private void initListener() {
-
 
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.task_save:
+            case R.id.task_new_save:
                 if (TextUtils.isEmpty(newMapMapNameEditText.getText().toString())) {
-                Toast.makeText(mContext, "先输入任务名字", Toast.LENGTH_SHORT).show();
-            } else {
-                new AlertDialog.Builder(mContext)
-                        .setTitle("提示")
-                        .setMessage("任务保存成功")
-                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).show();
-                gsonUtils.setList(mList);
-
-                gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());
-                emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));
-            }
-
+                    Toast.makeText(mContext, "先输入任务名字", Toast.LENGTH_SHORT).show();
+                } else {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("提示")
+                            .setMessage("任务保存成功")
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());//任务名
+                                    // 定时时间
+                                    gsonUtils.setList(mList);//任务点和所对于时间
+                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));//保存任务
+                                    getActivity().getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .replace(R.id.first_fragment, new TaskManagerFragment(), null)
+                                            .addToBackStack(null)
+                                            .commit();
+                                }
+                            }).show();
+                }
                 break;
             case R.id.addtask_select_point:
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));//得到所有导航点
+                gsonUtils.setMapName(Content.map_Name);//请求导航点前发送当前地图名
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));//请求导航点
                 break;
         }
     }
@@ -168,6 +173,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 mList.add(saveTaskBean);
                 mAdapter.refeshList(mList);
                 mAdapter.notifyDataSetChanged();
+
             }
         });
         builder.create().show();
