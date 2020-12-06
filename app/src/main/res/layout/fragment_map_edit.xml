@@ -56,31 +56,31 @@
 
         <Button
             android:id="@+id/wall_btn"
-            android:layout_width="250px"
+            android:layout_width="200px"
             android:layout_height="match_parent"
-            android:textSize="30dp"
+            android:textSize="15dp"
             android:text="Add Virtual Wall" />
 
         <Button
             android:id="@+id/mark_btn"
-            android:layout_width="250px"
+            android:layout_width="200px"
             android:layout_height="match_parent"
-            android:textSize="30dp"
+            android:textSize="15dp"
             android:text="Mark Current Position" />
 
         <Button
             android:id="@+id/save_btn"
-            android:layout_width="250px"
+            android:layout_width="200px"
             android:layout_height="match_parent"
-            android:textSize="30dp"
+            android:textSize="15dp"
             android:text="Save" />
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="250px"
+            android:layout_width="200px"
             android:layout_height="match_parent"
             android:text="Back"
-            android:textSize="30dp" />
+            android:textSize="15dp" />
     </LinearLayout>
 
 </RelativeLayout>

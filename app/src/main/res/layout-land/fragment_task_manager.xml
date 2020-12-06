@@ -27,9 +27,12 @@
         android:text="@string/task_add"/>
 
     <RelativeLayout
+        android:id="@+id/task_manage_map_relative_border"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/task_manage_title">
+        android:layout_below="@+id/task_manage_title"
+        android:layout_above="@+id/task_manage_edit"
+        >
     <RelativeLayout
         android:id="@+id/task_manage_map_relative"
         android:layout_width="wrap_content"

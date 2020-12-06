@@ -86,6 +86,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     double mBitmapHeight;
     double mBitmapWidth;
 
+
+
     private List<List<DrawLineBean>> lists = new ArrayList<>();
 
     @Override
@@ -130,7 +132,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
         gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
-
     }
 
     //保存点
@@ -145,9 +146,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         gsonUtils.setPositionName(input_name.getText().toString());
                         System.out.println("pointName1111" + input_name);
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
-                        ImageView imageView = new ImageView(mContext);
-                        imageView.setImageResource(R.drawable.ic_point);
-
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -172,7 +171,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             Log.d(TAG, "图片11111 ： " + bytes1);
 
             Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
-            mBitmapHeight =mBitmap.getHeight();
+            mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
             if (mBitmapHeight >= mBitmapWidth){
                 mBitmapWidth = mapRelativeBorder.getHeight()/mBitmapHeight*mBitmapWidth;
@@ -182,11 +181,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 mBitmapWidth = mapRelativeBorder.getWidth();
             }
 
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             editMapImage.setImageBitmap(mBitmap);
             mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
             editMapImage.setLayoutParams(layoutParams);
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             mapRelative.addView(editMapImage);
 
         } else if (messageEvent.getState() == 10008) {
@@ -356,6 +355,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 MainActivity.emptyClient.send(gsonUtils.putVirtualWallMsg(Content.UPDATA_VIRTUAL, lists));
                 break;
             case R.id.back_btn:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new MapManagerFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
     }
@@ -391,7 +395,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             float moveX = event.getX();
             float moveY = event.getY();
             //划线    先清掉之前的线，重新画 连接start点和 move点
-//划线：点连线 连接start和end
+            //划线：点连线 连接start和end
             Canvas canvas = new Canvas();
             Paint paint = new Paint();
             paint.setColor(R.color.colorPrimaryDark);
@@ -408,7 +412,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             drawLineBeanList.add(drawLineBean);
             lists.add(drawLineBeanList);
         }
-
         return true;
     }
 
