@@ -158,7 +158,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String newMapName = input_name.getText().toString();
-                                gsonUtils.setPositionName(newMapName);
                                 System.out.println("pointName1111" + input_name);
                                 if (!newMapName.equals(null)&&!newMapName.equals("")){
                                     gsonUtils.setOldMapName(Content.map_Name);

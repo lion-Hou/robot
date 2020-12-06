@@ -143,9 +143,14 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        gsonUtils.setPositionName(input_name.getText().toString());
-                        System.out.println("pointName1111" + input_name);
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
+                        String newPointName = input_name.getText().toString();
+                        if (!newPointName.equals(null)&&!newPointName.equals("")){
+                            gsonUtils.setPositionName(newPointName);
+                            System.out.println("pointName1111" + input_name);
+                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
+                        }else {
+                            Toast.makeText(mContext, "请输入新的地点名", Toast.LENGTH_SHORT).show();
+                        }
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                     }
                 })
