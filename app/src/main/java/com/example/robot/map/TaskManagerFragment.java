@@ -105,6 +105,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     }
 
     private void initListener() {
+
     }
 
     @Override
@@ -117,8 +118,8 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         .addToBackStack(null)
                         .commit();
                 break;
-
             case R.id.task_manage_name:
+                gsonUtils.setMapName(Content.first_map_Name);//给上位机传入地图名称
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
         }
 

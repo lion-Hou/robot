@@ -42,7 +42,7 @@
             android:id="@+id/main_execute"
             android:layout_width="200px"
             android:layout_height="200px"
-            android:layout_marginLeft="700px"
+            android:layout_toRightOf="@+id/main_spinner_task"
             android:text="@string/run"/>
 
     </RelativeLayout>

@@ -3,6 +3,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -21,13 +22,16 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class MainActivity extends FragmentActivity {
 
-    public static String TAG="MainActivity";
+    public static String TAG = "MainActivity";
     public static EmptyClient emptyClient;
+    @BindView(R.id.time)
+    TextView time;
     private GsonUtils gsonUtils;
     private FirstFragment firstFragment;
     private SecoundFragment secoundFragment;
@@ -50,10 +54,11 @@ public class MainActivity extends FragmentActivity {
         connect();
         disconnectDialog = new NormalDialogUtil();
         firstFragment = new FirstFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment,firstFragment).commit();
-        secoundFragment  = new SecoundFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment,secoundFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment, firstFragment).commit();
+        secoundFragment = new SecoundFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment, secoundFragment).commit();
         mapManagerFragment = new MapManagerFragment();
+
         waitingDialog = new ProgressDialog(MainActivity.this);
     }
 
@@ -63,13 +68,13 @@ public class MainActivity extends FragmentActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    public void connect(){
+    public void connect() {
         try {
-            if(emptyClient == null){
+            if (emptyClient == null) {
                 emptyClient = new EmptyClient(new URI("ws://10.7.5.176:8887"));
                 emptyClient.connect();
-                Log.d(TAG,"开始连接");
-            }else {
+                Log.d(TAG, "开始连接");
+            } else {
                 emptyClient.reconnect();
             }
         } catch (URISyntaxException e) {
@@ -77,33 +82,35 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getT());
-            if (messageEvent.getState() == 10005) {
-                Log.d(TAG, "onEventMsg ： " + "3");
-                //firstFragment.refesh((String) messageEvent.getT());
-            }else if (messageEvent.getState() == 10006) {
-                String type = (String) messageEvent.getT();
-                System.out.println("type:" + type);
+        if (messageEvent.getState() == 10005) {
+            Log.d(TAG, "onEventMsg ： " + "3");
+            //firstFragment.refesh((String) messageEvent.getT());
+        } else if (messageEvent.getState() == 10006) {
+            String type = (String) messageEvent.getT();
+            System.out.println("type:" + type);
 
-            }else if (messageEvent.getState() == 10001){
-                Log.d(TAG, "图片 ： " + messageEvent.getT());
+        } else if (messageEvent.getState() == 10001) {
+            Log.d(TAG, "图片 ： " + messageEvent.getT());
 
-            }else if (messageEvent.getState() == 11111) {
-                Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
-                waitingDialog.dismiss();
-                if (disconnectDialog!=null){
-                    disconnectDialog.dismiss();
-                }
-            }else if (messageEvent.getState() == 11110){
-                    Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
-                    waitingDialog.dismiss();
-                    showDisconnectDialog();
-            }else if (messageEvent.getState() == 11119){
-                Log.d(TAG, "connect state：connect 11119" + messageEvent.getT());
-                showDisconnectDialog();
+        } else if (messageEvent.getState() == 11111) {
+            Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
+            waitingDialog.dismiss();
+            if (disconnectDialog != null) {
+                disconnectDialog.dismiss();
+            }
+        } else if (messageEvent.getState() == 11110) {
+            Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
+            waitingDialog.dismiss();
+            showDisconnectDialog();
+        } else if (messageEvent.getState() == 11119) {
+            Log.d(TAG, "connect state：connect 11119" + messageEvent.getT());
+            showDisconnectDialog();
+        } else if (messageEvent.getState() == 40003) {
+            String batter = (String) messageEvent.getT();
+            time.setText(batter);
         }
     }
 
@@ -138,7 +145,7 @@ public class MainActivity extends FragmentActivity {
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
         waitingDialog.show();
-        };
+    }
 
 }
 
