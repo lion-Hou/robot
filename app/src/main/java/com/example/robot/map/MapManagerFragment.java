@@ -135,6 +135,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 Log.d(TAG,"查看地图请求地图链表");
                 break;
 
+
             case R.id.manager_rename:
                 if (!Content.map_Name.equals(null)){
                     gsonUtils.setOldMapName(Content.map_Name);
@@ -173,15 +174,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    //获取map名称
-    public void refreshMapManage(String[] mapName){
-        mapName = new String[Content.list.size()];
-        for (int i =0; i <Content.list.size(); i++){
-            mapName[i] =   Content.list.get(i).getMap_Name();
-        }
-        System.out.println("MG_map_name: " + Content.list.size());
-        moreMap(mapName);
-    }
 
     public void moreMap(String[] mapName){
         Log.d(TAG, "onEventMsg ： " + "2");
@@ -220,7 +212,12 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 mapName[i] =Content.list.get(i).getMap_Name();
             }
             Log.d(TAG,mapName[1]);
-            refreshMapManage(mapName);
+            if (mapName.length == 1){
+                System.out.println("MG_map_nameSSSS: " + Content.list.size());
+                managerSelected.setText(mapName[0]);
+            }else{
+                moreMap(mapName);
+            }
             Log.d(TAG, "onEventMsg ： " + "3");
             //EventBus.getDefault().cancelEventDelivery(10005);
         }

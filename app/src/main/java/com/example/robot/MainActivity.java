@@ -1,11 +1,10 @@
 package com.example.robot;
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.robot.content.EventBusMessage;
@@ -22,7 +21,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -43,6 +41,7 @@ public class MainActivity extends FragmentActivity {
     private ProgressDialog waitingDialog;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(this);
         gsonUtils = new GsonUtils();
         connect();
-
+        disconnectDialog = new NormalDialogUtil();
         firstFragment = new FirstFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment, firstFragment).commit();
         secoundFragment = new SecoundFragment();
@@ -113,10 +112,10 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+
     //Dialog
-    private void showDisconnectDialog() {
-        disconnectDialog = new NormalDialogUtil();
-        disconnectDialog.showDialog(this, "网络错误", "网络连接错误，请确认当前网络状态", "退出", "重新连接", new DialogInterface.OnClickListener() {
+    private void showDisconnectDialog(){
+        disconnectDialog.showDialog(this, "网络错误","网络连接错误，请确认当前网络状态","退出","重新连接" , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //取消
