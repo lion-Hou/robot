@@ -8,7 +8,8 @@ public final class Content {
 
     public static final double ROBOT_SIZE = 0.215;
     public static String map_Name = null;
-    public static String task_Mame = null;
+    public static String first_map_Name = null;
+    public static String task_Name = null;
 
     /**
      * robotState：

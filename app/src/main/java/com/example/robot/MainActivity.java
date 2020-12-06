@@ -3,6 +3,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -21,6 +22,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
