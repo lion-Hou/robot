@@ -61,10 +61,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecycleHolder> {
     }
 
     public void convert(RecycleHolder holder, HistoryBean historyBean, int position) {
-        holder.setText(R.id.history_map_name, historyBean.getMapName());
-        holder.setText(R.id.history_task_name, historyBean.getTaskName());
-        holder.setText(R.id.history_time_name, historyBean.getTime());
-        holder.setText(R.id.history_date_name, historyBean.getDate());
+            holder.setText(R.id.history_map_name, historyBean.getMapName());
+            holder.setText(R.id.history_task_name, historyBean.getTaskName());
+            holder.setText(R.id.history_time_name, historyBean.getTime());
+            holder.setText(R.id.history_date_name, historyBean.getDate());
     }
 
     @Override

@@ -7,60 +7,62 @@
     tools:ignore="MissingDefaultResource">
 
     <TextView
-        android:id="@+id/task_title"
+        android:id="@+id/task_manage_title"
         android:layout_width="200px"
         android:layout_height="100px"
         android:text="@string/task_name"/>
 
     <TextView
-        android:id="@+id/task_name"
+        android:id="@+id/task_manage_name"
         android:layout_width="200px"
         android:layout_height="100px"
-        android:layout_toRightOf="@id/task_title"
+        android:layout_toRightOf="@id/task_manage_title"
         android:background="@drawable/btn_gb_normal"/>
 
     <Button
-        android:id="@+id/new_task"
+        android:id="@+id/task_manage_new_task"
         android:layout_width="200px"
         android:layout_height="100px"
-        android:layout_toRightOf="@id/task_name"
+        android:layout_toRightOf="@id/task_manage_name"
         android:text="@string/task_add"/>
 
     <RelativeLayout
-        android:id="@+id/map_relative"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/task_title"
-        android:layout_above="@+id/line1">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/task_manage_title">
+    <RelativeLayout
+        android:id="@+id/task_manage_map_relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
         <ImageView
-            android:id="@+id/edit_map_Image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/task_manage_map_Image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher_round"
-            tools:ignore="MissingConstraints" />
+             />
+    </RelativeLayout>
     </RelativeLayout>
 
     <Button
-        android:id="@+id/task_edit"
+        android:id="@+id/task_manage_edit"
         android:layout_width="200px"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/map_relative"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
         android:text="@string/task_deit"/>
     <Button
-        android:id="@+id/task_delete"
+        android:id="@+id/task_manage_delete"
         android:layout_width="200px"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/map_relative"
-        android:layout_toRightOf="@id/task_edit"
+        android:layout_height="100px"
+        android:layout_toRightOf="@+id/task_manage_edit"
+        android:layout_alignParentBottom="true"
         android:text="@string/task_delete"/>
     <Button
-        android:id="@+id/task_back"
+        android:id="@+id/task_manage_back"
         android:layout_width="200px"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/map_relative"
-        android:layout_toRightOf="@id/task_delete"
+        android:layout_height="100px"
+        android:layout_toRightOf="@id/task_manage_delete"
+        android:layout_alignParentBottom="true"
         android:text="@string/task_back"/>
 
 </RelativeLayout>

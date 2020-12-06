@@ -33,7 +33,7 @@
                 android:id="@+id/battery"
                 android:layout_width="70px"
                 android:layout_height="70px"
-                android:layout_marginLeft="300px"
+                android:layout_marginLeft="50px"
                 android:layout_toRightOf="@+id/net"
                 android:src="@drawable/batty" />
 

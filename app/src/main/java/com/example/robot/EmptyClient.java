@@ -43,13 +43,6 @@ public class EmptyClient extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshake) {
         isConnected = true;
-        send("{\n" +
-                " \"type\": \"task_alarm\",\n" +
-                " \"dbAlarmMapTaskName\": \"test00\",\n" +
-                " \"dbAlarmTime\": \"11\",\n" +
-                "   \"task_type\":true,\n" +
-                " \"dbAlarmCycle\": [\"星期1\",\"星期2\"]\n" +
-                "}");
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         System.out.println("connect state new connection opened"+isConnected);
     }
@@ -64,7 +57,6 @@ public class EmptyClient extends WebSocketClient {
     @Override
     public void onMessage(String message) {
         System.out.println("received message: " + message);
-
         try {
             differentiateType(message);
         } catch (JSONException e) {
@@ -130,21 +122,19 @@ public class EmptyClient extends WebSocketClient {
                 break;
 
             case Content.SENDTASKQUEUE:
-                //当前任务列表
-                EventBus.getDefault().post(new EventBusMessage(10017, message));
+                //返回任务列表
                 jsonObject = new JSONObject(message);
-                JSONObject list = jsonObject.getJSONObject(Content.DATATIME);
-                String[] taskList = new String[list.length()];
-                for (int i = 0; i < list.length(); i++){
-                    JSONObject jsonObject = list.getJSONObject(String.valueOf(i));
+                JSONArray task = jsonObject.getJSONArray(Content.DATATIME);
+                String[] taskName = new String[task.length()];
+                for (int i =0; i <task.length(); i++){
+                    taskName[i] = task.getString(i);
                 }
-                break;
-
+                Log.d("task_name",taskName[0]);
+                EventBus.getDefault().post(new EventBusMessage(10017, taskName));
             case Content.SENDPOINTPOSITION:
                 //当前地图点列表
                 jsonObject = new JSONObject(message);
                 JSONArray point = jsonObject.getJSONArray(Content.SENDPOINTPOSITION);
-
                 String[] pointName = new String[point.length()];
                 for (int i =0; i <point.length(); i++){
                     JSONObject jsonObject = point.getJSONObject(i);

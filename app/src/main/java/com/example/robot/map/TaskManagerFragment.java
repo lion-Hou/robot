@@ -3,6 +3,8 @@ package com.example.robot.map;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,9 @@ import com.example.robot.task.TaskNewFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
 
@@ -37,26 +42,27 @@ import butterknife.ButterKnife;
 public class TaskManagerFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "TaskManagerFragment";
-    @BindView(R.id.task_title)
+    @BindView(R.id.task_manage_title)
     TextView taskTitle;
-    @BindView(R.id.task_name)
+    @BindView(R.id.task_manage_name)
     TextView taskName;
-    @BindView(R.id.new_task)
+    @BindView(R.id.task_manage_new_task)
     Button newTask;
-    @BindView(R.id.edit_map_Image)
-    ImageView editMapImage;
-    @BindView(R.id.map_relative)
-    RelativeLayout mapRelative;
-    @BindView(R.id.task_edit)
+    @BindView(R.id.task_manage_map_Image)
+    ImageView taskManageMapImage;
+    @BindView(R.id.task_manage_map_relative)
+    RelativeLayout taskManageMapRelative;
+    @BindView(R.id.task_manage_edit)
     Button taskEdit;
-    @BindView(R.id.task_delete)
+    @BindView(R.id.task_manage_delete)
     Button taskDelete;
-    @BindView(R.id.task_back)
+    @BindView(R.id.task_manage_back)
     Button taskBack;
+
     private Context mContext;
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
-
+    private String[] taskNameList;
     public View view;
 
     @Override
@@ -66,29 +72,45 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+        Log.d("hhhh",  "manger_start");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+        Log.d("hhhh",  "manger_stop");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_task_manager, container, false);
         ButterKnife.bind(this, view);
         gsonUtils = new GsonUtils();
+        mContext = view.getContext();
+        gsonUtils.setMapName(Content.map_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
         initView();
         initListener();
         return view;
     }
 
     private void initView() {
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));//任务界面初始化时加载地图
+        newTask.setOnClickListener(this);
+        taskName.setOnClickListener(this);
     }
 
     private void initListener() {
-        newTask.setOnClickListener(this);
-        taskName.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.new_task:
+            case R.id.task_manage_new_task:
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new TaskNewFragment(), null)
@@ -96,27 +118,27 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         .commit();
                 break;
 
-            case R.id.task_name:
+            case R.id.task_manage_name:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
-
         }
 
     }
 
-//    public void requestTaskList(){
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//        System.out.println("which" + mapName.length);
-//        builder.setItems(, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                System.out.println("which" + which);
-//            }
-//        });
-//        builder.create().show();
-//    }
+    public void requestTaskList(String[] taskNameList){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        System.out.println("which" + taskNameList.length);
+        builder.setItems(taskNameList, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("which" + which);
+                taskName.setText(taskNameList[which]);
+            }
+        });
+        builder.create().show();
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMsg(EventBusMessage messageEvent) {
+    public void onEventMsg(EventBusMessage messageEvent){
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
         if (messageEvent.getState() == 10001) {
             Log.d(TAG, "图片 ： " + messageEvent.getT());
@@ -125,9 +147,12 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
             Log.d(TAG, "任务界面获得地图数据" + bytes1.length);
-            Glide.with(mContext).load(bytes1).into(editMapImage);
+            Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            taskManageMapImage.setImageBitmap(mBitmap);
         }else if(messageEvent.getState() == 10017){
-
+            taskNameList = (String[]) messageEvent.getT();
+            Log.d("task_name",taskNameList[0]);
+            requestTaskList(taskNameList);
         }
     }
 }

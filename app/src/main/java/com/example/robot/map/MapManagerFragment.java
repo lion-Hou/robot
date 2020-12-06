@@ -3,6 +3,8 @@ package com.example.robot.map;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,7 +89,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_map_manager, container, false);
         ButterKnife.bind(this, view);
         gsonUtils = new GsonUtils();
@@ -132,8 +133,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             case R.id.manager_selected:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 Log.d(TAG,"查看地图请求地图链表");
-                break;
 
+                break;
 
             case R.id.manager_rename:
                 if (!Content.map_Name.equals(null)){
@@ -177,7 +178,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     //获取map名称
     public void refreshMapManage(String[] mapName){
-
         mapName = new String[Content.list.size()];
         for (int i =0; i <Content.list.size(); i++){
             mapName[i] =   Content.list.get(i).getMap_Name();
@@ -214,7 +214,9 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
             Log.d(TAG, "新建地图 ： " + bytes1.length);
-            Glide.with(mContext).load(bytes1).into(managerMapImage);
+            Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            managerMapImage.setImageBitmap(mBitmap);
+
         }else if (messageEvent.getState() == 10005) {
             mapName = new String[Content.list.size()];
             for (int i=0;i< Content.list.size();i++) {
