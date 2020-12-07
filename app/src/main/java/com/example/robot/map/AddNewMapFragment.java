@@ -65,6 +65,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public EmptyClient emptyClient;
     private Context mContext;
     private View view;
+    private String newMapName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,7 +143,8 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         //确定逻辑
                         Log.d(TAG, "onEventMsg ： " + "开始扫描");
                         newMapMapNameEditText.setEnabled(false);
-                        gsonUtils.setMapName(newMapMapNameEditText.getText().toString());
+                        newMapName = newMapMapNameEditText.getText().toString();
+                        gsonUtils.setMapName(newMapName);
                         Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
                         dialog.dismiss();
@@ -169,7 +171,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         dialog.dismiss();
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.first_fragment, new MapEditFragment(), null)
+                                .replace(R.id.first_fragment, new MapManagerFragment(), null)
                                 .addToBackStack(null)
                                 .commit();
                     }
@@ -187,7 +189,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP_NO));
                         dialog.dismiss();
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()

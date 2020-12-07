@@ -23,8 +23,23 @@
     <string name="new_map_save">保存</string>
     <string name="new_map_back">返回</string>
 
-    <string name="edit_map_name_text">地图名:</string>
+
     <string name="please_select_map">PLEASE SELECT MAP</string>
+
+    <string name="map_manage_add_new_map_btn">新建地图</string>
+    <string name="map_manage_name_text">地图名:</string>
+    <string name="map_manage_select_map">请选择地图</string>
+    <string name="map_manage_rename">重命名</string>
+    <string name="map_manage_delete">删除</string>
+    <string name="map_manage_edit">编辑</string>
+    <string name="map_manage_back">返回</string>
+
+    <string name="edit_map_name_text">地图名:</string>
+    <string name="map_edit_charging_btn">设置充电点</string>
+    <string name="map_edit_virtual_wall">添加虚拟墙</string>
+    <string name="map_edit_position">设置当前位置为任务点</string>
+    <string name="map_edit_save">保存</string>
+    <string name="map_edit_back">返回</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

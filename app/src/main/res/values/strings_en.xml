@@ -17,6 +17,28 @@
     <string name="settings_led_brightness_en">LED Brightness:</string>
     <string name="settings_version_number_en">Version Number:</string>
 
+    <string name="new_map_name_text">Map Name:</string>
+    <string name="new_map_name_edit">Please enter new map name</string>
+    <string name="new_map_scan">Start scanning</string>
+    <string name="new_map_save">Save Map</string>
+    <string name="new_map_back">Cancel scanning</string>
+
+    <string name="map_manage_add_new_map_btn">New Map</string>
+    <string name="map_manage_name_text">Map Name:</string>
+    <string name="map_manage_select_map">Please select a map</string>
+    <string name="map_manage_rename">Rename</string>
+    <string name="map_manage_delete">Delete</string>
+    <string name="map_manage_edit">Edit Map</string>
+    <string name="map_manage_back">Back</string>
+
+    <string name="edit_map_name_text">Map Name:</string>
+    <string name="map_edit_charging_btn">Set Charging Point</string>
+    <string name="map_edit_virtual_wall">Add Virtual Wall</string>
+    <string name="map_edit_position">Set Current Position As Task Point</string>
+    <string name="map_edit_save">Save Changes</string>
+    <string name="map_edit_back">Back</string>
+
+
     <string name="task_name">Task_name:</string>
     <string name="task_deit">EDIT</string>
     <string name="task_delete">DELETE</string>

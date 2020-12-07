@@ -11,7 +11,6 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,19 +23,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
-import com.example.robot.EmptyClient;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.bean.DrawLineBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
-import com.example.robot.view.MyImageTextViewNew;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,7 +51,6 @@ import butterknife.OnClick;
 public class MapEditFragment extends Fragment implements View.OnTouchListener, View.OnClickListener {
 
     private static final String TAG = "MapEditFragment";
-
     @BindView(R.id.add_point_title)
     LinearLayout addPointTitle;
     @BindView(R.id.edit_map_Image)
@@ -75,6 +69,10 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     RelativeLayout mapRelative;
     @BindView(R.id.map_relative_border)
     RelativeLayout mapRelativeBorder;
+    @BindView(R.id.save_charging_btn)
+    Button saveChargingBtn;
+    @BindView(R.id.line1)
+    LinearLayout line1;
     private List<ImageView> imageViewArrayList = new ArrayList<>();
 
 
@@ -83,10 +81,10 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     private ImageView robot_Img;
     private View view;
     private int index = 0;
-    double mBitmapHeight;
-    double mBitmapWidth;
+    private String charging;
 
-
+    private double mBitmapHeight;
+    private double mBitmapWidth;
 
     private List<List<DrawLineBean>> lists = new ArrayList<>();
 
@@ -117,19 +115,17 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
         initView();
+
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
     private void initView() {
         robot_Img = new ImageView(mContext);
         editMapname.setText(Content.map_Name);
         gsonUtils.setMapName(Content.map_Name);
+        wallBtn.setEnabled(false);
+        markBtn.setEnabled(false);
+        saveBtn.setEnabled(false);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
     }
@@ -144,11 +140,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newPointName = input_name.getText().toString();
-                        if (!newPointName.equals(null)&&!newPointName.equals("")&&!newPointName.isEmpty()){
+                        if (!newPointName.equals(null) && !newPointName.equals("") && !newPointName.isEmpty()) {
                             gsonUtils.setPositionName(newPointName);
                             System.out.println("pointName1111" + input_name);
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
-                        }else {
+                        } else {
                             Toast.makeText(mContext, "请输入新的地点名", Toast.LENGTH_SHORT).show();
                         }
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
@@ -178,23 +174,26 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
-            if (mBitmapHeight >= mBitmapWidth){
-                mBitmapWidth = mapRelativeBorder.getHeight()/mBitmapHeight*mBitmapWidth;
+            if (mBitmapHeight >= mBitmapWidth) {
+                mBitmapWidth = mapRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = mapRelativeBorder.getHeight();
-            }else if (mBitmapHeight > mBitmapWidth){
-                mBitmapHeight = mapRelativeBorder.getWidth()/mBitmapWidth*mBitmapHeight;
+            } else if (mBitmapHeight > mBitmapWidth) {
+                mBitmapHeight = mapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = mapRelativeBorder.getWidth();
             }
 
+
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+
+
             editMapImage.setImageBitmap(mBitmap);
-            mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
-            RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+            mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
             editMapImage.setLayoutParams(layoutParams);
             mapRelative.addView(editMapImage);
 
         } else if (messageEvent.getState() == 10008) {
-            for (int i = 0; i <imageViewArrayList.size(); i++) {
+            for (int i = 0; i < imageViewArrayList.size(); i++) {
                 mapRelative.removeView(imageViewArrayList.get(i));
             }
             String message = (String) messageEvent.getT();
@@ -230,13 +229,12 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         Log.d("zdzd222", "      \n");
                         double mapWidth = (double) editMapImage.getWidth();
                         double mapHeight = (double) editMapImage.getHeight();
-//
 
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
                         double layoutW = (double) mapRelative.getWidth();
                         double layoutH = (double) mapRelative.getHeight();
-                        Log.d("W H", ""+layoutW/mapWidth+"MW:"+layoutH/mapHeight);
+                        Log.d("W H", "" + layoutW / mapWidth + "MW:" + layoutH / mapHeight);
 //                        Log.d("zdzd999", "RW:x"+coefficientX+"Y"+coefficientY);
                         double pointX = jsonItem.getDouble(Content.POINT_X);
                         int pointType = jsonItem.getInt(Content.POINT_TYPE);
@@ -247,17 +245,25 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         double angleY = Math.sin(jsonItem.getDouble(Content.ANGLE));
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
-                        Log.d("zdzd9998", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
-                        Log.d("zdzd9998", " resolution * angleX"+  resolution*angleX);
-                        if (pointType == 2) {
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                        Log.d("zdzd9998", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "       originX" + originX + "       Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
+                        Log.d("zdzd9998", " resolution * angleX" + resolution * angleX);
+
+                        if (pointType == 1) {
+                            saveChargingBtn.setEnabled(false);
+                            wallBtn.setEnabled(true);
+                            markBtn.setEnabled(true);
+                            saveBtn.setEnabled(true);
+                            robot_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
-                            Log.d("zdzd9998", "angleX"+  angleX);
-                            Log.d("zdzd9998", " resolution"+  resolution);
-                            mapRelative.addView(imageView);
-                        }else if (pointType == 1){
-
+                            if (pointType == 2) {
+                                imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                                        0, 0);
+                                Log.d("zdzd9998", "angleX" + angleX);
+                                Log.d("zdzd9998", " resolution" + resolution);
+                                mapRelative.addView(imageView);
+                            }
 
                         }
                     }
@@ -266,6 +272,9 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 e.printStackTrace();
             }
 
+        }else if (messageEvent.getState() == 19191) {
+            String message = (String) messageEvent.getT();
+            charging = message;
         } else if (messageEvent.getState() == 10009) {
             String message = (String) messageEvent.getT();
             try {
@@ -284,16 +293,17 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                     double angleY = Math.sin(jsonObject.getDouble(Content.ANGLE));
                     double angleX = Math.cos(jsonObject.getDouble(Content.ANGLE));
 
-                    robot_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX  - (Content.ROBOT_SIZE / resolution * angleX))),
+                    robot_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                             (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                             0, 0);
-                    Log.d("zdzd999888", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
-                    Log.d("zdzd999888", " resolution * angleX"+  resolution*angleX);
-                    Log.d("zdzd999888", "angleX"+  angleX);
-                    Log.d("zdzd999888", " resolution"+  resolution);
+                    Log.d("zdzd999888", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "       originX" + originX + "       Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
+                    Log.d("zdzd999888", " resolution * angleX" + resolution * angleX);
+                    Log.d("zdzd999888", "angleX" + angleX);
+                    Log.d("zdzd999888", " resolution" + resolution);
                     mapRelative.addView(robot_Img);
                 }
-            } catch (JSONException e) {
+            }
+            catch (JSONException e) {
                 e.printStackTrace();
             }
         } else if (messageEvent.getState() == 40002) {//获取虚拟墙
@@ -340,7 +350,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
         }
     }
 
-    @OnClick({R.id.edit_mapname, R.id.add_point_title, R.id.map_relative, R.id.wall_btn, R.id.mark_btn, R.id.save_btn, R.id.back_btn})
+    @OnClick({R.id.edit_mapname, R.id.add_point_title, R.id.map_relative, R.id.wall_btn, R.id.mark_btn, R.id.save_btn, R.id.back_btn,R.id.save_charging_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.edit_mapname:
@@ -365,6 +375,16 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         .replace(R.id.first_fragment, new MapManagerFragment(), null)
                         .addToBackStack(null)
                         .commit();
+                break;
+            case R.id.save_charging_btn:
+                Log.d("YYYYY", "save_charging_point");
+                if (charging.equals("放电")){
+                    Toast.makeText(mContext, "请确认机器人是否连接上充电点", Toast.LENGTH_SHORT).show();
+                }else {
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+                }
                 break;
         }
     }
@@ -422,10 +442,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
 
     @Override
     public void onClick(View view) {
-        for (int i = 0;i < imageViewArrayList.size(); i++) {
-            if (view == imageViewArrayList.get(i)){
+        for (int i = 0; i < imageViewArrayList.size(); i++) {
+            if (view == imageViewArrayList.get(i)) {
                 Toast.makeText(mContext, i + "", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 }

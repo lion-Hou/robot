@@ -57,7 +57,7 @@ public class SettingsActivity extends Activity {
         languageSpinner.setAdapter(languageAdapter);
 
         robotSpeedSpinner = new Spinner(this);
-        robotSpeedItems = new String[]{"低", "高"};
+        robotSpeedItems = new String[]{"低","中","高"};
         ArrayAdapter<String> robotSpeedAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languageItems);
         robotSpeedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         robotSpeedSpinner.setAdapter(robotSpeedAdapter);
