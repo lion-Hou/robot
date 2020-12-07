@@ -144,7 +144,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newPointName = input_name.getText().toString();
-                        if (!newPointName.equals(null)&&!newPointName.equals("")){
+                        if (!newPointName.equals(null)&&!newPointName.equals("")&&!newPointName.isEmpty()){
                             gsonUtils.setPositionName(newPointName);
                             System.out.println("pointName1111" + input_name);
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
@@ -258,8 +258,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                             mapRelative.addView(imageView);
                         }else if (pointType == 1){
 
-                        }
 
+                        }
                     }
                 }
             } catch (JSONException e) {

@@ -125,6 +125,9 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_map_scan:
+                if (newMapMapNameEditText.getText().toString().isEmpty()){
+                    Toast.makeText(mContext, "请输入新地图的名字", Toast.LENGTH_SHORT).show();
+                }else {
                 Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
                 addNewMapDialog = new NormalDialogUtil();
                 addNewMapDialog.showDialog(mContext, "","是否开始扫描","取消","开始扫描" , new DialogInterface.OnClickListener() {
@@ -145,6 +148,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         dialog.dismiss();
                     }
                 });
+                }
                 break;
             case R.id.new_map_save:
                 addNewMapDialog = new NormalDialogUtil();
@@ -165,7 +169,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         dialog.dismiss();
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.first_fragment, new MapManagerFragment(), null)
+                                .replace(R.id.first_fragment, new MapEditFragment(), null)
                                 .addToBackStack(null)
                                 .commit();
                     }
