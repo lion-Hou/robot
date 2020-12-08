@@ -105,15 +105,15 @@ public class MainActivity extends FragmentActivity {
         } else if (messageEvent.getState() == 11111) {
             Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
             waitingDialog.dismiss();
-           // showDisconnectDialog();
+            showDisconnectDialog();
             disconnectDialog.dismiss();
         } else if (messageEvent.getState() == 11110) {
             Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
             waitingDialog.dismiss();
-           // showDisconnectDialog();
+            showDisconnectDialog();
         } else if (messageEvent.getState() == 11119) {
             Log.d(TAG, "connect state：connect 11119" + messageEvent.getT());
-            //showDisconnectDialog();
+            showDisconnectDialog();
         } else if (messageEvent.getState() == 40003) {
             String batter = (String) messageEvent.getT();
             time.setText(batter);

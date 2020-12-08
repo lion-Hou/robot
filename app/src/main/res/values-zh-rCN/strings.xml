@@ -82,5 +82,10 @@
         <item>中文</item>
     </string-array>
 
+    <string name="test_self_inspection">自检</string>
+    <string name="test_voice_and_led">声音与LED灯光</string>
+    <string name="test_uvc">UVC</string>
+    <string name="test_pir">PIR</string>
+
 
 </resources>
