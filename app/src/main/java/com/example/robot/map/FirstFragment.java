@@ -239,7 +239,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 System.out.println("which" + which);
                 mainSpinnerMap.setText(mapName[which]);
-                Content.map_Name = mapName[which];
                 Content.first_map_Name = mapName[which];
                 gsonUtils.setMapName(mapName[which]);//给上位机传入地图名称
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图

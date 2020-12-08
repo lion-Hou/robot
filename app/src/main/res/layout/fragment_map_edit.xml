@@ -20,8 +20,7 @@
             android:id="@+id/edit_mapname"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="30dp"
-            android:text="AAAAAAAAAAAAA"/>
+            android:textSize="30dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -54,32 +53,39 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/save_charging_btn"
+            android:layout_width="200px"
+            android:layout_height="match_parent"
+            android:textSize="14dp"
+            android:text="@string/map_edit_charging_btn" />
+
+        <Button
             android:id="@+id/wall_btn"
             android:layout_width="200px"
             android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:text="Add Virtual Wall" />
+            android:textSize="14dp"
+            android:text="@string/map_edit_virtual_wall" />
 
         <Button
             android:id="@+id/mark_btn"
             android:layout_width="200px"
             android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:text="Mark Current Position" />
+            android:textSize="14dp"
+            android:text="@string/map_edit_position"/>
 
         <Button
             android:id="@+id/save_btn"
             android:layout_width="200px"
             android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:text="Save" />
+            android:textSize="14dp"
+            android:text="@string/map_edit_save" />
 
         <Button
             android:id="@+id/back_btn"
             android:layout_width="200px"
             android:layout_height="match_parent"
-            android:text="Back"
-            android:textSize="15dp" />
+            android:text="@string/map_edit_back"
+            android:textSize="14dp" />
     </LinearLayout>
 
 </RelativeLayout>

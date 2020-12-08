@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,6 +129,13 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         managerBack.setOnClickListener(this);
         managerDelete.setOnClickListener(this);
         managerRename.setOnClickListener(this);
+
+        if (Content.map_Name == null){
+            managerEdit.setEnabled(false);
+            managerDelete.setEnabled(false);
+            managerRename.setEnabled(false);
+        }
+
     }
 
     private void initListener() {
@@ -159,7 +167,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             public void onClick(DialogInterface dialog, int which) {
                                 String newMapName = input_name.getText().toString();
                                 System.out.println("pointName1111" + input_name);
-                                if (!newMapName.equals(null)&&!newMapName.equals("")){
+                                if (!newMapName.equals(null)&&!newMapName.equals("")&&!newMapName.isEmpty()){
                                     gsonUtils.setOldMapName(Content.map_Name);
                                     gsonUtils.setNewMapName(newMapName);
                                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
@@ -201,7 +209,10 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
                             managerSelected.setText(R.string.please_select_map);
                             Content.map_Name = null;
-                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                            mapManageRelative.removeView(managerMapImage);
+                            managerEdit.setEnabled(false);
+                            managerDelete.setEnabled(false);
+                            managerRename.setEnabled(false);
                             Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                         }
                         dialog.dismiss();
@@ -240,6 +251,12 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 System.out.println("which" + which);
                 managerSelected.setText(mapName[which]);
                 Content.map_Name = mapName[which];
+                Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
+                if (Content.map_Name!=null) {
+                    managerEdit.setEnabled(true);
+                    managerDelete.setEnabled(true);
+                    managerRename.setEnabled(true);
+                }
                 gsonUtils.setMapName(mapName[which]);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                 Log.d(TAG,"AAAAAAAA");
@@ -278,19 +295,35 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             managerMapImage.setLayoutParams(layoutParams);
             mapManageRelative.addView(managerMapImage);
         }else if (messageEvent.getState() == 10005) {
-            mapName = new String[Content.list.size()];
+            int ori_size = Content.list.size();
+            System.out.println("ZHZHSSSS: ori_size = " + ori_size);
+            int null_count = 0;
+            for (int i=0;i< ori_size;i++) {
+                String temp1 = Content.list.get(i).getMap_Name();
+                System.out.println("ZHZHZZZZ1111,temp1 =: " + temp1);
+                if(TextUtils.isEmpty(temp1)){
+                //    null_count++;
+                    Content.list.remove(i);
+                    ori_size--;
+                }
+            }
+            mapName = new String[Content.list.size()-null_count];
+            System.out.println("ZHZHSSSS: " + Content.list.size());
             for (int i=0;i< Content.list.size();i++) {
                 mapName[i] =Content.list.get(i).getMap_Name();
+                System.out.println("ZHZHZZZZ: " + mapName[i]);
             }
             System.out.println("ZHZHSSSS: " + Content.list.size());
             if (Content.list.size() == 1){
                 System.out.println("MG_map_nameSSSS: " + Content.list.size());
                 managerSelected.setText(mapName[0]);
+                Content.map_Name=mapName[0];
                 gsonUtils.setMapName(mapName[0]);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{
                 moreMap(mapName);
             }
+
             Log.d(TAG, "onEventMsg ： " + "3");
             //EventBus.getDefault().cancelEventDelivery(10005);
         } else if (messageEvent.getState() == 10008) {
@@ -317,20 +350,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         imageView.setImageResource(R.drawable.ic_point);
                         imageViewArrayList.add(imageView);
                         imageView.setOnClickListener(this);
-                        Log.d("zdzd222", "" + (managerMapImage.getWidth() / Content.list.get(index).getGridWidth() * jsonItem.getDouble(Content.POINT_X)
-                                + Content.list.get(index).getOriginX() - (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE)))));
-                        Log.d("zdzd222", "" + (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE))));
-                        Log.d("zdzd222", "      \n");
-
-                        Log.d("zdzd 777", "" + managerMapImage.getWidth());
-                        Log.d("zdzd 777", "" + Content.list.get(index).getGridWidth());
-                        Log.d("zdzd 777", "" + jsonItem.getDouble(Content.POINT_X));
-                        Log.d("zdzd 777", "" + Content.list.get(index).getOriginX());
-                        Log.d("zdzd 777", "" + (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE))));
-                        Log.d("zdzd222", "      \n");
-                        double mapWidth = (double) managerMapImage.getWidth();
-                        double mapHeight = (double) managerMapImage.getHeight();
-//
 
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
@@ -347,13 +366,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         Log.d("zdzd9998", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
                         Log.d("zdzd9998", " resolution * angleX"+  resolution*angleX);
                         if (pointType == 2) {
+                            Log.d("zdzd9998", "pointType" +  pointType);
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
-                            Log.d("zdzd9998", "angleX"+  angleX);
-                            Log.d("zdzd9998", " resolution"+  resolution);
                             mapManageRelative.addView(imageView);
                         }else if (pointType == 1){
+
+
                         }
                     }
                 }

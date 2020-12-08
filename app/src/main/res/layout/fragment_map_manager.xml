@@ -16,20 +16,22 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30dp"
-            android:text="@string/new_map_name_text"/>
+            android:gravity="center"
+            android:text="@string/map_manage_name_text"/>
 
         <TextView
             android:id="@+id/manager_selected"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/please_select_map"/>
+            android:gravity="center"
+            android:text="@string/map_manage_select_map"/>
 
         <Button
             android:id="@+id/manager_newMap"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Add New Map"
-            android:textSize="30dp" />
+            android:text="@string/map_manage_add_new_map_btn"
+            android:textSize="25dp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -64,29 +66,29 @@
             android:id="@+id/manager_rename"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="30dp"
-            android:text="Rename" />
+            android:textSize="15dp"
+            android:text="@string/map_manage_rename" />
 
         <Button
             android:id="@+id/manager_delete"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="30dp"
-            android:text="Delete" />
+            android:textSize="15dp"
+            android:text="@string/map_manage_delete" />
 
         <Button
             android:id="@+id/manager_edit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="30dp"
-            android:text="Edit" />
+            android:textSize="15dp"
+            android:text="@string/map_manage_edit" />
 
         <Button
             android:id="@+id/manager_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Back"
-            android:textSize="30dp" />
+            android:text="@string/map_manage_back"
+            android:textSize="15dp" />
     </LinearLayout>
 
 </RelativeLayout>

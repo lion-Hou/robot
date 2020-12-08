@@ -79,6 +79,12 @@ public class EmptyClient extends WebSocketClient {
     public void differentiateType(String message) throws JSONException {
         Log.d("gsonUtils.getType  : ", ""+ gsonUtils.getType(message));
         switch (gsonUtils.getType(message)) {
+            case Content.CHARGING:
+                String request_msg = null;
+                jsonObject = new JSONObject(message);
+                request_msg = jsonObject.getString(Content.CHARGING);
+                EventBus.getDefault().post(new EventBusMessage<>(19191,request_msg));
+                break;
             case Content.CONN_NO:
                 isConnected = false;
                 EventBus.getDefault().post(new EventBusMessage<>(11110,"11110"));

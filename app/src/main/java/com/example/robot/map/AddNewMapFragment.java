@@ -65,6 +65,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public EmptyClient emptyClient;
     private Context mContext;
     private View view;
+    private String newMapName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,9 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_map_scan:
+                if (newMapMapNameEditText.getText().toString().isEmpty()){
+                    Toast.makeText(mContext, "请输入新地图的名字", Toast.LENGTH_SHORT).show();
+                }else {
                 Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
                 addNewMapDialog = new NormalDialogUtil();
                 addNewMapDialog.showDialog(mContext, "","是否开始扫描","取消","开始扫描" , new DialogInterface.OnClickListener() {
@@ -139,12 +143,14 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         //确定逻辑
                         Log.d(TAG, "onEventMsg ： " + "开始扫描");
                         newMapMapNameEditText.setEnabled(false);
-                        gsonUtils.setMapName(newMapMapNameEditText.getText().toString());
+                        newMapName = newMapMapNameEditText.getText().toString();
+                        gsonUtils.setMapName(newMapName);
                         Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
                         dialog.dismiss();
                     }
                 });
+                }
                 break;
             case R.id.new_map_save:
                 addNewMapDialog = new NormalDialogUtil();
@@ -183,7 +189,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP_NO));
                         dialog.dismiss();
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
