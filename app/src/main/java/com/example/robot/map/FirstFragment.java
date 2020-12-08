@@ -108,6 +108,18 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+
+        /**
+         * 加载首页判断是否有选择地图
+         * 没有选择-->任务按钮不可点击
+         * 反之可点
+         */
+        if(mainSpinnerMap.getText() == "PLEASE SELECT MAP" || mainSpinnerMap.getText() == "请选择地图"){
+            Log.d("hhh", (String) mainSpinnerMap.getText());
+            mainTask.setEnabled(false);
+        }else {
+            mainTask.setEnabled(true);
+        }
     }
 
     /**

@@ -53,6 +53,7 @@
         android:layout_height="100px"
         android:layout_alignParentBottom="true"
         android:text="@string/task_deit"/>
+
     <Button
         android:id="@+id/task_manage_delete"
         android:layout_width="200px"
@@ -60,6 +61,7 @@
         android:layout_toRightOf="@+id/task_manage_edit"
         android:layout_alignParentBottom="true"
         android:text="@string/task_delete"/>
+
     <Button
         android:id="@+id/task_manage_back"
         android:layout_width="200px"

@@ -44,6 +44,7 @@ public class EmptyClient extends WebSocketClient {
     public void onOpen(ServerHandshake handshake) {
         isConnected = true;
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
+        //发送系统时间给下位机
         System.out.println("connect state new connection opened"+isConnected);
     }
 
@@ -91,6 +92,7 @@ public class EmptyClient extends WebSocketClient {
             case Content.CONN_OK:
                 isConnected = true;
                 EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
+                //20201207.121212+
                 break;
             case Content.TV_TIME:
                 String string = null;
