@@ -196,6 +196,7 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.editTaskQueue:
                 EventBus.getDefault().post(new EventBusMessage(20004, message));
+                Log.d("edit_Queue",message );
                 break;
 
 

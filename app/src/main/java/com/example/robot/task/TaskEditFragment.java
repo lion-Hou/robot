@@ -87,8 +87,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     private MyAdapter mAdapter;
     private String[] point_name;
     private ItemTouchHelper itemTouchHelper;
-    private String[] type;
-    private String[] selectWeek;
+    private String[] type = new String[]{"Once", "Pre Day", "Pre Week"};
+    private String selectWeek = "";
     private String typeValue;
     private String typeTime;
     private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
@@ -130,6 +130,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
 
     private void initView() {
 
+        newMapMapNameEditText.setText(Content.fixTaskName);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         mAdapter = new MyAdapter(mList, this);
@@ -139,6 +141,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
         itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
+        gsonUtils.setTaskName(Content.fixTaskName);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
 
         taskNewSave.setOnClickListener(this);
@@ -203,7 +206,6 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
              */
             case R.id.task_type_select_edit:
                 Log.d("tasklog", "type");
-                type = new String[]{"Once", "Pre Day", "Pre Week"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setItems(type, new DialogInterface.OnClickListener() {
                     @Override
@@ -303,27 +305,36 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
-        Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
+        Log.d(TAG, "onEventMsgEditeTask ： " + messageEvent.getState());
         if (messageEvent.getState() == 10007) {
             String[] point = (String[]) messageEvent.getT();
             point_name = new String[point.length];
             pointList(point);
-            //Log.d(TAG, "收到点的数据大小 ： " + point.length);
+            Log.d(TAG, "收到点的数据大小 ： " + point.length);
         } else if (messageEvent.getState() == 20004) {
             Log.d(TAG, "onEventMsg20004 ： " + (String) messageEvent.getT());
             try {
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
                 //类型
-                if (jsonObject.getString(Content.editTaskQueueType) == null) {
+                JSONArray typeArray = jsonObject.getJSONArray(Content.editTaskQueueType);
+                if (typeArray.length() == 0) {
                     //Once
                     taskTypeSelectWeek.setVisibility(View.GONE);
+                    taskTypeSelect.setText(type[0]);
+                } else if (typeArray.length() == 7) {
+                    taskTypeSelect.setText(type[1]);
+                    taskTypeSelectWeek.setVisibility(View.GONE);
                 } else {
-                    //每天或者每周几   如果jsonarray.length() == 7 则是每天
-                    JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueueType);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        myWeek.add(jsonArray.getString(i));
+                    taskTypeSelect.setText(type[2]);
+                    for (int i = 0; i < typeArray.length(); i++) {
+                        myWeek.add(typeArray.getString(i));
+                        selectWeek = selectWeek + typeArray.getString(i) + "  ";
                     }
+                    taskTypeSelectWeek.setText(selectWeek);
                 }
+                taskTypeSelectTime.setText(jsonObject.getString(Content.editTaskQueueTime));
+
+
                 //数据
                 String point = jsonObject.getString(Content.editTaskQueue);
                 JSONObject js = new JSONObject(point);

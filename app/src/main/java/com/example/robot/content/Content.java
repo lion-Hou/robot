@@ -76,8 +76,8 @@ public final class Content {
     public static final String STOPTASKQUEUE = "stopTaskQueue";//停止任务队列
     public static final String DELETE_TASK = "delete_task";//删除任务
     public static final String editTaskQueue = "editTaskQueue";//编辑任务
-    public static final String editTaskQueueType = "editTaskQueueType";//编辑任务类型
-
+    public static final String editTaskQueueType = "edittaskqueuetype";//编辑任务类型
+    public static final String editTaskQueueTime = "edittaskqueuetime";//编辑任务类型
 
     //settings
     public static final String GET_LED_LEVEL = "get_led_level";//获取LED亮度
