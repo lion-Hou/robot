@@ -28,6 +28,7 @@ import com.example.robot.bean.DrawLineBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.task.TaskEditFragment;
 import com.example.robot.task.TaskNewFragment;
 import com.example.robot.util.NormalDialogUtil;
 
@@ -122,6 +123,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         taskName.setOnClickListener(this);
         taskDelete.setOnClickListener(this);
         taskBack.setOnClickListener(this);
+        taskEdit.setOnClickListener(this);
     }
 
     private void initListener() {
@@ -164,6 +166,13 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new FirstFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.task_manage_edit:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new TaskEditFragment(), null)
                         .addToBackStack(null)
                         .commit();
                 break;

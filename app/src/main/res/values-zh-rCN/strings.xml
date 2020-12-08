@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">消毒机器人</string>
+    <string name="text_map">地图:</string>
+    <string name="text_task">任务:</string>
+    <string name="run">执行</string>
+    <string name="map">地图</string>
+    <string name="task">任务</string>
+    <string name="history">历史</string>
+    <string name="settings">设置</string>
+
+    <string name="settings_title">设置</string>
+    <string name="settings_electricity_quantity">回充电量:</string>
+    <string name="settings_language">语言:</string>
+    <string name="settings_volume">音量:</string>
+    <string name="settings_robot_speed">机器人行进速度:</string>
+    <string name="settings_led_brightness">LED亮度:</string>
+    <string name="settings_version_number">版本号:</string>
+
+
+    <string name="new_map_name_text">地图名:</string>
+    <string name="new_map_name_edit">请输入地图名称</string>
+    <string name="new_map_scan">开始扫描</string>
+    <string name="new_map_save">保存</string>
+    <string name="new_map_back">返回</string>
+
+
+    <string name="please_select_map">请选择地图</string>
+
+    <string name="map_manage_add_new_map_btn">新建地图</string>
+    <string name="map_manage_name_text">地图名:</string>
+    <string name="map_manage_select_map">请选择地图</string>
+    <string name="map_manage_rename">重命名</string>
+    <string name="map_manage_delete">删除</string>
+    <string name="map_manage_edit">编辑</string>
+    <string name="map_manage_back">返回</string>
+
+    <string name="edit_map_name_text">地图名:</string>
+    <string name="map_edit_charging_btn">设置充电点</string>
+    <string name="map_edit_virtual_wall">添加虚拟墙</string>
+    <string name="map_edit_position">设置当前位置为任务点</string>
+    <string name="map_edit_save">保存</string>
+    <string name="map_edit_back">返回</string>
+
+    <string name="task_name">任务名</string>
+    <string name="task_deit">修改</string>
+    <string name="task_delete">删除</string>
+    <string name="task_back">返回</string>
+    <string name="task_add">新建任务</string>
+    <string name="run_map">地图名</string>
+    <string name="run_task">任务名</string>
+    <string name="run_stop">停止</string>
+    <string name="task_type">任务类型</string>
+    <string name="task_type_select">请选择任务类型</string>
+    <string name="task_type_time">请选择任务时间</string>
+    <string name="task_type_week">请选择任务周</string>
+
+
+</resources>

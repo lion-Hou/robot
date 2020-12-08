@@ -1,47 +1,55 @@
 <resources>
-    <string name="app_name">消毒机器人</string>
-    <string name="text_map">地图:</string>
-    <string name="text_task">任务:</string>
-    <string name="run">执行</string>
-    <string name="map">地图</string>
-    <string name="task">任务</string>
-    <string name="history">历史</string>
-    <string name="settings">设置</string>
 
-    <string name="settings_title">设置</string>
-    <string name="settings_electricity_quantity">回充电量:</string>
-    <string name="settings_language">语言:</string>
-    <string name="settings_volume">音量:</string>
-    <string name="settings_robot_speed">机器人行进速度:</string>
-    <string name="settings_led_brightness">LED亮度:</string>
-    <string name="settings_version_number">版本号:</string>
+    <string name="app_name">Robot</string>
+    <string name="text_map">Map:</string>
+    <string name="text_task">Task:</string>
+    <string name="run">Run</string>
+    <string name="map">Map</string>
+    <string name="task">Task</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
 
-
-    <string name="new_map_name_text">地图名:</string>
-    <string name="new_map_name_edit">请输入地图名称</string>
-    <string name="new_map_scan">开始扫描</string>
-    <string name="new_map_save">保存</string>
-    <string name="new_map_back">返回</string>
-
+    <string name="settings_title">Settings</string>
+    <string name="settings_electricity_quantity">Recharge Capacity:</string>
+    <string name="settings_language">Language:</string>
+    <string name="settings_volume">Volume:</string>
+    <string name="settings_robot_speed">Robot Speed:</string>
+    <string name="settings_led_brightness">LED Brightness:</string>
+    <string name="settings_version_number">Version Number:</string>
 
     <string name="please_select_map">PLEASE SELECT MAP</string>
+    <string name="new_map_name_text">Map Name:</string>
+    <string name="new_map_name_edit">Please enter new map name</string>
+    <string name="new_map_scan">Start scanning</string>
+    <string name="new_map_save">Save Map</string>
+    <string name="new_map_back">Cancel scanning</string>
 
-    <string name="map_manage_add_new_map_btn">新建地图</string>
-    <string name="map_manage_name_text">地图名:</string>
-    <string name="map_manage_select_map">请选择地图</string>
-    <string name="map_manage_rename">重命名</string>
-    <string name="map_manage_delete">删除</string>
-    <string name="map_manage_edit">编辑</string>
-    <string name="map_manage_back">返回</string>
+    <string name="map_manage_add_new_map_btn">New Map</string>
+    <string name="map_manage_name_text">Map Name:</string>
+    <string name="map_manage_select_map">Please select a map</string>
+    <string name="map_manage_rename">Rename</string>
+    <string name="map_manage_delete">Delete</string>
+    <string name="map_manage_edit">Edit Map</string>
+    <string name="map_manage_back">Back</string>
 
-    <string name="edit_map_name_text">地图名:</string>
-    <string name="map_edit_charging_btn">设置充电点</string>
-    <string name="map_edit_virtual_wall">添加虚拟墙</string>
-    <string name="map_edit_position">设置当前位置为任务点</string>
-    <string name="map_edit_save">保存</string>
-    <string name="map_edit_back">返回</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_map_name_text">Map Name:</string>
+    <string name="map_edit_charging_btn">Set Charging Point</string>
+    <string name="map_edit_virtual_wall">Add Virtual Wall</string>
+    <string name="map_edit_position">Set Current Position As Task Point</string>
+    <string name="map_edit_save">Save Changes</string>
+    <string name="map_edit_back">Back</string>
 
 
+    <string name="task_name">Task_name:</string>
+    <string name="task_deit">EDIT</string>
+    <string name="task_delete">DELETE</string>
+    <string name="task_back">BACK</string>
+    <string name="task_add">Add New</string>
+    <string name="run_map">Map Name:</string>
+    <string name="run_task">Task Name:</string>
+    <string name="run_stop">STOP</string>
+    <string name="task_type">Task_Type</string>
+    <string name="task_type_select">PLEASE SELECT TASK TYPE</string>
+    <string name="task_type_time">PLEASE SELECT TASK TIME</string>
+    <string name="task_type_week">PLEASE SELECT TASK WEEK</string>
 </resources>

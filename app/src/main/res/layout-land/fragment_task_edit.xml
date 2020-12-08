@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
+
+    <RelativeLayout
+        android:id="@+id/edit_title1"
+        android:layout_width="500px"
+        android:layout_height="100px">
+
+        <TextView
+            android:id="@+id/edit_task_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:text="@string/task_name"/>
+        <EditText
+            android:id="@+id/edit_mapName_editText"
+            android:layout_width="200px"
+            android:layout_height="100px"
+            android:textSize="18dp"
+            android:gravity="bottom"
+            android:hint="请输入任务名"
+            android:layout_toRightOf="@id/edit_task_name"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/edit_title2"
+        android:layout_width="500px"
+        android:layout_height="300px"
+        android:layout_below="@+id/edit_title1">
+        <TextView
+            android:id="@+id/edit_task_type"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:text="@string/task_type"/>
+        <TextView
+            android:id="@+id/edit_task_type_select"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/edit_task_type"
+            android:layout_height="100px"
+            android:layout_marginLeft="50px"
+            android:text="@string/task_type_select"/>
+        <TextView
+            android:id="@+id/edit_task_type_selectTime"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/edit_task_type"
+            android:layout_below="@+id/edit_task_type_select"
+            android:layout_height="100px"
+            android:layout_marginLeft="50px"
+            android:text="@string/task_type_time"/>
+        <TextView
+            android:id="@+id/edit_task_type_selectWeek"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/edit_task_type"
+            android:layout_below="@+id/edit_task_type_selectTime"
+            android:layout_height="100px"
+            android:layout_marginLeft="50px"
+            android:text="@string/task_type_week"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/addtask_select_point"
+        android:layout_width="220px"
+        android:layout_height="100px"
+        android:layout_below="@+id/edit_title2"
+        android:text="SelectPoint"/>
+
+    <RelativeLayout
+        android:id="@+id/edit_title3"
+        android:layout_width="500px"
+        android:layout_height="200px"
+        android:layout_below="@+id/addtask_select_point">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_task"
+            android:layout_width="800px"
+            android:layout_height="500px"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_gb_normal">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/edit_task_new_save"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_below="@+id/edit_title3"
+        android:text="SAVE"/>
+
+    <Button
+        android:id="@+id/task_new_back"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_below="@+id/edit_title3"
+        android:layout_toRightOf="@id/edit_task_new_save"
+        android:text="BACK"/>
+
+</RelativeLayout>
