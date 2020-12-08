@@ -25,5 +25,8 @@
     <string name="run_map">Map Name:</string>
     <string name="run_task">Task Name:</string>
     <string name="run_stop">STOP</string>
-
+    <string name="task_type">Task_Type</string>
+    <string name="task_type_select">PLEASE SELECT TASK TYPE</string>
+    <string name="task_type_time">PLEASE SELECT TASK TIME</string>
+    <string name="task_type_week">PLEASE SELECT TASK WEEK</string>
 </resources>

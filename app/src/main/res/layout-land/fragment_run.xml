@@ -31,6 +31,7 @@
         android:id="@+id/run_task_name"
         android:layout_width="wrap_content"
         android:layout_toRightOf="@id/run_task"
+        android:layout_below="@+id/run_map"
         android:layout_height="50px"
         android:textSize="18dp" />
 
@@ -38,10 +39,11 @@
     <RelativeLayout
         android:id="@+id/run"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/task_run_edit"/>
 
     <Button
-        android:id="@+id/task_manage_edit"
+        android:id="@+id/task_run_edit"
         android:layout_width="200px"
         android:layout_height="100px"
         android:layout_alignParentBottom="true"

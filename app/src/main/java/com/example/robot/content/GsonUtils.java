@@ -26,6 +26,9 @@ public class GsonUtils {
     private List<SaveTaskBean> list;
     private String oldMapName;
     private String newMapName;
+    private String taskType;
+    private List<String> taskWeek;
+    private String taskTime;
 
     public String getOldMapName() {
         return oldMapName;
@@ -72,6 +75,18 @@ public class GsonUtils {
         this.taskName = taskName;
     }
 
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
+    }
+
+    public void setTaskTime(String taskTime) {
+        this.taskTime = taskTime;
+    }
+
+    public void setTaskWeek(List<String> taskWeek) {
+        this.taskWeek = taskWeek;
+    }
+
     public String getPositionName() {
         return positionName;
     }
@@ -99,6 +114,15 @@ public class GsonUtils {
                     jsonArray.put(i, js);
                 }
                 jsonObject.put(Content.SAVETASKQUEUE, jsonArray);
+            }
+            jsonObject.put(Content.dbAlarmTime, taskTime);
+            jsonObject.put(Content.dbAlarmTaskName, taskName);
+            if (taskWeek != null) {
+                JSONArray jsonArray = new JSONArray();
+                for (int i = 0; i < taskWeek.size(); i++) {
+                    jsonArray.put(i, taskWeek.get(i));
+                }
+                jsonObject.put(Content.dbAlarmCycle, jsonArray);
             }
         } catch (JSONException e) {
             e.printStackTrace();

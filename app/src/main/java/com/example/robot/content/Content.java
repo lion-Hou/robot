@@ -70,7 +70,7 @@ public final class Content {
     public static final String DELETETASKQUEUE = "deleteTaskQueue";//删除任务队列
     public static final String STARTTASKQUEUE = "startTaskQueue";//开始任务队列
     public static final String STOPTASKQUEUE = "stopTaskQueue";//停止任务队列
-
+    public static final String DELETE_TASK = "delete_task";//删除任务
     public static final String DATATIME = "dataTime";//地图名称的列表array的key
 
     //task key
@@ -115,10 +115,11 @@ public final class Content {
     public static final String TEST_LIGHTSTART = "test_lightstart";
     public static final String TEST_LIGHTSTOP = "test_lightstop";
 
+
     public static final String ROBOT_HEALTHY = "robot_healthy";//机器人健康
     public static final String ROBOT_TASK_STATE = "robot_task_state";//机器人任务状态
     public static final String ROBOT_TASK_HISTORY = "robot_task_history";//机器人历史任务
-
+    public static final String TASK_ALARM = "task_alarm";//定时任务
     public static final String GET_VIRTUAL = "get_virtual";//获取虚拟墙数据
     public static final String UPDATA_VIRTUAL = "updata_virtual";//更新虚拟墙
     public static final String SEND_VIRTUAL = "send_virtual";//返回虚拟墙数据
@@ -135,12 +136,16 @@ public final class Content {
     public static final String dbAlarmName = "dbAlarmName";//表名
     public static final String dbAlarmMapName = "dbAlarmMapName";
     public static final String dbAlarmTaskName = "dbAlarmTaskName";//任务名
-    public static final String dbAlarmTime = "dbAlarmTime";//时间
+    public static final String dbAlarmTime = "dbAlarmTime";//时间a
     public static final String dbAlarmCycle = "dbAlarmCycle";//周期
     public static final String SET_SPEED_LEVEL = "set_speed_level";//设置导航速度
     public static final String RENAME_POSITION = "RENAME_POSITION";//重命名点
     public static final String OLD_POSITION_NAME = "old_position_name";//原始点
     public static final String NEW_POSITION_NAME = "new_position_name";//新点
+    public static final String SYSTEM_DATE = "system_data";//设置系统电量
+    public static final String GET_TASK_STATE ="get_task_state";//返回task状态
+    public static final String EDITTASKQUEUE = "editTaskQueue";//编辑任务队列
+    public static final String EDITTASKQUEUETYPE = "edittaskqueuetype";//任务类别
 
     //fragment见传递
     public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";
