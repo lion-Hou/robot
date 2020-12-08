@@ -166,6 +166,29 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(40003, batty));
                 Log.d("batter",batty);
                 break;
+
+            case Content.GET_LOW_BATTERY:
+                jsonObject = new JSONObject(message);
+                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
+                Log.d("lowBattery", String.valueOf(lowBattery));
+                break;
+
+            case Content.GET_LED_LEVEL:
+                jsonObject = new JSONObject(message);
+                int ledLevel = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                EventBus.getDefault().post(new EventBusMessage(20002, ledLevel));
+                Log.d("ledLevel", String.valueOf(ledLevel));
+                break;
+
+            case Content.GET_SPEED_LEVEL:
+                jsonObject = new JSONObject(message);
+                int speedLevel = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
+                Log.d("speedLevel", String.valueOf(speedLevel));
+                break;
+
+
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));
         }

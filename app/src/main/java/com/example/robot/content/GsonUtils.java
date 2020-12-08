@@ -26,6 +26,33 @@ public class GsonUtils {
     private List<SaveTaskBean> list;
     private String oldMapName;
     private String newMapName;
+    private int ledLevel;
+    private int lowBattery;
+    private int speedLevel;
+
+    public int getLedLevel() {
+        return ledLevel;
+    }
+
+    public void setLedLevel(int ledLevel) {
+        this.ledLevel = ledLevel;
+    }
+
+    public int getLowBattery() {
+        return lowBattery;
+    }
+
+    public void setLowBattery(int lowBattery) {
+        this.lowBattery = lowBattery;
+    }
+
+    public int getSpeedLevel() {
+        return speedLevel;
+    }
+
+    public void setSpeedLevel(int speedLevel) {
+        this.speedLevel = speedLevel;
+    }
 
     public String getOldMapName() {
         return oldMapName;
@@ -90,6 +117,10 @@ public class GsonUtils {
             jsonObject.put(Content.TASK_NAME, taskName);
             jsonObject.put(Content.OLD_MAP_NAME,oldMapName);
             jsonObject.put(Content.NEW_MAP_NAME,newMapName);
+            jsonObject.put(Content.SET_LED_LEVEL,ledLevel);
+            jsonObject.put(Content.SET_LOW_BATTERY,lowBattery);
+            jsonObject.put(Content.SET_SPEED_LEVEL,speedLevel);
+
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {
