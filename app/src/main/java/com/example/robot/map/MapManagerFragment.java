@@ -161,7 +161,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 final EditText input_name = new EditText(getContext());
                 new AlertDialog.Builder(getContext())
                         .setView(input_name)
-                        .setMessage("请输入新地图名称")
+                        .setMessage("请输入新的地图名")
                         .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -365,15 +365,24 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
                         Log.d("zdzd9998", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
                         Log.d("zdzd9998", " resolution * angleX"+  resolution*angleX);
+
+                        if (pointType == 1) {
+                            ImageView charging_Img = new ImageView(mContext);
+                            charging_Img.setImageResource(R.drawable.charging);
+                            imageViewArrayList.add(charging_Img);
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                                    0, 0);
+                            mapManageRelative.addView(charging_Img);
+                        }
                         if (pointType == 2) {
-                            Log.d("zdzd9998", "pointType" +  pointType);
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
+                            Log.d("zdzd9998", "angleX" + angleX);
+                            Log.d("zdzd9998", " resolution" + resolution);
                             mapManageRelative.addView(imageView);
-                        }else if (pointType == 1){
-
-
+                            imageViewArrayList.add(imageView);
                         }
                     }
                 }

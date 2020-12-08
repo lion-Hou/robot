@@ -58,4 +58,35 @@
     <string name="task_type_week">请选择任务周</string>
 
 
+    <string-array name="spinner_time">
+        <item>1 分钟</item>
+        <item>2 分钟</item>
+        <item>3 分钟</item>
+        <item>4 分钟</item>
+        <item>5 分钟</item>
+    </string-array>
+
+    <string-array name="spinner_settings_led">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>
+
+    <string-array name="spinner_settings_speed">
+        <item>慢</item>
+        <item>中</item>
+        <item>快</item>
+    </string-array>
+
+    <string-array name="spinner_settings_language">
+        <item>English</item>
+        <item>中文</item>
+    </string-array>
+
+    <string name="test_self_inspection">自检</string>
+    <string name="test_voice_and_led">声音与LED灯光</string>
+    <string name="test_uvc">UVC</string>
+    <string name="test_pir">PIR</string>
+
+
 </resources>

@@ -2,10 +2,27 @@
 <resources>
 
     <string-array name="spinner_time">
-        <item>1分钟</item>
-        <item>2分钟</item>
-        <item>3分钟 </item>
-        <item>4分钟</item>
-        <item>5分钟</item>
+        <item>1 minute</item>
+        <item>2 minute</item>
+        <item>3 minute</item>
+        <item>4 minute</item>
+        <item>5 minute</item>
+    </string-array>
+
+    <string-array name="spinner_settings_led">
+        <item>low</item>
+        <item>medium</item>
+        <item>high</item>
+    </string-array>
+
+    <string-array name="spinner_settings_speed">
+        <item>slow</item>
+        <item>medium</item>
+        <item>fast</item>
+    </string-array>
+
+    <string-array name="spinner_settings_language">
+        <item>English</item>
+        <item>中文</item>
     </string-array>
 </resources>
