@@ -174,9 +174,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_settings:
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), SettingsActivity.class);
-                getActivity().startActivity(intent);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new SettingFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             case R.id.main_spinner_map:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));

@@ -380,7 +380,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 Log.d("YYYYY", "save_charging_point");
                 if (charging.equals("放电")){
                     Toast.makeText(mContext, "请确认机器人是否连接上充电点", Toast.LENGTH_SHORT).show();
-                }else {
+                }else if (charging.equals("充电")){
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));

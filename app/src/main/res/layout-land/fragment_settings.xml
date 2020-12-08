@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingDefaultResource">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,12 +17,12 @@
             android:text="@string/settings_title"
             android:textSize="60dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="-6dp" />
+            tools:layout_editor_absoluteY="34dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_main_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,12 +37,13 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_electricity_quantity"
-                android:textSize="38dp" />
+                android:textSize="30dp" />
 
             <SeekBar
                 android:id="@+id/settings_electricityQuantity"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
+                android:max="100"
                 app:layout_constraintLeft_toRightOf="@+id/electricityQuantityTV" />
 
             <TextView
@@ -49,13 +51,15 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_language"
-                android:textSize="38dp"
+                android:textSize="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/electricityQuantityTV" />
 
             <Spinner
                 android:id="@+id/settings_language"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
+                android:textSize="30dp"
+                android:entries="@array/spinner_settings_language"
                 app:layout_constraintLeft_toRightOf="@+id/languageTV"
                 app:layout_constraintTop_toBottomOf="@+id/settings_electricityQuantity" />
 
@@ -64,7 +68,7 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_volume"
-                android:textSize="38dp"
+                android:textSize="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/languageTV" />
 
             <SeekBar
@@ -79,13 +83,15 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_robot_speed"
-                android:textSize="38dp"
+                android:textSize="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/volumeTV" />
 
             <Spinner
                 android:id="@+id/settings_robotSpeed"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
+                android:textSize="30dp"
+                android:entries="@array/spinner_settings_speed"
                 app:layout_constraintLeft_toRightOf="@+id/robotSpeedTV"
                 app:layout_constraintTop_toBottomOf="@+id/settings_volume" />
 
@@ -94,13 +100,15 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_led_brightness"
-                android:textSize="38dp"
+                android:textSize="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/robotSpeedTV" />
 
             <Spinner
                 android:id="@+id/settings_ledBrightness"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
+                android:textSize="30dp"
+                android:entries="@array/spinner_settings_led"
                 app:layout_constraintLeft_toRightOf="@+id/ledBrightnessTV"
                 app:layout_constraintTop_toBottomOf="@+id/settings_robotSpeed" />
 
@@ -109,36 +117,43 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_version_number"
-                android:textSize="38dp"
+                android:textSize="30dp"
                 app:layout_constraintTop_toBottomOf="@+id/ledBrightnessTV" />
 
             <TextView
                 android:id="@+id/settings_versionNumber"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:textSize="38dp"
+                android:textSize="30dp"
                 app:layout_constraintLeft_toRightOf="@+id/versionNumberTV"
                 app:layout_constraintTop_toBottomOf="@+id/settings_ledBrightness" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintCircle="@+id/settings_main_layout"
+            app:layout_constraintCircleAngle="120"
+            app:layout_constraintCircleRadius="350dp"
+            tools:ignore="MissingConstraints">
+            <Button
+                android:id="@+id/settings_ok"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="@string/settings_ok"
+                tools:ignore="MissingConstraints"/>
+            <Button
+                android:id="@+id/settings_cancel"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                app:layout_constraintCircle="@+id/settings_ok"
+                app:layout_constraintCircleAngle="90"
+                app:layout_constraintCircleRadius="120dp"
+                android:text="@string/settings_cancel"
+                app:layout_constraintLeft_toRightOf="@+id/settings_ok"
+                tools:ignore="MissingConstraints"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/settings_ok"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            tools:ignore="MissingConstraints"
-            android:text="@string/settings_ok"
-            tools:layout_editor_absoluteX="600dp"
-            tools:layout_editor_absoluteY="354dp" />
-
-        <Button
-            android:id="@+id/settings_cancel"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            tools:ignore="MissingConstraints"
-            android:text="@string/settings_cancel"
-            tools:layout_editor_absoluteX="465dp"
-            tools:layout_editor_absoluteY="354dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

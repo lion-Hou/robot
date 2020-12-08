@@ -79,10 +79,9 @@ public class EmptyClient extends WebSocketClient {
     public void differentiateType(String message) throws JSONException {
         Log.d("gsonUtils.getType  : ", ""+ gsonUtils.getType(message));
         switch (gsonUtils.getType(message)) {
-            case Content.CHARGING:
-                String request_msg = null;
+            case Content.REQUEST_MSG:
                 jsonObject = new JSONObject(message);
-                request_msg = jsonObject.getString(Content.CHARGING);
+                String request_msg = jsonObject.getString(Content.REQUEST_MSG);
                 EventBus.getDefault().post(new EventBusMessage<>(19191,request_msg));
                 break;
             case Content.CONN_NO:
@@ -178,14 +177,14 @@ public class EmptyClient extends WebSocketClient {
 
             case Content.GET_LED_LEVEL:
                 jsonObject = new JSONObject(message);
-                int ledLevel = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                int ledLevel = jsonObject.getInt(Content.GET_LED_LEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20002, ledLevel));
                 Log.d("ledLevel", String.valueOf(ledLevel));
                 break;
 
             case Content.GET_SPEED_LEVEL:
                 jsonObject = new JSONObject(message);
-                int speedLevel = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
                 Log.d("speedLevel", String.valueOf(speedLevel));
                 break;

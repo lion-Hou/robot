@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
 import com.example.robot.map.FirstFragment;
+import com.example.robot.map.MainFragment;
 import com.example.robot.map.MapManagerFragment;
 import com.example.robot.map.SecoundFragment;
 import com.example.robot.util.NormalDialogUtil;
@@ -35,6 +37,7 @@ public class MainActivity extends FragmentActivity {
     private GsonUtils gsonUtils;
     private FirstFragment firstFragment;
     private SecoundFragment secoundFragment;
+    private MainFragment mainFragment;
     private MapManagerFragment mapManagerFragment;
 
 
@@ -53,11 +56,15 @@ public class MainActivity extends FragmentActivity {
         gsonUtils = new GsonUtils();
         connect();
         disconnectDialog = new NormalDialogUtil();
+
         firstFragment = new FirstFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.first_fragment, firstFragment).commit();
         secoundFragment = new SecoundFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment, secoundFragment).commit();
         mapManagerFragment = new MapManagerFragment();
+
+        mainFragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,mainFragment).commit();
 
         waitingDialog = new ProgressDialog(MainActivity.this);
     }
@@ -98,18 +105,23 @@ public class MainActivity extends FragmentActivity {
         } else if (messageEvent.getState() == 11111) {
             Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
             waitingDialog.dismiss();
-            showDisconnectDialog();
+           // showDisconnectDialog();
             disconnectDialog.dismiss();
         } else if (messageEvent.getState() == 11110) {
             Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
             waitingDialog.dismiss();
-            showDisconnectDialog();
+           // showDisconnectDialog();
         } else if (messageEvent.getState() == 11119) {
             Log.d(TAG, "connect state：connect 11119" + messageEvent.getT());
-            showDisconnectDialog();
+            //showDisconnectDialog();
         } else if (messageEvent.getState() == 40003) {
             String batter = (String) messageEvent.getT();
             time.setText(batter);
+        } else if (messageEvent.getState() == 19191) {
+            String message = (String) messageEvent.getT();
+            if (!"充电".equals(message) && !"放电".equals(message)) {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
