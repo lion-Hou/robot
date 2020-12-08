@@ -214,7 +214,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         Log.d("zdzd111 ", "pointName : " + jsonItem.toString());
                         ImageView imageView = new ImageView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
-                        imageViewArrayList.add(imageView);
                         imageView.setOnClickListener(this);
                         Log.d("zdzd222", "" + (editMapImage.getWidth() / Content.list.get(index).getGridWidth() * jsonItem.getDouble(Content.POINT_X)
                                 + Content.list.get(index).getOriginX() - (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE)))));
@@ -249,22 +248,26 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         Log.d("zdzd9998", " resolution * angleX" + resolution * angleX);
 
                         if (pointType == 1) {
+                            ImageView charging_Img = new ImageView(mContext);
+                            charging_Img.setImageResource(R.drawable.charging);
+                            imageViewArrayList.add(charging_Img);
                             saveChargingBtn.setEnabled(false);
                             wallBtn.setEnabled(true);
                             markBtn.setEnabled(true);
                             saveBtn.setEnabled(true);
-                            robot_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
-                            if (pointType == 2) {
-                                imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
-                                        0, 0);
-                                Log.d("zdzd9998", "angleX" + angleX);
-                                Log.d("zdzd9998", " resolution" + resolution);
-                                mapRelative.addView(imageView);
-                            }
-
+                            mapRelative.addView(charging_Img);
+                        }
+                        if (pointType == 2) {
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                                    0, 0);
+                            Log.d("zdzd9998", "angleX" + angleX);
+                            Log.d("zdzd9998", " resolution" + resolution);
+                            mapRelative.addView(imageView);
+                            imageViewArrayList.add(imageView);
                         }
                     }
                 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -71,6 +73,9 @@ public class SettingFragment extends Fragment {
     private View view;
     private GsonUtils gsonUtils;
     private Context mContext;
+    private long[] mHints = new long[3];
+    private long[] mHints1 = new long[2];
+    private long[] mHints2 = new long[1];
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -148,7 +153,7 @@ public class SettingFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.settings_ok, R.id.settings_cancel})
+    @OnClick({R.id.settings_ok, R.id.settings_cancel,R.id.settings_versionNumber})
     public void onViewClicked(View view) {
             switch (view.getId()) {
                 case R.id.settings_ok:
@@ -167,7 +172,32 @@ public class SettingFragment extends Fragment {
                     break;
                 case R.id.settings_cancel:
                     Log.d(TAG, "返回");
-                    getActivity().finish();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment, new MainFragment(), null)
+                            .addToBackStack(null)
+                            .commit();
+                    break;
+                case R.id.settings_versionNumber:
+                    Log.d(TAG, "banbenhao");
+                    System.arraycopy(mHints1, 1, mHints1, 0, mHints1.length - 1);
+                    //获得当前系统已经启动的时间
+                    mHints1[mHints1.length - 1] = SystemClock.uptimeMillis();
+                    if(SystemClock.uptimeMillis()-mHints1[0]<=500){
+                        Toast.makeText(mContext.getApplicationContext(),"快速点击三次进入测试页面", Toast.LENGTH_SHORT).show();
+                    }
+
+                    System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
+                    //获得当前系统已经启动的时间
+                    mHints[mHints.length - 1] = SystemClock.uptimeMillis();
+                    if(SystemClock.uptimeMillis()-mHints[0]<=500){
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_fragment, new TestFragment(), null)
+                                .addToBackStack(null)
+                                .commit();
+                        Toast.makeText(mContext.getApplicationContext(),"进入测试页面", Toast.LENGTH_SHORT).show();
+                    }
                     break;
         }
     }

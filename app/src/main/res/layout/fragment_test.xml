@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFFFFF"
     android:layout_width="match_parent"
@@ -13,8 +12,7 @@
         android:layout_width="250px"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="10dp">
+        >
         <TextView
             android:id="@+id/test_self_inspection_title"
             android:layout_width="match_parent"
@@ -38,9 +36,7 @@
         android:id="@+id/test_relative2"
         android:layout_width="250px"
         android:layout_height="match_parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="270dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_toRightOf="@+id/test_relative1">
         <TextView
             android:id="@+id/test_voice_and_led_title"
             android:layout_width="match_parent"
@@ -49,16 +45,21 @@
             android:gravity="center"
             android:text="@string/test_voice_and_led"/>
 
-        <Button
-            android:id="@+id/test_voice_btn"
+        <Switch
+            android:id="@+id/switch_voice"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:text="Voice"
+            android:textSize="30dp"
             android:layout_below="@+id/test_voice_and_led_title"/>
-        <Button
-            android:id="@+id/test_led_btn"
+
+        <Switch
+            android:id="@+id/switch_led"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/test_voice_btn"/>
+            android:layout_height="100dp"
+            android:text="Led"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_voice"/>
 
     </RelativeLayout>
 
@@ -67,16 +68,54 @@
         android:id="@+id/test_relative3"
         android:layout_width="250px"
         android:layout_height="match_parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="497dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_toRightOf="@+id/test_relative2">
         <TextView
+            android:id="@+id/test_uvc_title"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:textSize="25dp"
             android:gravity="center"
             android:text="@string/test_uvc"/>
 
+        <Switch
+            android:id="@+id/switch_uvc_all"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC ALL"
+            android:textSize="30dp"
+            android:layout_below="@+id/test_uvc_title"/>
+
+        <Switch
+            android:id="@+id/switch_uvc1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC A"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_uvc_all"/>
+
+        <Switch
+            android:id="@+id/switch_uvc2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC B"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_uvc1"/>
+
+        <Switch
+            android:id="@+id/switch_uvc3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC C"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_uvc2"/>
+
+        <Switch
+            android:id="@+id/switch_uvc4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC D"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_uvc3"/>
 
     </RelativeLayout>
 
@@ -84,18 +123,47 @@
         android:id="@+id/test_relative4"
         android:layout_width="250px"
         android:layout_height="match_parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="731dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_toRightOf="@+id/test_relative3">
 
         <TextView
+            android:id="@+id/test_pir_title"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:textSize="25dp"
             android:gravity="center"
             android:text="@string/test_pir"/>
 
+        <Switch
+            android:id="@+id/switch_pir1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC A"
+            android:textSize="30dp"
+            android:layout_below="@+id/test_pir_title"/>
 
+        <Switch
+            android:id="@+id/switch_pir2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC B"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_pir1"/>
+
+        <Switch
+            android:id="@+id/switch_pir3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC C"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_pir2"/>
+
+        <Switch
+            android:id="@+id/switch_pir4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="UVC D"
+            android:textSize="30dp"
+            android:layout_below="@+id/switch_pir3"/>
     </RelativeLayout>
 
 
@@ -104,4 +172,4 @@
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
