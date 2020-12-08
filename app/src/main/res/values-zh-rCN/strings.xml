@@ -9,6 +9,8 @@
     <string name="settings">设置</string>
 
     <string name="settings_title">设置</string>
+    <string name="settings_cancel">取消</string>
+    <string name="settings_ok">应用</string>
     <string name="settings_electricity_quantity">回充电量:</string>
     <string name="settings_language">语言:</string>
     <string name="settings_volume">音量:</string>

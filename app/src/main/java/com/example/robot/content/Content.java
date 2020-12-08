@@ -95,6 +95,7 @@ public final class Content {
     public static final String TASK_Y = "y";//y坐标
     public static final String TASK_DISINFECT_TIME = "disinfect_Time";//执行任务的点的时间
     public static final String TASK_ANGLE = "angle";//机器人角度
+    public static final String TASK_ALARM ="task_alarm";//定时任务
 
     public static final String POINT_NAME = "point_Name";//点的名字
     public static final String POINT_TYPE = "point_type";//点类型
