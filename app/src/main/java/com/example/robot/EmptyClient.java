@@ -189,6 +189,9 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
                 Log.d("speedLevel", String.valueOf(speedLevel));
                 break;
+            case Content.editTaskQueue:
+                EventBus.getDefault().post(new EventBusMessage(20004, message));
+                break;
 
 
             default:

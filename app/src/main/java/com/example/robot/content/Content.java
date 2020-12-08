@@ -10,6 +10,7 @@ public final class Content {
     public static String map_Name = null;
     public static String first_map_Name = null;
     public static String task_Name = null;
+    public static String fixTaskName = null;
 
     /**
      * robotState：
@@ -74,6 +75,8 @@ public final class Content {
     public static final String STARTTASKQUEUE = "startTaskQueue";//开始任务队列
     public static final String STOPTASKQUEUE = "stopTaskQueue";//停止任务队列
     public static final String DELETE_TASK = "delete_task";//删除任务
+    public static final String editTaskQueue = "editTaskQueue";//编辑任务
+    public static final String editTaskQueueType = "editTaskQueueType";//编辑任务类型
 
 
     //settings
@@ -85,11 +88,7 @@ public final class Content {
     public static final String SET_LOW_BATTERY = "set_low_battery";//设置回充电量
 
 
-
-
-
     public static final String DATATIME = "dataTime";//地图名称的列表array的key
-
     //task key
     public static final String TASK_X = "x";//x坐标
     public static final String TASK_Y = "y";//y坐标

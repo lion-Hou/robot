@@ -82,7 +82,6 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     double mBitmapHeight;
     double mBitmapWidth;
     private NormalDialogUtil delectTask;
-    private String fixTaskName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +110,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         ButterKnife.bind(this, view);
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
-        gsonUtils.setMapName(Content.map_Name);
+        gsonUtils.setMapName(Content.first_map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
         initView();
         initListener();
@@ -142,25 +141,29 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
 
             case R.id.task_manage_name:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
-
+                break;
             case R.id.task_manage_delete:
-                delectTask = new NormalDialogUtil();
-                delectTask.showDialog(mContext, "","是否删除该任务","取消","确认" , new DialogInterface.OnClickListener() {
+                AlertDialog.Builder delete = new AlertDialog.Builder(mContext);
+                delete.setMessage("是否删除当前任务");
+                //设置正面按钮
+                delete.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //取消
-                        dialog.dismiss();
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (!Content.map_Name.equals(null)){
-                            gsonUtils.setTaskName(fixTaskName);
-                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_TASK));//删除任务
-                        }
+                        Log.d("Content.fixTaskName",  Content.fixTaskName);
+                        gsonUtils.setTaskName(Content.fixTaskName);
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));//删除任务
+                        taskName.setText(R.string.map_manage_select_task);
                         dialog.dismiss();
                     }
                 });
+                //设置反面按钮
+                delete.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                delete.show();
                 break;
             case R.id.task_manage_back:
                 getActivity().getSupportFragmentManager()
@@ -189,7 +192,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 System.out.println("which" + which);
-                fixTaskName = taskNameList[which];
+                Content.fixTaskName = taskNameList[which];
                 taskName.setText(taskNameList[which]);
             }
         });

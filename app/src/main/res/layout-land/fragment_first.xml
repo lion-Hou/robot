@@ -36,7 +36,8 @@
             android:layout_height="80px"
             android:layout_below="@id/main_text_map"
             android:layout_toRightOf="@+id/main_text_task"
-            android:background="@drawable/btn_gb_normal"/>
+            android:background="@drawable/btn_gb_normal"
+            android:text="@string/map_manage_select_task"/>
 
         <Button
             android:id="@+id/main_execute"
