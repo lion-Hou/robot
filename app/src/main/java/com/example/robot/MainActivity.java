@@ -119,9 +119,9 @@ public class MainActivity extends FragmentActivity {
             time.setText(batter);
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
-            if (!"充电".equals(message) && !"放电".equals(message)) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-            }
+//            if (!"充电".equals(message) && !"放电".equals(message)) {
+//                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 

@@ -169,10 +169,10 @@ public class EmptyClient extends WebSocketClient {
                 break;
 
             case Content.GET_LOW_BATTERY:
-                jsonObject = new JSONObject(message);
-                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
-                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
-                Log.d("lowBattery", String.valueOf(lowBattery));
+//                jsonObject = new JSONObject(message);
+//                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
+//                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
+//                Log.d("lowBattery", String.valueOf(lowBattery));
                 break;
 
             case Content.GET_LED_LEVEL:
@@ -180,13 +180,19 @@ public class EmptyClient extends WebSocketClient {
                 int ledLevel = jsonObject.getInt(Content.GET_LED_LEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20002, ledLevel));
                 Log.d("ledLevel", String.valueOf(ledLevel));
-                break;
-
-            case Content.GET_SPEED_LEVEL:
-                jsonObject = new JSONObject(message);
                 int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
                 Log.d("speedLevel", String.valueOf(speedLevel));
+                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
+                Log.d("lowBattery", String.valueOf(lowBattery));
+                break;
+
+            case Content.GET_SPEED_LEVEL:
+//                jsonObject = new JSONObject(message);
+//                int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
+//                EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
+//                Log.d("speedLevel", String.valueOf(speedLevel));
                 break;
 
 

@@ -111,14 +111,15 @@ public class SettingFragment extends Fragment {
         ButterKnife.bind(this, view);
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_SPEED_LEVEL));//0,1,2
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LED_LEVEL));//0,1,2
+
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
         initView();
         return view;
     }
 
     private void initView() {
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LED_LEVEL));//0,1,2
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_SPEED_LEVEL));//0,1,2
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
 
     }
 
@@ -130,9 +131,11 @@ public class SettingFragment extends Fragment {
         Log.d(TAG, "onEventMsg setting： " + messageEvent.getState());
         if (messageEvent.getState() == 20001) {
             int lowBattery = (int) messageEvent.getT();
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState()+"low_battery"+lowBattery);
             settingsElectricityQuantity.setProgress(lowBattery);
         } else if (messageEvent.getState() == 20002) {
             int ledLevel = (int) messageEvent.getT();
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState()+"LED"+ledLevel);
             if (ledLevel == 0) {
                 settingsLedBrightness.setSelection(0);
             } else if (ledLevel == 1) {
@@ -143,11 +146,11 @@ public class SettingFragment extends Fragment {
         } else if (messageEvent.getState() == 20003) {
             int robotSpeed = (int) messageEvent.getT();
             if (robotSpeed == 0) {
-                settingsLedBrightness.setSelection(0);
+                settingsRobotSpeed.setSelection(0);
             } else if (robotSpeed == 1) {
-                settingsLedBrightness.setSelection(1);
+                settingsRobotSpeed.setSelection(1);
             } else {
-                settingsLedBrightness.setSelection(2);
+                settingsRobotSpeed.setSelection(2);
             }
         }
     }
@@ -163,12 +166,18 @@ public class SettingFragment extends Fragment {
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LOW_BATTERY));//30-80
 
                     int ledLevel = settingsLedBrightness.getSelectedItemPosition();
-                    gsonUtils.setLowBattery(ledLevel);
+                    gsonUtils.setLedLevel(ledLevel);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LED_LEVEL));//0,1,2
 
                     int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
-                    gsonUtils.setLowBattery(robotSpeed);
+                    gsonUtils.setSpeedLevel(robotSpeed);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_SPEED_LEVEL));//0,1,2
+
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment, new MainFragment(), null)
+                            .addToBackStack(null)
+                            .commit();
                     break;
                 case R.id.settings_cancel:
                     Log.d(TAG, "返回");
