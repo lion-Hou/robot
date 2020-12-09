@@ -234,6 +234,11 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .replace(R.id.first_fragment, new FirstFragment(), null)
                         .addToBackStack(null)
                         .commit();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.second_fragment, new SecoundFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             default:
                 break;

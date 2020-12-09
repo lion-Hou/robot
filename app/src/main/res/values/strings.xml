@@ -28,7 +28,8 @@
 
     <string name="map_manage_add_new_map_btn">New Map</string>
     <string name="map_manage_name_text">Map Name:</string>
-    <string name="map_manage_select_map">Please select a map</string>
+    <string name="map_manage_select_map">Please select map</string>
+    <string name="map_manage_select_task">PLEASE SELECT TASK</string>
     <string name="map_manage_rename">Rename</string>
     <string name="map_manage_delete">Delete</string>
     <string name="map_manage_edit">Edit Map</string>

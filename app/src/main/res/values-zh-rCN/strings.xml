@@ -31,6 +31,7 @@
     <string name="map_manage_add_new_map_btn">新建地图</string>
     <string name="map_manage_name_text">地图名:</string>
     <string name="map_manage_select_map">请选择地图</string>
+    <string name="map_manage_select_task">请选择任务</string>
     <string name="map_manage_rename">重命名</string>
     <string name="map_manage_delete">删除</string>
     <string name="map_manage_edit">编辑</string>

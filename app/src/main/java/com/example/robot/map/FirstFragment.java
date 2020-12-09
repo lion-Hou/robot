@@ -57,7 +57,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public View view;
     private String[] mapName;
     private String task_name;
-
+    private String name;
+    private String name1 = "请选择地图";
+    private String name2 = "PLEASE SELECT MAP";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         initView();
         initListener();
         mContext = view.getContext();
+        name = mainSpinnerMap.getText().toString();
+        System.out.println("mainSpinnerMap"+name);
         return view;
     }
 
@@ -106,18 +110,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
-
-        /**
-         * 加载首页判断是否有选择地图
-         * 没有选择-->任务按钮不可点击
-         * 反之可点
-         */
-        if(mainSpinnerMap.getText() == "PLEASE SELECT MAP" || mainSpinnerMap.getText() == "请选择地图"){
-            Log.d("hhh", (String) mainSpinnerMap.getText());
-            mainTask.setEnabled(false);
-        }else {
-            mainTask.setEnabled(true);
-        }
     }
 
     /**
@@ -196,6 +188,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.main_spinner_task:
+
+                gsonUtils.setMapName(Content.first_map_Name);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 break;
             case R.id.main_map:
@@ -240,6 +234,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 System.out.println("which" + which);
                 mainSpinnerMap.setText(mapName[which]);
                 Content.first_map_Name = mapName[which];
+                if(Content.first_map_Name != null){
+                    mainTask.setEnabled(true);
+                }
                 gsonUtils.setMapName(mapName[which]);//给上位机传入地图名称
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
                 EventBus.getDefault().post(new EventBusMessage(30001, mapName[which]));//30001给编辑点页面传所选中的地图名

@@ -7,79 +7,79 @@
     tools:ignore="MissingDefaultResource">
 
     <RelativeLayout
-        android:id="@+id/edit_title1"
+        android:id="@+id/title_edit"
         android:layout_width="500px"
         android:layout_height="100px">
 
         <TextView
-            android:id="@+id/edit_task_name"
+            android:id="@+id/add_task_name_edit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="18dp"
             android:gravity="center"
             android:text="@string/task_name"/>
         <EditText
-            android:id="@+id/edit_mapName_editText"
+            android:id="@+id/new_map_mapName_editText_edit"
             android:layout_width="200px"
             android:layout_height="100px"
             android:textSize="18dp"
             android:gravity="bottom"
             android:hint="请输入任务名"
-            android:layout_toRightOf="@id/edit_task_name"/>
+            android:layout_toRightOf="@id/add_task_name_edit"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/edit_title2"
+        android:id="@+id/title2_edit"
         android:layout_width="500px"
-        android:layout_height="300px"
-        android:layout_below="@+id/edit_title1">
+        android:layout_height="200px"
+        android:layout_below="@+id/title_edit">
         <TextView
-            android:id="@+id/edit_task_type"
+            android:id="@+id/task_type_edit"
             android:layout_width="wrap_content"
             android:layout_height="100px"
             android:text="@string/task_type"/>
         <TextView
-            android:id="@+id/edit_task_type_select"
+            android:id="@+id/task_type_select_edit"
             android:layout_width="wrap_content"
-            android:layout_toRightOf="@+id/edit_task_type"
-            android:layout_height="100px"
+            android:layout_toRightOf="@+id/task_type_edit"
+            android:layout_height="50px"
             android:layout_marginLeft="50px"
             android:text="@string/task_type_select"/>
         <TextView
-            android:id="@+id/edit_task_type_selectTime"
+            android:id="@+id/task_type_selectTime_edit"
             android:layout_width="wrap_content"
-            android:layout_toRightOf="@+id/edit_task_type"
-            android:layout_below="@+id/edit_task_type_select"
-            android:layout_height="100px"
+            android:layout_toRightOf="@+id/task_type_edit"
+            android:layout_below="@+id/task_type_select_edit"
+            android:layout_height="50px"
             android:layout_marginLeft="50px"
             android:text="@string/task_type_time"/>
         <TextView
-            android:id="@+id/edit_task_type_selectWeek"
+            android:id="@+id/task_type_selectWeek_edit"
             android:layout_width="wrap_content"
-            android:layout_toRightOf="@+id/edit_task_type"
-            android:layout_below="@+id/edit_task_type_selectTime"
-            android:layout_height="100px"
+            android:layout_toRightOf="@+id/task_type_edit"
+            android:layout_below="@+id/task_type_selectTime_edit"
+            android:layout_height="50px"
             android:layout_marginLeft="50px"
             android:text="@string/task_type_week"/>
 
     </RelativeLayout>
 
     <Button
-        android:id="@+id/addtask_select_point"
+        android:id="@+id/addtask_select_point_edit"
         android:layout_width="220px"
         android:layout_height="100px"
-        android:layout_below="@+id/edit_title2"
+        android:layout_below="@+id/title2_edit"
         android:text="SelectPoint"/>
 
     <RelativeLayout
-        android:id="@+id/edit_title3"
+        android:id="@+id/title3_edit"
         android:layout_width="500px"
         android:layout_height="200px"
-        android:layout_below="@+id/addtask_select_point">
+        android:layout_below="@+id/addtask_select_point_edit">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_task"
+            android:id="@+id/list_task_edit"
             android:layout_width="800px"
             android:layout_height="500px"
             android:layout_alignParentTop="true"
@@ -89,18 +89,18 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/edit_task_new_save"
+        android:id="@+id/task_new_save_edit"
         android:layout_width="100px"
         android:layout_height="100px"
-        android:layout_below="@+id/edit_title3"
+        android:layout_below="@+id/title3_edit"
         android:text="SAVE"/>
 
     <Button
-        android:id="@+id/task_new_back"
+        android:id="@+id/task_new_back_edit"
         android:layout_width="100px"
         android:layout_height="100px"
-        android:layout_below="@+id/edit_title3"
-        android:layout_toRightOf="@id/edit_task_new_save"
+        android:layout_below="@+id/title3_edit"
+        android:layout_toRightOf="@id/task_new_save_edit"
         android:text="BACK"/>
 
 </RelativeLayout>

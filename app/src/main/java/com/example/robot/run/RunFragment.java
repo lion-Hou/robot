@@ -14,9 +14,14 @@ import androidx.fragment.app.Fragment;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.content.Content;
+import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
 import com.example.robot.map.AddNewMapFragment;
 import com.example.robot.map.FirstFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,14 +53,13 @@ public class RunFragment extends Fragment {
         initView();
         return view;
 
-
     }
 
     private void initView() {
-        Log.d("hhhhh:", Content.first_map_Name);
-        Log.d("hhhhh:", Content.task_Name);
         runMapName.setText(Content.first_map_Name);
         runTaskName.setText(Content.task_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_STATE));//请求机器人状态
+
     }
 
     @OnClick(R.id.task_run_edit)
@@ -72,4 +76,5 @@ public class RunFragment extends Fragment {
                 break;
         }
     }
+
 }
