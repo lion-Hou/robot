@@ -1,5 +1,6 @@
 package com.example.robot.map;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -36,8 +37,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +70,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     private Context mContext;
     private View view;
     private String newMapName;
+    private ProgressDialog waitingDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -170,11 +175,28 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
                         dialog.dismiss();
                         Content.map_Name=newMapName;
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.first_fragment, new MapEditFragment(), null)
-                                .addToBackStack(null)
-                                .commit();
+
+                        waitingDialog = new ProgressDialog(mContext);
+                        Log.d(TAG, "onEventMsg ： "+"dialog生成");
+                        waitingDialog.setMessage("正在生成地图中请稍后...");
+                        waitingDialog.setIndeterminate(true);
+                        waitingDialog.setCancelable(false);
+                        waitingDialog.show();
+
+                        Timer timer = new Timer();
+                        TimerTask task = new TimerTask() {
+                            @Override
+                            public void run() {
+                                Log.d(TAG, "onEventMsg ： "+"正在生成地图");
+                                waitingDialog.dismiss();
+                                getActivity().getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.first_fragment, new MapEditFragment(), null)
+                                        .addToBackStack(null)
+                                        .commit();
+                            }
+                        };
+                        timer.schedule(task,2000);
                     }
                 });
                 break;
