@@ -169,9 +169,10 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                          */
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
                         dialog.dismiss();
+                        Content.map_Name=newMapName;
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.first_fragment, new MapManagerFragment(), null)
+                                .replace(R.id.first_fragment, new MapEditFragment(), null)
                                 .addToBackStack(null)
                                 .commit();
                     }

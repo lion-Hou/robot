@@ -209,7 +209,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
                             managerSelected.setText(R.string.please_select_map);
                             Content.map_Name = null;
-                            mapManageRelative.removeView(managerMapImage);
+                            mapManageRelative.removeAllViews();
                             managerEdit.setEnabled(false);
                             managerDelete.setEnabled(false);
                             managerRename.setEnabled(false);
@@ -370,14 +370,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             ImageView charging_Img = new ImageView(mContext);
                             charging_Img.setImageResource(R.drawable.charging);
                             imageViewArrayList.add(charging_Img);
-                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
                             mapManageRelative.addView(charging_Img);
                         }
                         if (pointType == 2) {
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
                             Log.d("zdzd9998", "angleX" + angleX);
                             Log.d("zdzd9998", " resolution" + resolution);
