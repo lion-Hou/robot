@@ -86,7 +86,8 @@ public final class Content {
     public static final String GET_SPEED_LEVEL = "get_speed_level";//获取导航速度
     public static final String GET_LOW_BATTERY = "get_low_battery";//获取回充电量
     public static final String SET_LOW_BATTERY = "set_low_battery";//设置回充电量
-
+    public static final String GET_VOICE_LEVEL = "get_voice_level";//获取声音
+    public static final String SET_VOICE_LEVEL = "set_voice_level";
 
     public static final String DATATIME = "dataTime";//地图名称的列表array的key
     //task key
