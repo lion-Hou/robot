@@ -515,7 +515,10 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     public void onClick(View view) {
         for (int i = 0; i < imageViewArrayList.size(); i++) {
             if (view == imageViewArrayList.get(i)) {
-                Toast.makeText(mContext, "pointName", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, i + "", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     Drawl bDrawl;
 
@@ -575,6 +578,124 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 canvas.drawLine(point[0], point[1], point[2], point[3], paint);//画保存的线
             }
         }
+
+        //触摸事件
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            List<DrawLineBean> drawLineBeanList = new ArrayList<>();
+
+            double mapWidth = (double) editMapImage.getWidth();
+            double mapHeight = (double) editMapImage.getHeight();
+            double gridHeight = Content.list.get(index).getGridHeight();
+            double gridWidth = Content.list.get(index).getGridWidth();
+            //double originX = Content.list.get(index).getOriginX();
+            //double originY = Content.list.get(index).getOriginY();
+
+            if (event.getAction()==MotionEvent.ACTION_MOVE) {//如果滑动
+                mov_x = event.getX();
+                mov_y = event.getY();
+                invalidate();
+            }
+			
+            if (event.getAction()==MotionEvent.ACTION_DOWN) {//如果点击
+                //记录起点
+                start_x = event.getX();
+                start_y = event.getY();
+               //invalidate();
+            }
+
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                float endX = event.getX();
+                float endY = event.getY();
+
+                float[] point = {start_x,start_y,endX,endY};
+                pointlist.add(point);
+
+                DrawLineBean drawLineBeanStart = new DrawLineBean();
+                double x_temp = (start_x*gridWidth)/mapWidth;
+                double y_temp = ((mapHeight-start_y)*gridHeight)/mapHeight;
+                drawLineBeanStart.setX(x_temp);
+                drawLineBeanStart.setY(y_temp);
+                drawLineBeanList.add(drawLineBeanStart);
+
+                DrawLineBean drawLineBeanEnd = new DrawLineBean();
+                double end_x_temp = (endX*gridWidth)/mapWidth;
+                double end_y_temp = (((mapHeight-endY)*gridHeight)/mapHeight);
+                drawLineBeanEnd.setX(end_x_temp);
+                drawLineBeanEnd.setY(end_y_temp);
+
+                drawLineBeanList.add(drawLineBeanEnd);
+                lists.add(drawLineBeanList);
+            }
+            return true;
+        }
+
+        void clearCanvas(){
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);//清掉画布上的内容
+            pointlist.clear();
+            start_x =start_y=mov_x=mov_y=0;
+         //   lists.clear();
+
+            invalidate();
+        }
     }
 
+    void updateVirtualWall(ArrayList<float[]> pointlist){
+        Log.i("Henly","updateVirtualWall");
+        RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+        // layoutParams.height = editMapImage.getHeight();
+        // layoutParams.width = editMapImage.getWidth();
+        //  layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        //   layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        DrawlineFromVW bDrawlVW = new DrawlineFromVW(mContext,pointlist);
+        bDrawlVW.setLayoutParams(layoutParams);
+        mapRelative.addView(bDrawlVW);
+    }
+
+    class DrawlineFromVW extends View{
+        private float start_x,start_y;//声明起点坐标
+        private float mov_x,mov_y;//滑动轨迹坐标
+        private Paint paint;//声明画笔
+        private Canvas canvas;//画布
+        private Bitmap bitmap;//位图
+        private float view_X,view_Y;
+
+        private double scale_x = 1;
+        private double scale_y = 1;
+
+        private ArrayList<float[]> Pointlist = new ArrayList<>();//保存所画线的坐标
+
+        public DrawlineFromVW(Context context,ArrayList<float[]>pointlist) {
+            super(context);
+            paint = new Paint(Paint.DITHER_FLAG);//创建一个画笔
+
+            bitmap = Bitmap.createBitmap( (int)mBitmapWidth, (int)mBitmapHeight, mBitmap ==null?Bitmap.Config.ARGB_8888:mBitmap.getConfig());
+            bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+            canvas=new Canvas();
+            canvas.setBitmap(bitmap);
+
+            paint.setStyle(Paint.Style.STROKE);//设置非填充
+            paint.setStrokeWidth(3);//笔宽3像素
+            paint.setColor(Color.RED);//设置为红笔
+            paint.setAntiAlias(true);//锯齿不显示
+
+            Pointlist = pointlist;
+            invalidate();
+
+            Log.i(TAG,"DrawlineFromVW");
+        }
+
+        //画位图
+        @Override
+        protected void onDraw(Canvas canvas) {
+            //super.onDraw(canvas);
+            canvas.drawBitmap(bitmap,0,0,null);
+            Log.i("Henly","updateVW,onDraw,mBitmapWidth = " + mBitmapWidth + ",mBitmapHeight = " + mBitmapHeight );
+            for(int i = 0;i < Pointlist.size();i++){
+                float[] point = Pointlist.get(i);
+                Log.i("Henly","updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
+                canvas.drawLine(point[0], point[1], point[2], point[3], paint);//画保存的线
+            }
+        }
+    }
 }
