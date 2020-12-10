@@ -118,7 +118,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
         if (Content.map_Name != null) {
-            //managqrSelected.setText(Content.map_Name);
+            managqrSelected.setText(Content.map_Name);
         }
     }
 
