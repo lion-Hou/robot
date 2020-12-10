@@ -31,6 +31,16 @@ public class GsonUtils {
     private String taskTime;
     private int ledLevel;
     private int lowBattery;
+
+    public int getVoiceLevel() {
+        return voiceLevel;
+    }
+
+    public void setVoiceLevel(int voiceLevel) {
+        this.voiceLevel = voiceLevel;
+    }
+
+    private int voiceLevel;
     private int speedLevel;
 
     public int getLedLevel() {
@@ -135,7 +145,7 @@ public class GsonUtils {
             jsonObject.put(Content.SET_LED_LEVEL,ledLevel);
             jsonObject.put(Content.SET_LOW_BATTERY,lowBattery);
             jsonObject.put(Content.SET_SPEED_LEVEL,speedLevel);
-
+            jsonObject.put(Content.SET_VOICE_LEVEL,voiceLevel);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {

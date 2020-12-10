@@ -113,7 +113,7 @@ public class SettingFragment extends Fragment {
         mContext = view.getContext();
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_SPEED_LEVEL));//0,1,2
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LED_LEVEL));//0,1,2
-
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VOICE_LEVEL));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
         initView();
         return view;
@@ -152,6 +152,10 @@ public class SettingFragment extends Fragment {
             } else {
                 settingsRobotSpeed.setSelection(2);
             }
+        }else if (messageEvent.getState() == 20004) {
+            int voiceLevel = (int) messageEvent.getT();
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + voiceLevel);
+            settingsVolume.setProgress(voiceLevel);
         }
     }
 
@@ -164,6 +168,10 @@ public class SettingFragment extends Fragment {
                     int lowBattery = settingsElectricityQuantity.getProgress();
                     gsonUtils.setLowBattery(lowBattery);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LOW_BATTERY));//30-80
+
+                    int voiceLevel = settingsElectricityQuantity.getProgress();
+                    gsonUtils.setVoiceLevel(voiceLevel);
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_VOICE_LEVEL));//30-80
 
                     int ledLevel = settingsLedBrightness.getSelectedItemPosition();
                     gsonUtils.setLedLevel(ledLevel);

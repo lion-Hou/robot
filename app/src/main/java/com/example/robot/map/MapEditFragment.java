@@ -140,9 +140,9 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
         saveChargingBtn.setEnabled(false);
         Toast.makeText(mContext, "正在初始化中，请在确保机器人周围无障碍物，请稍后...", Toast.LENGTH_LONG).show();
         gsonUtils.setMapName(Content.map_Name);
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-        gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));
+        gsonUtils.setMapName(Content.map_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
     }
 
@@ -163,7 +163,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         } else {
                             Toast.makeText(mContext, "请输入新的地点名", Toast.LENGTH_SHORT).show();
                         }
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -178,14 +178,14 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
-        Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
+        Log.d(TAG, "onEventMsgedit ： " + messageEvent.getState());
         if (messageEvent.getState() == 10001) {
-            Log.d(TAG, "图片 ： " + messageEvent.getT());
+            Log.d(TAG, "图片Edit ： " + messageEvent.getT());
             ByteBuffer bytes = (ByteBuffer) messageEvent.getT();
             int len = bytes.limit() - bytes.position();
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
-            Log.d(TAG, "图片11111 ： " + bytes1);
+            Log.d(TAG, "图片11111edit ： " + bytes1);
 
             Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
@@ -197,10 +197,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 mBitmapHeight = mapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = mapRelativeBorder.getWidth();
             }
-
-
-
-
 
             editMapImage.setImageBitmap(mBitmap);
             mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
@@ -276,8 +272,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                             wallBtn.setEnabled(true);
                             markBtn.setEnabled(true);
                             saveBtn.setEnabled(true);
-                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                    (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
                             mapRelative.addView(charging_Img);
                             Log.d("zdzd999222", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX + "  pointY" + pointY + "   originX" + originX + "   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
@@ -285,8 +281,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                             Log.d("zdzd999222", "angleX" + angleX);
                         }
                         if (pointType == 2) {
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
                             textView.setText(pointName);
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
@@ -306,14 +302,18 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
 
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
+            if (message.equals("放电")||message.equals("充电")){
             charging = message;
+            }
+            if (message.equals("初始化完成")){
             init =message;
-            if (init.equals("初始化完成")){
-                if (saveChargingBtn.isEnabled()==false){
-                saveChargingBtn.setEnabled(true);
-                    Toast.makeText(mContext, "初始化完成", Toast.LENGTH_SHORT).show();
+                if (init.equals("初始化完成")){
+                    if (saveChargingBtn.isEnabled()==false){
+                        saveChargingBtn.setEnabled(true);
+                        Toast.makeText(mContext, "初始化完成", Toast.LENGTH_SHORT).show();
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+                    }
                 }
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             }
         } else if (messageEvent.getState() == 10009) {
             String message = (String) messageEvent.getT();
@@ -414,11 +414,10 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         .commit();
                 break;
             case R.id.save_charging_btn:
-                Log.d("YYYYY", "save_charging_point");
+                Log.d("YYYYY", "save_charging_point"+charging);
                 if (charging.equals("充电")) {
+                    Log.d("YYYYY", "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "+charging);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
                 } else {
                     Toast.makeText(mContext, "请确认机器人是否连接上充电点", Toast.LENGTH_SHORT).show();
                 }

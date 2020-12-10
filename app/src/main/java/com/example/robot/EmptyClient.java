@@ -169,11 +169,17 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("batter",batty);
                 break;
 
+            case Content.GET_VOICE_LEVEL:
+                jsonObject = new JSONObject(message);
+                int voiceLevel = jsonObject.getInt(Content.GET_VOICE_LEVEL);
+                EventBus.getDefault().post(new EventBusMessage(20004, voiceLevel));
+                break;
+
             case Content.GET_LOW_BATTERY:
-//                jsonObject = new JSONObject(message);
-//                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
-//                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
-//                Log.d("lowBattery", String.valueOf(lowBattery));
+                jsonObject = new JSONObject(message);
+                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
+                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
+                Log.d("lowBattery", String.valueOf(lowBattery));
                 break;
 
             case Content.GET_LED_LEVEL:
@@ -181,19 +187,13 @@ public class EmptyClient extends WebSocketClient {
                 int ledLevel = jsonObject.getInt(Content.GET_LED_LEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20002, ledLevel));
                 Log.d("ledLevel", String.valueOf(ledLevel));
-                int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
-                EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
-                Log.d("speedLevel", String.valueOf(speedLevel));
-                int lowBattery = jsonObject.getInt(Content.GET_LOW_BATTERY);
-                EventBus.getDefault().post(new EventBusMessage(20001, lowBattery));
-                Log.d("lowBattery", String.valueOf(lowBattery));
                 break;
 
             case Content.GET_SPEED_LEVEL:
-//                jsonObject = new JSONObject(message);
-//                int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
-//                EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
-//                Log.d("speedLevel", String.valueOf(speedLevel));
+                jsonObject = new JSONObject(message);
+                int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
+                EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
+                Log.d("speedLevel", String.valueOf(speedLevel));
                 break;
             case Content.editTaskQueue:
                 EventBus.getDefault().post(new EventBusMessage(20004, message));
