@@ -102,7 +102,9 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     private List<List<DrawLineBean>> lists = new ArrayList<>();
     private int listSize;
 
-    private ProgressDialog waitingDialog;
+    ArrayList<String> pointArrayList = new ArrayList<String>();
+    private String pointData[];
+
     @Override
     public void onStart() {
         super.onStart();
@@ -294,6 +296,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
                             textView.setText(pointName);
+                            pointArrayList.add(pointName);
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
                                     0, 0);
@@ -304,6 +307,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                             imageViewArrayList.add(imageView);
                         }
                     }
+                    pointData = pointArrayList.toArray(new String[pointArrayList.size()]);
+                    pointAndWallList.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,pointData));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
