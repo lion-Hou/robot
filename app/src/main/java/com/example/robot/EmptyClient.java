@@ -96,8 +96,9 @@ public class EmptyClient extends WebSocketClient {
             case Content.TV_TIME:
                 String string = null;
                 jsonObject = new JSONObject(message);
-                string = jsonObject.getString(Content.SPINNERTIME);
+                string = jsonObject.getString(Content.TV_TIME);
                 EventBus.getDefault().post(new EventBusMessage(10002, string));
+                Log.d("hhhh", ""+string);
                 break;
             case Content.SENDMAPNAME:
                 //地图列表
@@ -199,7 +200,10 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("edit_Queue",message );
                 break;
 
-
+            case Content.ROBOT_TASK_STATE:
+                EventBus.getDefault().post(new EventBusMessage(50001));
+                Log.d("task_state",message );
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));
         }

@@ -87,9 +87,9 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     private ItemTouchHelper itemTouchHelper;
     private RecyclerView mRecyclerView;
     private String[] type;
-    private String[] selectWeek;
+    private String selectWeek = "";
     private String typeValue;
-    private String typeTime;
+    private String typeTime = "FF:FF";
     private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private List<String> myWeek = new ArrayList<>();
 
@@ -166,11 +166,15 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                                     /**
                                      * 保存任务
                                      */
+                                    gsonUtils.setMapName(Content.first_map_Name);
                                     gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());//任务名
                                     gsonUtils.setList(mList);//导航点和所对于时间
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));//保存任务
 
-                                    if (typeValue.equals(weeks[2]) || typeValue.equals(weeks[0])) {
+                                    if (typeValue.equals(type[1])) {
+                                        for (int i =0;i< weeks.length; i++) {
+                                            myWeek.add(weeks[i]);
+                                        }
                                         gsonUtils.setTaskWeek(myWeek);//任务周期
                                     } else {
                                         gsonUtils.setTaskWeek(myWeek);//任务周期
@@ -207,6 +211,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                         typeValue = type[which];//任务类型
                         taskTypeSelect.setText(typeValue);
                         if (which == 0 || which == 1) {
+                            myWeek.clear();
                             taskTypeSelectWeek.setVisibility(View.GONE);
                         } else {
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
@@ -246,10 +251,19 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
              * 选择任务周期（星期）
              */
             case R.id.task_type_selectWeek:
-                myWeek.clear();
+                boolean[] booleans = new boolean[weeks.length];
+                for (int i = 0;i<weeks.length;i++) {
+                    boolean flag = false;
+                    for (int j =0;j<myWeek.size();j++) {
+                        if (weeks[i].equals(myWeek.get(j))){
+                            flag = true;
+                        }
+                    }
+                    booleans[i] = flag;
+                }
                 Log.d("tasklog", "week");
                 AlertDialog.Builder week = new AlertDialog.Builder(mContext);
-                week.setMultiChoiceItems(weeks, null, new DialogInterface.OnMultiChoiceClickListener() {
+                week.setMultiChoiceItems(weeks, booleans, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         if (isChecked) {
@@ -258,7 +272,6 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                         } else {
                             myWeek.remove(weeks[which]);
                         }
-                        taskTypeSelectWeek.setText(myWeek.toString());
                     }
                 });
 
@@ -266,6 +279,11 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        selectWeek = "";
+                        for (int i = 0; i < myWeek.size(); i++) {
+                            selectWeek = selectWeek + myWeek.get(i);
+                        }
+                        taskTypeSelectWeek.setText(selectWeek);
                         dialog.dismiss();
                     }
                 });
