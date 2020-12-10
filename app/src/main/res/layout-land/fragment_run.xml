@@ -8,21 +8,21 @@
     <TextView
         android:id="@+id/run_map"
         android:layout_width="wrap_content"
-        android:layout_height="50px"
+        android:layout_height="80px"
         android:textSize="18dp"
         android:text="@string/run_map"/>
 
     <TextView
         android:id="@+id/run_map_name"
         android:layout_width="wrap_content"
-        android:layout_height="50px"
+        android:layout_height="80px"
         android:layout_toRightOf="@id/run_map"
         android:textSize="18dp"/>
 
     <TextView
         android:id="@+id/run_task"
         android:layout_width="wrap_content"
-        android:layout_height="50px"
+        android:layout_height="80px"
         android:layout_below="@+id/run_map"
         android:textSize="18dp"
         android:text="@string/run_task"/>
@@ -32,35 +32,41 @@
         android:layout_width="wrap_content"
         android:layout_toRightOf="@id/run_task"
         android:layout_below="@+id/run_map"
-        android:layout_height="50px"
+        android:layout_height="80px"
         android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/point_state_time_text"
+        android:layout_width="200px"
+        android:layout_height="80px"
+        android:layout_below="@+id/run_task"
+        android:text="倒计时:"/>
+    <TextView
+        android:id="@+id/point_state_time"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:layout_toRightOf="@id/point_state_time_text"
+        android:layout_below="@+id/run_task"/>
 
     <!-- 进行任务       -->
     <RelativeLayout
         android:id="@+id/run"
         android:layout_width="match_parent"
         android:layout_height="400px"
-        android:layout_below="@id/run_task">
-
-        <TextView
-            android:id="@+id/count_time"
-            android:layout_width="match_parent"
-            android:layout_height="50px"/>
-
+        android:layout_below="@id/point_state_time_text">
         <ListView
             android:id="@+id/count_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/count_time"/>
+            android:background="@drawable/btn_gb_normal"/>
 
     </RelativeLayout>
 
     <Button
         android:id="@+id/task_run_edit"
         android:layout_width="200px"
-        android:layout_height="100px"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/run"
+        android:layout_height="50px"
+        android:layout_marginTop="650px"
         android:text="@string/run_stop"/>
 
 

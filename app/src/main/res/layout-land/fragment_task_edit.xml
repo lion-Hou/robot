@@ -96,7 +96,7 @@
         android:text="SAVE"/>
 
     <Button
-        android:id="@+id/task_new_back_edit"
+        android:id="@+id/task_new_back_edit_edit"
         android:layout_width="100px"
         android:layout_height="100px"
         android:layout_below="@+id/title3_edit"

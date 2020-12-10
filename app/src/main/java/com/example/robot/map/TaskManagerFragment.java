@@ -9,14 +9,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -140,6 +143,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.task_manage_name:
+                gsonUtils.setMapName(Content.first_map_Name);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 break;
             case R.id.task_manage_delete:
@@ -150,6 +154,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("Content.fixTaskName",  Content.fixTaskName);
+                        gsonUtils.setMapName(Content.first_map_Name);
                         gsonUtils.setTaskName(Content.fixTaskName);
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));//删除任务
                         taskName.setText(R.string.map_manage_select_task);
@@ -173,6 +178,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         .commit();
                 break;
             case R.id.task_manage_edit:
+
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new TaskEditFragment(), null)
@@ -264,14 +270,24 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
 
                         Log.d("zdzd9998", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
                         Log.d("zdzd9998", " resolution * angleX"+  resolution*angleX);
-                        if (pointType == 2) {
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+
+                        if (pointType == 1) {
+                            ImageView charging_Img = new ImageView(mContext);
+                            charging_Img.setImageResource(R.drawable.charging);
+                            imageViewArrayList.add(charging_Img);
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
-                            Log.d("zdzd9998", "angleX"+  angleX);
-                            Log.d("zdzd9998", " resolution"+  resolution);
+                            taskManageMapRelative.addView(charging_Img);
+                        }
+                        if (pointType == 2) {
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                                    0, 0);
+                            Log.d("zdzd9998", "angleX" + angleX);
+                            Log.d("zdzd9998", " resolution" + resolution);
                             taskManageMapRelative.addView(imageView);
-                        }else if (pointType == 1){
+                            imageViewArrayList.add(imageView);
                         }
                     }
                 }

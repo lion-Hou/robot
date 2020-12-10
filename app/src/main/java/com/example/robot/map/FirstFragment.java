@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public View view;
     private String[] mapName;
     private String task_name;
+    private String map_name;
     private String name;
     private String name1 = "请选择地图";
     private String name2 = "PLEASE SELECT MAP";
@@ -110,6 +112,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+        String a = (String) mainTask.getText();
+        if (a.equals(null) == name1.equals(null) && a.equals(null) == name2.equals(null) ){
+            mainTask.setEnabled(false);
+        }else {
+            mainTask.setEnabled(true);
+        }
     }
 
     /**
@@ -178,6 +186,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
+                    gsonUtils.setMapName(Content.first_map_Name);
                     gsonUtils.setTaskName(task_name);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
                     getActivity().getSupportFragmentManager()
@@ -188,8 +197,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.main_spinner_task:
-
-                gsonUtils.setMapName(Content.first_map_Name);
+                gsonUtils.setMapName(map_name);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 break;
             case R.id.main_map:
@@ -226,6 +234,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     //首页获取所有地图名称
     public void moreMap(String[] mapName) {
         Log.d(TAG, "onEventMsg ： " + "2");
+        Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         System.out.println("which" + mapName.length);
         builder.setItems(mapName, new DialogInterface.OnClickListener() {
@@ -234,12 +243,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 System.out.println("which" + which);
                 mainSpinnerMap.setText(mapName[which]);
                 Content.first_map_Name = mapName[which];
-                if(Content.first_map_Name != null){
-                    mainTask.setEnabled(true);
-                }
-                gsonUtils.setMapName(mapName[which]);//给上位机传入地图名称
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));//应用这个地图
-                EventBus.getDefault().post(new EventBusMessage(30001, mapName[which]));//30001给编辑点页面传所选中的地图名
+                map_name = mapName[which];
+                mainTask.setEnabled(true);
+                Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
             }
         });
         builder.create().show();
@@ -247,30 +253,58 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     //首页获取当前选定的地图的所有任务列表
     public void requestTaskList(String[] taskNameList) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        System.out.println("which" + taskNameList.length);
-        builder.setItems(taskNameList, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                System.out.println("which" + which);
-                task_name = taskNameList[which];
-                Content.task_Name = taskNameList[which];
-                mainSpinnerTask.setText(taskNameList[which]);
-            }
-        });
-        builder.create().show();
+        if(taskNameList.length == 0){
+            Log.d("hhhhh","hhhhhjjj");
+            Toast toast = Toast.makeText(mContext,"当前地图没有任务",Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            System.out.println("which" + taskNameList.length);
+            builder.setItems(taskNameList, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("which" + which);
+                    task_name = taskNameList[which];
+                    Content.task_Name = taskNameList[which];
+                    mainSpinnerTask.setText(taskNameList[which]);
+                }
+            });
+            builder.create().show();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
         if (messageEvent.getState() == 10005) {
-            mapName = new String[Content.list.size()];
-            for (int i = 0; i < Content.list.size(); i++) {
-                mapName[i] = Content.list.get(i).getMap_Name();
+            int ori_size = Content.list.size();
+            System.out.println("ZHZHSSSS: ori_size = " + ori_size);
+            int null_count = 0;
+            for (int i=0;i< ori_size;i++) {
+                String temp1 = Content.list.get(i).getMap_Name();
+                System.out.println("ZHZHZZZZ1111,temp1 =: " + temp1);
+                if(TextUtils.isEmpty(temp1)){
+                    //    null_count++;
+                    Content.list.remove(i);
+                    ori_size--;
+                }
             }
-            Log.d(TAG, mapName[1]);
-            moreMap(mapName);
+            mapName = new String[Content.list.size()-null_count];
+            System.out.println("ZHZHSSSS: " + Content.list.size());
+            for (int i=0;i< Content.list.size();i++) {
+                mapName[i] =Content.list.get(i).getMap_Name();
+                System.out.println("ZHZHZZZZ: " + mapName[i]);
+            }
+            System.out.println("ZHZHSSSS: " + Content.list.size());
+            if (Content.list.size() == 1){
+                System.out.println("MG_map_nameSSSS: " + Content.list.size());
+                mainSpinnerMap.setText(mapName[0]);
+                Content.map_Name=mapName[0];
+            //    gsonUtils.setMapName(mapName[0]);
+            //    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+            }else{
+                moreMap(mapName);
+            }
             Log.d(TAG, "onEventMsg ： " + "3");
             //EventBus.getDefault().cancelEventDelivery(10005);
         } else if (messageEvent.getState() == 10017) {

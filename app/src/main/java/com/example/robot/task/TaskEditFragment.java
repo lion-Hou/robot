@@ -68,8 +68,6 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     RelativeLayout title3;
     @BindView(R.id.task_new_save_edit)
     Button taskNewSave;
-    @BindView(R.id.task_new_back_edit)
-    Button taskNewBack;
     @BindView(R.id.new_map_mapName_editText_edit)
     EditText newMapMapNameEditText;
     @BindView(R.id.task_type_select_edit)
@@ -78,6 +76,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     TextView taskTypeSelectTime;
     @BindView(R.id.task_type_selectWeek_edit)
     TextView taskTypeSelectWeek;
+    @BindView(R.id.task_new_back_edit_edit)
+    Button taskNewBackEditEdit;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -141,6 +141,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
         itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
+        gsonUtils.setMapName(Content.first_map_Name);
         gsonUtils.setTaskName(Content.fixTaskName);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
 
@@ -149,6 +150,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
         taskTypeSelect.setOnClickListener(this);
         taskTypeSelectTime.setOnClickListener(this);
         taskTypeSelectWeek.setOnClickListener(this);
+        taskNewBackEditEdit.setOnClickListener(this);
     }
 
     private void initListener() {
@@ -175,14 +177,23 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                                      * 保存任务
                                      */
                                     //删除之前的任务
+                                    gsonUtils.setMapName(Content.first_map_Name);
                                     gsonUtils.setTaskName(Content.fixTaskName);
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));
                                     //保存新的任务
+                                    gsonUtils.setMapName(Content.first_map_Name);
                                     gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());//任务名
                                     gsonUtils.setList(mList);//导航点和所对于时间
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));//保存任务
-
-                                    gsonUtils.setTaskWeek(myWeek);//任务周期
+                                    Log.d("zdzd week :", "" + myWeek.size() + ",    " + typeValue);
+                                    if (typeValue.equals(type[1])) {
+                                        for (int i = 0; i < weeks.length; i++) {
+                                            myWeek.add(weeks[i]);
+                                        }
+                                        gsonUtils.setTaskWeek(myWeek);//任务周期
+                                    } else {
+                                        gsonUtils.setTaskWeek(myWeek);//任务周期
+                                    }
                                     gsonUtils.setTaskTime(typeTime);//任务时间 “20：20”
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TASK_ALARM));//定时任务
 
@@ -212,6 +223,9 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     public void onClick(DialogInterface dialog, int which) {
                         typeValue = type[which];//任务类型
                         if (which == 0 || which == 1) {
+                            myWeek.clear();
+                            selectWeek = "";
+                            taskTypeSelectWeek.setText(selectWeek);
                             taskTypeSelectWeek.setVisibility(View.GONE);
                         } else {
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
@@ -250,10 +264,19 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
              * 选择任务周期（星期）
              */
             case R.id.task_type_selectWeek_edit:
-                myWeek.clear();
                 Log.d("tasklog", "week");
+                boolean[] booleans = new boolean[weeks.length];
+                for (int i = 0; i < weeks.length; i++) {
+                    boolean flag = false;
+                    for (int j = 0; j < myWeek.size(); j++) {
+                        if (weeks[i].equals(myWeek.get(j))) {
+                            flag = true;
+                        }
+                    }
+                    booleans[i] = flag;
+                }
                 week = new AlertDialog.Builder(mContext);
-                week.setMultiChoiceItems(weeks, null, new DialogInterface.OnMultiChoiceClickListener() {
+                week.setMultiChoiceItems(weeks, booleans, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         if (isChecked) {
@@ -269,6 +292,11 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        selectWeek = "";
+                        for (int i = 0; i < myWeek.size(); i++) {
+                            selectWeek = selectWeek + myWeek.get(i);
+                        }
+                        taskTypeSelectWeek.setText(selectWeek);
                         dialog.dismiss();
                     }
                 });
@@ -281,6 +309,15 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     }
                 });
                 week.show();
+                break;
+            case R.id.task_new_back_edit_edit:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new TaskManagerFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            default:
                 break;
         }
     }
@@ -317,14 +354,19 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
                 //类型
                 JSONArray typeArray = jsonObject.getJSONArray(Content.editTaskQueueType);
-                if (typeArray.length() == 0) {
+                Log.d("type event :", "" + TextUtils.isEmpty(typeArray.getString(0)));
+                Log.d("type event :", "" + typeArray.getString(0).length());
+                if (TextUtils.isEmpty(typeArray.getString(0))) {
                     //Once
                     taskTypeSelectWeek.setVisibility(View.GONE);
                     taskTypeSelect.setText(type[0]);
+                    typeValue = type[0];
                 } else if (typeArray.length() == 7) {
                     taskTypeSelect.setText(type[1]);
                     taskTypeSelectWeek.setVisibility(View.GONE);
+                    typeValue = type[1];
                 } else {
+                    typeValue = type[2];
                     taskTypeSelect.setText(type[2]);
                     for (int i = 0; i < typeArray.length(); i++) {
                         myWeek.add(typeArray.getString(i));
