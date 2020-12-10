@@ -143,6 +143,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
 
         gsonUtils.setMapName(Content.first_map_Name);
         gsonUtils.setTaskName(Content.fixTaskName);
+        Log.d("ffff",Content.first_map_Name);
+        Log.d("ffff",Content.fixTaskName);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
 
         taskNewSave.setOnClickListener(this);
@@ -208,7 +210,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.addtask_select_point_edit:
                 Log.d("tasklog", "select");
-                gsonUtils.setMapName(Content.map_Name);//请求导航点前发送当前地图名
+                //gsonUtils.setMapName(Content.map_Name);//请求导航点前发送当前地图名
+                gsonUtils.setMapName(Content.first_map_Name);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));//请求导航点
                 break;
 
@@ -255,9 +258,11 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                         //typeTime = String.format("%d:%d",hourOfDay,minute);//任务时间
                         //typeTime = String.format("0%d:0%d",hourOfDay,minute);
                         //typeTime = String.format("%H:%M",hourOfDay,minute);
+                        taskTypeSelectTime.setText(typeTime);
                         Log.d("taskvalue", typeTime);
                     }
                 }, 00, 00, true).show();
+
                 break;
 
             /**
@@ -311,11 +316,28 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 week.show();
                 break;
             case R.id.task_new_back_edit_edit:
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.first_fragment, new TaskManagerFragment(), null)
-                        .addToBackStack(null)
-                        .commit();
+                AlertDialog.Builder back = new AlertDialog.Builder(mContext);
+                back.setMessage("当前修改未保存是否退出");
+                //设置正面按钮
+                back.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.first_fragment, new TaskManagerFragment(), null)
+                                .addToBackStack(null)
+                                .commit();
+                        dialog.dismiss();
+                    }
+                });
+                //设置反面按钮
+                back.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                back.show();
                 break;
             default:
                 break;
