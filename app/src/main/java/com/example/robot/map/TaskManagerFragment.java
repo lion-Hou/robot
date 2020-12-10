@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -84,6 +85,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     private int index = 0;
     double mBitmapHeight;
     double mBitmapWidth;
+    private Bitmap mBitmap;
     private NormalDialogUtil delectTask;
     String a;
     String select_cn = "请选择任务";
@@ -233,7 +235,8 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             byte[] bytes1 = new byte[len];
             bytes.get(bytes1);
             Log.d(TAG, "任务界面获得地图数据" + bytes1.length);
-            Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            //Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
             if (mBitmapHeight >= mBitmapWidth){
@@ -248,7 +251,14 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             taskManageMapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
             taskManageMapImage.setLayoutParams(layoutParams);
+
+            ViewGroup parent = (ViewGroup) taskManageMapImage.getParent();
+            if (parent != null) {
+                parent.removeView(taskManageMapImage);
+            }
+
             taskManageMapRelative.addView(taskManageMapImage);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         } else if (messageEvent.getState() == 10008) {
             for (int i = 0; i <imageViewArrayList.size(); i++) {
                 taskManageMapRelative.removeView(imageViewArrayList.get(i));
@@ -321,31 +331,37 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             try {
                 JSONObject jsonObject = new JSONObject(message);
                 JSONArray jsonArray = jsonObject.getJSONArray(Content.SEND_VIRTUAL);
+                List<DrawLineBean> lineBeans = new ArrayList<>();//线段的坐标
+                ArrayList<float[]> pointlist = new ArrayList<>();//保存所画线的坐标
+
+                float startX = 0, startY = 0, endX = 0, endY = 0;
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    List<DrawLineBean> lineBeans = new ArrayList<>();
                     for (int k = 0; k < jsonArray.getJSONArray(i).length(); k++) {
                         JSONObject js = jsonArray.getJSONArray(i).getJSONObject(k);
                         DrawLineBean drawLineBean = new DrawLineBean();
-                        drawLineBean.setX(js.getInt(Content.VIRTUAL_X));
-                        drawLineBean.setY(js.getInt(Content.VIRTUAL_Y));
+                        drawLineBean.setX(js.getDouble(Content.VIRTUAL_X));
+                        drawLineBean.setY(js.getDouble(Content.VIRTUAL_Y));
                         lineBeans.add(drawLineBean);
                     }
-                    float startX = 0, startY = 0, endX = 0, endY = 0;
-                    for (int k = 0; k < lineBeans.size(); k++) {
-                        if (k == 0) {
-                            startX = (float) ((mBitmapWidth / (lineBeans.get(k).getX() * gridWidth)) + originX);
-                            startY = (float) (mBitmapHeight / (gridHeight * (mBitmapHeight - lineBeans.get(k).getY())) + originY);
-                        } else {
-                            endX = (float) ((mBitmapWidth / (lineBeans.get(k).getX() * gridWidth)) + originX);
-                            endY = (float) (mBitmapHeight / (gridHeight * (mBitmapHeight - lineBeans.get(k).getY())) + originY);
-                        }
-                    }
-                    //划线：点连线 连接start和end
-                    Canvas canvas = new Canvas();
-                    Paint paint = new Paint();
-                    paint.setColor(R.color.colorPrimaryDark);
-                    canvas.drawLine(startX, startY, endX, endY, paint);
-                    taskManageMapRelative.draw(canvas);
+                }
+
+                //画虚拟墙
+                for (int k = 0; k < lineBeans.size(); ) {
+                    startX = (float) ((mBitmapWidth / gridWidth) * lineBeans.get(k).getX());
+                    startY = (float) (mBitmapHeight - (mBitmapHeight / gridHeight) * lineBeans.get(k).getY());
+                    endX = (float) ((mBitmapWidth / gridWidth) * lineBeans.get(k + 1).getX());
+                    endY = (float) (mBitmapHeight - (mBitmapHeight / gridHeight) * lineBeans.get(k + 1).getY());
+
+                    float[] point = {startX,startY,endX,endY};
+                    Log.i("Henly","mapManager,update VirtualWall,k = " + k);
+                    pointlist.add(point);
+
+                    k = k +2 ;
+                }
+
+                if (pointlist.size() != 0) {
+                    Log.i("Henly", "updateVW,gridWidth = " + gridWidth + ",gridHeight = " + gridHeight);
+                    updateVirtualWall(pointlist);
                 }
 
             } catch (JSONException e) {
@@ -360,6 +376,65 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             if(state == 0){
                 Toast toast = Toast.makeText(mContext,"请新建任务",Toast.LENGTH_SHORT);
                 toast.show();
+            }
+        }
+    }
+	
+    void updateVirtualWall(ArrayList<float[]> pointlist){
+        Log.i("Henly","mapmanager-updateVirtualWall");
+        RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+        // layoutParams.height = editMapImage.getHeight();
+        // layoutParams.width = editMapImage.getWidth();
+        //  layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        //   layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        TaskManagerFragment.DrawlineFromVW bDrawlVW = new TaskManagerFragment.DrawlineFromVW(mContext,pointlist);
+        bDrawlVW.setLayoutParams(layoutParams);
+        taskManageMapRelative.addView(bDrawlVW);
+    }
+
+    class DrawlineFromVW extends View{
+        private float start_x,start_y;//声明起点坐标
+        private float mov_x,mov_y;//滑动轨迹坐标
+        private Paint paint;//声明画笔
+        private Canvas canvas;//画布
+        private Bitmap bitmap;//位图
+        private float view_X,view_Y;
+
+        private double scale_x = 1;
+        private double scale_y = 1;
+
+        private ArrayList<float[]> Pointlist = new ArrayList<>();//保存所画线的坐标
+
+        public DrawlineFromVW(Context context,ArrayList<float[]>pointlist) {
+            super(context);
+            paint = new Paint(Paint.DITHER_FLAG);//创建一个画笔
+
+            bitmap = Bitmap.createBitmap( (int)mBitmapWidth, (int)mBitmapHeight, mBitmap ==null?Bitmap.Config.ARGB_8888:mBitmap.getConfig());
+            bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+            canvas=new Canvas();
+            canvas.setBitmap(bitmap);
+
+            paint.setStyle(Paint.Style.STROKE);//设置非填充
+            paint.setStrokeWidth(3);//笔宽3像素
+            paint.setColor(Color.RED);//设置为红笔
+            paint.setAntiAlias(true);//锯齿不显示
+
+            Pointlist = pointlist;
+            invalidate();
+
+            Log.i(TAG,"DrawlineFromVW");
+        }
+
+        //画位图
+        @Override
+        protected void onDraw(Canvas canvas) {
+            //super.onDraw(canvas);
+            canvas.drawBitmap(bitmap,0,0,null);
+            Log.i("Henly","mapmanager-updateVW,onDraw,mBitmapWidth = " + mBitmapWidth + ",mBitmapHeight = " + mBitmapHeight );
+            for(int i = 0;i < Pointlist.size();i++){
+                float[] point = Pointlist.get(i);
+                Log.i("Henly","mapmanager-updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
+                canvas.drawLine(point[0], point[1], point[2], point[3], paint);//画保存的线
             }
         }
     }
