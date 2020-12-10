@@ -85,6 +85,9 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     double mBitmapHeight;
     double mBitmapWidth;
     private NormalDialogUtil delectTask;
+    String a;
+    String select_cn = "请选择任务";
+    String select_en = "PLEASE SELECT TASK";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,6 +129,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         taskDelete.setOnClickListener(this);
         taskBack.setOnClickListener(this);
         taskEdit.setOnClickListener(this);
+
     }
 
     private void initListener() {
@@ -147,28 +151,35 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 break;
             case R.id.task_manage_delete:
-                AlertDialog.Builder delete = new AlertDialog.Builder(mContext);
-                delete.setMessage("是否删除当前任务");
-                //设置正面按钮
-                delete.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Content.fixTaskName",  Content.fixTaskName);
-                        gsonUtils.setMapName(Content.first_map_Name);
-                        gsonUtils.setTaskName(Content.fixTaskName);
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));//删除任务
-                        taskName.setText(R.string.map_manage_select_task);
-                        dialog.dismiss();
-                    }
-                });
-                //设置反面按钮
-                delete.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                delete.show();
+                a = (String) taskName.getText();
+                if(a.equals(select_cn)  || a.equals(select_en)){
+                    Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
+                    toast.show();
+                }else {
+                    AlertDialog.Builder delete = new AlertDialog.Builder(mContext);
+                    delete.setMessage("是否删除当前任务");
+                    //设置正面按钮
+                    delete.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.d("Content.fixTaskName", Content.fixTaskName);
+                            gsonUtils.setMapName(Content.first_map_Name);
+                            gsonUtils.setTaskName(Content.fixTaskName);
+                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));//删除任务
+                            Content.fixTaskName = null;
+                            taskName.setText(R.string.map_manage_select_task);
+                            dialog.dismiss();
+                        }
+                    });
+                    //设置反面按钮
+                    delete.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    delete.show();
+                }
                 break;
             case R.id.task_manage_back:
                 getActivity().getSupportFragmentManager()
@@ -178,12 +189,17 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         .commit();
                 break;
             case R.id.task_manage_edit:
-
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.first_fragment, new TaskEditFragment(), null)
-                        .addToBackStack(null)
-                        .commit();
+                a = (String) taskName.getText();
+                if(a.equals(select_cn)  || a.equals(select_en)){
+                    Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
+                    toast.show();
+                }else {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.first_fragment, new TaskEditFragment(), null)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 break;
             default:
                 break;
@@ -200,6 +216,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 System.out.println("which" + which);
                 Content.fixTaskName = taskNameList[which];
                 taskName.setText(taskNameList[which]);
+                Log.d(TAG, "ggggg ： " + taskName.getText());
             }
         });
         builder.create().show();
@@ -338,6 +355,12 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             taskNameList = (String[]) messageEvent.getT();
             Log.d("task_name",taskNameList[0]);
             requestTaskList(taskNameList);
+        }else if(messageEvent.getState() == 10018){
+            int state = (int) messageEvent.getT();
+            if(state == 0){
+                Toast toast = Toast.makeText(mContext,"请新建任务",Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 }
