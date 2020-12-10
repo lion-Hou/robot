@@ -51,7 +51,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private static final String TAG = "MapManagerFragment";
 
     @BindView(R.id.manager_selected)
-    TextView managqrSelected;
+    TextView managerSelected;
     @BindView(R.id.manager_newMap)
     Button managerNewMap;
     @BindView(R.id.manager_mapImage)
@@ -118,13 +118,13 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
         if (Content.map_Name != null) {
-            managqrSelected.setText(Content.map_Name);
+            managerSelected.setText(Content.map_Name);
         }
     }
 
     private void initView() {
         managerNewMap.setOnClickListener(this);
-        managqrSelected.setOnClickListener(this);
+        managerSelected.setOnClickListener(this);
         managerEdit.setOnClickListener(this);
         managerBack.setOnClickListener(this);
         managerDelete.setOnClickListener(this);
@@ -174,7 +174,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                                     Content.map_Name = newMapName;
                                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_MAP));
-                                    managqrSelected.setText(Content.map_Name);
+                                    managerSelected.setText(Content.map_Name);
                                 }else {
                                     Toast.makeText(mContext, "请输入新的地图名"+newMapName, Toast.LENGTH_SHORT).show();
                                 }
@@ -207,7 +207,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                          */
                         if (!Content.map_Name.equals(null)){
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
-                            managqrSelected.setText(R.string.please_select_map);
+                            managerSelected.setText(R.string.please_select_map);
                             Content.map_Name = null;
                             mapManageRelative.removeAllViews();
                             managerEdit.setEnabled(false);
@@ -252,7 +252,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 System.out.println("which" + which);
-                managqrSelected.setText(mapName[which]);
+                managerSelected.setText(mapName[which]);
                 Content.map_Name = mapName[which];
                 Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
                 if (Content.map_Name!=null) {
@@ -319,7 +319,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             System.out.println("ZHZHSSSS: " + Content.list.size());
             if (Content.list.size() == 1){
                 System.out.println("MG_map_nameSSSS: " + Content.list.size());
-                managqrSelected.setText(mapName[0]);
+                managerSelected.setText(mapName[0]);
                 Content.map_Name=mapName[0];
                 gsonUtils.setMapName(mapName[0]);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
