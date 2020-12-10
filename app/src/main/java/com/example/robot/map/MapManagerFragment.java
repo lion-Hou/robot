@@ -220,8 +220,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 });
                 break;
             case R.id.manager_edit:
-                gsonUtils.setMapName(Content.map_Name);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.first_fragment, new MapEditFragment(), null)

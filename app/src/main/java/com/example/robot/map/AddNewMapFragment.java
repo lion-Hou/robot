@@ -196,7 +196,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                                         .commit();
                             }
                         };
-                        timer.schedule(task,2000);
+                        timer.schedule(task,3000);
                     }
                 });
                 break;

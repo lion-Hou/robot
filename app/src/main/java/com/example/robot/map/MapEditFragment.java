@@ -2,6 +2,7 @@ package com.example.robot.map;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -15,10 +16,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +46,8 @@ import org.json.JSONObject;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +78,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     Button saveChargingBtn;
     @BindView(R.id.line1)
     LinearLayout line1;
+    @BindView(R.id.point_and_wall_list)
+    ListView pointAndWallList;
+    @BindView(R.id.map_list_border)
+    RelativeLayout mapListBorder;
+
     private List<ImageView> imageViewArrayList = new ArrayList<>();
 
 
@@ -82,12 +92,15 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     private View view;
     private int index = 0;
     private String charging;
+    private String init;
 
     private double mBitmapHeight;
     private double mBitmapWidth;
 
     private List<List<DrawLineBean>> lists = new ArrayList<>();
+    private int listSize;
 
+    private ProgressDialog waitingDialog;
     @Override
     public void onStart() {
         super.onStart();
@@ -115,18 +128,21 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
         initView();
-
         return view;
     }
 
     private void initView() {
         robot_Img = new ImageView(mContext);
         editMapname.setText(Content.map_Name);
-        gsonUtils.setMapName(Content.map_Name);
         wallBtn.setEnabled(false);
         markBtn.setEnabled(false);
         saveBtn.setEnabled(false);
+        saveChargingBtn.setEnabled(false);
+        Toast.makeText(mContext, "正在初始化中，请在确保机器人周围无障碍物，请稍后...", Toast.LENGTH_LONG).show();
+        gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+        gsonUtils.setMapName(Content.map_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
     }
 
@@ -183,7 +199,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             }
 
 
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+
 
 
             editMapImage.setImageBitmap(mBitmap);
@@ -215,8 +231,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         ImageView imageView = new ImageView(mContext);
                         TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
-
                         imageView.setOnClickListener(this);
+
                         Log.d("zdzd222", "" + (editMapImage.getWidth() / Content.list.get(index).getGridWidth() * jsonItem.getDouble(Content.POINT_X)
                                 + Content.list.get(index).getOriginX() - (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE)))));
                         Log.d("zdzd222", "" + (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE))));
@@ -234,8 +250,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         double gridWidth = Content.list.get(index).getGridWidth();
 
                         String pointName = jsonItem.getString(Content.POINT_NAME);
-                        Log.d("zhzh111", "point"+pointName);
-
+                        Log.d("zhzh111", "point" + pointName);
                         double layoutW = (double) mapRelative.getWidth();
                         double layoutH = (double) mapRelative.getHeight();
                         Log.d("W H", "" + layoutW / mapWidth + "MW:" + layoutH / mapHeight);
@@ -265,7 +280,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
                             mapRelative.addView(charging_Img);
-                            Log.d("zdzd999222", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX +  "  pointY" + pointY +"   originX" + originX +"   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
+                            Log.d("zdzd999222", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX + "  pointY" + pointY + "   originX" + originX + "   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
                             Log.d("zdzd999222", " resolution * angleX" + resolution * angleX);
                             Log.d("zdzd999222", "angleX" + angleX);
                         }
@@ -275,26 +290,31 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                                     0, 0);
                             textView.setText(pointName);
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))+4),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
                                     0, 0);
-
-                            Log.d("zdzd999111", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX +  "  pointY" + pointY +"   originX" + originX +"   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
                             Log.d("zdzd999111", " resolution * angleX" + resolution * angleX);
                             Log.d("zdzd999111", "angleX" + angleX);
                             mapRelative.addView(imageView);
                             mapRelative.addView(textView);
                             imageViewArrayList.add(imageView);
                         }
-
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-        }else if (messageEvent.getState() == 19191) {
+        } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
             charging = message;
+            init =message;
+            if (init.equals("初始化完成")){
+                if (saveChargingBtn.isEnabled()==false){
+                saveChargingBtn.setEnabled(true);
+                    Toast.makeText(mContext, "初始化完成", Toast.LENGTH_SHORT).show();
+                }
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+            }
         } else if (messageEvent.getState() == 10009) {
             String message = (String) messageEvent.getT();
             try {
@@ -314,14 +334,13 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                     robot_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                             (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                             0, 0);
-                    Log.d("zdzd999888", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX +  "  pointY" + pointY +"   originX" + originX +"   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
+                    Log.d("zdzd999888", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX + "  pointY" + pointY + "   originX" + originX + "   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
                     Log.d("zdzd999888", " resolution * angleX" + resolution * angleX);
                     Log.d("zdzd999888", "angleX" + angleX);
                     Log.d("zdzd999888", " resolution" + resolution);
                     mapRelative.addView(robot_Img);
                 }
-            }
-            catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else if (messageEvent.getState() == 40002) {//获取虚拟墙
@@ -368,7 +387,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
         }
     }
 
-    @OnClick({R.id.edit_mapname, R.id.add_point_title, R.id.map_relative, R.id.wall_btn, R.id.mark_btn, R.id.save_btn, R.id.back_btn,R.id.save_charging_btn})
+    @OnClick({R.id.edit_mapname, R.id.add_point_title, R.id.map_relative, R.id.wall_btn, R.id.mark_btn, R.id.save_btn, R.id.back_btn, R.id.save_charging_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.edit_mapname:
@@ -396,11 +415,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 break;
             case R.id.save_charging_btn:
                 Log.d("YYYYY", "save_charging_point");
-                if (charging.equals("充电")){
+                if (charging.equals("充电")) {
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
-                }else {
+                } else {
                     Toast.makeText(mContext, "请确认机器人是否连接上充电点", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -462,7 +481,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     public void onClick(View view) {
         for (int i = 0; i < imageViewArrayList.size(); i++) {
             if (view == imageViewArrayList.get(i)) {
-                Toast.makeText(mContext, i + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "pointName", Toast.LENGTH_SHORT).show();
+
             }
         }
     }
