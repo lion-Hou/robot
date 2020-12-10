@@ -133,12 +133,17 @@ public class EmptyClient extends WebSocketClient {
                 //返回任务列表
                 jsonObject = new JSONObject(message);
                 JSONArray task = jsonObject.getJSONArray(Content.DATATIME);
+                Log.d("task_name", String.valueOf(task));
                 String[] taskName = new String[task.length()];
                 for (int i =0; i <task.length(); i++){
                     taskName[i] = task.getString(i);
                 }
                 Log.d("task_name",taskName[0]);
-                EventBus.getDefault().post(new EventBusMessage(10017, taskName));
+                if (task == null){
+                    EventBus.getDefault().post(new EventBusMessage(10018, 0));
+                }else {
+                    EventBus.getDefault().post(new EventBusMessage(10017, taskName));
+                }
             case Content.SENDPOINTPOSITION:
                 //当前地图点列表
                 jsonObject = new JSONObject(message);

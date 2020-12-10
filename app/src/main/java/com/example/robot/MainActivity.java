@@ -1,8 +1,12 @@
 package com.example.robot;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +56,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
+        hideBottomUIMenu();
         ButterKnife.bind(this);
         gsonUtils = new GsonUtils();
         connect();
@@ -156,6 +161,20 @@ public class MainActivity extends FragmentActivity {
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
         waitingDialog.show();
+    }
+
+    protected void hideBottomUIMenu() {
+        //隐藏虚拟按键，并且全屏
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+            View v = this.getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+
+            Window window = getWindow();
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
+            window.setAttributes(params);
+        }
     }
 
 }

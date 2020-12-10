@@ -157,9 +157,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        if (Content.map_Name != null) {
-            mainSpinnerMap.setText(Content.map_Name);
-        }
     }
 
     @Override
