@@ -121,7 +121,12 @@ public class RunFragment extends Fragment {
             String time = (String) messageEvent.getT();
             Log.d("timehhhh",time);
             pointStateTime.setText(time);
-        }else if (messageEvent.getState() == 50001){
+        }else if (messageEvent.getState() == 50005){
+            List<String> list = (List<String>) messageEvent.getT();
+            String[] strList = new String[list.size()];
+            for (int i = 0; i < strList.length; i++){
+
+            }
 
         }
     }

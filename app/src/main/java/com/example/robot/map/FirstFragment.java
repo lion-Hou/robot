@@ -28,6 +28,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -62,7 +65,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private String name;
     private String name1 = "请选择地图";
     private String name2 = "PLEASE SELECT MAP";
-
+    private String name3 = "请选择任务";
+    private String name4 = "PLEASE SELECT TASK";
+    private List<String> myTaskNameList = new ArrayList<>();
+    private String selectTask = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,13 +185,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
                 break;
             case R.id.main_execute:
-                if (task_name == null) {
+                String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
+                if (mainSpinnerTaskText.equals(name3) || mainSpinnerTaskText.equals(name4)) {
                     Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
-                    gsonUtils.setMapName(Content.first_map_Name);
-                    gsonUtils.setTaskName(task_name);
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
+                    Log.d(TAG, "strList ： " + myTaskNameList);
+                    for (int i = 0; i < myTaskNameList.size(); i++){
+                        gsonUtils.setMapName(Content.first_map_Name);
+                        gsonUtils.setTaskName(myTaskNameList.get(i));
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
+//                        Log.d(TAG, "strList ： " + myTaskNameList.get(0));
+//                        Log.d(TAG, "strList ： " + myTaskNameList.get(1));
+                    }
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.first_fragment, new RunFragment(), null)
@@ -255,18 +267,47 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             Toast toast = Toast.makeText(mContext,"当前地图没有任务",Toast.LENGTH_SHORT);
             toast.show();
         }else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            System.out.println("which" + taskNameList.length);
-            builder.setItems(taskNameList, new DialogInterface.OnClickListener() {
+            boolean[] booleans = new boolean[taskNameList.length];
+            for (int i = 0;i<taskNameList.length;i++) {
+                boolean flag = false;
+                booleans[i] = flag;
+            }
+            Log.d("tasklistlog", "tasklist");
+            AlertDialog.Builder week = new AlertDialog.Builder(mContext);
+            week.setMultiChoiceItems(taskNameList, booleans, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    System.out.println("which" + which);
-                    task_name = taskNameList[which];
-                    Content.task_Name = taskNameList[which];
-                    mainSpinnerTask.setText(taskNameList[which]);
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    if (isChecked) {
+                        myTaskNameList.add(taskNameList[which]);
+                        Log.d("tasklistvalue",myTaskNameList.toString());
+                    } else {
+                        myTaskNameList.remove(taskNameList[which]);
+                    }
                 }
             });
-            builder.create().show();
+
+            //设置正面按钮
+            week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    selectTask = "";
+                    for (int i = 0; i < myTaskNameList.size(); i++) {
+                        selectTask = selectTask + myTaskNameList.get(i);
+                    }
+                    mainSpinnerTask.setText(selectTask);
+                    dialog.dismiss();
+                }
+            });
+            //设置反面按钮
+            week.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    myTaskNameList.clear();
+                    dialog.dismiss();
+                }
+            });
+            week.show();
+
         }
     }
 

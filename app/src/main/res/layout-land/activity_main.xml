@@ -48,9 +48,15 @@
         <ImageView
             android:id="@+id/robot_img"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="160dp"
             android:layout_below="@id/title"
             android:src="@drawable/batty" />
+        <Button
+            android:id="@+id/text_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/robot_img"
+            android:text="测试"/>
 
     </RelativeLayout>
 
