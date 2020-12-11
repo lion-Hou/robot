@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -34,11 +35,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TaskHistoryFragment extends Fragment {
+public class TaskHistoryFragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = "TaskHistoryFragment";
     @BindView(R.id.history_recyclerview)
     RecyclerView historyRecyclerview;
+    @BindView(R.id.hitory_back)
+    Button hitoryBack;
     private View view;
     private Context mContext;
     private HistoryAdapter historyAdapter;
@@ -85,6 +88,7 @@ public class TaskHistoryFragment extends Fragment {
     }
 
     private void initView() {
+        hitoryBack.setOnClickListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         historyRecyclerview.setLayoutManager(linearLayoutManager);
@@ -116,6 +120,18 @@ public class TaskHistoryFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.hitory_back:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new FirstFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
         }
     }
 }
