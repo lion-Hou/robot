@@ -23,24 +23,25 @@
             android:layout_width="wrap_content"
             android:layout_height="100px">
 
-            <ImageView
-                android:id="@+id/net"
+            <TextView
+                android:id="@+id/net_time"
                 android:layout_width="70px"
                 android:layout_height="70px"
-                android:src="@drawable/wifi" />
+                android:textSize="20px"/>
 
             <ImageView
                 android:id="@+id/battery"
                 android:layout_width="70px"
                 android:layout_height="70px"
-                android:layout_marginLeft="50px"
-                android:layout_toRightOf="@+id/net"
+                android:layout_marginLeft="30px"
+                android:layout_toRightOf="@+id/net_time"
                 android:src="@drawable/batty" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="53dp"
                 android:layout_height="37dp"
+                android:textSize="20px"
                 android:layout_toRightOf="@+id/battery" />
 
         </RelativeLayout>

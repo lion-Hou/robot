@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -28,6 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +45,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     TextView time;
     @BindView(R.id.text_text)
     Button textText;
+    @BindView(R.id.net_time)
+    TextView net_Time;
     private GsonUtils gsonUtils;
     private FirstFragment firstFragment;
     private SecoundFragment secoundFragment;
@@ -49,7 +55,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     private NormalDialogUtil disconnectDialog;
-
+    private static final int msgKey = 1;
     private ProgressDialog waitingDialog;
 
 
@@ -75,6 +81,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         waitingDialog = new ProgressDialog(MainActivity.this);
         textText.setOnClickListener(this);
+        new TimeThread().start();
     }
 
     @Override
@@ -152,6 +159,39 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         });
     }
+
+    public class TimeThread extends Thread {
+        @Override
+        public void run() {
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = msgKey;
+                    mHandler.sendMessage(msg);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case msgKey:
+                    long sysTime = System.currentTimeMillis();
+                    CharSequence sysTimeStr = DateFormat
+                            .format("hh:mm", sysTime);
+                    net_Time.setText(sysTimeStr);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 
     private void showWaitingDialog() {
