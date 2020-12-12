@@ -86,9 +86,9 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     private String[] point_name;
     private ItemTouchHelper itemTouchHelper;
     private RecyclerView mRecyclerView;
-    private String[] type;
+    private String[] type = new String[]{"Once", "Pre Day", "Pre Week"};
     private String selectWeek = "";
-    private String typeValue;
+    private String typeValue = "";
     private String typeTime = "FF:FF";
     private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private List<String> myWeek = new ArrayList<>();
@@ -203,7 +203,6 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
              */
             case R.id.task_type_select:
                 Log.d("tasklog", "type");
-                type = new String[]{"Once", "Pre Day", "Pre Week"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setItems(type, new DialogInterface.OnClickListener() {
                     @Override
