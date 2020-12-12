@@ -169,9 +169,9 @@ public class SettingFragment extends Fragment {
                     gsonUtils.setLowBattery(lowBattery);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LOW_BATTERY));//30-80
 
-                    int voiceLevel = settingsElectricityQuantity.getProgress();
+                    int voiceLevel = settingsVolume.getProgress();
                     gsonUtils.setVoiceLevel(voiceLevel);
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_VOICE_LEVEL));//30-80
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_VOICE_LEVEL));//0-15
 
                     int ledLevel = settingsLedBrightness.getSelectedItemPosition();
                     gsonUtils.setLedLevel(ledLevel);

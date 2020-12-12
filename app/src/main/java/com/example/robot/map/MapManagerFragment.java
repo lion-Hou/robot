@@ -290,7 +290,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             if (mBitmapHeight >= mBitmapWidth){
                 mBitmapWidth = mapManageRelativeBorder.getHeight()/mBitmapHeight*mBitmapWidth;
                 mBitmapHeight = mapManageRelativeBorder.getHeight();
-            }else if (mBitmapHeight > mBitmapWidth){
+            }else if (mBitmapHeight < mBitmapWidth){
                 mBitmapHeight = mapManageRelativeBorder.getWidth()/mBitmapWidth*mBitmapHeight;
                 mBitmapWidth = mapManageRelativeBorder.getWidth();
             }
@@ -363,7 +363,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         ImageView imageView = new ImageView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
                         imageViewArrayList.add(imageView);
-                        imageView.setOnClickListener(this);
 
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
