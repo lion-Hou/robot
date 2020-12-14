@@ -26,11 +26,15 @@ public class GsonUtils {
     private List<SaveTaskBean> list;
     private String oldMapName;
     private String newMapName;
+    private String oldPointName;
+    private String newPointName;
     private String taskType;
     private List<String> taskWeek;
     private String taskTime;
     private int ledLevel;
     private int lowBattery;
+    private int voiceLevel;
+    private int speedLevel;
 
     public int getVoiceLevel() {
         return voiceLevel;
@@ -40,8 +44,21 @@ public class GsonUtils {
         this.voiceLevel = voiceLevel;
     }
 
-    private int voiceLevel;
-    private int speedLevel;
+    public String getOldPointName() {
+        return oldPointName;
+    }
+
+    public void setOldPointName(String oldPointName) {
+        this.oldPointName = oldPointName;
+    }
+
+    public String getNewPointName() {
+        return newPointName;
+    }
+
+    public void setNewPointName(String newPointName) {
+        this.newPointName = newPointName;
+    }
 
     public int getLedLevel() {
         return ledLevel;
@@ -146,6 +163,8 @@ public class GsonUtils {
             jsonObject.put(Content.SET_LOW_BATTERY,lowBattery);
             jsonObject.put(Content.SET_SPEED_LEVEL,speedLevel);
             jsonObject.put(Content.SET_VOICE_LEVEL,voiceLevel);
+            jsonObject.put(Content.OLD_POINT_NAME,oldPointName);
+            jsonObject.put(Content.NEW_POINT_NAME,newPointName);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {

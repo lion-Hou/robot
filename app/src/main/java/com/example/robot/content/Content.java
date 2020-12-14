@@ -41,6 +41,10 @@ public final class Content {
     public static final String NEW_MAP_NAME = "new_map_name";//新地图名字
     public static final String TASK_NAME = "task_Name";//任务名字
 
+
+    public static final String OLD_POINT_NAME = "old_point_name";//老地图名字
+    public static final String NEW_POINT_NAME = "new_point_name";//新地图名字
+
     public static final String CHARGING = "request_msg";
     //type id
     public static final String STARTUP = "startUp";//前进
@@ -156,7 +160,7 @@ public final class Content {
     public static final String dbAlarmTaskName = "dbAlarmTaskName";//任务名
     public static final String dbAlarmTime = "dbAlarmTime";//时间
     public static final String dbAlarmCycle = "dbAlarmCycle";//周期
-    public static final String RENAME_POSITION = "RENAME_POSITION";//重命名点
+    public static final String RENAME_POSITION = "rename_position";//重命名点
     public static final String OLD_POSITION_NAME = "old_position_name";//原始点
     public static final String NEW_POSITION_NAME = "new_position_name";//新点
 

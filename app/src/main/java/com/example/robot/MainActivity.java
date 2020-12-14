@@ -134,6 +134,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             time.setText(batter);
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
+            if(message.contains("701")){
+                Toast.makeText(this, "检测到机器人附近存在障碍物", Toast.LENGTH_SHORT).show();
+            }
+
 //            if (!"充电".equals(message) && !"放电".equals(message)) {
 //                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 //            }

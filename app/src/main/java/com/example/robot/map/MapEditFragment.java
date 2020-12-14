@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,25 +19,32 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.bean.DrawLineBean;
+import com.example.robot.bean.Point;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.util.SwipeListLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -47,7 +55,9 @@ import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,7 +65,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MapEditFragment extends Fragment implements View.OnTouchListener, View.OnClickListener {
+public class MapEditFragment extends Fragment{
 
     private static final String TAG = "MapEditFragment";
     @BindView(R.id.add_point_title)
@@ -102,7 +112,9 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
     private List<List<DrawLineBean>> lists = new ArrayList<>();
     private int listSize;
 
-    ArrayList<String> pointArrayList = new ArrayList<String>();
+    private Set<SwipeListLayout> sets = new HashSet();
+    private List<Point> listPoint = new ArrayList<>();
+    private ListAdapter adapter = new ListAdapter();
     private String pointData[];
 
     @Override
@@ -198,7 +210,7 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             if (mBitmapHeight >= mBitmapWidth) {
                 mBitmapWidth = mapRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = mapRelativeBorder.getHeight();
-            } else if (mBitmapHeight < mBitmapWidth) {
+            } else {
                 mBitmapHeight = mapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = mapRelativeBorder.getWidth();
             }
@@ -215,6 +227,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
 
             mapRelative.addView(editMapImage);
 
+
+//            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
         } else if (messageEvent.getState() == 10008) {
             for (int i = 0; i < imageViewArrayList.size(); i++) {
                 mapRelative.removeView(imageViewArrayList.get(i));
@@ -238,7 +252,6 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                         ImageView imageView = new ImageView(mContext);
                         TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
-                        imageView.setOnClickListener(this);
 
                         Log.d("zdzd222", "" + (editMapImage.getWidth() / Content.list.get(index).getGridWidth() * jsonItem.getDouble(Content.POINT_X)
                                 + Content.list.get(index).getOriginX() - (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE)))));
@@ -296,7 +309,11 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
                             textView.setText(pointName);
-                            pointArrayList.add(pointName);
+                            Point point = new Point(pointName);
+                            point.setName(pointName);
+                            Log.d("SourireG", "add point name" + point.getName());
+                            listPoint.add(point);
+
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
                                     0, 0);
@@ -307,8 +324,34 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                             imageViewArrayList.add(imageView);
                         }
                     }
-                    pointData = pointArrayList.toArray(new String[pointArrayList.size()]);
-                    pointAndWallList.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,pointData));
+                    adapter.notifyDataSetChanged();
+                    pointAndWallList.setAdapter(adapter);
+                    pointAndWallList.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+                        @Override
+                        public void onScrollStateChanged(AbsListView view, int scrollState) {
+                            switch (scrollState) {
+                                //当listview开始滑动时，若有item的状态为Open，则Close，然后移除
+                                case SCROLL_STATE_TOUCH_SCROLL:
+                                    if (sets.size() > 0) {
+                                        for (SwipeListLayout s : sets) {
+                                            s.setStatus(SwipeListLayout.Status.Close, true);
+                                            sets.remove(s);
+                                        }
+                                    }
+                                    break;
+                            }
+                        }
+
+                        @Override
+                        public void onScroll(AbsListView view, int firstVisibleItem,
+                                             int visibleItemCount, int totalItemCount) {
+
+                        }
+                    });
+//                    pointData = pointArrayList.toArray(new String[pointArrayList.size()]);
+//                    pointAndWallList.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,pointData));
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -366,12 +409,8 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             }
             Log.i("Henly","update VirtualWall" + index);
             String message = (String) messageEvent.getT();
-            double mapWidth = (double) editMapImage.getWidth();
-            double mapHeight = (double) editMapImage.getHeight();
             double gridHeight = Content.list.get(index).getGridHeight();
             double gridWidth = Content.list.get(index).getGridWidth();
-            double originX = Content.list.get(index).getOriginX();
-            double originY = Content.list.get(index).getOriginY();
             try {
                 JSONObject jsonObject = new JSONObject(message);
                 JSONArray jsonArray = jsonObject.getJSONArray(Content.SEND_VIRTUAL);
@@ -456,72 +495,12 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
             case R.id.save_charging_btn:
                 Log.d("YYYYY", "save_charging_point"+charging);
                 if (charging.equals("充电")) {
-                    Log.d("YYYYY", "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "+charging);
+                    Log.d("YYYYY", "yyy"+charging);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
                 } else {
                     Toast.makeText(mContext, "请确认机器人是否连接上充电点", Toast.LENGTH_SHORT).show();
                 }
                 break;
-        }
-    }
-
-    @SuppressLint("ResourceAsColor")
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        List<DrawLineBean> drawLineBeanList = new ArrayList<>();
-
-        double mapWidth = (double) editMapImage.getWidth();
-        double mapHeight = (double) editMapImage.getHeight();
-        double gridHeight = Content.list.get(index).getGridHeight();
-        double gridWidth = Content.list.get(index).getGridWidth();
-        double originX = Content.list.get(index).getOriginX();
-        double originY = Content.list.get(index).getOriginY();
-
-        float startX = 0;
-        float startY = 0;
-
-        if (MotionEvent.ACTION_DOWN == event.getAction()) {
-            DrawLineBean drawLineBean = new DrawLineBean();
-            startX = event.getX();
-            startY = event.getY();
-//            robot_Img.setPaddingRelative((int) (mapHeight - (mapHeight / gridHeight * (pointY - originY) - (Content.ROBOT_SIZE / resolution * angleY))),
-//                    (int) (mapWidth / gridWidth * (pointX - originX - (Content.ROBOT_SIZE / resolution * angleX))),
-//                    0, 0);
-            drawLineBean.setX((mapWidth / (startX * gridWidth)) + originX);
-            drawLineBean.setY(mapHeight / (gridHeight * (mapHeight - startY)) + originY);
-            drawLineBeanList.add(drawLineBean);
-        }
-
-        if (MotionEvent.ACTION_MOVE == event.getAction()) {
-            float moveX = event.getX();
-            float moveY = event.getY();
-            //划线    先清掉之前的线，重新画 连接start点和 move点
-            //划线：点连线 连接start和end
-            Canvas canvas = new Canvas();
-            Paint paint = new Paint();
-            paint.setColor(R.color.colorPrimaryDark);
-            canvas.drawLine(startX, startY, moveX, moveY, paint);
-            mapRelative.draw(canvas);
-
-        }
-        if (MotionEvent.ACTION_UP == event.getAction()) {
-            DrawLineBean drawLineBean = new DrawLineBean();
-            float endX = event.getX();
-            float endY = event.getY();
-            drawLineBean.setY(mapHeight / (gridHeight * (mapHeight - endY)) + originY);
-            drawLineBean.setX((mapWidth / (endX * gridWidth)) + originX);
-            drawLineBeanList.add(drawLineBean);
-            lists.add(drawLineBeanList);
-        }
-        return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        for (int i = 0; i < imageViewArrayList.size(); i++) {
-            if (view == imageViewArrayList.get(i)) {
-                Toast.makeText(mContext, i + "", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
@@ -702,5 +681,127 @@ public class MapEditFragment extends Fragment implements View.OnTouchListener, V
                 canvas.drawLine(point[0], point[1], point[2], point[3], paint);//画保存的线
             }
         }
+    }
+
+    class MyOnSlipStatusListener implements SwipeListLayout.OnSwipeStatusListener {
+
+        private SwipeListLayout slipListLayout;
+
+        public MyOnSlipStatusListener(SwipeListLayout slipListLayout) {
+            this.slipListLayout = slipListLayout;
+        }
+
+        @Override
+        public void onStatusChanged(SwipeListLayout.Status status) {
+            if (status == SwipeListLayout.Status.Open) {
+                //若有其他的item的状态为Open，则Close，然后移除
+                if (sets.size() > 0) {
+                    for (SwipeListLayout s : sets) {
+                        s.setStatus(SwipeListLayout.Status.Close, true);
+                        sets.remove(s);
+                    }
+                }
+                sets.add(slipListLayout);
+            } else {
+                if (sets.contains(slipListLayout))
+                    sets.remove(slipListLayout);
+            }
+        }
+
+        @Override
+        public void onStartCloseAnimation() {
+
+        }
+
+        @Override
+        public void onStartOpenAnimation() {
+
+        }
+
+    }
+
+    class ListAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return listPoint.size();
+        }
+
+        @Override
+        public Object getItem(int arg0) {
+            return listPoint.get(arg0);
+        }
+
+        @Override
+        public long getItemId(int arg0) {
+            return arg0;
+        }
+
+        @Override
+        public View getView(final int arg0, View view, ViewGroup arg2) {
+            Point pointName = (Point) getItem(arg0);
+            if (view == null) {
+                view = LayoutInflater.from(getContext()).inflate(
+                        R.layout.slip_item_item, null);
+            }
+            TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
+            tv_name.setText(pointName.getName());
+            Log.i("SourireG","GETNAME()"+pointName.getName());
+            final SwipeListLayout sll_main = (SwipeListLayout) view
+                    .findViewById(R.id.sll_main);
+            TextView tv_rename = (TextView) view.findViewById(R.id.tv_top);
+            TextView tv_delete = (TextView) view.findViewById(R.id.tv_delete);
+            sll_main.setOnSwipeStatusListener(new MyOnSlipStatusListener(
+                    sll_main));
+            tv_rename.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    sll_main.setStatus(SwipeListLayout.Status.Close, true);
+                    final EditText input_name = new EditText(getContext());
+                    new AlertDialog.Builder(getContext())
+                            .setView(input_name)
+                            .setMessage("请输入新的地点名")
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String newPointName = input_name.getText().toString();
+                                    System.out.println("pointName1111" + input_name);
+                                    if (!newPointName.equals(null)&&!newPointName.equals("")&&!newPointName.isEmpty()){
+                                        gsonUtils.setOldPointName(pointName.getName());
+                                        gsonUtils.setNewPointName(newPointName);
+
+                                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_POSITION));
+                                        tv_name.setText(newPointName);
+                                    }else {
+                                        Toast.makeText(mContext, "请输入新的地图名"+newPointName, Toast.LENGTH_SHORT).show();
+                                    }
+                                    gsonUtils.setMapName(Content.map_Name);
+                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
+                }
+            });
+            tv_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sll_main.setStatus(SwipeListLayout.Status.Close, true);
+                    gsonUtils.setMapName(Content.map_Name);
+                    gsonUtils.setPositionName(pointName.getName());
+                    Log.i("SourireG","delete"+pointName.getName());
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_POSITION));
+                    listPoint.remove(arg0);
+                    notifyDataSetChanged();
+                }
+            });
+            return view;
+        }
+
     }
 }
