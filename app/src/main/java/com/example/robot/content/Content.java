@@ -103,6 +103,7 @@ public final class Content {
 
     public static final String POINT_NAME = "point_Name";//点的名字
     public static final String POINT_TYPE = "point_type";//点类型
+    public static final String POINT_STATE ="point_state";
     public static final String START_SCAN_MAP = "start_scan_map";//开始扫描地图
     public static final String CANCEL_SCAN_MAP = "cancel_scan_map";//取消扫描地图并且保存
     public static final String CANCEL_SCAN_MAP_NO = "cancel_scan_map_no";//取消扫描地图bu保存

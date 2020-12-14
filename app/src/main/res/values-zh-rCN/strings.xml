@@ -49,6 +49,8 @@
     <string name="task_delete">删除</string>
     <string name="task_back">返回</string>
     <string name="task_add">新建任务</string>
+    <string name="task_details">详情</string>
+    <string name="task_time">时间</string>
     <string name="run_map">地图名</string>
     <string name="run_task">任务名</string>
     <string name="run_stop">停止</string>
