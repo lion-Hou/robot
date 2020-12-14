@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EmptyClient extends WebSocketClient {
 
@@ -154,10 +156,18 @@ public class EmptyClient extends WebSocketClient {
                     pointName[i] = jsonObject.getString(Content.POINT_NAME);
                 }
                 System.out.println("point_name" + pointName[0]);
-                EventBus.getDefault().post(new EventBusMessage(10007, pointName));
+                List<String> list = Arrays.asList(pointName);
+                List<String> arrayList = new ArrayList<String>(list);
+                Log.d("arrayList.size", arrayList.toString());
+                arrayList.remove("Origin");
+                arrayList.remove("End");
+                arrayList.remove("Current");
+                arrayList.remove("charging");
+                Log.d("arrayList.size", arrayList.toString());
+                String [] stockArr = arrayList.toArray(new String[arrayList.size()]);
+                EventBus.getDefault().post(new EventBusMessage(10007, stockArr));
                 EventBus.getDefault().post(new EventBusMessage(10008, message));
                 break;
-
             case Content.SENDGPSPOSITION:
                 EventBus.getDefault().post(new EventBusMessage(10009, message));
                 break;

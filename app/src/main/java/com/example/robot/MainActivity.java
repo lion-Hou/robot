@@ -1,16 +1,20 @@
 package com.example.robot;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.robot.content.EventBusMessage;
@@ -27,17 +31,22 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
     public static String TAG = "MainActivity";
     public static EmptyClient emptyClient;
     @BindView(R.id.time)
     TextView time;
+    @BindView(R.id.text_text)
+    Button textText;
+    @BindView(R.id.net_time)
+    TextView net_Time;
     private GsonUtils gsonUtils;
     private FirstFragment firstFragment;
     private SecoundFragment secoundFragment;
@@ -46,9 +55,8 @@ public class MainActivity extends FragmentActivity {
 
 
     private NormalDialogUtil disconnectDialog;
-
+    private static final int msgKey = 1;
     private ProgressDialog waitingDialog;
-
 
 
     @Override
@@ -69,9 +77,11 @@ public class MainActivity extends FragmentActivity {
         mapManagerFragment = new MapManagerFragment();
 
         mainFragment = new MainFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,mainFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, mainFragment).commit();
 
         waitingDialog = new ProgressDialog(MainActivity.this);
+        textText.setOnClickListener(this);
+        new TimeThread().start();
     }
 
     @Override
@@ -136,8 +146,8 @@ public class MainActivity extends FragmentActivity {
 
 
     //Dialog
-    private void showDisconnectDialog(){
-        disconnectDialog.showDialog(this, "网络错误","网络连接错误，请确认当前网络状态","退出","重新连接" , new DialogInterface.OnClickListener() {
+    private void showDisconnectDialog() {
+        disconnectDialog.showDialog(this, "网络错误", "网络连接错误，请确认当前网络状态", "退出", "重新连接", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //取消
@@ -153,6 +163,39 @@ public class MainActivity extends FragmentActivity {
             }
         });
     }
+
+    public class TimeThread extends Thread {
+        @Override
+        public void run() {
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = msgKey;
+                    mHandler.sendMessage(msg);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case msgKey:
+                    long sysTime = System.currentTimeMillis();
+                    CharSequence sysTimeStr = DateFormat
+                            .format("hh:mm", sysTime);
+                    net_Time.setText(sysTimeStr);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 
     private void showWaitingDialog() {
@@ -176,11 +219,20 @@ public class MainActivity extends FragmentActivity {
 
             Window window = getWindow();
             WindowManager.LayoutParams params = window.getAttributes();
-            params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
+            params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE;
             window.setAttributes(params);
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.text_text:
+                Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }
 
 
