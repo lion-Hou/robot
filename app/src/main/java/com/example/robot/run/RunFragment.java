@@ -12,6 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.robot.MainActivity;
 import com.example.robot.R;
@@ -25,7 +28,11 @@ import com.example.robot.map.FirstFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,14 +55,14 @@ public class RunFragment extends Fragment {
     @BindView(R.id.task_run_edit)
     Button taskRunEdit;
     @BindView(R.id.count_list)
-    ListView countList;
+    RecyclerView recyclerView;
     @BindView(R.id.point_state_time)
     TextView pointStateTime;
     private View view;
     private GsonUtils gsonUtils;
-    private List<TaskStateList> mData = null;
     private TaskStateListAdapter mAdapter = null;
     private Context mContext;
+    private List<TaskStateList> listPointName = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,17 +93,16 @@ public class RunFragment extends Fragment {
         gsonUtils = new GsonUtils();
         initView();
         return view;
-
     }
 
     private void initView() {
         runMapName.setText(Content.first_map_Name);
         runTaskName.setText(Content.task_Name);
-
-        mData = new LinkedList<TaskStateList>();
-        mData.add(new TaskStateList("hhh", "hhh", R.drawable.ok));
-        mAdapter = new TaskStateListAdapter((LinkedList<TaskStateList>) mData, mContext);
-        countList.setAdapter(mAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        mAdapter = new TaskStateListAdapter(mContext, R.layout.item_list_task);
+        recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
     }
 
     @OnClick(R.id.task_run_edit)
@@ -116,18 +122,31 @@ public class RunFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
-        Log.d("run", "onEventMsgEditeTask ： " + messageEvent.getState());
+        Log.d("run", "onEventMsgrun ： " + messageEvent.getState());
         if (messageEvent.getState() == 10002) {
             String time = (String) messageEvent.getT();
-            Log.d("timehhhh",time);
+            Log.d("timehhhh", time);
             pointStateTime.setText(time);
-        }else if (messageEvent.getState() == 50005){
-            List<String> list = (List<String>) messageEvent.getT();
-            String[] strList = new String[list.size()];
-            for (int i = 0; i < strList.length; i++){
-
+        }
+        if (messageEvent.getState() == 60001) {
+            Log.d("run fragment : " , (String) messageEvent.getT());
+            listPointName.clear();
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject((String) messageEvent.getT());
+                JSONArray stateList = jsonObject.getJSONArray(Content.ROBOT_TASK_STATE);
+                for (int i = 0; i < stateList.length(); i++) {
+                    JSONObject js = stateList.getJSONObject(i);
+                    TaskStateList taskStateList = new TaskStateList(js.getString(Content.POINT_NAME),
+                            js.getString(Content.POINT_STATE));
+                    listPointName.add(taskStateList);
+                }
+                mAdapter.refeshList(listPointName);
+                recyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
         }
     }
 }

@@ -4,51 +4,61 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.robot.R;
+import com.example.robot.bean.HistoryBean;
 import com.example.robot.bean.TaskStateList;
 
-import java.util.LinkedList;
+import java.util.List;
 
-public class TaskStateListAdapter extends BaseAdapter {
+public class TaskStateListAdapter extends RecyclerView.Adapter<RecycleHolder> {
 
-    private LinkedList<TaskStateList> mData;
     private Context mContext;
+    private List<TaskStateList> mDatas;
+    private int mLayoutId;
+    private LayoutInflater mInflater;
 
-    public TaskStateListAdapter(LinkedList<TaskStateList> mData,Context mContext ){
-        this.mData = mData;
+    private OnItemClickListener onItemClickListener;
+
+
+    public TaskStateListAdapter(Context mContext, int mLayoutId) {
         this.mContext = mContext;
+        this.mLayoutId = mLayoutId;
+        mInflater = LayoutInflater.from(mContext);
+    }
+
+    public void refeshList(List<TaskStateList> mDatas) {
+        this.mDatas = mDatas;
     }
 
     @Override
-    public int getCount() {
-        return mData.size();
+    public RecycleHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RecycleHolder(mInflater.inflate(mLayoutId, parent, false));
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public void onBindViewHolder(final RecycleHolder holder, int position) {
+        convert(holder, mDatas.get(position), position);
+    }
+
+    public void convert(RecycleHolder holder, TaskStateList taskStateList, int position) {
+        holder.setText(R.id.state_name, taskStateList.getPointName());
+        holder.setText(R.id.state_state, taskStateList.getTaskState());
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public int getItemCount() {
+        return mDatas.size();
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_task,parent,false);
-        ImageView img_icon = convertView.findViewById(R.id.state_img);
-        TextView state_name = convertView.findViewById(R.id.state_name);
-        TextView state_state = convertView.findViewById(R.id.state_state);
-        img_icon.setBackgroundResource(mData.get(position).getaIcon());
-        state_name.setText(mData.get(position).getPointName());
-        state_state.setText(mData.get(position).getTaskState());
-        return convertView;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
-
+    public interface OnItemClickListener {
+        void OnItemClickListener(View view, int position);
+        void OnItemLongClickListener(View view, int position);
+    }
 }

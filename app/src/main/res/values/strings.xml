@@ -48,6 +48,8 @@
     <string name="task_delete">DELETE</string>
     <string name="task_back">BACK</string>
     <string name="task_add">Add New</string>
+    <string name="task_details">DETAILS</string>
+    <string name="task_time">Time</string>
     <string name="run_map">Map Name:</string>
     <string name="run_task">Task Name:</string>
     <string name="run_stop">STOP</string>

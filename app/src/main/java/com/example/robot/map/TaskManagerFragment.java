@@ -10,21 +10,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.example.robot.EmptyClient;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
@@ -72,6 +70,8 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     Button taskDelete;
     @BindView(R.id.task_manage_back)
     Button taskBack;
+    @BindView(R.id.task_manage_details)
+    Button taskManageDetails;
 
     private Context mContext;
     public static EmptyClient emptyClient;
@@ -101,14 +101,14 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        Log.d("hhhh",  "manger_start");
+        Log.d("hhhh", "manger_start");
     }
 
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-        Log.d("hhhh",  "manger_stop");
+        Log.d("hhhh", "manger_stop");
     }
 
     @Override
@@ -131,6 +131,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         taskDelete.setOnClickListener(this);
         taskBack.setOnClickListener(this);
         taskEdit.setOnClickListener(this);
+        taskManageDetails.setOnClickListener(this);
 
     }
 
@@ -154,10 +155,10 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.task_manage_delete:
                 a = (String) taskName.getText();
-                if(a.equals(select_cn)  || a.equals(select_en)){
-                    Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
+                if (a.equals(select_cn) || a.equals(select_en)) {
+                    Toast toast = Toast.makeText(mContext, "请选择任务名", Toast.LENGTH_SHORT);
                     toast.show();
-                }else {
+                } else {
                     AlertDialog.Builder delete = new AlertDialog.Builder(mContext);
                     delete.setMessage("是否删除当前任务");
                     //设置正面按钮
@@ -192,10 +193,10 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.task_manage_edit:
                 a = (String) taskName.getText();
-                if(a.equals(select_cn)  || a.equals(select_en)){
-                    Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
+                if (a.equals(select_cn) || a.equals(select_en)) {
+                    Toast toast = Toast.makeText(mContext, "请选择任务名", Toast.LENGTH_SHORT);
                     toast.show();
-                }else {
+                } else {
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.first_fragment, new TaskEditFragment(), null)
@@ -203,13 +204,29 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             .commit();
                 }
                 break;
+            case R.id.task_manage_details:
+
+                break;
             default:
                 break;
         }
 
     }
 
-    public void requestTaskList(String[] taskNameList){
+    /**
+     * 任务详情PopWindow
+     * @param v
+     */
+    private void initPopWindow(View v) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.details_popup, null, false);
+        final PopupWindow popWindow = new PopupWindow(view,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
+        popWindow.setTouchable(true);
+        popWindow.showAsDropDown(v, 50, 0);
+    }
+
+    public void requestTaskList(String[] taskNameList) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         System.out.println("which" + taskNameList.length);
         builder.setItems(taskNameList, new DialogInterface.OnClickListener() {
@@ -226,7 +243,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
 
     @SuppressLint({"ResourceAsColor", "NewApi"})
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMsg(EventBusMessage messageEvent){
+    public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
         if (messageEvent.getState() == 10001) {
             Log.d(TAG, "图片 ： " + messageEvent.getT());
@@ -239,17 +256,17 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
-            if (mBitmapHeight >= mBitmapWidth){
-                mBitmapWidth = taskManageMapRelativeBorder.getHeight()/mBitmapHeight*mBitmapWidth;
+            if (mBitmapHeight >= mBitmapWidth) {
+                mBitmapWidth = taskManageMapRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = taskManageMapRelativeBorder.getHeight();
-            }else if (mBitmapHeight < mBitmapWidth){
-                mBitmapHeight = taskManageMapRelativeBorder.getWidth()/mBitmapWidth*mBitmapHeight;
+            } else if (mBitmapHeight < mBitmapWidth) {
+                mBitmapHeight = taskManageMapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = taskManageMapRelativeBorder.getWidth();
             }
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             taskManageMapImage.setImageBitmap(mBitmap);
-            taskManageMapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
-            RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+            taskManageMapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
             taskManageMapImage.setLayoutParams(layoutParams);
 
             ViewGroup parent = (ViewGroup) taskManageMapImage.getParent();
@@ -260,7 +277,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             taskManageMapRelative.addView(taskManageMapImage);
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         } else if (messageEvent.getState() == 10008) {
-            for (int i = 0; i <imageViewArrayList.size(); i++) {
+            for (int i = 0; i < imageViewArrayList.size(); i++) {
                 taskManageMapRelative.removeView(imageViewArrayList.get(i));
             }
             String message = (String) messageEvent.getT();
@@ -295,8 +312,8 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         double angleY = Math.sin(jsonItem.getDouble(Content.ANGLE));
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
-                        Log.d("zdzd9998", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
-                        Log.d("zdzd9998", " resolution * angleX"+  resolution*angleX);
+                        Log.d("zdzd9998", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "       originX" + originX + "       Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
+                        Log.d("zdzd9998", " resolution * angleX" + resolution * angleX);
 
                         if (pointType == 1) {
                             ImageView charging_Img = new ImageView(mContext);
@@ -352,11 +369,11 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                     endX = (float) ((mBitmapWidth / gridWidth) * lineBeans.get(k + 1).getX());
                     endY = (float) (mBitmapHeight - (mBitmapHeight / gridHeight) * lineBeans.get(k + 1).getY());
 
-                    float[] point = {startX,startY,endX,endY};
-                    Log.i("Henly","mapManager,update VirtualWall,k = " + k);
+                    float[] point = {startX, startY, endX, endY};
+                    Log.i("Henly", "mapManager,update VirtualWall,k = " + k);
                     pointlist.add(point);
 
-                    k = k +2 ;
+                    k = k + 2;
                 }
 
                 if (pointlist.size() != 0) {
@@ -367,51 +384,51 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }else if(messageEvent.getState() == 10017){
+        } else if (messageEvent.getState() == 10017) {
             taskNameList = (String[]) messageEvent.getT();
-            Log.d("task_name",taskNameList[0]);
+            Log.d("task_name", taskNameList[0]);
             requestTaskList(taskNameList);
-        }else if(messageEvent.getState() == 10018){
+        } else if (messageEvent.getState() == 10018) {
             int state = (int) messageEvent.getT();
-            if(state == 0){
-                Toast toast = Toast.makeText(mContext,"请新建任务",Toast.LENGTH_SHORT);
+            if (state == 0) {
+                Toast toast = Toast.makeText(mContext, "请新建任务", Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
     }
-	
-    void updateVirtualWall(ArrayList<float[]> pointlist){
-        Log.i("Henly","mapmanager-updateVirtualWall");
-        RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+
+    void updateVirtualWall(ArrayList<float[]> pointlist) {
+        Log.i("Henly", "mapmanager-updateVirtualWall");
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         // layoutParams.height = editMapImage.getHeight();
         // layoutParams.width = editMapImage.getWidth();
         //  layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         //   layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        TaskManagerFragment.DrawlineFromVW bDrawlVW = new TaskManagerFragment.DrawlineFromVW(mContext,pointlist);
+        DrawlineFromVW bDrawlVW = new DrawlineFromVW(mContext, pointlist);
         bDrawlVW.setLayoutParams(layoutParams);
         taskManageMapRelative.addView(bDrawlVW);
     }
 
-    class DrawlineFromVW extends View{
-        private float start_x,start_y;//声明起点坐标
-        private float mov_x,mov_y;//滑动轨迹坐标
+    class DrawlineFromVW extends View {
+        private float start_x, start_y;//声明起点坐标
+        private float mov_x, mov_y;//滑动轨迹坐标
         private Paint paint;//声明画笔
         private Canvas canvas;//画布
         private Bitmap bitmap;//位图
-        private float view_X,view_Y;
+        private float view_X, view_Y;
 
         private double scale_x = 1;
         private double scale_y = 1;
 
         private ArrayList<float[]> Pointlist = new ArrayList<>();//保存所画线的坐标
 
-        public DrawlineFromVW(Context context,ArrayList<float[]>pointlist) {
+        public DrawlineFromVW(Context context, ArrayList<float[]> pointlist) {
             super(context);
             paint = new Paint(Paint.DITHER_FLAG);//创建一个画笔
 
-            bitmap = Bitmap.createBitmap( (int)mBitmapWidth, (int)mBitmapHeight, mBitmap ==null?Bitmap.Config.ARGB_8888:mBitmap.getConfig());
+            bitmap = Bitmap.createBitmap((int) mBitmapWidth, (int) mBitmapHeight, mBitmap == null ? Bitmap.Config.ARGB_8888 : mBitmap.getConfig());
             bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-            canvas=new Canvas();
+            canvas = new Canvas();
             canvas.setBitmap(bitmap);
 
             paint.setStyle(Paint.Style.STROKE);//设置非填充
@@ -422,18 +439,18 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             Pointlist = pointlist;
             invalidate();
 
-            Log.i(TAG,"DrawlineFromVW");
+            Log.i(TAG, "DrawlineFromVW");
         }
 
         //画位图
         @Override
         protected void onDraw(Canvas canvas) {
             //super.onDraw(canvas);
-            canvas.drawBitmap(bitmap,0,0,null);
-            Log.i("Henly","mapmanager-updateVW,onDraw,mBitmapWidth = " + mBitmapWidth + ",mBitmapHeight = " + mBitmapHeight );
-            for(int i = 0;i < Pointlist.size();i++){
+            canvas.drawBitmap(bitmap, 0, 0, null);
+            Log.i("Henly", "mapmanager-updateVW,onDraw,mBitmapWidth = " + mBitmapWidth + ",mBitmapHeight = " + mBitmapHeight);
+            for (int i = 0; i < Pointlist.size(); i++) {
                 float[] point = Pointlist.get(i);
-                Log.i("Henly","mapmanager-updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
+                Log.i("Henly", "mapmanager-updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
                 canvas.drawLine(point[0], point[1], point[2], point[3], paint);//画保存的线
             }
         }

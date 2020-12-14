@@ -216,8 +216,8 @@ public class EmptyClient extends WebSocketClient {
                 break;
 
             case Content.ROBOT_TASK_STATE:
-                EventBus.getDefault().post(new EventBusMessage(50001));
-                Log.d("task_state",message );
+                Log.d("HOUHOUHOU1",message );
+                EventBus.getDefault().post(new EventBusMessage(60001, message));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));
