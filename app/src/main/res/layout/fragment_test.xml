@@ -34,11 +34,100 @@
             android:layout_height="250dp"
             android:layout_below="@+id/test_self_inspection">
             <TextView
+                android:id="@+id/center_view"
                 android:layout_width="100dp"
-                android:layout_height="100dp">
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:text="UltraSonic"
+                android:gravity="center">
             </TextView>
 
+            <TextView
+                android:id="@+id/ultraSonic1"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_above="@+id/center_view"
+                android:layout_alignLeft="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic1"
+                android:gravity="center"
+                ></TextView>
 
+            <TextView
+                android:id="@+id/ultraSonic2"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_toLeftOf="@+id/center_view"
+                android:layout_alignTop="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic2"
+                android:gravity="center"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/ultraSonic3"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_toLeftOf="@+id/center_view"
+                android:layout_alignBottom="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic3"
+                android:gravity="center"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/ultraSonic4"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/center_view"
+                android:layout_alignLeft="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic4"
+                android:gravity="center"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/ultraSonic5"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/center_view"
+                android:layout_alignRight="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic5"
+                android:gravity="center"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/ultraSonic6"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_toRightOf="@+id/center_view"
+                android:layout_alignBottom="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic6"
+                android:gravity="center"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/ultraSonic7"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_toRightOf="@+id/center_view"
+                android:layout_alignTop="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic7"
+                android:gravity="center"
+                ></TextView>
+            <TextView
+                android:id="@+id/ultraSonic8"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_above="@+id/center_view"
+                android:layout_alignRight="@+id/center_view"
+                android:textSize="10dp"
+                android:text="UltraSonic8"
+                android:gravity="center"
+                ></TextView>
 
         </RelativeLayout>
 
@@ -47,9 +136,14 @@
 
     <RelativeLayout
         android:id="@+id/test_relative2"
-        android:layout_width="250px"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/test_relative1">
+        
+        <RelativeLayout
+            android:id="@+id/test_relative3"
+            android:layout_width="180dp"
+            android:layout_height="match_parent">
         <TextView
             android:id="@+id/test_voice_and_led_title"
             android:layout_width="match_parent"
@@ -61,124 +155,62 @@
         <Switch
             android:id="@+id/switch_voice"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:text="Voice"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_below="@+id/test_voice_and_led_title"/>
 
         <Switch
             android:id="@+id/switch_led"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="60dp"
             android:text="Led"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_below="@+id/switch_voice"/>
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/test_relative3"
-        android:layout_width="250px"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/test_relative2">
-        <TextView
-            android:id="@+id/test_uvc_title"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:textSize="25dp"
-            android:gravity="center"
-            android:text="@string/test_uvc"/>
 
         <Switch
             android:id="@+id/switch_uvc_all"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:text="UVC ALL"
-            android:textSize="30dp"
-            android:layout_below="@+id/test_uvc_title"/>
+            android:textSize="20dp"
+            android:layout_below="@+id/switch_led"/>
 
         <Switch
             android:id="@+id/switch_uvc1"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:text="UVC A"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_below="@+id/switch_uvc_all"/>
 
         <Switch
             android:id="@+id/switch_uvc2"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:text="UVC B"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_below="@+id/switch_uvc1"/>
 
         <Switch
             android:id="@+id/switch_uvc3"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:text="UVC C"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_below="@+id/switch_uvc2"/>
 
         <Switch
             android:id="@+id/switch_uvc4"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:text="UVC D"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_below="@+id/switch_uvc3"/>
+        </RelativeLayout>
+
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/test_relative4"
-        android:layout_width="250px"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/test_relative3">
-
-        <TextView
-            android:id="@+id/test_pir_title"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:textSize="25dp"
-            android:gravity="center"
-            android:text="@string/test_pir"/>
-
-        <Switch
-            android:id="@+id/switch_pir1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="UVC A"
-            android:textSize="30dp"
-            android:layout_below="@+id/test_pir_title"/>
-
-        <Switch
-            android:id="@+id/switch_pir2"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="UVC B"
-            android:textSize="30dp"
-            android:layout_below="@+id/switch_pir1"/>
-
-        <Switch
-            android:id="@+id/switch_pir3"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="UVC C"
-            android:textSize="30dp"
-            android:layout_below="@+id/switch_pir2"/>
-
-        <Switch
-            android:id="@+id/switch_pir4"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="UVC D"
-            android:textSize="30dp"
-            android:layout_below="@+id/switch_pir3"/>
-    </RelativeLayout>
-
 
 
 
