@@ -295,7 +295,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 mBitmapWidth = mapManageRelativeBorder.getWidth();
             }
 
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+
             managerMapImage.setImageBitmap(mBitmap);
             mapManageRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -307,6 +307,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             }
 
             mapManageRelative.addView(managerMapImage);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         }else if (messageEvent.getState() == 10005) {
             int ori_size = Content.list.size();
@@ -361,13 +362,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         JSONObject jsonItem = jsonArray.getJSONObject(i);
                         Log.d("zdzd111 ", "pointName : " + jsonItem.toString());
                         ImageView imageView = new ImageView(mContext);
+                        TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
                         imageViewArrayList.add(imageView);
                         imageView.setOnClickListener(this);
 
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
-
+                        String pointName = jsonItem.getString(Content.POINT_NAME);
                         double pointX = jsonItem.getDouble(Content.POINT_X);
                         int pointType = jsonItem.getInt(Content.POINT_TYPE);
                         double pointY = jsonItem.getDouble(Content.POINT_Y);
@@ -393,9 +395,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
+                            textView.setText(pointName);
+                            textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 1),
+                                    0, 0);
                             Log.d("zdzd9998", "angleX" + angleX);
                             Log.d("zdzd9998", " resolution" + resolution);
                             mapManageRelative.addView(imageView);
+                            mapManageRelative.addView(textView);
                             imageViewArrayList.add(imageView);
                         }
                     }

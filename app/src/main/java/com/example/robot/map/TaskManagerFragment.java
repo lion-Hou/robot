@@ -246,7 +246,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 mBitmapHeight = taskManageMapRelativeBorder.getWidth()/mBitmapWidth*mBitmapHeight;
                 mBitmapWidth = taskManageMapRelativeBorder.getWidth();
             }
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+
             taskManageMapImage.setImageBitmap(mBitmap);
             taskManageMapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -258,6 +258,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             }
 
             taskManageMapRelative.addView(taskManageMapImage);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         } else if (messageEvent.getState() == 10008) {
             for (int i = 0; i <imageViewArrayList.size(); i++) {
@@ -270,7 +271,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                     JSONArray jsonArray = jsonObject.getJSONArray(Content.SENDPOINTPOSITION);
                     Log.d("zdzd000 ", "pointName : " + jsonArray.toString());
                     for (int k = 0; k < Content.list.size(); k++) {
-                        if (Content.list.get(k).getMap_Name().equals(Content.map_Name)) {
+                        if (Content.list.get(k).getMap_Name().equals(Content.first_map_Name)) {
                             Log.d("zdzd555", "" + Content.list.get(k).getResolution());
                             index = k;
                         }
@@ -280,6 +281,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         JSONObject jsonItem = jsonArray.getJSONObject(i);
                         Log.d("zdzd111 ", "pointName : " + jsonItem.toString());
                         ImageView imageView = new ImageView(mContext);
+                        TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
                         imageViewArrayList.add(imageView);
                         imageView.setOnClickListener(this);
@@ -287,6 +289,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         double gridWidth = Content.list.get(index).getGridWidth();
 
                         double pointX = jsonItem.getDouble(Content.POINT_X);
+                        String pointName = jsonItem.getString(Content.POINT_NAME);
                         int pointType = jsonItem.getInt(Content.POINT_TYPE);
                         double pointY = jsonItem.getDouble(Content.POINT_Y);
                         double originX = Content.list.get(index).getOriginX();
@@ -311,9 +314,14 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
+                            textView.setText(pointName);
+                            textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
+                                    0, 0);
                             Log.d("zdzd9998", "angleX" + angleX);
                             Log.d("zdzd9998", " resolution" + resolution);
                             taskManageMapRelative.addView(imageView);
+                            taskManageMapRelative.addView(textView);
                             imageViewArrayList.add(imageView);
                         }
                     }

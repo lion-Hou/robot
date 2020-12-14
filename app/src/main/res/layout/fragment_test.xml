@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:id="@+id/test_relative1"
-        android:layout_width="250px"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
         >
@@ -20,14 +20,27 @@
             android:textSize="25dp"
             android:gravity="center"
             android:text="@string/test_self_inspection"/>
-
         <TextView
             android:id="@+id/test_self_inspection"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="25dp"
+            android:layout_height="300dp"
+            android:textSize="15dp"
             android:gravity="center"
             android:layout_below="@+id/test_self_inspection_title"/>
+
+        <RelativeLayout
+            android:id="@+id/ultraSonic"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_below="@+id/test_self_inspection">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp">
+            </TextView>
+
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
