@@ -25,6 +25,7 @@ public final class Content {
     public static int robotState = 0;
     public static int time = 0;//灯带时间间隔
     public static List<RobotMapBean> list;//地图所有点数据
+    public static List<RobotHealthyBean> robotHealthyBeanList;
     /**
      * 0：任务结束
      * 1：执行任务，恢复任务
@@ -131,12 +132,10 @@ public final class Content {
 
     public static final String TEST_UVCSTART = "test_uvcstart";
     public static final String TEST_UVCSTOP = "test_uvcstop";
-    public static final String TEST_SENSOR = "test_sensor";
     public static final String TEST_SENSOR_CALLBACK = "test_sensor_callback";
     public static final String TEST_WARINGSTART = "test_waringstart";
     public static final String TEST_WARINGSTOP = "test_waringstop";
-    public static final String TEST_LIGHTSTART = "test_lightstart";
-    public static final String TEST_LIGHTSTOP = "test_lightstop";
+
 
     public static final String ROBOT_HEALTHY = "robot_healthy";//机器人健康
     public static final String ROBOT_TASK_STATE = "robot_task_state";//机器人任务状态
@@ -160,9 +159,32 @@ public final class Content {
     public static final String dbAlarmTaskName = "dbAlarmTaskName";//任务名
     public static final String dbAlarmTime = "dbAlarmTime";//时间
     public static final String dbAlarmCycle = "dbAlarmCycle";//周期
-    public static final String RENAME_POSITION = "rename_position";//重命名点
+    public static final String RENAME_POSITION = "rename_position";
+    public static final String RESET_ROBOT = "reset_robot";//重命名点
     public static final String OLD_POSITION_NAME = "old_position_name";//原始点
     public static final String NEW_POSITION_NAME = "new_position_name";//新点
+
+    //test
+    public static final String GET_ULTRASONIC = "get_ultrasonic";//声呐设备
+    public static final String GET_ULTRASONIC_X = "get_ultrasonic_x";//声呐设备x
+    public static final String GET_ULTRASONIC_Y = "get_ultrasonic_y";//声呐设备y
+
+    public static final String TEST_UVCSTART_1 = "test_uvcstart_1";
+    public static final String TEST_UVCSTART_2 = "test_uvcstart_2";
+    public static final String TEST_UVCSTART_3 = "test_uvcstart_3";
+    public static final String TEST_UVCSTART_4 = "test_uvcstart_4";
+    public static final String TEST_UVCSTOP_1 = "test_uvcstop_1";
+    public static final String TEST_UVCSTOP_2 = "test_uvcstop_2";
+    public static final String TEST_UVCSTOP_3 = "test_uvcstop_3";
+    public static final String TEST_UVCSTOP_4 = "test_uvcstop_4";
+    public static final String TEST_UVCSTART_ALL = "test_uvcstart_ALL";
+    public static final String TEST_UVCSTOP_ALL = "test_uvcstop_ALL";
+    public static final String TEST_SENSOR = "test_sensor";
+    public static final String TEST_WARNINGSTART = "test_warningstart";
+    public static final String TEST_WARNINGSTOP = "test_warningstop";
+    public static final String TEST_LIGHTSTART = "test_lightstart";
+    public static final String TEST_LIGHTSTOP = "test_lightstop";
+
 
     //fragment见传递
     public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";

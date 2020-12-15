@@ -2,6 +2,7 @@ package com.example.robot.map;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -24,6 +25,7 @@ import com.example.robot.R;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.util.NormalDialogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,10 +45,8 @@ public class SettingFragment extends Fragment {
     TextView electricityQuantityTV;
     @BindView(R.id.settings_electricityQuantity)
     SeekBar settingsElectricityQuantity;
-    @BindView(R.id.languageTV)
-    TextView languageTV;
-    @BindView(R.id.settings_language)
-    Spinner settingsLanguage;
+    @BindView(R.id.settings_reset_robot)
+    Button settingsResetRobot;
     @BindView(R.id.volumeTV)
     TextView volumeTV;
     @BindView(R.id.settings_volume)
@@ -160,9 +160,32 @@ public class SettingFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.settings_ok, R.id.settings_cancel,R.id.settings_versionNumber})
+    @OnClick({R.id.settings_ok, R.id.settings_cancel,R.id.settings_versionNumber,R.id.settings_reset_robot})
     public void onViewClicked(View view) {
             switch (view.getId()) {
+                case R.id.settings_reset_robot:
+                    NormalDialogUtil resetNormalDialog = new NormalDialogUtil();
+                    resetNormalDialog.showDialog(mContext, "","是否删除该地图","取消","确认" , new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //取消
+                            dialog.dismiss();
+                        }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //确定逻辑
+                            /**
+                             * houbo
+                             */
+                            if (!Content.map_Name.equals(null)){
+                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RESET_ROBOT));
+                                Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+                    break;
                 case R.id.settings_ok:
                     Log.d(TAG, "APPLY");
                     int lowBattery = settingsElectricityQuantity.getProgress();

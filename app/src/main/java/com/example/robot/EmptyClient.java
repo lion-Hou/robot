@@ -81,6 +81,11 @@ public class EmptyClient extends WebSocketClient {
     public void differentiateType(String message) throws JSONException {
         Log.d("gsonUtils.getType  : ", ""+ gsonUtils.getType(message));
         switch (gsonUtils.getType(message)) {
+            case Content.ROBOT_HEALTHY:
+                jsonObject = new JSONObject(message);
+                String robotHealthy = jsonObject.getString(Content.ROBOT_HEALTHY);
+                EventBus.getDefault().post(new EventBusMessage<>(19199,robotHealthy));
+                break;
             case Content.REQUEST_MSG:
                 jsonObject = new JSONObject(message);
                 String request_msg = jsonObject.getString(Content.REQUEST_MSG);
