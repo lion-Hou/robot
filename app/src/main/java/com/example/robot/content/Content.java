@@ -141,6 +141,7 @@ public final class Content {
     public static final String ROBOT_HEALTHY = "robot_healthy";//机器人健康
     public static final String ROBOT_TASK_STATE = "robot_task_state";//机器人任务状态
     public static final String ROBOT_TASK_HISTORY = "robot_task_history";//机器人历史任务
+    public static final String RESECT_ROBOT = "resect_robot";//恢复出厂设置
 
     public static final String GET_VIRTUAL = "get_virtual";//获取虚拟墙数据
     public static final String UPDATA_VIRTUAL = "updata_virtual";//更新虚拟墙

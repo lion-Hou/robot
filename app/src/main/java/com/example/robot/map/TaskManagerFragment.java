@@ -10,23 +10,31 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.robot.EmptyClient;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
+import com.example.robot.adapter.TaskStateListAdapter;
 import com.example.robot.bean.DrawLineBean;
+import com.example.robot.bean.SaveTaskBean;
+import com.example.robot.bean.TaskStateList;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -90,6 +98,13 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     String a;
     String select_cn = "请选择任务";
     String select_en = "PLEASE SELECT TASK";
+    private String selectWeek = "";
+    private List<String> myWeek = new ArrayList<>();
+    private TextView detailsTaskType;
+    private TextView detailsTaskTime;
+    private RecyclerView recyclerView;
+    private List<TaskStateList> listPointName = new ArrayList<>();
+    private TaskStateListAdapter mAdapter = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -205,7 +220,13 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 }
                 break;
             case R.id.task_manage_details:
-
+                /**
+                 * 查看task详情
+                 */
+                gsonUtils.setMapName(Content.first_map_Name);
+                gsonUtils.setTaskName(Content.fixTaskName);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
+                initPopWindow(view);
                 break;
             default:
                 break;
@@ -215,15 +236,39 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
 
     /**
      * 任务详情PopWindow
+     *
      * @param v
      */
     private void initPopWindow(View v) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.details_popup, null, false);
-        final PopupWindow popWindow = new PopupWindow(view,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
+        TextView detailsTaskMap = view.findViewById(R.id.details_task_map);
+        TextView detailsTaskTask = view.findViewById(R.id.details_task_task);
+        detailsTaskType = view.findViewById(R.id.details_task_type);
+        detailsTaskTime = view.findViewById(R.id.details_task_time);
+        recyclerView = view.findViewById(R.id.details_count_list);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        mAdapter = new TaskStateListAdapter(mContext, R.layout.item_list_task);
+        recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+
+        final PopupWindow popWindow = new PopupWindow(
+                view,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true);
+        //popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
+        popWindow.setWidth(300);
+        popWindow.setHeight(400);
         popWindow.setTouchable(true);
-        popWindow.showAsDropDown(v, 50, 0);
+        //popWindow.showAsDropDown(v, 0, 0);
+        popWindow.showAsDropDown(taskManageDetails);
+        detailsTaskMap.setText(Content.first_map_Name);
+        detailsTaskTask.setText(Content.fixTaskName);
+
+
+
     }
 
     public void requestTaskList(String[] taskNameList) {
@@ -401,6 +446,50 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             if (state == 0) {
                 Toast toast = Toast.makeText(mContext, "请新建任务", Toast.LENGTH_SHORT);
                 toast.show();
+            }
+        }else if (messageEvent.getState() == 20004) {
+            Log.d(TAG, "onEventMsg20004 ： " + (String) messageEvent.getT());
+            try {
+
+                JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
+                String time = jsonObject.getString(Content.editTaskQueueTime);
+                Log.d(TAG, "onEventMsgtime ： " + time);
+                detailsTaskTime.setText(time);
+
+                //类型
+                JSONArray typeArray = jsonObject.getJSONArray(Content.editTaskQueueType);
+                Log.d("type event :", "" + TextUtils.isEmpty(typeArray.getString(0)));
+                Log.d("type event :", "" + typeArray.getString(0).length());
+                for (int i = 0; i < typeArray.length(); i++) {
+                    myWeek.add(typeArray.getString(i));
+                    selectWeek = selectWeek + typeArray.getString(i) + "  ";
+                }
+                detailsTaskType.setText(selectWeek);
+
+                /**
+                 * 详情->点数据
+                 */
+                try {
+                    String point = jsonObject.getString(Content.editTaskQueue);
+                    JSONObject json = new JSONObject(point);
+                    Log.d("details_hh", "" + json.toString());
+                    JSONArray jsonArray = json.getJSONArray(Content.fixTaskName);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject js = jsonArray.getJSONObject(i);
+                        TaskStateList taskStateList = new TaskStateList(js.getString(Content.POINT_NAME),
+                                js.getInt(Content.TASK_DISINFECT_TIME));
+                        Log.d("details_hh", "" + js.getString(Content.TASK_DISINFECT_TIME));
+                        Log.d("details_hh", "" + js.getString(Content.POINT_NAME));
+                        listPointName.add(taskStateList);
+                    }
+                    mAdapter.refeshList(listPointName);
+                    recyclerView.setAdapter(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
