@@ -478,8 +478,11 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Log.d(TAG, "onEventMsg200049 ： " + taskPoint);
                 String time = jsonObject.getString(Content.editTaskQueueTime);
                 Log.d(TAG, "onEventMsgtime ： " + time);
-                detailsTaskTime.setText(time);
-
+                if (time.equals("FF:FF")){
+                    detailsTaskTime.setText("立即执行");
+                }else {
+                    detailsTaskTime.setText(time);
+                }
                 //类型
                 JSONArray typeArray = jsonObject.getJSONArray(Content.editTaskQueueType);
                 Log.d("type event :", "" + TextUtils.isEmpty(typeArray.getString(0)));
@@ -508,7 +511,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                     }
                     mAdapter.refeshList(listPointName);
                     recyclerView.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
+                    //mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

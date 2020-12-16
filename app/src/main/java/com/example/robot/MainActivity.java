@@ -30,8 +30,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
@@ -67,6 +71,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         ButterKnife.bind(this);
         gsonUtils = new GsonUtils();
         connect();
+//        try {
+//            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
+//            int size = is.available();
+//            ByteBuffer byteBuffer =ByteBuffer.allocate(size);
+//            while (is.available() > 0) {
+//                byteBuffer.put((byte) is.read());
+//            }
+//            gsonUtils.setByteBuffer(byteBuffer);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         disconnectDialog = new NormalDialogUtil();
 
         firstFragment = new FirstFragment();
