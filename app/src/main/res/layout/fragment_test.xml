@@ -258,8 +258,8 @@
                     android:id="@+id/pir2"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/pir_main"
-                    android:layout_toLeftOf="@+id/pir_main"
+                    android:layout_above="@+id/pir_main"
+                    android:layout_toRightOf="@+id/pir_main"
                     android:text="PIR B"
                     android:textSize="20dp"
                     android:gravity="center"
@@ -271,31 +271,21 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/pir_main"
-                    android:layout_toRightOf="@+id/pir_main"
+                    android:layout_centerHorizontal="true"
                     android:text="PIR C"
                     android:textSize="20dp"
                     android:gravity="center"
                     android:background="@drawable/text_view_background"
                     ></TextView>
 
-                <TextView
-                    android:id="@+id/pir4"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_above="@+id/pir_main"
-                    android:layout_toRightOf="@+id/pir_main"
-                    android:text="PIR D"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:background="@drawable/text_view_background"
-                    ></TextView>
 
                 <Button
                     android:id="@+id/test_back"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"></Button>
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/test_back"></Button>
 
             </RelativeLayout>
 
