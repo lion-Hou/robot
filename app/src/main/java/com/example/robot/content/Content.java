@@ -25,7 +25,6 @@ public final class Content {
     public static int robotState = 0;
     public static int time = 0;//灯带时间间隔
     public static List<RobotMapBean> list;//地图所有点数据
-    public static List<RobotHealthyBean> robotHealthyBeanList;
     /**
      * 0：任务结束
      * 1：执行任务，恢复任务

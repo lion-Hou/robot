@@ -73,9 +73,7 @@ public class SettingFragment extends Fragment {
     private View view;
     private GsonUtils gsonUtils;
     private Context mContext;
-    private long[] mHints = new long[3];
-    private long[] mHints1 = new long[2];
-    private long[] mHints2 = new long[1];
+    private long[] mHints = new long[2];
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -220,13 +218,6 @@ public class SettingFragment extends Fragment {
                     break;
                 case R.id.settings_versionNumber:
                     Log.d(TAG, "banbenhao");
-                    System.arraycopy(mHints1, 1, mHints1, 0, mHints1.length - 1);
-                    //获得当前系统已经启动的时间
-                    mHints1[mHints1.length - 1] = SystemClock.uptimeMillis();
-                    if(SystemClock.uptimeMillis()-mHints1[0]<=500){
-                        Toast.makeText(mContext.getApplicationContext(),"快速点击三次进入测试页面", Toast.LENGTH_SHORT).show();
-                    }
-
                     System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
                     //获得当前系统已经启动的时间
                     mHints[mHints.length - 1] = SystemClock.uptimeMillis();

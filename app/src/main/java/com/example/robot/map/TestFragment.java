@@ -2,21 +2,31 @@ package com.example.robot.map;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.robot.MainActivity;
 import com.example.robot.R;
+import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
 
@@ -24,11 +34,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class TestFragment extends Fragment {
@@ -87,8 +101,6 @@ public class TestFragment extends Fragment {
     TextView pir2;
     @BindView(R.id.pir3)
     TextView pir3;
-    @BindView(R.id.pir4)
-    TextView pir4;
     @BindView(R.id.test_relative2)
     RelativeLayout testRelative2;
 
@@ -97,11 +109,16 @@ public class TestFragment extends Fragment {
     private Context mContext;
 
 
+    private Handler handler = new Handler();
+    private Runnable runnable;
+
 
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        //开始
+        handler.postDelayed(runnable,1000); // 开始Timer
         Log.d("hhhh", "edit_start");
     }
 
@@ -109,6 +126,7 @@ public class TestFragment extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+        handler.removeCallbacks(runnable); //停止Timer
         Log.d("hhhh", "edit_stop");
     }
 
@@ -128,9 +146,106 @@ public class TestFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_test, container, false);
         ButterKnife.bind(this, view);
+        initView();
+        runnable = new Runnable() {
+            public void run () {
+                MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_SENSOR));
+                MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.GET_ULTRASONIC));
+                handler.postDelayed(this,2000);
+                //postDelayed(this,2000)方法安排一个Runnable对象到主线程队列中
+            }
+        };
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
         return view;
+    }
+
+    private void initView(){
+        switchVoice.setChecked(false);
+        switchLed.setChecked(false);
+        switchUvcAll.setChecked(false);
+        switchUvc1.setChecked(false);
+        switchUvc2.setChecked(false);
+        switchUvc3.setChecked(false);
+        switchUvc4.setChecked(false);
+        switchVoice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchVoice.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_WARNINGSTART));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_WARNINGSTOP));
+                }
+            }
+        });
+
+        switchLed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchLed.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_LIGHTSTART));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_LIGHTSTOP));
+                }
+            }
+        });
+
+        switchUvcAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchUvcAll.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTART_ALL));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTOP_ALL));
+                }
+            }
+        });
+
+        switchUvc1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchUvc1.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTART_1));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTOP_1));
+                }
+            }
+        });
+
+        switchUvc2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchUvc2.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTART_2));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTOP_2));
+                }
+            }
+        });
+
+        switchUvc3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchUvc3.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTART_3));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTOP_3));
+                }
+            }
+        });
+
+        switchUvc4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchUvc4.isChecked()) {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTART_4));
+                } else {
+                    MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_UVCSTOP_4));
+                }
+            }
+        });
+
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -146,8 +261,11 @@ public class TestFragment extends Fragment {
             String message2 = message1.replace("{","");
             String message3 = message2.replace("}","");
             String message4 = message3.replace(",","\n");
+            int color1 = Color.parseColor("#00FF00");
+            int color2 = Color.parseColor("#FF0000");
+            Log.d(TAG, "onEventMsg mytest111333： " + color1);
             Log.d(TAG, "onEventMsg mytest111333： " + message4);
-            testSelfInspection.setText(message4);
+            testSelfInspection.setText(matcherSearchText(color1,message4,"true",color2,"false"));
             testSelfInspection.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         } else if (messageEvent.getState() == 20002) {
@@ -155,12 +273,36 @@ public class TestFragment extends Fragment {
         }
     }
 
-    @OnClick({R.id.ultraSonic1})
+    @OnClick({R.id.test_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ultraSonic1:
+            case R.id.test_back:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new SettingFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
+    }
+
+    public static SpannableString matcherSearchText(int color, String text, String keyword,int color2 , String keyword2) {
+        SpannableString ss = new SpannableString(text);
+        Pattern pattern = Pattern.compile(keyword);
+        Pattern pattern2 = Pattern.compile(keyword2);
+        Matcher matcher = pattern.matcher(ss);
+        Matcher matcher2 = pattern2.matcher(ss);
+        while (matcher.find()) {
+            int start = matcher.start();
+            int end = matcher.end();
+            ss.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        while (matcher2.find()) {
+            int start = matcher2.start();
+            int end = matcher2.end();
+            ss.setSpan(new ForegroundColorSpan(color2), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return ss;
     }
 
 }

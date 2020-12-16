@@ -312,8 +312,9 @@ public class MapEditFragment extends Fragment{
                             Point point = new Point(pointName);
                             point.setName(pointName);
                             Log.d("SourireG", "add point name" + point.getName());
+                            if(!listPoint.contains(point)){
                             listPoint.add(point);
-
+                            }
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
                                     0, 0);
