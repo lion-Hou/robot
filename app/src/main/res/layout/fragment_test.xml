@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:id="@+id/test_relative1"
-        android:layout_width="250dp"
+        android:layout_width="400dp"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
         >
@@ -19,19 +19,24 @@
             android:layout_height="80dp"
             android:textSize="25dp"
             android:gravity="center"
-            android:text="@string/test_self_inspection"/>
+            android:text="@string/self_test_of_lower_computer"/>
+        
+
         <TextView
             android:id="@+id/test_self_inspection"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:textSize="15dp"
+            android:scrollbars="vertical"
+            android:singleLine="false"
             android:gravity="center"
             android:layout_below="@+id/test_self_inspection_title"/>
 
+
         <RelativeLayout
             android:id="@+id/ultraSonic"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             android:layout_below="@+id/test_self_inspection">
             <TextView
                 android:id="@+id/center_view"
@@ -39,7 +44,8 @@
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:text="UltraSonic"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/text_view_background">
             </TextView>
 
             <TextView
@@ -51,6 +57,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic1"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
             <TextView
@@ -62,6 +69,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic2"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
             <TextView
@@ -73,6 +81,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic3"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
             <TextView
@@ -84,6 +93,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic4"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
             <TextView
@@ -95,6 +105,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic5"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
             <TextView
@@ -106,6 +117,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic6"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
             <TextView
@@ -117,6 +129,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic7"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
             <TextView
                 android:id="@+id/ultraSonic8"
@@ -127,6 +140,7 @@
                 android:textSize="10dp"
                 android:text="UltraSonic8"
                 android:gravity="center"
+                android:background="@drawable/text_view_background"
                 ></TextView>
 
         </RelativeLayout>
@@ -136,21 +150,23 @@
 
     <RelativeLayout
         android:id="@+id/test_relative2"
-        android:layout_width="180dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/test_relative1">
-        
-        <RelativeLayout
-            android:id="@+id/test_relative3"
-            android:layout_width="180dp"
-            android:layout_height="match_parent">
         <TextView
-            android:id="@+id/test_voice_and_led_title"
+            android:id="@+id/upper_computer_check"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:textSize="25dp"
             android:gravity="center"
-            android:text="@string/test_voice_and_led"/>
+            android:text="@string/upper_computer_check"/>
+
+        <RelativeLayout
+            android:id="@+id/test_relative3"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/upper_computer_check">
 
         <Switch
             android:id="@+id/switch_voice"
@@ -158,7 +174,7 @@
             android:layout_height="60dp"
             android:text="Voice"
             android:textSize="20dp"
-            android:layout_below="@+id/test_voice_and_led_title"/>
+            />
 
         <Switch
             android:id="@+id/switch_led"
@@ -208,6 +224,83 @@
             android:textSize="20dp"
             android:layout_below="@+id/switch_uvc3"/>
         </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/upper_computer_check"
+                android:layout_toRightOf="@+id/test_relative3">
+
+
+                <TextView
+                    android:id="@+id/pir_main"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_centerInParent="true"
+                    android:text="PIR"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_view_background"></TextView>
+
+                <TextView
+                    android:id="@+id/pir1"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_above="@+id/pir_main"
+                    android:layout_toLeftOf="@+id/pir_main"
+                    android:text="PIR A"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_view_background"></TextView>
+
+                <TextView
+                    android:id="@+id/pir2"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/pir_main"
+                    android:layout_toLeftOf="@+id/pir_main"
+                    android:text="PIR B"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_view_background"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/pir3"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/pir_main"
+                    android:layout_toRightOf="@+id/pir_main"
+                    android:text="PIR C"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_view_background"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/pir4"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_above="@+id/pir_main"
+                    android:layout_toRightOf="@+id/pir_main"
+                    android:text="PIR D"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_view_background"
+                    ></TextView>
+
+                <Button
+                    android:id="@+id/test_back"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"></Button>
+
+            </RelativeLayout>
+
+
+
 
 
     </RelativeLayout>

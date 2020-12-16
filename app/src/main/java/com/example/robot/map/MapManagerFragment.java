@@ -77,6 +77,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private View view;
     private String[] mapName;
     private NormalDialogUtil mapManageNormalDialog;
+    private String[] taskNameList;
 
     private List<ImageView> imageViewArrayList = new ArrayList<>();
     private ImageView robot_Img;
@@ -96,6 +97,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         EventBus.getDefault().register(this);
         gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+        gsonUtils.setMapName(Content.map_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));
         Log.d("hhhh",  "manger_start");
     }
 
@@ -209,6 +212,10 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                          * houbo
                          */
                         if (!Content.map_Name.equals(null)){
+                            for (int i = 0; i < taskNameList.length ; i++) {
+                                gsonUtils.setTaskName(taskNameList[i]);
+                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_TASK));
+                            }
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
                             managerSelected.setText(R.string.please_select_map);
                             Content.map_Name = null;
@@ -410,7 +417,10 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 e.printStackTrace();
             }
 
-        } else if (messageEvent.getState() == 40002) {//获取虚拟墙
+        }else if (messageEvent.getState() == 10017) {
+            taskNameList = (String[]) messageEvent.getT();
+            Log.d("task_name", taskNameList[0]);
+        }else if (messageEvent.getState() == 40002) {//获取虚拟墙
             for (int k = 0; k < Content.list.size(); k++) {
                 if (Content.list.get(k).getMap_Name().equals(Content.map_Name)) {
                     Log.d("zdzd555", "" + Content.list.get(k).getResolution());

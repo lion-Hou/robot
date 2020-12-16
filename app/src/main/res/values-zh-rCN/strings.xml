@@ -12,7 +12,7 @@
     <string name="settings_cancel">取消</string>
     <string name="settings_ok">应用</string>
     <string name="settings_electricity_quantity">回充电量:</string>
-    <string name="settings_language">语言:</string>
+    <string name="settings_reset_robot">恢复出厂设置</string>
     <string name="settings_volume">音量:</string>
     <string name="settings_robot_speed">机器人行进速度:</string>
     <string name="settings_led_brightness">LED亮度:</string>
@@ -84,8 +84,8 @@
         <item>English</item>
         <item>中文</item>
     </string-array>
-
-    <string name="test_self_inspection">自检</string>
+    <string name="self_test_of_lower_computer">下位机自检</string>
+    <string name="upper_computer_check">上位机检查</string>
     <string name="test_voice_and_led">声音与LED灯光</string>
     <string name="test_uvc">UVC</string>
     <string name="test_pir">PIR</string>
