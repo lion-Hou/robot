@@ -207,6 +207,7 @@ public class SettingFragment extends Fragment {
                             .replace(R.id.main_fragment, new MainFragment(), null)
                             .addToBackStack(null)
                             .commit();
+                    Toast.makeText(mContext.getApplicationContext(),"应用成功", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.settings_cancel:
                     Log.d(TAG, "返回");
