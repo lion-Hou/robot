@@ -105,6 +105,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     private RecyclerView recyclerView;
     private List<TaskStateList> listPointName = new ArrayList<>();
     private TaskStateListAdapter mAdapter = null;
+    private String taskPoint;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,6 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         taskBack.setOnClickListener(this);
         taskEdit.setOnClickListener(this);
         taskManageDetails.setOnClickListener(this);
-
     }
 
     private void initListener() {
@@ -281,6 +281,9 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Content.fixTaskName = taskNameList[which];
                 taskName.setText(taskNameList[which]);
                 Log.d(TAG, "ggggg ： " + taskName.getText());
+                gsonUtils.setTaskName(Content.fixTaskName);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }
         });
         builder.create().show();
@@ -373,6 +376,21 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             taskManageMapRelative.addView(charging_Img);
                         }
                         if (pointType == 2) {
+                            if (Content.fixTaskName == null){
+                                imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                                        0, 0);
+                                textView.setText(pointName);
+                                textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
+                                        0, 0);
+                                Log.d("zdzd9998", "angleX" + angleX);
+                                Log.d("zdzd9998", " resolution" + resolution);
+                                taskManageMapRelative.addView(imageView);
+                                taskManageMapRelative.addView(textView);
+                                imageViewArrayList.add(imageView);
+                            }else {
+                            if (taskPoint.contains("\\point_Name\\:\\"+pointName)){
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
@@ -385,6 +403,8 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             taskManageMapRelative.addView(imageView);
                             taskManageMapRelative.addView(textView);
                             imageViewArrayList.add(imageView);
+                            }
+                            }
                         }
                     }
                 }
@@ -447,11 +467,14 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Toast toast = Toast.makeText(mContext, "请新建任务", Toast.LENGTH_SHORT);
                 toast.show();
             }
-        }else if (messageEvent.getState() == 20004) {
-            Log.d(TAG, "onEventMsg20004 ： " + (String) messageEvent.getT());
+        }else if (messageEvent.getState() == 20009) {
+            Log.d(TAG, "onEventMsg20009 ： " + (String) messageEvent.getT());
             try {
-
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
+
+                String message = (String) messageEvent.getT();
+                taskPoint = message.replace("\"","");
+                Log.d(TAG, "onEventMsg200049 ： " + taskPoint);
                 String time = jsonObject.getString(Content.editTaskQueueTime);
                 Log.d(TAG, "onEventMsgtime ： " + time);
                 detailsTaskTime.setText(time);
