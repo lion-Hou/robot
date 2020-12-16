@@ -218,18 +218,7 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.editTaskQueue:
                 jsonObject = new JSONObject(message);
-                String taskQueue = jsonObject.getString(Content.editTaskQueue);
-                Log.d("taskPoint name", "ffffff");
-                JSONObject json = new JSONObject(taskQueue);
-                Log.d("taskPoint name", json.toString());
-                JSONArray jsonArray = json.getJSONArray(Content.fixTaskName);
-                String[] taskPointName = new String[jsonArray.length()];
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject js = jsonArray.getJSONObject(i);
-                    taskPointName[i] = js.getString(Content.POINT_NAME);
-                }
-                Log.d("taskPoint name", taskPointName.toString());
-                EventBus.getDefault().post(new EventBusMessage(20004, message));
+                EventBus.getDefault().post(new EventBusMessage(20009, message));
                 Log.d("edit_Queue",message );
                 break;
 

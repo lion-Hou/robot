@@ -236,6 +236,7 @@ public class MapEditFragment extends Fragment{
             String message = (String) messageEvent.getT();
             try {
                 JSONObject jsonObject = new JSONObject(message);
+                listPoint.clear();
                 if (jsonObject != null) {
                     JSONArray jsonArray = jsonObject.getJSONArray(Content.SENDPOINTPOSITION);
                     Log.d("zdzd000 ", "pointName : " + jsonArray.toString());
@@ -312,9 +313,8 @@ public class MapEditFragment extends Fragment{
                             Point point = new Point(pointName);
                             point.setName(pointName);
                             Log.d("SourireG", "add point name" + point.getName());
-                            if(!listPoint.contains(point)){
                             listPoint.add(point);
-                            }
+
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
                                     0, 0);
