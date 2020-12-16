@@ -370,7 +370,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
             point_name = new String[point.length];
             pointList(point);
             Log.d(TAG, "收到点的数据大小 ： " + point.length);
-        } else if (messageEvent.getState() == 20009) {
+        } else if (messageEvent.getState() == 20004) {
             Log.d(TAG, "onEventMsg20004 ： " + (String) messageEvent.getT());
             try {
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());

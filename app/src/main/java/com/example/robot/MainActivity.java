@@ -71,17 +71,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         ButterKnife.bind(this);
         gsonUtils = new GsonUtils();
         connect();
-//        try {
-//            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
-//            int size = is.available();
-//            ByteBuffer byteBuffer =ByteBuffer.allocate(size);
-//            while (is.available() > 0) {
-//                byteBuffer.put((byte) is.read());
-//            }
-//            gsonUtils.setByteBuffer(byteBuffer);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         disconnectDialog = new NormalDialogUtil();
 
         firstFragment = new FirstFragment();
@@ -95,6 +84,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         waitingDialog = new ProgressDialog(MainActivity.this);
         new TimeThread().start();
+        //ota();
     }
 
     @Override
@@ -113,6 +103,21 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 emptyClient.reconnect();
             }
         } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ota() {
+        try {
+            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
+            int size = is.available();
+            Log.d("ggg", String.valueOf(size));
+            ByteBuffer byteBuffer =ByteBuffer.allocate(size);
+            while (is.available() > 0) {
+                byteBuffer.put((byte) is.read());
+            }
+            //gsonUtils.setByteBuffer(byteBuffer);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
