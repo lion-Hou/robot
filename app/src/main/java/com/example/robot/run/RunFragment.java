@@ -95,6 +95,13 @@ public class RunFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        initView();
+    }
+
     private void initView() {
         runMapName.setText(Content.first_map_Name);
         runTaskName.setText(Content.task_Name);

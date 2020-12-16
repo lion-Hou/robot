@@ -27,6 +27,9 @@ import com.example.robot.run.RunFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private String name4 = "PLEASE SELECT TASK";
     private List<String> myTaskNameList = new ArrayList<>();
     private String selectTask = "";
+    private String get_name;
+    private String get_task;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,6 +227,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         .replace(R.id.second_fragment, new RobotControlPanelFragment(), null)
                         .addToBackStack(null)
                         .commit();
+//                getActivity().getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.second_fragment, new RockerFragment(), null)
+//                        .addToBackStack(null)
+//                        .commit();
                 break;
             case R.id.main_task:
                 getActivity().getSupportFragmentManager()
@@ -349,6 +360,23 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             taskNameList = (String[]) messageEvent.getT();
             Log.d("task_name", taskNameList[0]);
             requestTaskList(taskNameList);
+        }else if(messageEvent.getState() == 90001){
+            JSONObject jsonObject = (JSONObject) messageEvent.getT();
+            try {
+                get_name = jsonObject.getString(Content.MAP_NAME);
+                get_task = jsonObject.getString(Content.GET_TASK_STATE);
+                Log.d("gdgdg",get_name);
+                Log.d("gdgdg",get_task);
+                gsonUtils.setMapName(get_name);
+                gsonUtils.setTaskName(get_task);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new RunFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -44,8 +44,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public static EmptyClient emptyClient;
     @BindView(R.id.time)
     TextView time;
-    @BindView(R.id.text_text)
-    Button textText;
     @BindView(R.id.net_time)
     TextView net_Time;
     private GsonUtils gsonUtils;
@@ -81,7 +79,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, mainFragment).commit();
 
         waitingDialog = new ProgressDialog(MainActivity.this);
-        textText.setOnClickListener(this);
         new TimeThread().start();
     }
 
@@ -227,12 +224,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.text_text:
-                Intent intent = new Intent(MainActivity.this, TestActivity.class);
-                startActivity(intent);
-                break;
-        }
+
     }
 }
 

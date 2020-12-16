@@ -164,7 +164,7 @@ public final class Content {
     public static final String RENAME_POSITION = "rename_position";//重命名点
     public static final String OLD_POSITION_NAME = "old_position_name";//原始点
     public static final String NEW_POSITION_NAME = "new_position_name";//新点
-
+    public static final String GET_TASK_STATE = "get_task_state";//断连请求
     //fragment见传递
     public static final String FIRSTMAPNAME_TOEDIT = "firstmap_toedit";
 

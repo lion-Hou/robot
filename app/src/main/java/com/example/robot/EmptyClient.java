@@ -47,6 +47,7 @@ public class EmptyClient extends WebSocketClient {
         isConnected = true;
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         //发送系统时间给下位机
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));//断连监听
         System.out.println("connect state new connection opened"+isConnected);
     }
 
@@ -211,6 +212,18 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("speedLevel", String.valueOf(speedLevel));
                 break;
             case Content.editTaskQueue:
+                jsonObject = new JSONObject(message);
+                String taskQueue = jsonObject.getString(Content.editTaskQueue);
+                Log.d("taskPoint name", "ffffff");
+                JSONObject json = new JSONObject(taskQueue);
+                Log.d("taskPoint name", json.toString());
+                JSONArray jsonArray = json.getJSONArray(Content.fixTaskName);
+                String[] taskPointName = new String[jsonArray.length()];
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject js = jsonArray.getJSONObject(i);
+                    taskPointName[i] = js.getString(Content.POINT_NAME);
+                }
+                Log.d("taskPoint name", taskPointName.toString());
                 EventBus.getDefault().post(new EventBusMessage(20004, message));
                 Log.d("edit_Queue",message );
                 break;
@@ -218,6 +231,10 @@ public class EmptyClient extends WebSocketClient {
             case Content.ROBOT_TASK_STATE:
                 Log.d("HOUHOUHOU1",message );
                 EventBus.getDefault().post(new EventBusMessage(60001, message));
+                break;
+            case Content.GET_TASK_STATE:
+                Log.d("HOUH111",message );
+                EventBus.getDefault().post(new EventBusMessage(90001, message));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));
