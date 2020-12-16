@@ -124,6 +124,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+        Content.fixTaskName = null;
         Log.d("hhhh", "manger_stop");
     }
 
