@@ -95,7 +95,7 @@ public class MapEditFragment extends Fragment{
     @BindView(R.id.map_list_border)
     RelativeLayout mapListBorder;
 
-    private List<ImageView> imageViewArrayList = new ArrayList<>();
+    private List<View> imageViewArrayList = new ArrayList<>();
 
 
     private GsonUtils gsonUtils;
@@ -214,7 +214,7 @@ public class MapEditFragment extends Fragment{
                 mBitmapHeight = mapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = mapRelativeBorder.getWidth();
             }
-
+            mapRelative.removeAllViews();
             editMapImage.setImageBitmap(mBitmap);
             mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -323,6 +323,7 @@ public class MapEditFragment extends Fragment{
                             mapRelative.addView(imageView);
                             mapRelative.addView(textView);
                             imageViewArrayList.add(imageView);
+                            imageViewArrayList.add(textView);
                         }
                     }
                     adapter.notifyDataSetChanged();
@@ -771,14 +772,11 @@ public class MapEditFragment extends Fragment{
                                     if (!newPointName.equals(null)&&!newPointName.equals("")&&!newPointName.isEmpty()){
                                         gsonUtils.setOldPointName(pointName.getName());
                                         gsonUtils.setNewPointName(newPointName);
-
                                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_POSITION));
                                         tv_name.setText(newPointName);
                                     }else {
-                                        Toast.makeText(mContext, "请输入新的地图名"+newPointName, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, "请输入新的地点名"+newPointName, Toast.LENGTH_SHORT).show();
                                     }
-                                    gsonUtils.setMapName(Content.map_Name);
-                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

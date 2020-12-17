@@ -90,7 +90,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
 
     private NormalDialogUtil mapManageNormalDialog;
 
-    private List<ImageView> imageViewArrayList = new ArrayList<>();
+    private List<View> imageViewArrayList = new ArrayList<>();
     private int index = 0;
     double mBitmapHeight;
     double mBitmapWidth;
@@ -187,6 +187,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             gsonUtils.setTaskName(Content.fixTaskName);
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));//删除任务
                             Content.fixTaskName = null;
+                            Content.manageTaskName = null;
                             taskName.setText(R.string.map_manage_select_task);
                             dialog.dismiss();
                         }
@@ -282,6 +283,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Content.manageTaskName = taskNameList[which];
                 taskName.setText(taskNameList[which]);
                 Log.d(TAG, "ggggg ： " + taskName.getText());
+                gsonUtils.setMapName(Content.first_map_Name);
                 gsonUtils.setTaskName(Content.fixTaskName);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
@@ -349,7 +351,6 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         ImageView imageView = new ImageView(mContext);
                         TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
-                        imageViewArrayList.add(imageView);
                         imageView.setOnClickListener(this);
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
@@ -390,20 +391,22 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                                 taskManageMapRelative.addView(imageView);
                                 taskManageMapRelative.addView(textView);
                                 imageViewArrayList.add(imageView);
+                                imageViewArrayList.add(textView);
                             }else {
-                            if (taskPoint.contains("\\point_Name\\:\\"+pointName)){
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
-                                    0, 0);
-                            textView.setText(pointName);
-                            textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
-                                    0, 0);
-                            Log.d("zdzd9998", "angleX" + angleX);
-                            Log.d("zdzd9998", " resolution" + resolution);
-                            taskManageMapRelative.addView(imageView);
-                            taskManageMapRelative.addView(textView);
-                            imageViewArrayList.add(imageView);
+                                if (taskPoint.contains("dbPointName:"+pointName)){
+                                imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                                        0, 0);
+                                textView.setText(pointName);
+                                textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
+                                        0 , 0);
+                                Log.d("zdzd9998", "angleX" + angleX);
+                                Log.d("zdzd9998", " resolution" + resolution);
+                                taskManageMapRelative.addView(imageView);
+                                taskManageMapRelative.addView(textView);
+                                imageViewArrayList.add(imageView);
+                                imageViewArrayList.add(textView);
                             }
                             }
                         }
@@ -468,11 +471,10 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Toast toast = Toast.makeText(mContext, "请新建任务", Toast.LENGTH_SHORT);
                 toast.show();
             }
-        }else if (messageEvent.getState() == 20004) {
+        }else if (messageEvent.getState() == 20009) {
             Log.d(TAG, "onEventMsg20009 ： " + (String) messageEvent.getT());
             try {
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
-
                 String message = (String) messageEvent.getT();
                 taskPoint = message.replace("\"","");
                 Log.d(TAG, "onEventMsg200049 ： " + taskPoint);
@@ -480,23 +482,23 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Log.d(TAG, "onEventMsgtime ： " + time);
                 if (time.equals("FF:FF")){
                     detailsTaskTime.setText("立即执行");
+                    detailsTaskType.setText("Once");
                 }else {
                     detailsTaskTime.setText(time);
+                    JSONArray typeArray = jsonObject.getJSONArray(Content.editTaskQueueType);
+                    if (typeArray.length()==7){
+                        detailsTaskType.setText("Per day");
+                    }else
+                    {
+                        detailsTaskType.setText("Per Week");
+                    }
                 }
-                //类型
-                JSONArray typeArray = jsonObject.getJSONArray(Content.editTaskQueueType);
-                Log.d("type event :", "" + TextUtils.isEmpty(typeArray.getString(0)));
-                Log.d("type event :", "" + typeArray.getString(0).length());
-                for (int i = 0; i < typeArray.length(); i++) {
-                    myWeek.add(typeArray.getString(i));
-                    selectWeek = selectWeek + typeArray.getString(i) + "  ";
-                }
-                detailsTaskType.setText(selectWeek);
 
                 /**
                  * 详情->点数据
                  */
                 try {
+                    listPointName.clear();
                     JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueue);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject js = jsonArray.getJSONObject(i);
