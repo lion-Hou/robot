@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -124,7 +125,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-        Content.fixTaskName = null;
+        //Content.fixTaskName = null;
         Log.d("hhhh", "manger_stop");
     }
 
@@ -265,11 +266,11 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         popWindow.setTouchable(true);
         //popWindow.showAsDropDown(v, 0, 0);
         popWindow.showAsDropDown(taskManageDetails);
+        popWindow.setBackgroundDrawable(new ColorDrawable(0));
         detailsTaskMap.setText(Content.first_map_Name);
         detailsTaskTask.setText(Content.fixTaskName);
-
-
-
+        recyclerView.removeAllViews();
+        //recyclerView.setItemViewCacheSize(0);
     }
 
     public void requestTaskList(String[] taskNameList) {
@@ -468,7 +469,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 Toast toast = Toast.makeText(mContext, "请新建任务", Toast.LENGTH_SHORT);
                 toast.show();
             }
-        }else if (messageEvent.getState() == 20009) {
+        }else if (messageEvent.getState() == 20004) {
             Log.d(TAG, "onEventMsg20009 ： " + (String) messageEvent.getT());
             try {
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
@@ -511,7 +512,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                     }
                     mAdapter.refeshList(listPointName);
                     recyclerView.setAdapter(mAdapter);
-                    //mAdapter.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
