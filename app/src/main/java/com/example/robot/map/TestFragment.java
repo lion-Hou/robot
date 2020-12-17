@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
@@ -15,11 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -34,15 +33,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class TestFragment extends Fragment {
@@ -103,6 +98,10 @@ public class TestFragment extends Fragment {
     TextView pir3;
     @BindView(R.id.test_relative2)
     RelativeLayout testRelative2;
+    @BindView(R.id.test_fragment)
+    RelativeLayout testFragment;
+    @BindView(R.id.test_back)
+    Button testBack;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -118,7 +117,7 @@ public class TestFragment extends Fragment {
         super.onStart();
         EventBus.getDefault().register(this);
         //开始
-        handler.postDelayed(runnable,1000); // 开始Timer
+        handler.postDelayed(runnable, 1000); // 开始Timer
         Log.d("hhhh", "edit_start");
     }
 
@@ -155,19 +154,25 @@ public class TestFragment extends Fragment {
         ButterKnife.bind(this, view);
         initView();
         runnable = new Runnable() {
-            public void run () {
+            public void run() {
                 MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.TEST_SENSOR));
                 MainActivity.emptyClient.send(gsonUtils.putTestMsg(Content.GET_ULTRASONIC));
-                handler.postDelayed(this,2000);
+                handler.postDelayed(this, 2000);
                 //postDelayed(this,2000)方法安排一个Runnable对象到主线程队列中
             }
         };
+        testFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         gsonUtils = new GsonUtils();
         mContext = view.getContext();
         return view;
     }
 
-    private void initView(){
+    private void initView() {
         switchVoice.setChecked(false);
         switchLed.setChecked(false);
         switchUvcAll.setChecked(false);
@@ -264,49 +269,49 @@ public class TestFragment extends Fragment {
             //"{\"antiPressureFoot\":true,\"cameraNotTrigger\":true,\"cannotRotate\":false,\"deviceTopic\":true,\"driverErrorLeftDriverCommandError\":true,\"driverErrorLeftDriverCommunicationError\":true,\"driverErrorLeftDriverCurrentExceedsLimit\":true,\"driverErrorLeftDriverEmergencyStop\":true,\"driverErrorLeftDriverError\":true,\"driverErrorLeftDriverExternalStop\":true,\"driverErrorLeftDriverHoarePhaseSequenceError\":true,\"driverErrorLeftDriverInitializationError\":true,\"driverErrorLeftDriverMosError\":true,\"driverErrorLeftDriverOverheat\":true,\"driverErrorLeftDriverOverload\":true,\"driverErrorLeftDriverParameterError\":true,\"driverErrorLeftDriverShortCircuit\":true,\"driverErrorLeftDriverVoltageIsBelowFunctioningThreshold\":true,\"driverErrorLeftEEPDataError\":true,\"driverErrorLeftEncoderError\":true,\"driverErrorLeftMotorDriverVoltageExceedsLimit\":true,\"driverErrorLeftMotorExceedsSpeedLimit\":true,\"driverErrorLeftMotorFeedbackError\":true,\"driverErrorLeftMotorIsDisconnected\":true,\"driverErrorLeftMotorOverheat\":true,\"driverErrorLeftMotorPowerOnProtection\":true,\"driverErrorRightDriverCommandError\":true,\"driverErrorRightDriverCommunicationError\":true,\"driverErrorRightDriverCurrentExceedsLimit\":true,\"driverErrorRightDriverEEPDataError\":true,\"driverErrorRightDriverEmergencyStop\":true,\"driverErrorRightDriverError\":true,\"driverErrorRightDriverExternalStop\":true,\"driverErrorRightDriverHoarePhaseSequenceError\":true,\"driverErrorRightDriverInitializationError\":true,\"driverErrorRightDriverMosError\":true,\"driverErrorRightDriverOverheat\":true,\"driverErrorRightDriverOverload\":true,\"driverErrorRightDriverParameterError\":true,\"driverErrorRightDriverShortCircuit\":true,\"driverErrorRightDriverVoltageExceedsLimit\":true,\"driverErrorRightDriverVoltageIsBelowFunctioningThreshold\":true,\"driverErrorRightEncoderSignalError\":true,\"driverErrorRightMotorExceedsSpeedLimit\":true,\"driverErrorRightMotorFeedbackError\":true,\"driverErrorRightMotorIsDisconnected\":true,\"driverErrorRightMotorOverheat\":true,\"driverErrorRightMotorPowerOnProtection\":true,\"healthTopic\":true,\"imuBoard\":true,\"imuTopic\":true,\"laserNotTrigger\":true,\"laserParam\":true,\"laserTopic\":true,\"leftMotor\":true,\"localizationLost\":true,\"odomTopic\":true,\"powerBoard\":true,\"protectorNotTrigger\":true,\"protectorTopic\":true,\"rightMotor\":true,\"robotSurround\":true,\"stuckVirtualWall\":true,\"ultrasonic0\":true,\"ultrasonic1\":true,\"ultrasonic2\":true,\"ultrasonic3\":true,\"ultrasonic4\":true,\"ultrasonic5\":true,\"ultrasonic6\":true,\"ultrasonic7\":true,\"ultrasonicBoard\":true,\"usbSecurity\":true}\n"}
             String message = (String) messageEvent.getT();
             Log.d(TAG, "onEventMsg mytest111： " + message);
-            String message1 = message.replace("\"","");
-            String message2 = message1.replace("{","");
-            String message3 = message2.replace("}","");
-            String message4 = message3.replace(",","\n");
+            String message1 = message.replace("\"", "");
+            String message2 = message1.replace("{", "");
+            String message3 = message2.replace("}", "");
+            String message4 = message3.replace(",", "\n");
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
             Log.d(TAG, "onEventMsg mytest111333： " + color1);
             Log.d(TAG, "onEventMsg mytest111333： " + message4);
-            testSelfInspection.setText(matcherSearchText(color1,message4,"true",color2,"false"));
+            testSelfInspection.setText(matcherSearchText(color1, message4, "true", color2, "false"));
             testSelfInspection.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         } else if (messageEvent.getState() == 19198) {
             String message = (String) messageEvent.getT();
-            String message1 = message.replace("\"","");
-            int i=message1.indexOf(",");
-            int j=message1.indexOf(",",i+1);
-            String itemString1 = message1.substring(0,i);
-            String itemString2 = message1.substring(i+1,j);
-            String itemString3 = message1.substring(j+1,message1.length());
-            Log.d(TAG, "onEventMsg 19198： " +"  "+i + message1+"  "+itemString1);
-            Log.d(TAG, "onEventMsg 191981：" + j +itemString2);
+            String message1 = message.replace("\"", "");
+            int i = message1.indexOf(",");
+            int j = message1.indexOf(",", i + 1);
+            String itemString1 = message1.substring(0, i);
+            String itemString2 = message1.substring(i + 1, j);
+            String itemString3 = message1.substring(j + 1, message1.length());
+            Log.d(TAG, "onEventMsg 19198： " + "  " + i + message1 + "  " + itemString1);
+            Log.d(TAG, "onEventMsg 191981：" + j + itemString2);
             Log.d(TAG, "onEventMsg 191982：" + itemString3);
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
-            if (itemString1.equals("false")){
+            if (itemString1.equals("false")) {
                 pir1.setTextColor(color1);
-            }else {
+            } else {
                 pir1.setTextColor(color2);
             }
-            if (itemString2.equals("false")){
+            if (itemString2.equals("false")) {
                 pir2.setTextColor(color1);
-            }else {
+            } else {
                 pir2.setTextColor(color2);
             }
-            if (itemString2.equals("false")){
+            if (itemString2.equals("false")) {
                 pir3.setTextColor(color1);
-            }else {
+            } else {
                 pir3.setTextColor(color2);
             }
-        }else if (messageEvent.getState() == 19197) {
+        } else if (messageEvent.getState() == 19197) {
             String message = (String) messageEvent.getT();
-            String message1 = message.replace("\"","");
-            Log.d(TAG, "onEventMsg 19197： "+message1);
+            String message1 = message.replace("\"", "");
+            Log.d(TAG, "onEventMsg 19197： " + message1);
         }
     }
 
@@ -323,7 +328,7 @@ public class TestFragment extends Fragment {
         }
     }
 
-    public static SpannableString matcherSearchText(int color, String text, String keyword,int color2 , String keyword2) {
+    public static SpannableString matcherSearchText(int color, String text, String keyword, int color2, String keyword2) {
         SpannableString ss = new SpannableString(text);
         Pattern pattern = Pattern.compile(keyword);
         Pattern pattern2 = Pattern.compile(keyword2);
