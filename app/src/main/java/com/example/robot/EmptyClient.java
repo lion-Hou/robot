@@ -235,7 +235,7 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.editTaskQueue:
                 jsonObject = new JSONObject(message);
-                EventBus.getDefault().post(new EventBusMessage(20004, message));
+                EventBus.getDefault().post(new EventBusMessage(20009, message));
                 Log.d("edit_Queue",message );
                 break;
 

@@ -212,10 +212,13 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                          * houbo
                          */
                         if (!Content.map_Name.equals(null)){
+                            if (taskNameList.length>0){
                             for (int i = 0; i < taskNameList.length ; i++) {
                                 gsonUtils.setTaskName(taskNameList[i]);
                                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_TASK));
                             }
+                            }
+                            gsonUtils.setMapName(Content.map_Name);
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETE_MAP));
                             managerSelected.setText(R.string.please_select_map);
                             Content.map_Name = null;
