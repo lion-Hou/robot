@@ -44,7 +44,7 @@ public final class Content {
 
     public static final String OLD_POINT_NAME = "old_point_name";//老地图名字
     public static final String NEW_POINT_NAME = "new_point_name";//新地图名字
-
+    public static final String VERSION_CODE = "version_code";//获得版本号
     public static final String CHARGING = "request_msg";
     //type id
     public static final String STARTUP = "startUp";//前进
@@ -163,6 +163,9 @@ public final class Content {
     public static final String RESET_ROBOT = "reset_robot";//重命名点
     public static final String OLD_POSITION_NAME = "old_position_name";//原始点
     public static final String NEW_POSITION_NAME = "new_position_name";//新点
+
+    public static final String dbPointName = "dbPointName";//点名字
+    public static final String dbSpinnerTime = "dbSpinnerTime";//点时间
 
     //test
     public static final String GET_ULTRASONIC = "get_ultrasonic";//声呐设备

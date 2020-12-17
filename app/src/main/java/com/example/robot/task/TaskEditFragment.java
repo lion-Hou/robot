@@ -29,6 +29,7 @@ import com.example.robot.R;
 import com.example.robot.adapter.MyAdapter;
 import com.example.robot.adapter.MyItemTouchHelperCallback;
 import com.example.robot.bean.SaveTaskBean;
+import com.example.robot.bean.TaskStateList;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -400,13 +401,14 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
 
 
                 //数据
-                String point = jsonObject.getString(Content.editTaskQueue);
-                JSONObject js = new JSONObject(point);
-                JSONArray jsonArray = js.getJSONArray(Content.fixTaskName);
+                JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueue);
                 for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject js = jsonArray.getJSONObject(i);
                     SaveTaskBean saveTaskBean = new SaveTaskBean();
-                    saveTaskBean.setPoint_Name(jsonArray.getJSONObject(i).getString(Content.POINT_NAME));
-                    saveTaskBean.setSpinerIndex(jsonArray.getJSONObject(i).getInt(Content.TASK_DISINFECT_TIME));
+                    saveTaskBean.setPoint_Name(jsonArray.getJSONObject(i).getString(Content.dbPointName));
+                    saveTaskBean.setSpinerIndex(jsonArray.getJSONObject(i).getInt(Content.dbSpinnerTime));
+                    Log.d("details_hh", "" + js.getString(Content.dbSpinnerTime));
+                    Log.d("details_hh", "" + js.getString(Content.dbPointName));
                     mList.add(saveTaskBean);
                 }
                 mAdapter.refeshList(mList);

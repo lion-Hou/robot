@@ -260,16 +260,14 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 true);
-        //popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
         popWindow.setWidth(300);
         popWindow.setHeight(400);
         popWindow.setTouchable(true);
-        //popWindow.showAsDropDown(v, 0, 0);
         popWindow.showAsDropDown(taskManageDetails);
         popWindow.setBackgroundDrawable(new ColorDrawable(0));
         detailsTaskMap.setText(Content.first_map_Name);
         detailsTaskTask.setText(Content.fixTaskName);
-        recyclerView.removeAllViews();
+        //recyclerView.removeAllViews();
         //recyclerView.setItemViewCacheSize(0);
     }
 
@@ -498,16 +496,13 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                  * 详情->点数据
                  */
                 try {
-                    String point = jsonObject.getString(Content.editTaskQueue);
-                    JSONObject json = new JSONObject(point);
-                    Log.d("details_hh", "" + json.toString());
-                    JSONArray jsonArray = json.getJSONArray(Content.fixTaskName);
+                    JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueue);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject js = jsonArray.getJSONObject(i);
-                        TaskStateList taskStateList = new TaskStateList(js.getString(Content.POINT_NAME),
-                                js.getInt(Content.TASK_DISINFECT_TIME));
-                        Log.d("details_hh", "" + js.getString(Content.TASK_DISINFECT_TIME));
-                        Log.d("details_hh", "" + js.getString(Content.POINT_NAME));
+                        TaskStateList taskStateList = new TaskStateList(js.getString(Content.dbPointName),
+                                js.getInt(Content.dbSpinnerTime));
+                        Log.d("details_hh", "" + js.getString(Content.dbSpinnerTime));
+                        Log.d("details_hh", "" + js.getString(Content.dbPointName));
                         listPointName.add(taskStateList);
                     }
                     mAdapter.refeshList(listPointName);

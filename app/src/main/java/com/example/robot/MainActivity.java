@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
 import com.example.robot.map.FirstFragment;
@@ -107,6 +108,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
     }
 
+    /**
+     * 更新上位机
+     */
     public void ota() {
         try {
             InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
@@ -116,7 +120,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             while (is.available() > 0) {
                 byteBuffer.put((byte) is.read());
             }
-            //gsonUtils.setByteBuffer(byteBuffer);
+            MainActivity.emptyClient.send(byteBuffer);//更新上位机apk
         } catch (Exception e) {
             e.printStackTrace();
         }

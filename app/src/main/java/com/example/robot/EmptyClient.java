@@ -48,6 +48,7 @@ public class EmptyClient extends WebSocketClient {
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         //发送系统时间给下位机
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));//断连监听
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LED_LEVEL));//连接成功，获得上位机版本号
         System.out.println("connect state new connection opened"+isConnected);
     }
 
