@@ -48,7 +48,8 @@ public class EmptyClient extends WebSocketClient {
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         //发送系统时间给下位机
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));//断连监听
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LED_LEVEL));//连接成功，获得上位机版本号
+        //获得上位机版本号
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.versionCode));
         System.out.println("connect state new connection opened"+isConnected);
     }
 
@@ -108,6 +109,11 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage<>(11110,"11110"));
                 break;
             case Content.CONN_OK:
+                jsonObject = new JSONObject(message);
+                Log.d("fdsfsdfsd", String.valueOf(jsonObject));
+                int versionCode = jsonObject.getInt(Content.versionCode);
+                Log.d("fdsfsdfsd", String.valueOf(versionCode));
+                EventBus.getDefault().post(new EventBusMessage(12345, versionCode));
                 isConnected = true;
                 EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
                 //20201207.121212+

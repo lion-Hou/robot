@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
+    android:id="@+id/myTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/mylist"
+        android:layout_width="200px"
+        android:layout_height="400px"/>
+
+    <RelativeLayout
+        android:id="@+id/map_manage_relative_border"
+        android:layout_width="match_parent"
+        android:layout_height="400px"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/mylist">
+
+        <RelativeLayout
+            android:id="@+id/map_manage_relative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/manager_mapImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
+
+
+    <Button
+        android:id="@+id/myConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myTitle"
+        android:text="@string/myConfirm"/>
+    <Button
+        android:id="@+id/myExc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myTitle"
+        android:layout_toRightOf="@+id/myConfirm"
+        android:text="@string/myExc"/>
+
+
+</RelativeLayout>

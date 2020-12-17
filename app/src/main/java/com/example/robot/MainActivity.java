@@ -31,6 +31,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -85,7 +86,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         waitingDialog = new ProgressDialog(MainActivity.this);
         new TimeThread().start();
-        //ota();
     }
 
     @Override
@@ -107,24 +107,24 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             e.printStackTrace();
         }
     }
-
-    /**
-     * 更新上位机
-     */
-    public void ota() {
-        try {
-            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
-            int size = is.available();
-            Log.d("ggg", String.valueOf(size));
-            ByteBuffer byteBuffer =ByteBuffer.allocate(size);
-            while (is.available() > 0) {
-                byteBuffer.put((byte) is.read());
-            }
-            MainActivity.emptyClient.send(byteBuffer);//更新上位机apk
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//
+//    /**
+//     * 更新上位机
+//     */
+//    public void ota() {
+//        try {
+//            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
+//            int size = is.available();
+//            Log.d("ggg", String.valueOf(size));
+//            ByteBuffer byteBuffer =ByteBuffer.allocate(size);
+//            while (is.available() > 0) {
+//                byteBuffer.put((byte) is.read());
+//            }
+//            MainActivity.emptyClient.send(byteBuffer);//更新上位机apk
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
@@ -159,10 +159,36 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             if(message.contains("701")){
                 Toast.makeText(this, "检测到机器人附近存在障碍物", Toast.LENGTH_SHORT).show();
             }
+        }else if (messageEvent.getState() == 12345) {
+            Log.d("fdsfsdfsd111", "String.valueOf(versionCode)");
+            int versionCode = (int) messageEvent.getT();
+            Log.d("fdsfsdfsd111", String.valueOf(versionCode));
+            if (Content.version < versionCode) {
+                ota();
+            }
+        }
 
-//            if (!"充电".equals(message) && !"放电".equals(message)) {
-//                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void ota(){
+        try {
+            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
+            int size = is.available();
+            Log.d("ggg111", String.valueOf(size));
+//            ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+//            while (is.available() > 0) {
+//                byteBuffer.put((byte) is.read());
 //            }
+            ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
+            byte[] buff = new byte[100];
+            int rc = 0;
+            while ((rc = is.read(buff, 0, 100)) > 0) {
+                swapStream.write(buff, 0, rc);
+            }
+            byte[] in2b = swapStream.toByteArray();
+            MainActivity.emptyClient.send(in2b);//更新上位机apk
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
