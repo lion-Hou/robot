@@ -125,7 +125,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-        //Content.fixTaskName = null;
+        Content.manageTaskName = null;
         Log.d("hhhh", "manger_stop");
     }
 
@@ -279,6 +279,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             public void onClick(DialogInterface dialog, int which) {
                 System.out.println("which" + which);
                 Content.fixTaskName = taskNameList[which];
+                Content.manageTaskName = taskNameList[which];
                 taskName.setText(taskNameList[which]);
                 Log.d(TAG, "ggggg ： " + taskName.getText());
                 gsonUtils.setTaskName(Content.fixTaskName);
@@ -376,7 +377,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             taskManageMapRelative.addView(charging_Img);
                         }
                         if (pointType == 2) {
-                            if (Content.fixTaskName == null){
+                            if (Content.manageTaskName == null){
                                 imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                         (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                         0, 0);

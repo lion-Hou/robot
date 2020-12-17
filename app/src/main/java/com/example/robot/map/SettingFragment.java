@@ -69,6 +69,8 @@ public class SettingFragment extends Fragment {
     Button settingsCancel;
     @BindView(R.id.settings_main_layout)
     ConstraintLayout settingsMainLayout;
+    @BindView(R.id.test_fragment)
+    ConstraintLayout testFragment;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -114,6 +116,11 @@ public class SettingFragment extends Fragment {
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VOICE_LEVEL));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
         initView();
+        testFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
         return view;
     }
 
@@ -129,11 +136,11 @@ public class SettingFragment extends Fragment {
         Log.d(TAG, "onEventMsg setting： " + messageEvent.getState());
         if (messageEvent.getState() == 20001) {
             int lowBattery = (int) messageEvent.getT();
-            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState()+"low_battery"+lowBattery);
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "low_battery" + lowBattery);
             settingsElectricityQuantity.setProgress(lowBattery);
         } else if (messageEvent.getState() == 20002) {
             int ledLevel = (int) messageEvent.getT();
-            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState()+"LED"+ledLevel);
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "LED" + ledLevel);
             if (ledLevel == 0) {
                 settingsLedBrightness.setSelection(0);
             } else if (ledLevel == 1) {
@@ -150,7 +157,7 @@ public class SettingFragment extends Fragment {
             } else {
                 settingsRobotSpeed.setSelection(2);
             }
-        }else if (messageEvent.getState() == 20004) {
+        } else if (messageEvent.getState() == 20004) {
             int voiceLevel = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + voiceLevel);
             settingsVolume.setProgress(voiceLevel);
@@ -158,79 +165,74 @@ public class SettingFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.settings_ok, R.id.settings_cancel,R.id.settings_versionNumber,R.id.settings_reset_robot})
+    @OnClick({R.id.settings_ok, R.id.settings_cancel, R.id.settings_versionNumber, R.id.settings_reset_robot})
     public void onViewClicked(View view) {
-            switch (view.getId()) {
-                case R.id.settings_reset_robot:
-                    NormalDialogUtil resetNormalDialog = new NormalDialogUtil();
-                    resetNormalDialog.showDialog(mContext, "","是否删除该地图","取消","确认" , new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //取消
-                            dialog.dismiss();
-                        }
-                    }, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //确定逻辑
-                            /**
-                             * houbo
-                             */
-                            if (!Content.map_Name.equals(null)){
-                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RESET_ROBOT));
-                                Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
-                            }
-                            dialog.dismiss();
-                        }
-                    });
-                    break;
-                case R.id.settings_ok:
-                    Log.d(TAG, "APPLY");
-                    int lowBattery = settingsElectricityQuantity.getProgress();
-                    gsonUtils.setLowBattery(lowBattery);
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LOW_BATTERY));//30-80
-
-                    int voiceLevel = settingsVolume.getProgress();
-                    gsonUtils.setVoiceLevel(voiceLevel);
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_VOICE_LEVEL));//0-15
-
-                    int ledLevel = settingsLedBrightness.getSelectedItemPosition();
-                    gsonUtils.setLedLevel(ledLevel);
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LED_LEVEL));//0,1,2
-
-                    int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
-                    gsonUtils.setSpeedLevel(robotSpeed);
-                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_SPEED_LEVEL));//0,1,2
-
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_fragment, new MainFragment(), null)
-                            .addToBackStack(null)
-                            .commit();
-                    Toast.makeText(mContext.getApplicationContext(),"应用成功", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.settings_cancel:
-                    Log.d(TAG, "返回");
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_fragment, new MainFragment(), null)
-                            .addToBackStack(null)
-                            .commit();
-                    break;
-                case R.id.settings_versionNumber:
-                    Log.d(TAG, "banbenhao");
-                    System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
-                    //获得当前系统已经启动的时间
-                    mHints[mHints.length - 1] = SystemClock.uptimeMillis();
-                    if(SystemClock.uptimeMillis()-mHints[0]<=500){
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_fragment, new TestFragment(), null)
-                                .addToBackStack(null)
-                                .commit();
-                        Toast.makeText(mContext.getApplicationContext(),"进入测试页面", Toast.LENGTH_SHORT).show();
+        switch (view.getId()) {
+            case R.id.settings_reset_robot:
+                NormalDialogUtil resetNormalDialog = new NormalDialogUtil();
+                resetNormalDialog.showDialog(mContext, "", "是否进行初始化", "取消", "确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //取消
+                        dialog.dismiss();
                     }
-                    break;
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //确定逻辑
+                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RESET_ROBOT));
+                            Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
+                        dialog.dismiss();
+                    }
+                });
+                break;
+            case R.id.settings_ok:
+                Log.d(TAG, "APPLY");
+                int lowBattery = settingsElectricityQuantity.getProgress();
+                gsonUtils.setLowBattery(lowBattery);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LOW_BATTERY));//30-80
+
+                int voiceLevel = settingsVolume.getProgress();
+                gsonUtils.setVoiceLevel(voiceLevel);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_VOICE_LEVEL));//0-15
+
+                int ledLevel = settingsLedBrightness.getSelectedItemPosition();
+                gsonUtils.setLedLevel(ledLevel);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LED_LEVEL));//0,1,2
+
+                int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
+                gsonUtils.setSpeedLevel(robotSpeed);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_SPEED_LEVEL));//0,1,2
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new MainFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                Toast.makeText(mContext.getApplicationContext(), "应用成功", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.settings_cancel:
+                Log.d(TAG, "返回");
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment, new MainFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.settings_versionNumber:
+                Log.d(TAG, "banbenhao");
+                System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
+                //获得当前系统已经启动的时间
+                mHints[mHints.length - 1] = SystemClock.uptimeMillis();
+                if (SystemClock.uptimeMillis() - mHints[0] <= 500) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment, new TestFragment(), null)
+                            .addToBackStack(null)
+                            .commit();
+                    Toast.makeText(mContext.getApplicationContext(), "进入测试页面", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 }

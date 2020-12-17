@@ -21,6 +21,12 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="34dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/test_fragment"
+            >
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_main_layout"
@@ -151,7 +157,13 @@
                 tools:ignore="MissingConstraints"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <Spinner
+            android:id="@+id/settings_debug"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:textSize="30dp"
+            android:entries="@array/spinner_settings_debug"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

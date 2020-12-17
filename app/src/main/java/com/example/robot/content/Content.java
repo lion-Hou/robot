@@ -11,6 +11,7 @@ public final class Content {
     public static String first_map_Name = null;
     public static String task_Name = null;
     public static String fixTaskName = null;
+    public static String manageTaskName = null;
 
     /**
      * robotState：
