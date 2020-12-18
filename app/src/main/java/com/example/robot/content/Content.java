@@ -34,6 +34,7 @@ public final class Content {
     */
     public static int taskState = 0;//机器人执行任务的状态
     public static int taskIndex = 0;
+    public static int version = 0;//初始版本号
 
     public static final String MAP_NAME = "map_Name";//地图名字
 
@@ -45,7 +46,6 @@ public final class Content {
 
     public static final String OLD_POINT_NAME = "old_point_name";//老地图名字
     public static final String NEW_POINT_NAME = "new_point_name";//新地图名字
-    public static final String VERSION_CODE = "version_code";//获得版本号
     public static final String CHARGING = "request_msg";
     //type id
     public static final String STARTUP = "startUp";//前进
@@ -83,6 +83,7 @@ public final class Content {
     public static final String editTaskQueue = "editTaskQueue";//编辑任务
     public static final String editTaskQueueType = "edittaskqueuetype";//编辑任务类型
     public static final String editTaskQueueTime = "edittaskqueuetime";//编辑任务类型
+    public static final String versionCode = "versionCode";//编辑任务类型
 
     //settings
     public static final String GET_LED_LEVEL = "get_led_level";//获取LED亮度

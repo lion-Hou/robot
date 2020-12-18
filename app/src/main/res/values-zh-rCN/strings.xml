@@ -58,6 +58,8 @@
     <string name="task_type_select">请选择任务类型</string>
     <string name="task_type_time">请选择任务时间</string>
     <string name="task_type_week">请选择任务周</string>
+    <string name="myConfirm">确认</string>
+    <string name="myExc">取消</string>
 
 
     <string-array name="spinner_time">
