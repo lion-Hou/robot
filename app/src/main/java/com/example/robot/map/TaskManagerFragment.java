@@ -477,7 +477,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
                 String message = (String) messageEvent.getT();
                 taskPoint = message.replace("\"","");
-                Log.d(TAG, "onEventMsg200049 ： " + taskPoint);
+                Log.d(TAG, "onEventMsg20004 ： " + taskPoint);
                 String time = jsonObject.getString(Content.editTaskQueueTime);
                 Log.d(TAG, "onEventMsgtime ： " + time);
                 if (time.equals("FF:FF")){

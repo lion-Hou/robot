@@ -164,12 +164,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             int versionCode = (int) messageEvent.getT();
             Log.d("fdsfsdfsd111", String.valueOf(versionCode));
             if (Content.version < versionCode) {
-                ota();
+                //ota();
             }
         }
 
     }
 
+    /**
+     * 升级上位机
+     */
     public void ota(){
         try {
             InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
