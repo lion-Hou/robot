@@ -19,6 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -51,7 +52,7 @@ public class TestFragment extends Fragment {
     TextView testSelfInspectionTitle;
     @BindView(R.id.test_self_inspection)
     TextView testSelfInspection;
-    @BindView(R.id.center_view)
+    @BindView(R.id.center_view_tv)
     TextView centerView;
     @BindView(R.id.ultraSonic1)
     TextView ultraSonic1;
@@ -91,7 +92,7 @@ public class TestFragment extends Fragment {
     Switch switchUvc4;
     @BindView(R.id.test_relative3)
     RelativeLayout testRelative3;
-    @BindView(R.id.pir_main)
+    @BindView(R.id.pir_main_tv)
     TextView pirMain;
     @BindView(R.id.pir1)
     TextView pir1;
@@ -294,6 +295,8 @@ public class TestFragment extends Fragment {
             Log.d(TAG, "onEventMsg 19198： " + "  " + i + message1 + "  " + itemString1);
             Log.d(TAG, "onEventMsg 191981：" + j + itemString2);
             Log.d(TAG, "onEventMsg 191982：" + itemString3);
+
+            Toast.makeText(mContext, "PIR"+itemString1+","+itemString2+","+itemString3, Toast.LENGTH_SHORT).show();
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
             if (itemString1.equals("false")) {
@@ -306,7 +309,8 @@ public class TestFragment extends Fragment {
             } else {
                 pir2.setTextColor(color2);
             }
-            if (itemString2.equals("false")) {
+
+            if (itemString3.equals("false")) {
                 pir3.setTextColor(color1);
             } else {
                 pir3.setTextColor(color2);
