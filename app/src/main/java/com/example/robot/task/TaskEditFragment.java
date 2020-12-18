@@ -229,9 +229,10 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                         if (which == 0 || which == 1) {
                             myWeek.clear();
                             selectWeek = "";
-                            taskTypeSelectWeek.setText(selectWeek);
+                            taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.GONE);
                         } else {
+                            taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
                         }
                         Log.d("taskvalue", typeValue);
