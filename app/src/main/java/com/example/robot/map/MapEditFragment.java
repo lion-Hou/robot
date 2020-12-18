@@ -12,6 +12,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -224,10 +226,10 @@ public class MapEditFragment extends Fragment{
             if (parent != null) {
                 parent.removeView(editMapImage);
             }
+            Drawable drawable = new BitmapDrawable(mBitmap);
 
-            mapRelative.addView(editMapImage);
-
-
+            mapRelative.setBackground(drawable);
+//            mapRelative.addView(editMapImage);
 //            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
         } else if (messageEvent.getState() == 10008) {
             for (int i = 0; i < imageViewArrayList.size(); i++) {

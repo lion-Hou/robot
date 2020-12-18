@@ -44,15 +44,31 @@
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:layout_below="@+id/test_self_inspection">
-            <TextView
+
+            <RelativeLayout
                 android:id="@+id/center_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/center_view_tv"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_centerInParent="true"
                 android:text="UltraSonic"
                 android:gravity="center"
                 android:background="@drawable/text_view_background">
             </TextView>
+            <TextView
+                android:id="@+id/laser1"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="Laser"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:background="@drawable/text_view_background"/>
+            </RelativeLayout>
+
 
             <TextView
                 android:id="@+id/ultraSonic1"
@@ -239,21 +255,37 @@
                 android:layout_toRightOf="@+id/test_relative3">
 
 
-                <TextView
+                <RelativeLayout
                     android:id="@+id/pir_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+                <TextView
+                    android:id="@+id/pir_main_tv"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_centerInParent="true"
                     android:text="PIR"
                     android:textSize="30dp"
                     android:gravity="center"
-                    android:background="@drawable/text_view_background"></TextView>
+                    android:background="@drawable/text_view_background"/>
+
+                    <TextView
+                        android:id="@+id/laser"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="Laser"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:background="@drawable/text_view_background"/>
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/pir1"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/pir_main"
+                    android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/pir_main"
                     android:text="PIR A"
                     android:textSize="20dp"
@@ -264,7 +296,7 @@
                     android:id="@+id/pir2"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/pir_main"
+                    android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/pir_main"
                     android:text="PIR B"
                     android:textSize="20dp"
@@ -274,11 +306,23 @@
 
                 <TextView
                     android:id="@+id/pir3"
-                    android:layout_width="60dp"
+                    android:layout_width="50dp"
                     android:layout_height="100dp"
                     android:layout_above="@+id/pir_main"
                     android:layout_centerHorizontal="true"
                     android:text="PIR C"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:background="@drawable/text_view_background"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/pir4"
+                    android:layout_width="50dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/pir_main"
+                    android:layout_centerHorizontal="true"
+                    android:text="PIR D"
                     android:textSize="20dp"
                     android:gravity="center"
                     android:background="@drawable/text_view_background"
