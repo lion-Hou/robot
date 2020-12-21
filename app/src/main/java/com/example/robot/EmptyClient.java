@@ -257,6 +257,9 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("HOUH111",message );
                 EventBus.getDefault().post(new EventBusMessage(90001, message));
                 break;
+            case Content.UPDATE:
+                EventBus.getDefault().post(new EventBusMessage(90009, message));
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + gsonUtils.getType(message));
         }

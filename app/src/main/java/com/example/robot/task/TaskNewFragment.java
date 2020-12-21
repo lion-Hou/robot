@@ -92,7 +92,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     private String typeTime = "FF:FF";
     private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private List<String> myWeek = new ArrayList<>();
-
+    private String[] taskNameList;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -132,6 +132,8 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
         initView();
         initListener();
+        gsonUtils.setMapName(Content.first_map_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
         return view;
     }
 
@@ -142,6 +144,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
         taskTypeSelectTime.setOnClickListener(this);
         taskTypeSelectWeek.setOnClickListener(this);
         taskNewBack.setOnClickListener(this);
+        newMapMapNameEditText.setOnClickListener(this);
     }
 
     private void initListener() {
@@ -151,44 +154,59 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.new_map_mapName_editText:
+                break;
             case R.id.task_new_save:
                 Log.d("tasklog", "taskname");
+                boolean isRepeat = false;
+                if (taskNameList != null){
+                    for (int i = 0; i <taskNameList.length ; i++) {
+                        if (taskNameList[i].equals(newMapMapNameEditText.getText().toString())){
+                            isRepeat = true;
+                        }
+                    }
+                }
+
                 if (TextUtils.isEmpty(newMapMapNameEditText.getText().toString())) {
                     Toast.makeText(mContext, "先输入任务名字", Toast.LENGTH_SHORT).show();
                 } else {
-                    new AlertDialog.Builder(mContext)
-                            .setTitle("提示")
-                            .setMessage("任务保存成功")
-                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    if (isRepeat == false){
+                        new AlertDialog.Builder(mContext)
+                                .setTitle("提示")
+                                .setMessage("任务保存成功")
+                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
-                                    /**
-                                     * 保存任务
-                                     */
-                                    gsonUtils.setMapName(Content.first_map_Name);
-                                    gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());//任务名
-                                    gsonUtils.setList(mList);//导航点和所对于时间
-                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));//保存任务
+                                        /**
+                                         * 保存任务
+                                         */
+                                        gsonUtils.setMapName(Content.first_map_Name);
+                                        gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());//任务名
+                                        gsonUtils.setList(mList);//导航点和所对于时间
+                                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));//保存任务
 
-                                    if (typeValue.equals(type[1])) {
-                                        for (int i =0;i< weeks.length; i++) {
-                                            myWeek.add(weeks[i]);
+                                        if (typeValue.equals(type[1])) {
+                                            for (int i =0;i< weeks.length; i++) {
+                                                myWeek.add(weeks[i]);
+                                            }
+                                            gsonUtils.setTaskWeek(myWeek);//任务周期
+                                        } else {
+                                            gsonUtils.setTaskWeek(myWeek);//任务周期
                                         }
-                                        gsonUtils.setTaskWeek(myWeek);//任务周期
-                                    } else {
-                                        gsonUtils.setTaskWeek(myWeek);//任务周期
-                                    }
-                                    gsonUtils.setTaskTime(typeTime);//任务时间 “20：20”
-                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TASK_ALARM));//定时任务
+                                        gsonUtils.setTaskTime(typeTime);//任务时间 “20：20”
+                                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TASK_ALARM));//定时任务
 
-                                    getActivity().getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .replace(R.id.first_fragment, new TaskManagerFragment(), null)
-                                            .addToBackStack(null)
-                                            .commit();
-                                }
-                            }).show();
+                                        getActivity().getSupportFragmentManager()
+                                                .beginTransaction()
+                                                .replace(R.id.first_fragment, new TaskManagerFragment(), null)
+                                                .addToBackStack(null)
+                                                .commit();
+                                    }
+                                }).show();
+                    }else if (isRepeat == true){
+                        Toast.makeText(mContext, "任务名不能重复", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             case R.id.addtask_select_point:
@@ -351,6 +369,9 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
             point_name = new String[point.length];
             pointList(point);
             Log.d(TAG, "收到点的数据大小new task ： " + point.length);
+        }else if (messageEvent.getState() == 10017) {
+            taskNameList = (String[]) messageEvent.getT();
+            Log.d("task_name", taskNameList[0]);
         }
     }
 

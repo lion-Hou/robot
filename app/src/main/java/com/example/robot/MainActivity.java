@@ -62,6 +62,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private NormalDialogUtil disconnectDialog;
     private static final int msgKey = 1;
     private ProgressDialog waitingDialog;
+    private ProgressDialog otaDialog;
 
 
     @Override
@@ -85,6 +86,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, mainFragment).commit();
 
         waitingDialog = new ProgressDialog(MainActivity.this);
+        otaDialog = new ProgressDialog(MainActivity.this);
         new TimeThread().start();
     }
 
@@ -163,9 +165,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             Log.d("fdsfsdfsd111", "String.valueOf(versionCode)");
             int versionCode = (int) messageEvent.getT();
             Log.d("fdsfsdfsd111", String.valueOf(versionCode));
-            if (Content.version < versionCode) {
-        //        ota();
+            if (Content.version == versionCode) {
+//                showOtaDialog();
+//                ota();
             }
+        }else if (messageEvent.getState() == 90009){
+            Log.d("fdsfsdfsd111", "update");
+            otaDialog.dismiss();
         }
 
     }
@@ -193,6 +199,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showOtaDialog() {
+        /* 等待Dialog具有屏蔽其他控件的交互能力
+         * @setCancelable 为使屏幕不可点击，设置为不可取消(false)
+         * 下载等事件完成后，主动调用函数关闭该Dialog
+         */
+        otaDialog.setTitle("提示");
+        otaDialog.setMessage("正在升级上位机，请保持连接,升级成功后，请点击重新连接");
+        otaDialog.setIndeterminate(true);
+        otaDialog.setCancelable(false);
+        otaDialog.show();
     }
 
 
