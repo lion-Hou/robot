@@ -170,6 +170,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
+    /**
+     * 升级上位机
+     */
     public void ota(){
         try {
             InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");

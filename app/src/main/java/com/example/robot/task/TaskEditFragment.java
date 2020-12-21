@@ -229,9 +229,10 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                         if (which == 0 || which == 1) {
                             myWeek.clear();
                             selectWeek = "";
-                            taskTypeSelectWeek.setText(selectWeek);
+                            taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.GONE);
                         } else {
+                            taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
                         }
                         Log.d("taskvalue", typeValue);
@@ -371,8 +372,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
             point_name = new String[point.length];
             pointList(point);
             Log.d(TAG, "收到点的数据大小 ： " + point.length);
-        } else if (messageEvent.getState() == 20004) {
-            Log.d(TAG, "onEventMsg20004 ： " + (String) messageEvent.getT());
+        } else if (messageEvent.getState() == 20009) {
+            Log.d(TAG, "onEventMsg20009 ： " + (String) messageEvent.getT());
             try {
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
                 //类型
