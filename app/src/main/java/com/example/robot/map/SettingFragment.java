@@ -73,6 +73,10 @@ public class SettingFragment extends Fragment {
     ConstraintLayout testFragment;
     @BindView(R.id.settings_debug)
     Spinner settingsDebug;
+    @BindView(R.id.robotNavigationSpeedTV)
+    TextView robotNavigationSpeedTV;
+    @BindView(R.id.settings_robotNavigationSpeed)
+    Spinner settingsRobotNavigationSpeed;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -154,11 +158,11 @@ public class SettingFragment extends Fragment {
         } else if (messageEvent.getState() == 20003) {
             int robotSpeed = (int) messageEvent.getT();
             if (robotSpeed == 0) {
-                settingsRobotSpeed.setSelection(0);
+                settingsRobotNavigationSpeed.setSelection(0);
             } else if (robotSpeed == 1) {
-                settingsRobotSpeed.setSelection(1);
+                settingsRobotNavigationSpeed.setSelection(1);
             } else {
-                settingsRobotSpeed.setSelection(2);
+                settingsRobotNavigationSpeed.setSelection(2);
             }
         } else if (messageEvent.getState() == 20004) {
             int voiceLevel = (int) messageEvent.getT();
@@ -174,7 +178,16 @@ public class SettingFragment extends Fragment {
             } else {
                 settingsDebug.setSelection(2);
             }
-        }
+        }else if (messageEvent.getState() == 20006) {
+            int robotSpeed = (int) messageEvent.getT();
+            if (robotSpeed == 0) {
+                settingsRobotSpeed.setSelection(0);
+            } else if (robotSpeed == 1) {
+                settingsRobotSpeed.setSelection(1);
+            } else {
+                settingsRobotSpeed.setSelection(2);
+            }
+    }
     }
 
 
@@ -215,11 +228,15 @@ public class SettingFragment extends Fragment {
 
                 int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
                 gsonUtils.setSpeedLevel(robotSpeed);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_SPEED_LEVEL));//0,1,2
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_PLAYPATHSPEEDLEVEL));//0,1,2
+
+                int robotSpeed2 = settingsRobotNavigationSpeed.getSelectedItemPosition();
+                gsonUtils.setSpeedLevel(robotSpeed2);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_NAVIGATIONSPEEDLEVEL));
 
                 int settingDebug = settingsDebug.getSelectedItemPosition();
                 gsonUtils.setWorkingMode(settingDebug);
-                Log.d(TAG, "workingmode"+settingDebug);
+                Log.d(TAG, "workingmode" + settingDebug);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.WORKING_MODE));
 
                 getActivity().getSupportFragmentManager()

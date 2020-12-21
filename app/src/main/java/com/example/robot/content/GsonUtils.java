@@ -170,7 +170,8 @@ public class GsonUtils {
             jsonObject.put(Content.NEW_MAP_NAME,newMapName);
             jsonObject.put(Content.SET_LED_LEVEL,ledLevel);
             jsonObject.put(Content.SET_LOW_BATTERY,lowBattery);
-            jsonObject.put(Content.SET_SPEED_LEVEL,speedLevel);
+            jsonObject.put(Content.SET_PLAYPATHSPEEDLEVEL,speedLevel);
+            jsonObject.put(Content.SET_NAVIGATIONSPEEDLEVEL,speedLevel);
             jsonObject.put(Content.SET_VOICE_LEVEL,voiceLevel);
             jsonObject.put(Content.OLD_POINT_NAME,oldPointName);
             jsonObject.put(Content.NEW_POINT_NAME,newPointName);
