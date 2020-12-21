@@ -35,6 +35,15 @@ public class GsonUtils {
     private int lowBattery;
     private int voiceLevel;
     private int speedLevel;
+    private int workingMode;
+
+    public int getWorkingMode() {
+        return workingMode;
+    }
+
+    public void setWorkingMode(int workingMode) {
+        this.workingMode = workingMode;
+    }
 
     public int getVoiceLevel() {
         return voiceLevel;
@@ -165,6 +174,7 @@ public class GsonUtils {
             jsonObject.put(Content.SET_VOICE_LEVEL,voiceLevel);
             jsonObject.put(Content.OLD_POINT_NAME,oldPointName);
             jsonObject.put(Content.NEW_POINT_NAME,newPointName);
+            jsonObject.put(Content.WORKING_MODE,workingMode);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {

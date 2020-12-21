@@ -96,6 +96,8 @@ public final class Content {
     public static final String GET_VOICE_LEVEL = "get_voice_level";//获取声音
     public static final String SET_VOICE_LEVEL = "set_voice_level";
 
+    public static final String WORKING_MODE= "working_mode";
+    public static final String GET_WORKING_MODE= "get_working_mode";
     public static final String DATATIME = "dataTime";//地图名称的列表array的key
     //task key
     public static final String TASK_X = "x";//x坐标

@@ -86,6 +86,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     double mBitmapWidth;
     private Bitmap mBitmap;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +118,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         gsonUtils = new GsonUtils();
         initListener();
         initView();
+
         mContext = view.getContext();
         return view;
     }
@@ -150,6 +153,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        final CharSequence allCancel=mContext.getString(R.string.all_cancel);
+        final CharSequence allOK=mContext.getString(R.string.all_ok);
         switch (view.getId()) {
             case R.id.manager_newMap:
                 Log.d(TAG, "onEventMsg ： " + "新建地图");
@@ -167,13 +172,21 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                 final EditText input_name = new EditText(getContext());
                 new AlertDialog.Builder(getContext())
                         .setView(input_name)
-                        .setMessage("请输入新的地图名")
-                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        .setMessage(R.string.dat_map_manage_dialog_text1)
+                        .setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String newMapName = input_name.getText().toString();
                                 System.out.println("pointName1111" + input_name);
+
+                                boolean isRepeat = false;
+                                for (int i = 0; i <mapName.length ; i++) {
+                                    if (mapName[i].equals(newMapName)){
+                                        isRepeat = true;
+                                    }
+                                }
                                 if (!newMapName.equals(null)&&!newMapName.equals("")&&!newMapName.isEmpty()){
+                                    if (isRepeat==false){
                                     gsonUtils.setOldMapName(Content.map_Name);
                                     gsonUtils.setNewMapName(newMapName);
                                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
@@ -181,14 +194,18 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_MAP));
                                     managerSelected.setText(Content.map_Name);
+                                        Toast.makeText(mContext, R.string.dat_map_manage_toast_text1, Toast.LENGTH_SHORT).show();
+                                    }else if (isRepeat==true){
+                                        Toast.makeText(mContext, R.string.dat_map_manage_toast_text2, Toast.LENGTH_SHORT).show();
+                                    }
                                 }else {
-                                    Toast.makeText(mContext, "请输入新的地图名"+newMapName, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext,R.string.dat_map_manage_toast_text3, Toast.LENGTH_SHORT).show();
                                 }
-                                gsonUtils.setMapName(Content.map_Name);
-                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+//                                gsonUtils.setMapName(Content.map_Name);
+//                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                             }
                         })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
@@ -198,7 +215,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             case R.id.manager_delete:
                 Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                 mapManageNormalDialog = new NormalDialogUtil();
-                mapManageNormalDialog.showDialog(mContext, "","是否删除该地图","取消","确认" , new DialogInterface.OnClickListener() {
+                final CharSequence datMapManageDialogText2=mContext.getString(R.string.dat_map_manage_dialog_text2);
+                mapManageNormalDialog.showDialog(mContext, "", (String) datMapManageDialogText2, (String) allCancel, (String)allOK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //取消
@@ -227,6 +245,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             managerDelete.setEnabled(false);
                             managerRename.setEnabled(false);
                             Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
+                            Toast.makeText(mContext,R.string.dat_map_manage_toast_text4, Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     }

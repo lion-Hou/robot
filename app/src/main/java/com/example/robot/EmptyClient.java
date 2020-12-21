@@ -233,6 +233,14 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
                 Log.d("speedLevel", String.valueOf(speedLevel));
                 break;
+
+            case Content.GET_WORKING_MODE:
+                jsonObject = new JSONObject(message);
+                int workingMode = jsonObject.getInt(Content.GET_WORKING_MODE);
+                EventBus.getDefault().post(new EventBusMessage(20005, workingMode));
+                Log.d("workingMode", String.valueOf(workingMode));
+                break;
+
             case Content.editTaskQueue:
                 jsonObject = new JSONObject(message);
                 EventBus.getDefault().post(new EventBusMessage(20009, message));

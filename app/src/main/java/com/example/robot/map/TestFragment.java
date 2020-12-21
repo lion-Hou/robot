@@ -106,6 +106,12 @@ public class TestFragment extends Fragment {
     RelativeLayout testFragment;
     @BindView(R.id.test_back)
     Button testBack;
+    @BindView(R.id.laser1)
+    TextView laser1;
+    @BindView(R.id.laser)
+    TextView laser;
+    @BindView(R.id.pir4)
+    TextView pir4;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -296,7 +302,7 @@ public class TestFragment extends Fragment {
             Log.d(TAG, "onEventMsg 191981：" + j + itemString2);
             Log.d(TAG, "onEventMsg 191982：" + itemString3);
 
-            Toast.makeText(mContext, "PIR"+itemString1+","+itemString2+","+itemString3, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "PIR" + itemString1 + "," + itemString2 + "," + itemString3, Toast.LENGTH_SHORT).show();
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
             if (itemString1.equals("false")) {
@@ -315,6 +321,17 @@ public class TestFragment extends Fragment {
             } else {
                 pir3.setTextColor(color2);
             }
+        } else if (messageEvent.getState() == 19191) {
+            String message = (String) messageEvent.getT();
+            int color1 = Color.parseColor("#00FF00");
+            int color2 = Color.parseColor("#FF0000");
+            if (message.contains("701")) {
+                laser.setTextColor(color1);
+                laser1.setTextColor(color1);
+            }else {
+                laser.setTextColor(color2);
+                laser1.setTextColor(color2);
+            }
         } else if (messageEvent.getState() == 19197) {
             String message = (String) messageEvent.getT();
             try {
@@ -324,106 +341,99 @@ public class TestFragment extends Fragment {
                 Log.d(TAG, "onEventMsg 191971：" + jsonArray.length());
                 JSONObject jsonObject00 = jsonArray.getJSONObject(0);
                 JSONObject jsonObject01 = jsonArray.getJSONObject(1);
-                String X00=jsonObject00.getString("get_ultrasonic_x");
-                String Y00=jsonObject00.getString("get_ultrasonic_y");
-                String X01=jsonObject01.getString("get_ultrasonic_x");
-                String Y01=jsonObject01.getString("get_ultrasonic_y");
-                if (X00.equals(X01)&&Y00.equals(Y01)){
+                String X00 = jsonObject00.getString("get_ultrasonic_x");
+                String Y00 = jsonObject00.getString("get_ultrasonic_y");
+                String X01 = jsonObject01.getString("get_ultrasonic_x");
+                String Y01 = jsonObject01.getString("get_ultrasonic_y");
+                if (X00.equals(X01) && Y00.equals(Y01)) {
                     ultraSonic1.setTextColor(color2);
-                }else {
+                } else {
                     ultraSonic1.setTextColor(color1);
                 }
 
                 JSONObject jsonObject10 = jsonArray.getJSONObject(2);
                 JSONObject jsonObject11 = jsonArray.getJSONObject(3);
-                String X10=jsonObject10.getString("get_ultrasonic_x");
-                String Y10=jsonObject10.getString("get_ultrasonic_y");
-                String X11=jsonObject11.getString("get_ultrasonic_x");
-                String Y11=jsonObject11.getString("get_ultrasonic_y");
-                if (X10.equals(X11)&&Y10.equals(Y11)){
+                String X10 = jsonObject10.getString("get_ultrasonic_x");
+                String Y10 = jsonObject10.getString("get_ultrasonic_y");
+                String X11 = jsonObject11.getString("get_ultrasonic_x");
+                String Y11 = jsonObject11.getString("get_ultrasonic_y");
+                if (X10.equals(X11) && Y10.equals(Y11)) {
                     ultraSonic2.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic2.setTextColor(color1);
                 }
 
                 JSONObject jsonObject20 = jsonArray.getJSONObject(4);
                 JSONObject jsonObject21 = jsonArray.getJSONObject(5);
-                String X20=jsonObject20.getString("get_ultrasonic_x");
-                String Y20=jsonObject20.getString("get_ultrasonic_y");
-                String X21=jsonObject21.getString("get_ultrasonic_x");
-                String Y21=jsonObject21.getString("get_ultrasonic_y");
-                if (X20.equals(X21)&&Y20.equals(Y21)){
+                String X20 = jsonObject20.getString("get_ultrasonic_x");
+                String Y20 = jsonObject20.getString("get_ultrasonic_y");
+                String X21 = jsonObject21.getString("get_ultrasonic_x");
+                String Y21 = jsonObject21.getString("get_ultrasonic_y");
+                if (X20.equals(X21) && Y20.equals(Y21)) {
                     ultraSonic3.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic3.setTextColor(color1);
                 }
 
                 JSONObject jsonObject30 = jsonArray.getJSONObject(6);
                 JSONObject jsonObject31 = jsonArray.getJSONObject(7);
-                String X30=jsonObject30.getString("get_ultrasonic_x");
-                String Y30=jsonObject30.getString("get_ultrasonic_y");
-                String X31=jsonObject31.getString("get_ultrasonic_x");
-                String Y31=jsonObject31.getString("get_ultrasonic_y");
-                if (X30.equals(X31)&&Y30.equals(Y31)){
+                String X30 = jsonObject30.getString("get_ultrasonic_x");
+                String Y30 = jsonObject30.getString("get_ultrasonic_y");
+                String X31 = jsonObject31.getString("get_ultrasonic_x");
+                String Y31 = jsonObject31.getString("get_ultrasonic_y");
+                if (X30.equals(X31) && Y30.equals(Y31)) {
                     ultraSonic4.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic4.setTextColor(color1);
                 }
 
 
                 JSONObject jsonObject40 = jsonArray.getJSONObject(8);
                 JSONObject jsonObject41 = jsonArray.getJSONObject(9);
-                String X40=jsonObject40.getString("get_ultrasonic_x");
-                String Y40=jsonObject40.getString("get_ultrasonic_y");
-                String X41=jsonObject41.getString("get_ultrasonic_x");
-                String Y41=jsonObject41.getString("get_ultrasonic_y");
-                if (X40.equals(X41)&&Y40.equals(Y41)){
+                String X40 = jsonObject40.getString("get_ultrasonic_x");
+                String Y40 = jsonObject40.getString("get_ultrasonic_y");
+                String X41 = jsonObject41.getString("get_ultrasonic_x");
+                String Y41 = jsonObject41.getString("get_ultrasonic_y");
+                if (X40.equals(X41) && Y40.equals(Y41)) {
                     ultraSonic5.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic5.setTextColor(color1);
                 }
 
                 JSONObject jsonObject50 = jsonArray.getJSONObject(10);
                 JSONObject jsonObject51 = jsonArray.getJSONObject(11);
-                String X50=jsonObject50.getString("get_ultrasonic_x");
-                String Y50=jsonObject50.getString("get_ultrasonic_y");
-                String X51=jsonObject51.getString("get_ultrasonic_x");
-                String Y51=jsonObject51.getString("get_ultrasonic_y");
-                if (X50.equals(X51)&&Y50.equals(Y51)){
+                String X50 = jsonObject50.getString("get_ultrasonic_x");
+                String Y50 = jsonObject50.getString("get_ultrasonic_y");
+                String X51 = jsonObject51.getString("get_ultrasonic_x");
+                String Y51 = jsonObject51.getString("get_ultrasonic_y");
+                if (X50.equals(X51) && Y50.equals(Y51)) {
                     ultraSonic6.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic6.setTextColor(color1);
                 }
 
 
                 JSONObject jsonObject60 = jsonArray.getJSONObject(12);
                 JSONObject jsonObject61 = jsonArray.getJSONObject(13);
-                String X60=jsonObject60.getString("get_ultrasonic_x");
-                String Y60=jsonObject60.getString("get_ultrasonic_y");
-                String X61=jsonObject61.getString("get_ultrasonic_x");
-                String Y61=jsonObject61.getString("get_ultrasonic_y");
-                if (X60.equals(X61)&&Y60.equals(Y61)){
+                String X60 = jsonObject60.getString("get_ultrasonic_x");
+                String Y60 = jsonObject60.getString("get_ultrasonic_y");
+                String X61 = jsonObject61.getString("get_ultrasonic_x");
+                String Y61 = jsonObject61.getString("get_ultrasonic_y");
+                if (X60.equals(X61) && Y60.equals(Y61)) {
                     ultraSonic7.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic7.setTextColor(color1);
                 }
 
                 JSONObject jsonObject70 = jsonArray.getJSONObject(14);
                 JSONObject jsonObject71 = jsonArray.getJSONObject(15);
-                String X70=jsonObject70.getString("get_ultrasonic_x");
-                String Y70=jsonObject70.getString("get_ultrasonic_y");
-                String X71=jsonObject71.getString("get_ultrasonic_x");
-                String Y71=jsonObject71.getString("get_ultrasonic_y");
-                if (X70.equals(X71)&&Y70.equals(Y71)){
+                String X70 = jsonObject70.getString("get_ultrasonic_x");
+                String Y70 = jsonObject70.getString("get_ultrasonic_y");
+                String X71 = jsonObject71.getString("get_ultrasonic_x");
+                String Y71 = jsonObject71.getString("get_ultrasonic_y");
+                if (X70.equals(X71) && Y70.equals(Y71)) {
                     ultraSonic8.setTextColor(color2);
-                }
-                else {
+                } else {
                     ultraSonic8.setTextColor(color1);
                 }
 

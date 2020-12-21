@@ -107,6 +107,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
     private List<TaskStateList> listPointName = new ArrayList<>();
     private TaskStateListAdapter mAdapter = null;
     private String taskPoint;
+    ArrayList taskPoint1 = new ArrayList();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -393,25 +394,28 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                                 imageViewArrayList.add(imageView);
                                 imageViewArrayList.add(textView);
                             }else {
-                                if (taskPoint.contains("dbPointName:"+pointName)){
-                                imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
-                                        0, 0);
-                                textView.setText(pointName);
-                                textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
-                                        0 , 0);
-                                Log.d("zdzd9998", "angleX" + angleX);
-                                Log.d("zdzd9998", " resolution" + resolution);
-                                taskManageMapRelative.addView(imageView);
-                                taskManageMapRelative.addView(textView);
-                                imageViewArrayList.add(imageView);
-                                imageViewArrayList.add(textView);
+                                for (int j = 0; j <taskPoint1.size() ; j++) {
+                                    String a= (String) taskPoint1.get(j);
+                                    if (a.equals(pointName)){
+                                        imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                                (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                                                0, 0);
+                                        textView.setText(pointName);
+                                        textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                                (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
+                                                0 , 0);
+                                        Log.d("zdzd9998", "angleX" + angleX);
+                                        Log.d("zdzd9998", " resolution" + resolution);
+                                        taskManageMapRelative.addView(imageView);
+                                        taskManageMapRelative.addView(textView);
+                                        imageViewArrayList.add(imageView);
+                                        imageViewArrayList.add(textView);
+                                    }
+                                }
                             }
                             }
                         }
                     }
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -474,10 +478,18 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         }else if (messageEvent.getState() == 20009) {
             Log.d(TAG, "onEventMsg20009 ： " + (String) messageEvent.getT());
             try {
+                listPointName.clear();
+                taskPoint1.clear();
                 JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
                 String message = (String) messageEvent.getT();
+                JSONArray jsonArray1 = jsonObject.getJSONArray(Content.editTaskQueue);
+                for (int i = 0; i < jsonArray1.length(); i++) {
+                    JSONObject js = jsonArray1.getJSONObject(i);
+                    taskPoint1.add(js.getString(Content.dbPointName));
+                    Log.d("details_GG", "" + taskPoint1);
+                }
                 taskPoint = message.replace("\"","");
-                Log.d(TAG, "onEventMsg20004 ： " + taskPoint);
+                Log.d(TAG, "onEventMsg2000499 ： " + taskPoint1);
                 String time = jsonObject.getString(Content.editTaskQueueTime);
                 Log.d(TAG, "onEventMsgtime ： " + time);
                 if (time.equals("FF:FF")){
@@ -498,7 +510,6 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                  * 详情->点数据
                  */
                 try {
-                    listPointName.clear();
                     JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueue);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject js = jsonArray.getJSONObject(i);
