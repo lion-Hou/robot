@@ -229,8 +229,10 @@ public class EmptyClient extends WebSocketClient {
 
             case Content.GET_SPEED_LEVEL:
                 jsonObject = new JSONObject(message);
-                int speedLevel = jsonObject.getInt(Content.GET_SPEED_LEVEL);
+                int speedLevel = jsonObject.getInt(Content.GET_NAVIGATIONSPEEDLEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
+                int speedLevel2 = jsonObject.getInt(Content.GET_PLAYPATHSPEEDLEVEL);
+                EventBus.getDefault().post(new EventBusMessage(20006, speedLevel2));
                 Log.d("speedLevel", String.valueOf(speedLevel));
                 break;
 

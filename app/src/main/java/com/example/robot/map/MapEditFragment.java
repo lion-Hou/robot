@@ -105,7 +105,7 @@ public class MapEditFragment extends Fragment{
     private ImageView robot_Img;
     private View view;
     private int index = 0;
-    private String charging;
+    private String charging = "放电";
     private String init;
 
     private double mBitmapHeight;
@@ -310,8 +310,8 @@ public class MapEditFragment extends Fragment{
                             wallBtn.setEnabled(true);
                             markBtn.setEnabled(true);
                             saveBtn.setEnabled(true);
-                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                    (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX )),
+                                    (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) )),
                                     0, 0);
                             mapRelative.addView(charging_Img);
                             Log.d("zdzd999222", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX + "  pointY" + pointY + "   originX" + originX + "   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
@@ -324,8 +324,8 @@ public class MapEditFragment extends Fragment{
                                 pointNameList[j] =pointName;
                             }
                             Log.d("SourireG", "point length" + jsonArray.length());
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
+                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX )),
+                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
                             textView.setText(pointName);
                             Point point = new Point(pointName);
@@ -379,9 +379,16 @@ public class MapEditFragment extends Fragment{
 
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
-            if (message.equals("放电")||message.equals("充电")){
-            charging = message;
+            if (message.equals("放电")){
+                if (charging.equals("充电")){
+                charging = message;
+                }
+            }else if (message.equals("充电")){
+                if (charging.equals("放电")){
+                charging = message;
+                }
             }
+            Log.d("YYYYY", "save_charging_point"+charging);
             if (message.equals("初始化完成")){
             init =message;
                 if (init.equals("初始化完成")){
@@ -513,9 +520,8 @@ public class MapEditFragment extends Fragment{
                         .commit();
                 break;
             case R.id.save_charging_btn:
-                Log.d("YYYYY", "save_charging_point"+charging);
                 if (charging.equals("充电")) {
-                    Log.d("YYYYY", "yyy"+charging);
+                    Log.d("SourireG", "ggg"+charging);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
                     Toast.makeText(mContext, R.string.toast_edit_map_text9, Toast.LENGTH_LONG).show();
                 } else {

@@ -89,11 +89,16 @@ public final class Content {
     public static final String GET_LED_LEVEL = "get_led_level";//获取LED亮度
     public static final String SET_LED_LEVEL = "set_led_level";//设置LED亮度
     public static final String SET_SPEED_LEVEL = "set_speed_level";//设置导航速度
-    public static final String GET_SPEED_LEVEL = "get_speed_level";//获取导航速度
     public static final String GET_LOW_BATTERY = "get_low_battery";//获取回充电量
     public static final String SET_LOW_BATTERY = "set_low_battery";//设置回充电量
     public static final String GET_VOICE_LEVEL = "get_voice_level";//获取声音
     public static final String SET_VOICE_LEVEL = "set_voice_level";
+    public static final String GET_SPEED_LEVEL = "get_speed_level";//导航速度
+    public static final String GET_NAVIGATIONSPEEDLEVEL = "get_navigationSpeedLevel";//任务导航速度
+    public static final String GET_PLAYPATHSPEEDLEVEL = "get_playPathSpeedLevel";//跟线导航速度
+
+    public static final String SET_PLAYPATHSPEEDLEVEL = "set_playPathSpeedLevel";//设置导航速度
+    public static final String SET_NAVIGATIONSPEEDLEVEL = "set_navigationSpeedLevel";//设置导航速度
 
     public static final String WORKING_MODE= "working_mode";
     public static final String GET_WORKING_MODE= "get_working_mode";
