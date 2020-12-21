@@ -169,6 +169,7 @@ public class EmptyClient extends WebSocketClient {
                 }else {
                     EventBus.getDefault().post(new EventBusMessage(10017, taskName));
                 }
+                break;
             case Content.SENDPOINTPOSITION:
                 //当前地图点列表
                 jsonObject = new JSONObject(message);
