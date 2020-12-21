@@ -173,7 +173,15 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             public void onClick(DialogInterface dialog, int which) {
                                 String newMapName = input_name.getText().toString();
                                 System.out.println("pointName1111" + input_name);
+
+                                boolean isRepeat = false;
+                                for (int i = 0; i <mapName.length ; i++) {
+                                    if (mapName[i].equals(newMapName)){
+                                        isRepeat = true;
+                                    }
+                                }
                                 if (!newMapName.equals(null)&&!newMapName.equals("")&&!newMapName.isEmpty()){
+                                    if (isRepeat==false){
                                     gsonUtils.setOldMapName(Content.map_Name);
                                     gsonUtils.setNewMapName(newMapName);
                                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
@@ -181,11 +189,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                                     Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_MAP));
                                     managerSelected.setText(Content.map_Name);
+                                    }else if (isRepeat==true){
+                                        Toast.makeText(mContext, "当前地图名已存在,请输入新的地图名", Toast.LENGTH_SHORT).show();
+                                    }
                                 }else {
-                                    Toast.makeText(mContext, "请输入新的地图名"+newMapName, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "当前地图名为空，请输入新的地图名", Toast.LENGTH_SHORT).show();
                                 }
-                                gsonUtils.setMapName(Content.map_Name);
-                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+//                                gsonUtils.setMapName(Content.map_Name);
+//                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {

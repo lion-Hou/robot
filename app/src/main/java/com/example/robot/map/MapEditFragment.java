@@ -117,7 +117,7 @@ public class MapEditFragment extends Fragment{
     private Set<SwipeListLayout> sets = new HashSet();
     private List<Point> listPoint = new ArrayList<>();
     private ListAdapter adapter = new ListAdapter();
-    private String pointData[];
+    private String pointNameList[];
 
     @Override
     public void onStart() {
@@ -167,29 +167,40 @@ public class MapEditFragment extends Fragment{
     //保存点
     public void AddPositionDialog() {
         final EditText input_name = new EditText(getContext());
-        new AlertDialog.Builder(getContext())
-                .setView(input_name)
-                .setMessage("请输入新建地点名称")
-                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newPointName = input_name.getText().toString();
-                        if (!newPointName.equals(null) && !newPointName.equals("") && !newPointName.isEmpty()) {
-                            gsonUtils.setPositionName(newPointName);
-                            System.out.println("pointName1111" + input_name);
-                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
-                        } else {
-                            Toast.makeText(mContext, "请输入新的地点名", Toast.LENGTH_SHORT).show();
-                        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(input_name);
+        builder.setMessage("请输入新建地点名称");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newPointName = input_name.getText().toString();
+                boolean isRepeat = false;
+                for (int i = 0; i < pointNameList.length; i++) {
+                    if (pointNameList[i].equals(newPointName)) {
+                        isRepeat = true;
+                    }
+                }
+                if (!newPointName.equals(null) && !newPointName.equals("") && !newPointName.isEmpty()) {
+                    if (isRepeat == true) {
+                        Toast.makeText(mContext, "此地点名已存在", Toast.LENGTH_SHORT).show();
+                    } else {
+                        gsonUtils.setPositionName(newPointName);
+                        System.out.println("pointName1111" + input_name);
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POSITION));
+                        Toast.makeText(mContext, "导航点添加成功", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(mContext, "请输入新的地点名", Toast.LENGTH_SHORT).show();
+                }
 
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .show();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 
     @SuppressLint("ResourceAsColor")
@@ -307,7 +318,12 @@ public class MapEditFragment extends Fragment{
                             Log.d("zdzd999222", " resolution * angleX" + resolution * angleX);
                             Log.d("zdzd999222", "angleX" + angleX);
                         }
+                        pointNameList = new String[jsonArray.length()-4];
                         if (pointType == 2) {
+                            for (int j = 0; j <jsonArray.length()-4; j++) {
+                                pointNameList[j] =pointName;
+                            }
+                            Log.d("SourireG", "point length" + jsonArray.length());
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX - (Content.ROBOT_SIZE / resolution * angleX))),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) - (Content.ROBOT_SIZE / resolution * angleY))),
                                     0, 0);
@@ -501,6 +517,7 @@ public class MapEditFragment extends Fragment{
                 if (charging.equals("充电")) {
                     Log.d("YYYYY", "yyy"+charging);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
+                    Toast.makeText(mContext, "充电点添加成功，请稍后...", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(mContext, "请确认机器人是否连接上充电点", Toast.LENGTH_SHORT).show();
                 }
@@ -770,12 +787,23 @@ public class MapEditFragment extends Fragment{
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     String newPointName = input_name.getText().toString();
+                                    boolean isRepeat = false;
+                                    for (int i = 0; i < pointNameList.length; i++) {
+                                        if (pointNameList[i].equals(newPointName)) {
+                                            isRepeat = true;
+                                        }
+                                    }
                                     System.out.println("pointName1111" + input_name);
                                     if (!newPointName.equals(null)&&!newPointName.equals("")&&!newPointName.isEmpty()){
-                                        gsonUtils.setOldPointName(pointName.getName());
-                                        gsonUtils.setNewPointName(newPointName);
-                                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_POSITION));
-                                        tv_name.setText(newPointName);
+                                        if (isRepeat = true) {
+                                            Toast.makeText(mContext, "此地点名已存在"+newPointName, Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            gsonUtils.setOldPointName(pointName.getName());
+                                            gsonUtils.setNewPointName(newPointName);
+                                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RENAME_POSITION));
+                                            tv_name.setText(newPointName);
+                                            Toast.makeText(mContext, "更改地点名成功"+newPointName, Toast.LENGTH_SHORT).show();
+                                        }
                                     }else {
                                         Toast.makeText(mContext, "请输入新的地点名"+newPointName, Toast.LENGTH_SHORT).show();
                                     }

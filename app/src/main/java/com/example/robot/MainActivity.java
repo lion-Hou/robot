@@ -164,7 +164,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             int versionCode = (int) messageEvent.getT();
             Log.d("fdsfsdfsd111", String.valueOf(versionCode));
             if (Content.version < versionCode) {
-                ota();
+        //        ota();
             }
         }
 

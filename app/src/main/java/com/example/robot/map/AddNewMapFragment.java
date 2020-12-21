@@ -71,6 +71,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     private View view;
     private String newMapName;
     private ProgressDialog waitingDialog;
+    private String[] mapName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
         gsonUtils = new GsonUtils();
         initView();
         initListener();
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
         mContext = view.getContext();
         return view;
     }
@@ -131,30 +133,41 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.new_map_scan:
+                boolean isRepeat = false;
+                for (int i = 0; i <mapName.length ; i++) {
+                    if (mapName[i].equals(newMapMapNameEditText.getText().toString())){
+                        isRepeat = true;
+                    }
+                }
+
                 if (newMapMapNameEditText.getText().toString().isEmpty()){
                     Toast.makeText(mContext, "请输入新地图的名字", Toast.LENGTH_SHORT).show();
                 }else {
-                Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
-                addNewMapDialog = new NormalDialogUtil();
-                addNewMapDialog.showDialog(mContext, "","是否开始扫描","取消","开始扫描" , new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //取消
-                        dialog.dismiss();
+                    if (isRepeat == false) {
+                        Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
+                        addNewMapDialog = new NormalDialogUtil();
+                        addNewMapDialog.showDialog(mContext, "", "是否开始扫描", "取消", "开始扫描", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //取消
+                                dialog.dismiss();
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //确定逻辑
+                                Log.d(TAG, "onEventMsg ： " + "开始扫描");
+                                newMapMapNameEditText.setEnabled(false);
+                                newMapName = newMapMapNameEditText.getText().toString();
+                                gsonUtils.setMapName(newMapName);
+                                Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
+                                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
+                                dialog.dismiss();
+                            }
+                        });
+                    } else if (isRepeat==true) {
+                        Toast.makeText(mContext, "您输入的地图名已经存在，请更改地图名", Toast.LENGTH_SHORT).show();
                     }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //确定逻辑
-                        Log.d(TAG, "onEventMsg ： " + "开始扫描");
-                        newMapMapNameEditText.setEnabled(false);
-                        newMapName = newMapMapNameEditText.getText().toString();
-                        gsonUtils.setMapName(newMapName);
-                        Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
-                        dialog.dismiss();
-                    }
-                });
                 }
                 break;
             case R.id.new_map_save:
@@ -236,6 +249,25 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
             bytes.get(bytes1);
             Log.d(TAG, "新建地图 ： " + bytes1.length);
             Glide.with(mContext).load(bytes1).into(newMapMapImage);
+        }else if (messageEvent.getState() == 10005) {
+            int ori_size = Content.list.size();
+            System.out.println("ZHZHSSSS: ori_size = " + ori_size);
+            int null_count = 0;
+            for (int i=0;i< ori_size;i++) {
+                String temp1 = Content.list.get(i).getMap_Name();
+                System.out.println("ZHZHZZZZ1111,temp1 =: " + temp1);
+                if(TextUtils.isEmpty(temp1)){
+                    //    null_count++;
+                    Content.list.remove(i);
+                    ori_size--;
+                }
+            }
+            mapName = new String[Content.list.size()-null_count];
+            System.out.println("ZHZHSSSS: " + Content.list.size());
+            for (int i=0;i< Content.list.size();i++) {
+                mapName[i] =Content.list.get(i).getMap_Name();
+                System.out.println("ZHZHZZZZ: " + mapName[i]);
+            }
         }
     }
 

@@ -71,6 +71,8 @@ public class SettingFragment extends Fragment {
     ConstraintLayout settingsMainLayout;
     @BindView(R.id.test_fragment)
     ConstraintLayout testFragment;
+    @BindView(R.id.settings_debug)
+    Spinner settingsDebug;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -115,6 +117,7 @@ public class SettingFragment extends Fragment {
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LED_LEVEL));//0,1,2
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VOICE_LEVEL));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_WORKING_MODE));
         initView();
         testFragment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +164,16 @@ public class SettingFragment extends Fragment {
             int voiceLevel = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + voiceLevel);
             settingsVolume.setProgress(voiceLevel);
+        } else if (messageEvent.getState() == 20005) {
+            int workingMode = (int) messageEvent.getT();
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + workingMode);
+            if (workingMode == 0) {
+                settingsDebug.setSelection(0);
+            } else if (workingMode == 1) {
+                settingsDebug.setSelection(1);
+            } else {
+                settingsDebug.setSelection(2);
+            }
         }
     }
 
@@ -180,8 +193,8 @@ public class SettingFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
-                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RESET_ROBOT));
-                            Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RESET_ROBOT));
+                        Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                         dialog.dismiss();
                     }
                 });
@@ -203,6 +216,11 @@ public class SettingFragment extends Fragment {
                 int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
                 gsonUtils.setSpeedLevel(robotSpeed);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_SPEED_LEVEL));//0,1,2
+
+                int settingDebug = settingsDebug.getSelectedItemPosition();
+                gsonUtils.setWorkingMode(settingDebug);
+                Log.d(TAG, "workingmode"+settingDebug);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.WORKING_MODE));
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
