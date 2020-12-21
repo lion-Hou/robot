@@ -166,8 +166,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             int versionCode = (int) messageEvent.getT();
             Log.d("fdsfsdfsd111", String.valueOf(versionCode));
             if (Content.version == versionCode) {
-                showOtaDialog();
-                ota();
+//                showOtaDialog();
+//                ota();
             }
         }else if (messageEvent.getState() == 90009){
             Log.d("fdsfsdfsd111", "update");
