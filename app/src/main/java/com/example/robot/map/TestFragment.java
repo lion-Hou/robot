@@ -326,11 +326,11 @@ public class TestFragment extends Fragment {
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
             if (message.contains("701")) {
-                laser.setTextColor(color1);
-                laser1.setTextColor(color1);
-            }else {
                 laser.setTextColor(color2);
                 laser1.setTextColor(color2);
+            }else {
+                laser.setTextColor(color1);
+                laser1.setTextColor(color1);
             }
         } else if (messageEvent.getState() == 19197) {
             String message = (String) messageEvent.getT();
