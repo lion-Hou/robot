@@ -141,12 +141,15 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                 }
 
                 if (newMapMapNameEditText.getText().toString().isEmpty()){
-                    Toast.makeText(mContext, "请输入新地图的名字", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.toast_new_map_text1, Toast.LENGTH_SHORT).show();
                 }else {
                     if (isRepeat == false) {
                         Log.d(TAG, "onEventMsg ： " + "点击开始扫描");
                         addNewMapDialog = new NormalDialogUtil();
-                        addNewMapDialog.showDialog(mContext, "", "是否开始扫描", "取消", "开始扫描", new DialogInterface.OnClickListener() {
+                        final CharSequence dialogNewMapText1=mContext.getString(R.string.dialog_new_map_text1);
+                        final CharSequence allCancel=mContext.getString(R.string.all_cancel);
+                        final CharSequence dialogNewMapText2=mContext.getString(R.string.dialog_new_map_text2);
+                        addNewMapDialog.showDialog(mContext, "", (String) dialogNewMapText1, (String) allCancel, (String) dialogNewMapText2, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //取消
@@ -163,16 +166,20 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                                 Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
                                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.START_SCAN_MAP));
                                 dialog.dismiss();
+                                Toast.makeText(mContext, R.string.toast_new_map_text2, Toast.LENGTH_LONG).show();
                             }
                         });
                     } else if (isRepeat==true) {
-                        Toast.makeText(mContext, "您输入的地图名已经存在，请更改地图名", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, R.string.toast_new_map_text3, Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
             case R.id.new_map_save:
                 addNewMapDialog = new NormalDialogUtil();
-                addNewMapDialog.showDialog(mContext, "","是否结束扫描并保存地图","取消","保存地图" , new DialogInterface.OnClickListener() {
+                final CharSequence dialogNewMapText3=mContext.getString(R.string.dialog_new_map_text3);
+                final CharSequence allCancel=mContext.getString(R.string.all_cancel);
+                final CharSequence dialogNewMapText4=mContext.getString(R.string.dialog_new_map_text4);
+                addNewMapDialog.showDialog(mContext, "", (String)dialogNewMapText3,(String)allCancel,(String)dialogNewMapText4, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //取消
@@ -191,7 +198,8 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
 
                         waitingDialog = new ProgressDialog(mContext);
                         Log.d(TAG, "onEventMsg ： "+"dialog生成");
-                        waitingDialog.setMessage("正在生成地图中请稍后...");
+                        final CharSequence strDialogBody=mContext.getString(R.string.dialog_new_map_text5);
+                        waitingDialog.setMessage(strDialogBody);
                         waitingDialog.setIndeterminate(true);
                         waitingDialog.setCancelable(false);
                         waitingDialog.show();
@@ -215,14 +223,16 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.new_map_back:
                 addNewMapDialog = new NormalDialogUtil();
-                addNewMapDialog.showDialog(mContext, "","是否结束当前扫描","取消","结束扫描" , new DialogInterface.OnClickListener() {
+                final CharSequence dialogNewMapText6=mContext.getString(R.string.dialog_new_map_text6);
+                final CharSequence allCancel1=mContext.getString(R.string.all_cancel);
+                final CharSequence dialogNewMapText7=mContext.getString(R.string.dialog_new_map_text7);
+                addNewMapDialog.showDialog(mContext, "", (String) dialogNewMapText6, (String) allCancel1, (String) dialogNewMapText7, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //取消
                         dialog.dismiss();
                     }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
+                }, new DialogInterface.OnClickListener() {                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP_NO));

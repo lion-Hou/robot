@@ -90,5 +90,42 @@
     <string name="test_uvc">UVC</string>
     <string name="test_pir">PIR</string>
 
+    <string name="dat_map_manage_dialog_text1">请输入新的地图名:</string>
+    <string name="dat_map_manage_dialog_text2">是否删除该地图?</string>
+    <string name="dialog_new_map_text1">是否开始扫描？</string>
+    <string name="dialog_new_map_text2">开始扫描</string>
+    <string name="dialog_new_map_text3">是否结束扫描并保存地图?</string>
+    <string name="dialog_new_map_text4">保存地图</string>
+    <string name="dialog_new_map_text5">正在生成地图中请稍后...</string>
+    <string name="dialog_new_map_text6">是否结束当前扫描？</string>
+    <string name="dialog_new_map_text7">结束扫描</string>
+    <string name="dialog_edit_map_text1">请为该导航点提供新的名字:</string>
+
+
+
+
+
+    <string name="dat_map_manage_toast_text1">地图名修改成功！</string>
+    <string name="dat_map_manage_toast_text2">当前地图名已存在,请输入新的地图名！</string>
+    <string name="dat_map_manage_toast_text3">当前地图名为空，请输入新的地图名！</string>
+    <string name="dat_map_manage_toast_text4">地图删除成功！</string>
+    <string name="toast_new_map_text1">地图名不能为空，请输入地图名！</string>
+    <string name="toast_new_map_text2">开始扫描...</string>
+    <string name="toast_new_map_text3">您输入的地图名已经存在，请输入新的地图名！</string>
+    <string name="toast_edit_map_text1">该名字已存在！</string>
+    <string name="toast_edit_map_text2">导航点重命名成功！</string>
+    <string name="toast_edit_map_text3">导航点名字不能为空！</string>
+    <string name="toast_edit_map_text4">导航点删除成功！</string>
+    <string name="toast_edit_map_text5">导航点添加成功！</string>
+    <string name="toast_edit_map_text6">请输入新导航点的名字：</string>
+    <string name="toast_edit_map_text7">正在初始化中，请在确保机器人周围无障碍物，请稍后...</string>
+    <string name="toast_edit_map_text8">初始化完成！</string>
+    <string name="toast_edit_map_text9">充电点添加成功，请稍后...</string>
+    <string name="toast_edit_map_text10">请确认机器人是否连接上充电点</string>
+
+
+
+    <string name="all_ok">确认</string>
+    <string name="all_cancel">取消</string>
 
 </resources>

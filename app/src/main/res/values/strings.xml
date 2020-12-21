@@ -67,6 +67,40 @@
     <string name="test_uvc">UVC</string>
     <string name="test_pir">PIR</string>
 
+    <string name="dat_map_manage_dialog_text1">Please enter a new map name:</string>
+    <string name="dat_map_manage_dialog_text2">Do you want to delete this map?</string>
+    <string name="dialog_new_map_text1">Do you want to start scanning?</string>
+    <string name="dialog_new_map_text2">Start scanning</string>
+    <string name="dialog_new_map_text3">Do you want to finish the scan and save the map?</string>
+    <string name="dialog_new_map_text4">Save Map</string>
+    <string name="dialog_new_map_text5">Building map, please wait a moment...</string>
+    <string name="dialog_new_map_text6">Do you want to stop the current scan？</string>
+    <string name="dialog_new_map_text7">Stop Scan</string>
+    <string name="dialog_edit_map_text1"> Please enter the new name of the navigation point:</string>
 
 
+    <string name="dat_map_manage_toast_text1">Map name has been modified successfully!</string>
+    <string name="dat_map_manage_toast_text2">The current map name already exists, please enter a new map name!</string>
+    <string name="dat_map_manage_toast_text3">The current map name is empty, please enter a new map name!</string>
+    <string name="dat_map_manage_toast_text4">Map deleted successfully!</string>
+    <string name="toast_new_map_text1">Map name cannot be empty, please input map name!</string>
+    <string name="toast_new_map_text2">Start Scan...</string>
+    <string name="toast_new_map_text3">The map name you entered already exists, please enter a new map name!</string>
+    <string name="toast_edit_map_text1">The name already exists!</string>
+    <string name="toast_edit_map_text2">Navigation point renamed successfully!</string>
+    <string name="toast_edit_map_text3">Navigation point name cannot be empty!</string>
+    <string name="toast_edit_map_text4">Navigation point deleted successfully!</string>
+    <string name="toast_edit_map_text5">Navigation point added successfully！</string>
+    <string name="toast_edit_map_text6">Please enter the name of the new navigation point：</string>
+    <string name="toast_edit_map_text7">Initialization is in progress. Please make sure there are no obstacles around the robot. Please wait a moment...</string>
+    <string name="toast_edit_map_text8">Initialization successful！</string>
+    <string name="toast_edit_map_text9">Charging point added successfully, please wait a moment...</string>
+    <string name="toast_edit_map_text10">Please check whether the charging point is connected to the robot!</string>
+
+
+
+
+
+    <string name="all_ok">OK</string>
+    <string name="all_cancel">Cancel</string>
 </resources>
