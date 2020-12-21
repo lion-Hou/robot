@@ -226,11 +226,18 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         typeValue = type[which];//任务类型
-                        if (which == 0 || which == 1) {
+                        if (which == 0) {
+                            typeTime = "FF:FF";
+                            taskTypeSelectTime.setText("FF:FF");
                             myWeek.clear();
                             selectWeek = "";
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.GONE);
+                        }else if (which == 1) {
+                            myWeek.clear();
+                            selectWeek = "";
+                            taskTypeSelect.setText(typeValue);
+                            taskTypeSelectWeek.setVisibility(View.VISIBLE);
                         } else {
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
