@@ -127,6 +127,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
         String a = (String) mainTask.getText();
+        Log.d(TAG, "strList ： " + myTaskNameList);
         if (a.equals(null) == name1.equals(null) && a.equals(null) == name2.equals(null) ){
             mainTask.setEnabled(false);
         }else {
@@ -255,22 +256,26 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     //首页获取所有地图名称
     public void moreMap(String[] mapName) {
-        Log.d(TAG, "onEventMsg ： " + "2");
+        Log.d(TAG, "onEventMsgfffff" + "2");
         Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         System.out.println("which" + mapName.length);
-        builder.setItems(mapName, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                System.out.println("which" + which);
-                mainSpinnerMap.setText(mapName[which]);
-                Content.first_map_Name = mapName[which];
-                map_name = mapName[which];
-                mainTask.setEnabled(true);
-                Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
-            }
-        });
-        builder.create().show();
+        if (mapName.length == 0){
+
+        }else{
+            builder.setItems(mapName, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("which" + which);
+                    mainSpinnerMap.setText(mapName[which]);
+                    Content.first_map_Name = mapName[which];
+                    map_name = mapName[which];
+                    mainTask.setEnabled(true);
+                    Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
+                }
+            });
+            builder.create().show();
+        }
     }
 
     //首页获取当前选定的地图的所有任务列表
@@ -351,6 +356,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 System.out.println("MG_map_nameSSSS: " + Content.list.size());
                 mainSpinnerMap.setText(mapName[0]);
                 Content.map_Name=mapName[0];
+                mainTask.setEnabled(true);
             //    gsonUtils.setMapName(mapName[0]);
             //    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{
