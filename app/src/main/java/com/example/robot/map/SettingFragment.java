@@ -196,7 +196,11 @@ public class SettingFragment extends Fragment {
         switch (view.getId()) {
             case R.id.settings_reset_robot:
                 NormalDialogUtil resetNormalDialog = new NormalDialogUtil();
-                resetNormalDialog.showDialog(mContext, "", "是否进行初始化", "取消", "确认", new DialogInterface.OnClickListener() {
+
+                final String dialogSettingsText1=mContext.getString(R.string.dialog_settings_text1);
+                final String allOK=mContext.getString(R.string.all_ok);
+                final String allCancel=mContext.getString(R.string.all_cancel);
+                resetNormalDialog.showDialog(mContext, "", dialogSettingsText1, allCancel, allOK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //取消
@@ -244,7 +248,7 @@ public class SettingFragment extends Fragment {
                         .replace(R.id.main_fragment, new MainFragment(), null)
                         .addToBackStack(null)
                         .commit();
-                Toast.makeText(mContext.getApplicationContext(), "应用成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext.getApplicationContext(), R.string.toast_settings_text1, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.settings_cancel:
                 Log.d(TAG, "返回");
@@ -265,7 +269,7 @@ public class SettingFragment extends Fragment {
                             .replace(R.id.main_fragment, new TestFragment(), null)
                             .addToBackStack(null)
                             .commit();
-                    Toast.makeText(mContext.getApplicationContext(), "进入测试页面", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), R.string.toast_settings_text2, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

@@ -101,7 +101,7 @@
     <string name="dialog_new_map_text6">是否结束当前扫描？</string>
     <string name="dialog_new_map_text7">结束扫描</string>
     <string name="dialog_edit_map_text1">请为该导航点提供新的名字:</string>
-
+    <string name="dialog_settings_text1">请为该导航点提供新的名字:</string>
 
 
 
@@ -123,6 +123,8 @@
     <string name="toast_edit_map_text8">初始化完成！</string>
     <string name="toast_edit_map_text9">充电点添加成功，请稍后...</string>
     <string name="toast_edit_map_text10">请确认机器人是否连接上充电点</string>
+    <string name="toast_settings_text1">应用成功!</string>
+    <string name="toast_settings_text2">进入测试页面</string>
 
 
 

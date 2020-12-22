@@ -302,7 +302,7 @@ public class TestFragment extends Fragment {
             Log.d(TAG, "onEventMsg 191981：" + j + itemString2);
             Log.d(TAG, "onEventMsg 191982：" + itemString3);
 
-            Toast.makeText(mContext, "PIR" + itemString1 + "," + itemString2 + "," + itemString3, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mContext, "PIR" + itemString1 + "," + itemString2 + "," + itemString3, Toast.LENGTH_SHORT).show();
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
             if (itemString1.equals("false")) {

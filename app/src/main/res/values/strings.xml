@@ -78,6 +78,7 @@
     <string name="dialog_new_map_text6">Do you want to stop the current scan？</string>
     <string name="dialog_new_map_text7">Stop Scan</string>
     <string name="dialog_edit_map_text1"> Please enter the new name of the navigation point:</string>
+    <string name="dialog_settings_text1">请为该导航点提供新的名字:</string>
 
 
     <string name="dat_map_manage_toast_text1">Map name has been modified successfully!</string>
@@ -97,6 +98,8 @@
     <string name="toast_edit_map_text8">Initialization successful！</string>
     <string name="toast_edit_map_text9">Charging point added successfully, please wait a moment...</string>
     <string name="toast_edit_map_text10">Please check whether the charging point is connected to the robot!</string>
+    <string name="toast_settings_text1">Successful application!</string>
+    <string name="toast_settings_text2">Access to the test page</string>
 
 
 
