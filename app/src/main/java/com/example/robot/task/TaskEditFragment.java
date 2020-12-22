@@ -228,7 +228,6 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     public void onClick(DialogInterface dialog, int which) {
                         typeValue = type[which];//任务类型
                         if (which == 0) {
-
                             taskTypeSelectTime.setText("请选择时间");
                             myWeek.clear();
                             selectWeek = "";
@@ -412,8 +411,9 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     }
                     taskTypeSelectWeek.setText(selectWeek);
                 }
-                taskTypeSelectTime.setText(jsonObject.getString(Content.editTaskQueueTime));
 
+                taskTypeSelectTime.setText(jsonObject.getString(Content.editTaskQueueTime));
+                typeTime = jsonObject.getString(Content.editTaskQueueTime);
 
                 //数据
                 JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueue);
