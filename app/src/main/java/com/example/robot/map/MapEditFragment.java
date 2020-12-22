@@ -175,7 +175,9 @@ public class MapEditFragment extends Fragment{
             public void onClick(DialogInterface dialog, int which) {
                 String newPointName = input_name.getText().toString();
                 boolean isRepeat = false;
+                Log.d("SourireG", "pointNameList" + pointNameList+newPointName);
                 for (int i = 0; i < pointNameList.length; i++) {
+                    Log.d("SourireG", "pointNameList" + pointNameList.length+pointNameList[i]);
                     if (pointNameList[i].equals(newPointName)) {
                         isRepeat = true;
                     }
@@ -259,6 +261,7 @@ public class MapEditFragment extends Fragment{
                             index = k;
                         }
                     }
+                    pointNameList = new String[jsonArray.length()];
                     Log.d("zdzd5111", "" + index);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonItem = jsonArray.getJSONObject(i);
@@ -267,23 +270,13 @@ public class MapEditFragment extends Fragment{
                         TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
 
-                        Log.d("zdzd222", "" + (editMapImage.getWidth() / Content.list.get(index).getGridWidth() * jsonItem.getDouble(Content.POINT_X)
-                                + Content.list.get(index).getOriginX() - (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE)))));
-                        Log.d("zdzd222", "" + (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE))));
-                        Log.d("zdzd222", "      \n");
-
-                        Log.d("zdzd 777", "" + editMapImage.getWidth());
-                        Log.d("zdzd 777", "" + Content.list.get(index).getGridWidth());
-                        Log.d("zdzd 777", "" + jsonItem.getDouble(Content.POINT_X));
-                        Log.d("zdzd 777", "" + Content.list.get(index).getOriginX());
-                        Log.d("zdzd 777", "" + (Content.ROBOT_SIZE / Content.list.get(index).getResolution() * Math.cos(jsonItem.getDouble(Content.ANGLE))));
-                        Log.d("zdzd222", "      \n");
                         double mapWidth = (double) editMapImage.getWidth();
                         double mapHeight = (double) editMapImage.getHeight();
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
 
                         String pointName = jsonItem.getString(Content.POINT_NAME);
+                        pointNameList[i] =pointName;
                         Log.d("zhzh111", "point" + pointName);
                         double layoutW = (double) mapRelative.getWidth();
                         double layoutH = (double) mapRelative.getHeight();
@@ -318,31 +311,27 @@ public class MapEditFragment extends Fragment{
                             Log.d("zdzd999222", " resolution * angleX" + resolution * angleX);
                             Log.d("zdzd999222", "angleX" + angleX);
                         }
-                        pointNameList = new String[jsonArray.length()-4];
-                        if (pointType == 2) {
-                            for (int j = 0; j <jsonArray.length()-4; j++) {
-                                pointNameList[j] =pointName;
-                            }
-                            Log.d("SourireG", "point length" + jsonArray.length());
-                            imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX )),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
-                                    0, 0);
-                            textView.setText(pointName);
-                            Point point = new Point(pointName);
-                            point.setName(pointName);
-                            Log.d("SourireG", "add point name" + point.getName());
-                            listPoint.add(point);
+                            if (pointType == 2) {
+                                Log.d("SourireG", "point length" + jsonArray.length());
+                                imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                                        0, 0);
+                                textView.setText(pointName);
+                                Point point = new Point(pointName);
+                                point.setName(pointName);
+                                Log.d("SourireG", "add point name" + point.getName());
+                                listPoint.add(point);
 
-                            textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
-                                    (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
-                                    0, 0);
-                            Log.d("zdzd999111", " resolution * angleX" + resolution * angleX);
-                            Log.d("zdzd999111", "angleX" + angleX);
-                            mapRelative.addView(imageView);
-                            mapRelative.addView(textView);
-                            imageViewArrayList.add(imageView);
-                            imageViewArrayList.add(textView);
-                        }
+                                textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                        (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 4),
+                                        0, 0);
+                                Log.d("zdzd999111", " resolution * angleX" + resolution * angleX);
+                                Log.d("zdzd999111", "angleX" + angleX);
+                                mapRelative.addView(imageView);
+                                mapRelative.addView(textView);
+                                imageViewArrayList.add(imageView);
+                                imageViewArrayList.add(textView);
+                            }
                     }
                     adapter.notifyDataSetChanged();
                     pointAndWallList.setAdapter(adapter);
