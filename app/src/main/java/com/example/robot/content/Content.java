@@ -58,7 +58,7 @@ public final class Content {
     public static final String STOPRIGHT = "stopRight";//停止右转
     public static final String STARTLIGHT = "startLight";//开灯
     public static final String STOPLIGHT = "stopLight";//关灯
-
+    public static final String SYSTEM_DATE = "system_date";//
     public static final String GETMAPLIST = "getMapList";//请求地图列表
     public static final String SENDMAPNAME = "sendMapName";//返回地图列表名称
     public static final String GETMAPPIC = "getMapPic";//请求地图图片
