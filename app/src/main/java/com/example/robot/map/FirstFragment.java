@@ -356,6 +356,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 System.out.println("MG_map_nameSSSS: " + Content.list.size());
                 mainSpinnerMap.setText(mapName[0]);
                 Content.map_Name=mapName[0];
+                Content.first_map_Name = mapName[0];
                 mainTask.setEnabled(true);
             //    gsonUtils.setMapName(mapName[0]);
             //    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
