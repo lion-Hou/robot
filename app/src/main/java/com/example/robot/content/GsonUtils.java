@@ -36,6 +36,7 @@ public class GsonUtils {
     private int voiceLevel;
     private int speedLevel;
     private int workingMode;
+    private long time;
 
     public int getWorkingMode() {
         return workingMode;
@@ -158,6 +159,9 @@ public class GsonUtils {
         this.positionName = positionName;
     }
 
+    public void setTime(long time) {
+        this.time = time;
+    }
 
     public String putJsonMessage(String type) {
         jsonObject = new JSONObject();
@@ -176,6 +180,7 @@ public class GsonUtils {
             jsonObject.put(Content.OLD_POINT_NAME,oldPointName);
             jsonObject.put(Content.NEW_POINT_NAME,newPointName);
             jsonObject.put(Content.WORKING_MODE,workingMode);
+            jsonObject.put(Content.SYSTEM_DATE,time);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {
@@ -249,5 +254,6 @@ public class GsonUtils {
         }
         return jsonObject.toString();
     }
+
 
 }

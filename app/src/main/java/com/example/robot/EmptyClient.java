@@ -47,6 +47,9 @@ public class EmptyClient extends WebSocketClient {
         isConnected = true;
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         //发送系统时间给下位机
+        long time = System.currentTimeMillis();
+        Log.d("gfdfas", String.valueOf(time));
+        gsonUtils.setTime(time);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));//断连监听
         //获得上位机版本号
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.versionCode));
@@ -169,6 +172,7 @@ public class EmptyClient extends WebSocketClient {
                 }else {
                     EventBus.getDefault().post(new EventBusMessage(10017, taskName));
                 }
+                break;
             case Content.SENDPOINTPOSITION:
                 //当前地图点列表
                 jsonObject = new JSONObject(message);
