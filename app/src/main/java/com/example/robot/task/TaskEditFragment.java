@@ -197,6 +197,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                                     } else {
                                         gsonUtils.setTaskWeek(myWeek);//任务周期
                                     }
+                                    Log.d("fdsfsd",typeTime);
                                     gsonUtils.setTaskTime(typeTime);//任务时间 “20：20”
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TASK_ALARM));//定时任务
 
@@ -227,18 +228,21 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     public void onClick(DialogInterface dialog, int which) {
                         typeValue = type[which];//任务类型
                         if (which == 0) {
-                            typeTime = "FF:FF";
-                            taskTypeSelectTime.setText("FF:FF");
+                            taskTypeSelectTime.setText("请选择时间");
                             myWeek.clear();
                             selectWeek = "";
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.GONE);
+                            typeTime = "FF:FF";
                         }else if (which == 1) {
+                            taskTypeSelectTime.setText("请选择时间");
                             myWeek.clear();
                             selectWeek = "";
                             taskTypeSelect.setText(typeValue);
-                            taskTypeSelectWeek.setVisibility(View.VISIBLE);
+                            taskTypeSelectWeek.setVisibility(View.GONE);
                         } else {
+                            taskTypeSelectTime.setText("请选择时间");
+                            taskTypeSelectWeek.setText("请选择周期");
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
                         }
@@ -393,10 +397,12 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     taskTypeSelect.setText(type[0]);
                     typeValue = type[0];
                 } else if (typeArray.length() == 7) {
+                    //pre day
                     taskTypeSelect.setText(type[1]);
                     taskTypeSelectWeek.setVisibility(View.GONE);
                     typeValue = type[1];
                 } else {
+                    // pre week
                     typeValue = type[2];
                     taskTypeSelect.setText(type[2]);
                     for (int i = 0; i < typeArray.length(); i++) {
@@ -405,8 +411,9 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     }
                     taskTypeSelectWeek.setText(selectWeek);
                 }
-                taskTypeSelectTime.setText(jsonObject.getString(Content.editTaskQueueTime));
 
+                taskTypeSelectTime.setText(jsonObject.getString(Content.editTaskQueueTime));
+                typeTime = jsonObject.getString(Content.editTaskQueueTime);
 
                 //数据
                 JSONArray jsonArray = jsonObject.getJSONArray(Content.editTaskQueue);

@@ -283,24 +283,28 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         Log.d(TAG, "onEventMsg ： " + "2");
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         System.out.println("which" + mapName.length);
-        builder.setItems(mapName, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                System.out.println("which" + which);
-                managerSelected.setText(mapName[which]);
-                Content.map_Name = mapName[which];
-                Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
-                if (Content.map_Name!=null) {
-                    managerEdit.setEnabled(true);
-                    managerDelete.setEnabled(true);
-                    managerRename.setEnabled(true);
+        if (mapName.length == 0){
+
+        }else {
+            builder.setItems(mapName, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("which" + which);
+                    managerSelected.setText(mapName[which]);
+                    Content.map_Name = mapName[which];
+                    Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
+                    if (Content.map_Name!=null) {
+                        managerEdit.setEnabled(true);
+                        managerDelete.setEnabled(true);
+                        managerRename.setEnabled(true);
+                    }
+                    gsonUtils.setMapName(mapName[which]);
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                    Log.d(TAG,"AAAAAAAA");
                 }
-                gsonUtils.setMapName(mapName[which]);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-                Log.d(TAG,"AAAAAAAA");
-            }
-        });
-        builder.create().show();
+            });
+            builder.create().show();
+        }
     }
 
     @SuppressLint({"ResourceAsColor", "NewApi"})
