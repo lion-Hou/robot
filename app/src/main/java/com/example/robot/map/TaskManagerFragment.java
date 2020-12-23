@@ -308,10 +308,10 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
-            if (mBitmapHeight >= mBitmapWidth) {
+            if (mBitmapHeight/taskManageMapRelativeBorder.getHeight() >= mBitmapWidth/taskManageMapRelativeBorder.getWidth()){
                 mBitmapWidth = taskManageMapRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = taskManageMapRelativeBorder.getHeight();
-            } else if (mBitmapHeight < mBitmapWidth) {
+            }else {
                 mBitmapHeight = taskManageMapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = taskManageMapRelativeBorder.getWidth();
             }

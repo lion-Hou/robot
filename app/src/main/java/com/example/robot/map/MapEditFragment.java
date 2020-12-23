@@ -158,9 +158,9 @@ public class MapEditFragment extends Fragment{
         saveChargingBtn.setEnabled(false);
         Toast.makeText(mContext, R.string.toast_edit_map_text7, Toast.LENGTH_LONG).show();
         gsonUtils.setMapName(Content.map_Name);
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));
-        gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+        gsonUtils.setMapName(Content.map_Name);
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.USE_MAP));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
     }
 
@@ -222,10 +222,10 @@ public class MapEditFragment extends Fragment{
             mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
-            if (mBitmapHeight >= mBitmapWidth) {
+            if (mBitmapHeight/mapRelativeBorder.getHeight() >= mBitmapWidth/mapRelativeBorder.getWidth()){
                 mBitmapWidth = mapRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = mapRelativeBorder.getHeight();
-            } else {
+            }else {
                 mBitmapHeight = mapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = mapRelativeBorder.getWidth();
             }
@@ -239,10 +239,10 @@ public class MapEditFragment extends Fragment{
             if (parent != null) {
                 parent.removeView(editMapImage);
             }
-            Drawable drawable = new BitmapDrawable(mBitmap);
+//            Drawable drawable = new BitmapDrawable(mBitmap);
 
-            mapRelative.setBackground(drawable);
-//            mapRelative.addView(editMapImage);
+//            mapRelative.setBackground(drawable);
+            mapRelative.addView(editMapImage);
 //            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
         } else if (messageEvent.getState() == 10008) {
             for (int i = 0; i < imageViewArrayList.size(); i++) {
@@ -270,18 +270,12 @@ public class MapEditFragment extends Fragment{
                         TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
 
-                        double mapWidth = (double) editMapImage.getWidth();
-                        double mapHeight = (double) editMapImage.getHeight();
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
 
                         String pointName = jsonItem.getString(Content.POINT_NAME);
                         pointNameList[i] =pointName;
                         Log.d("zhzh111", "point" + pointName);
-                        double layoutW = (double) mapRelative.getWidth();
-                        double layoutH = (double) mapRelative.getHeight();
-                        Log.d("W H", "" + layoutW / mapWidth + "MW:" + layoutH / mapHeight);
-//                        Log.d("zdzd999", "RW:x"+coefficientX+"Y"+coefficientY);
                         double pointX = jsonItem.getDouble(Content.POINT_X);
 
                         int pointType = jsonItem.getInt(Content.POINT_TYPE);
@@ -292,7 +286,7 @@ public class MapEditFragment extends Fragment{
                         double angleY = Math.sin(jsonItem.getDouble(Content.ANGLE));
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
-                        Log.d("zdzd9998", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "       originX" + originX + "       Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
+                        Log.d("zdzd9998asd", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "    pointy"+pointY+"       originX" + originX + "       Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
                         Log.d("zdzd9998", " resolution * angleX" + resolution * angleX);
 
                         if (pointType == 1) {
@@ -304,7 +298,7 @@ public class MapEditFragment extends Fragment{
                             markBtn.setEnabled(true);
                             saveBtn.setEnabled(true);
                             charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX )),
-                                    (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY) )),
+                                    (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
                             mapRelative.addView(charging_Img);
                             Log.d("zdzd999222", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX + "  pointY" + pointY + "   originX" + originX + "   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
@@ -312,7 +306,8 @@ public class MapEditFragment extends Fragment{
                             Log.d("zdzd999222", "angleX" + angleX);
                         }
                             if (pointType == 2) {
-                                Log.d("SourireG", "point length" + jsonArray.length());
+                                Log.d("Sourire1", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"    pointy"+pointY+ "   originX"+originX);
+                                Log.d("SourireG", "width:"+mBitmapWidth+"height:"+mBitmapHeight);
                                 imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                         (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                         0, 0);

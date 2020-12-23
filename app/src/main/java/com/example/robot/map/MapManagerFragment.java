@@ -79,7 +79,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     private NormalDialogUtil mapManageNormalDialog;
     private String[] taskNameList;
 
-    private List<ImageView> imageViewArrayList = new ArrayList<>();
+    private List<View> imageViewArrayList = new ArrayList<>();
     private ImageView robot_Img;
     private int index = 0;
     double mBitmapHeight;
@@ -306,7 +306,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     @SuppressLint({"ResourceAsColor", "NewApi"})
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
-        Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
+        Log.d(TAG, "onEventMsgmapManager ： " + messageEvent.getState());
         if (messageEvent.getState() == 10001) {
             Log.d(TAG, "图片 ： " + messageEvent.getT());
             ByteBuffer bytes = (ByteBuffer) messageEvent.getT();
@@ -319,18 +319,30 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
             mBitmapHeight = mBitmap.getHeight();
             mBitmapWidth = mBitmap.getWidth();
-            if (mBitmapHeight >= mBitmapWidth){
-                mBitmapWidth = mapManageRelativeBorder.getHeight()/mBitmapHeight*mBitmapWidth;
+            System.out.println("SourireG SSSS1: " +"  h:"+mBitmap.getHeight()+"  w:"+mBitmap.getWidth());
+            System.out.println("SourireG SSSS2: " +"  h:"+mBitmapHeight+"  w:"+mBitmapWidth);
+            System.out.println("SourireG SSSS2: " +"  h:"+mapManageRelativeBorder.getHeight()+"  w:"+mapManageRelativeBorder.getWidth());
+//            if (mBitmapHeight >= mBitmapWidth) {
+//                mBitmapWidth = mapManageRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
+//                mBitmapHeight = mapManageRelativeBorder.getHeight();
+//            } else {
+//                mBitmapHeight = mapManageRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
+//                mBitmapWidth = mapManageRelativeBorder.getWidth();
+//            }
+            if (mBitmapHeight/mapManageRelativeBorder.getHeight() >= mBitmapWidth/mapManageRelativeBorder.getWidth()){
+                mBitmapWidth = mapManageRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = mapManageRelativeBorder.getHeight();
-            }else if (mBitmapHeight < mBitmapWidth){
-                mBitmapHeight = mapManageRelativeBorder.getWidth()/mBitmapWidth*mBitmapHeight;
+            }else {
+                mBitmapHeight = mapManageRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = mapManageRelativeBorder.getWidth();
             }
 
-
+            System.out.println("SourireG SSSS3: " +"  h:"+mBitmapHeight+"  w:"+mBitmapWidth);
+            mapManageRelative.removeAllViews();
             managerMapImage.setImageBitmap(mBitmap);
             mapManageRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+
             managerMapImage.setLayoutParams(layoutParams);
 
             ViewGroup parent = (ViewGroup) managerMapImage.getParent();
@@ -380,6 +392,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             String message = (String) messageEvent.getT();
             try {
                 JSONObject jsonObject = new JSONObject(message);
+                imageViewArrayList.clear();
                 if (jsonObject != null) {
                     JSONArray jsonArray = jsonObject.getJSONArray(Content.SENDPOINTPOSITION);
                     Log.d("zdzd000 ", "pointName : " + jsonArray.toString());
@@ -396,7 +409,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         ImageView imageView = new ImageView(mContext);
                         TextView textView = new TextView(mContext);
                         imageView.setImageResource(R.drawable.ic_point);
-                        imageViewArrayList.add(imageView);
 
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
@@ -410,7 +422,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         double angleY = Math.sin(jsonItem.getDouble(Content.ANGLE));
                         double angleX = Math.cos(jsonItem.getDouble(Content.ANGLE));
 
-                        Log.d("zdzd9998", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"       originX"+originX+"       Content.ROBOT_SIZE "+Content.ROBOT_SIZE);
+                        Log.d("zdzd9998qwe", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"    pointy"+pointY+ "   originX"+originX);
                         Log.d("zdzd9998", " resolution * angleX"+  resolution*angleX);
 
                         if (pointType == 1) {
@@ -423,6 +435,8 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             mapManageRelative.addView(charging_Img);
                         }
                         if (pointType == 2) {
+                            Log.d("Sourire1", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"    pointy"+pointY+ "   originX"+originX);
+                            Log.d("SourireG", "width:"+mBitmapWidth+"height:"+mBitmapHeight);
                             imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
@@ -430,11 +444,12 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                             textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 1),
                                     0, 0);
-                            Log.d("zdzd9998", "angleX" + angleX);
-                            Log.d("zdzd9998", " resolution" + resolution);
+
                             mapManageRelative.addView(imageView);
                             mapManageRelative.addView(textView);
                             imageViewArrayList.add(imageView);
+                            imageViewArrayList.add(imageView);
+                            imageViewArrayList.add(textView);
                         }
                     }
                 }

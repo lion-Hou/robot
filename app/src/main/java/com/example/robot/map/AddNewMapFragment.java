@@ -217,7 +217,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                                         .commit();
                             }
                         };
-                        timer.schedule(task,3000);
+                        timer.schedule(task,4000);
                     }
                 });
                 break;
@@ -232,7 +232,8 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         //取消
                         dialog.dismiss();
                     }
-                }, new DialogInterface.OnClickListener() {                    @Override
+                }, new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定逻辑
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP_NO));
