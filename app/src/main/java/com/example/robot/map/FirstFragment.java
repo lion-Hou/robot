@@ -3,6 +3,9 @@ package com.example.robot.map;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.robot.EmptyClient;
@@ -23,6 +29,7 @@ import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
 import com.example.robot.run.RunFragment;
+import com.example.robot.util.SelectDialogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -31,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -76,6 +84,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private String selectTask = "";
     private String get_name;
     private String get_task;
+    private SelectDialogUtil mDialog;
+    private Bitmap mBitmap;
+    private int mBitmapHeight;
+    private int mBitmapWidth;
+    private SelectDialogUtil myDialog;
+    private List<View> imageViewArrayList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -192,6 +206,22 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.main_spinner_map:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+//                SelectDialogUtil.Builder builder = new SelectDialogUtil.Builder(mContext);
+////                builder.setImage(R.drawable.batty)
+//                  builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                mDialog.dismiss();
+//                            }
+//                        })
+//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                mDialog.dismiss();
+//                            }
+//                        });
+//                mDialog = builder.create();
+//                mDialog.show();
                 break;
             case R.id.main_execute:
                 String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
@@ -203,6 +233,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     for (int i = 0; i < myTaskNameList.size(); i++){
                         gsonUtils.setMapName(Content.first_map_Name);
                         gsonUtils.setTaskName(myTaskNameList.get(i));
+
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
 //                        Log.d(TAG, "strList ： " + myTaskNameList.get(0));
 //                        Log.d(TAG, "strList ： " + myTaskNameList.get(1));
@@ -254,28 +285,77 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private String listMapName;
+    /**
+     * 设置mydialog需要处理的事情
+     */
+    SelectDialogUtil.Dialogcallback dialogcallback = new SelectDialogUtil.Dialogcallback() {
+        @Override
+        public void dialogdo(String string) {
+            if (string == "true") {
+                mainSpinnerMap.setText(listMapName);
+                Content.first_map_Name = listMapName;
+                map_name = listMapName;
+                mainTask.setEnabled(true);
+            }
+        }
+    };
+
+    SelectDialogUtil.ListViewcallback listViewcallback = new SelectDialogUtil.ListViewcallback() {
+        @Override
+        public void ListViewClick(int position, String map) {
+            listMapName = map;
+            myDialog.setContent(map);
+            gsonUtils.setMapName(map);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+
+        }
+    };
+
     //首页获取所有地图名称
     public void moreMap(String[] mapName) {
         Log.d(TAG, "onEventMsgfffff" + "2");
         Log.d(TAG, "onEventMsg ： " + "2");
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        System.out.println("which" + mapName.length);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        System.out.println("which" + mapName.length);
+//        if (mapName.length == 0){
+//
+//        }else{
+//            builder.setItems(mapName, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    System.out.println("which" + which);
+//                    mainSpinnerMap.setText(mapName[which]);
+//                    Content.first_map_Name = mapName[which];
+//                    map_name = mapName[which];
+//                    mainTask.setEnabled(true);
+//                    Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
+//                }
+//            });
+//            builder.create().show();
+//        }
         if (mapName.length == 0){
-
+            Toast.makeText(mContext, "请先加地图", Toast.LENGTH_SHORT).show();
         }else{
-            builder.setItems(mapName, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    System.out.println("which" + which);
-                    mainSpinnerMap.setText(mapName[which]);
-                    Content.first_map_Name = mapName[which];
-                    map_name = mapName[which];
-                    mainTask.setEnabled(true);
-                    Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
-                }
-            });
-            builder.create().show();
+            myDialog = new SelectDialogUtil(mContext, R.layout.dialog_select);
+            myDialog.setDialogCallback(dialogcallback);
+            myDialog.setStrings(mapName);
+            myDialog.setListViewCallback(listViewcallback);
+            if (Content.first_map_Name == null) {
+                gsonUtils.setMapName(mapName[0]);
+                mainSpinnerMap.setText(mapName[0]);
+                Content.first_map_Name = mapName[0];
+                map_name = mapName[0];
+                mainTask.setEnabled(true);
+            } else {
+                gsonUtils.setMapName(Content.first_map_Name);
+            }
+            myDialog.setContent(Content.first_map_Name);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+            myDialog.show();
         }
+
+
     }
 
     //首页获取当前选定的地图的所有任务列表
@@ -329,10 +409,26 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
-        if (messageEvent.getState() == 10005) {
+        if (messageEvent.getState() == 10001) {
+            Log.d(TAG, "图片 ： " + messageEvent.getT());
+            ByteBuffer bytes = (ByteBuffer) messageEvent.getT();
+            int len = bytes.limit() - bytes.position();
+            byte[] bytes1 = new byte[len];
+            bytes.get(bytes1);
+            Log.d(TAG, "图片11111 ： " + bytes1);
+
+            //Bitmap mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            mBitmap = BitmapFactory.decodeByteArray(bytes1, 0, bytes1.length);
+            myDialog.setMapByte(bytes1);
+//            myDialog.setBitmap(mBitmap);
+            gsonUtils.setMapName(listMapName);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
+        }else if (messageEvent.getState() == 10005) {
             int ori_size = Content.list.size();
             System.out.println("ZHZHSSSS: ori_size = " + ori_size);
             int null_count = 0;
@@ -358,8 +454,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.map_Name=mapName[0];
                 Content.first_map_Name = mapName[0];
                 mainTask.setEnabled(true);
-            //    gsonUtils.setMapName(mapName[0]);
-            //    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                gsonUtils.setMapName(mapName[0]);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{
                 moreMap(mapName);
             }
@@ -386,6 +482,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        } else if (messageEvent.getState() == 10008) {
+            Log.d(TAG, "获取点列表 ： " + (String) messageEvent.getT());
+            myDialog.setPointIcon((String) messageEvent.getT());
+
+        }else if (messageEvent.getState() == 40002) {
+            String message = (String) messageEvent.getT();
+            myDialog.drawWall(message);
         }
     }
 

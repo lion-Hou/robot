@@ -315,7 +315,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 mBitmapHeight = taskManageMapRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
                 mBitmapWidth = taskManageMapRelativeBorder.getWidth();
             }
-
+            taskManageMapRelative.removeAllViews();
             taskManageMapImage.setImageBitmap(mBitmap);
             taskManageMapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);

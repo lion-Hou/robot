@@ -333,7 +333,7 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
 //                mBitmapHeight = mapManageRelativeBorder.getWidth() / mBitmapWidth * mBitmapHeight;
 //                mBitmapWidth = mapManageRelativeBorder.getWidth();
 //            }
-            if (mBitmapHeight/mapManageRelativeBorder.getHeight() >= mBitmapWidth/mapManageRelativeBorder.getWidth()){
+            if ((mapManageRelativeBorder.getHeight()/mBitmapHeight) <= (mapManageRelativeBorder.getWidth()/mBitmapWidth)){
                 mBitmapWidth = mapManageRelativeBorder.getHeight() / mBitmapHeight * mBitmapWidth;
                 mBitmapHeight = mapManageRelativeBorder.getHeight();
             }else {
@@ -346,7 +346,6 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             managerMapImage.setImageBitmap(mBitmap);
             mapManageRelative.setLayoutParams(new RelativeLayout.LayoutParams((int)mBitmapWidth,(int)mBitmapHeight));
             RelativeLayout.LayoutParams layoutParams = new  RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-
             managerMapImage.setLayoutParams(layoutParams);
 
             ViewGroup parent = (ViewGroup) managerMapImage.getParent();
