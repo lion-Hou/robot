@@ -159,7 +159,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
             if(message.contains("701")){
-                Toast.makeText(this, "检测到机器人附近存在障碍物", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.toast_mainactivity_text1, Toast.LENGTH_SHORT).show();
             }
         }else if (messageEvent.getState() == 12345) {
             Log.d("fdsfsdfsd111", "String.valueOf(versionCode)");

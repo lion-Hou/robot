@@ -100,6 +100,7 @@
     <string name="toast_edit_map_text10">Please check whether the charging point is connected to the robot!</string>
     <string name="toast_settings_text1">Successful application!</string>
     <string name="toast_settings_text2">Access to the test page</string>
+    <string name="toast_mainactivity_text1">Obstacle detected in front of robot!</string>
 
 
 

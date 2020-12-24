@@ -62,7 +62,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:layout_below="@id/robot"
-        android:background="@drawable/btn_gb_normal"/>
+        />
 
     <FrameLayout
         android:id="@+id/first_fragment"

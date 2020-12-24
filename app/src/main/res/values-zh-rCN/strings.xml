@@ -125,6 +125,7 @@
     <string name="toast_edit_map_text10">请确认机器人是否连接上充电点</string>
     <string name="toast_settings_text1">应用成功!</string>
     <string name="toast_settings_text2">进入测试页面</string>
+    <string name="toast_mainactivity_text1">检测到机器人前方存在障碍物!</string>
 
 
 

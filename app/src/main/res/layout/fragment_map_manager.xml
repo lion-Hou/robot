@@ -34,7 +34,7 @@
             android:textSize="25dp" />
     </LinearLayout>
 
-    <RelativeLayout
+2    <RelativeLayout
         android:id="@+id/list_border"
         android:layout_width="0dp"
         android:layout_height="match_parent"

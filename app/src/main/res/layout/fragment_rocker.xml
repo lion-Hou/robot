@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".map.RockerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.kongqw.rockerlibrary.view.RockerView
-        android:id="@+id/rockerView"
-        android:layout_width="match_parent"
+    <com.example.robot.view.RemoteView
+        android:id="@+id/remote_view"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        app:areaBackground="#37DFAA"
-        app:rockerBackground="#FFCC5E2B"
-        app:rockerRadius="19dp" />
+        android:layout_width="match_parent" />
 
 </FrameLayout>

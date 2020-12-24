@@ -161,6 +161,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                                 //确定逻辑
                                 Log.d(TAG, "onEventMsg ： " + "开始扫描");
                                 newMapMapNameEditText.setEnabled(false);
+                                newMapScan.setEnabled(false);
                                 newMapName = newMapMapNameEditText.getText().toString();
                                 gsonUtils.setMapName(newMapName);
                                 Log.d(TAG, "name" + newMapMapNameEditText.getText().toString());
