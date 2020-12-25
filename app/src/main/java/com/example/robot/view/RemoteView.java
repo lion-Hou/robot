@@ -27,7 +27,11 @@ public class RemoteView extends View {
     Paint bubblePaint = new Paint();//气泡画笔
     Paint rectfPaint = new Paint();
     private GsonUtils gsonUtils  = new GsonUtils();
-    ;
+    private boolean isUp = false;
+    private boolean isDown = false;
+    private boolean isLeft = false;
+    private boolean isRight = false;
+
     public static EmptyClient emptyClient;
     /**
      * 气泡的位置
@@ -61,6 +65,7 @@ public class RemoteView extends View {
         this.mContext = context;
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -68,52 +73,111 @@ public class RemoteView extends View {
         View view = findViewById(R.id.remote_view);
         float x = view.getWidth();
         float y = view.getHeight();
+
         Log.d("ssss","onEventMsg setting： " + x + "voiceLevel" + y);
 
         canvas.drawCircle(backX, backY, radiusBack, backPaint);
 
         if (orientation=="GO") {
             canvas.drawArc(mRectF, -45, -90, true, rectfPaint);
-            Log.d("ssss","前进");
+
+            if (isUp == false){
+                Log.d("ssss","前进");
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTUP));
-
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
-
+            isUp = true;
+            }
+            if (isRight==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
+                isRight = false;
+            }
+            if (isDown==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
+                isDown = false;
+            }
+            if (isLeft==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
+                isLeft = false;
+            }
         }else if (orientation=="RETURN"){
             canvas.drawArc(mRectF, 45, 90, true, rectfPaint);
-            Log.d("ssss","后退");
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTDOWN));
 
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
-
+            if (isDown == false) {
+                Log.d("ssss","后退");
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTDOWN));
+                isDown = true;
+            }
+            if (isUp==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
+                isUp = false;
+            }
+            if (isRight==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
+                isRight = false;
+            }
+            if (isLeft==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
+                isLeft = false;
+            }
         }else if (orientation=="LEFT"){
             canvas.drawArc(mRectF, 135, 90, true, rectfPaint);
-            Log.d("ssss","左转");
+
+            if (isLeft == false){
+                Log.d("ssss","左转");
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTLEFT));
-
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
-
+            isLeft = true;
+            }
+            if (isUp==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
+                isUp = false;
+            }
+            if (isDown==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
+                isDown = false;
+            }
+            if (isRight==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
+                isRight = false;
+            }
         }else if (orientation=="RIGHT"){
-            Log.d("ssss","右转");
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTRIGHT));
-
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
             canvas.drawArc(mRectF, -45, 90, true, rectfPaint);
+
+            if (isRight == false) {
+                Log.d("ssss","右转");
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTRIGHT));
+                isRight = true;
+            }
+            if (isUp==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
+                isUp = false;
+            }
+            if (isDown==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
+                isDown = false;
+            }
+            if (isLeft==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
+                isLeft = false;
+            }
 
         }else if (orientation=="STOP"){
             Log.d("ssss","停止");
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
+            if (isUp==true){
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPUP));
+                isUp = false;
+            }
+            if (isLeft==true) {
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPLEFT));
+                isLeft = false;
+            }
+            if (isRight==true) {
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPRIGHT));
+                isRight = false;
+            }
+            if (isDown==true) {
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STOPDOWN));
+                isDown = false;
+            }
+
             rectfPaint.setAlpha(0);
             canvas.drawArc(mRectF, -90, 360, true, rectfPaint);
         }
@@ -124,10 +188,11 @@ public class RemoteView extends View {
 
     private void initPaint() {
         backPaint.setAntiAlias(true);
-        backPaint.setColor(Color.parseColor("#0404B4"));
+        backPaint.setColor(Color.parseColor("#F6D8CE"));
 
         bubblePaint.setAntiAlias(true);
-        bubblePaint.setColor(Color.parseColor("#FE2E2E"));
+        bubblePaint.setColor(Color.parseColor("#F5D0A9"));
+
         rectfPaint.setAntiAlias(true);
         rectfPaint.setColor(Color.parseColor("#ffffff"));
         rectfPaint.setAlpha(144);

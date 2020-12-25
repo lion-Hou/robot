@@ -73,15 +73,20 @@ public class SettingFragment extends Fragment {
     ConstraintLayout testFragment;
     @BindView(R.id.settings_debug)
     Spinner settingsDebug;
-    @BindView(R.id.robotNavigationSpeedTV)
-    TextView robotNavigationSpeedTV;
-    @BindView(R.id.settings_robotNavigationSpeed)
-    Spinner settingsRobotNavigationSpeed;
+    @BindView(R.id.electricityQuantityValueTV)
+    TextView electricityQuantityValueTV;
+    @BindView(R.id.volumeValueTV)
+    TextView volumeValueTV;
+    @BindView(R.id.versionNumberTV2)
+    TextView versionNumberTV2;
+    @BindView(R.id.settings_versionNumber2)
+    TextView settingsVersionNumber2;
 
     private View view;
     private GsonUtils gsonUtils;
     private Context mContext;
     private long[] mHints = new long[2];
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -133,6 +138,62 @@ public class SettingFragment extends Fragment {
 
     private void initView() {
 
+        settingsElectricityQuantity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /**
+             * 拖动条停止拖动的时候调用
+             */
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                sett.setText("拖动停止");
+            }
+
+            /**
+             * 拖动条开始拖动的时候调用
+             */
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+//                description.setText("开始拖动");
+            }
+
+            /**
+             * 拖动条进度改变的时候调用
+             */
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                electricityQuantityValueTV.setText(progress+"%");
+            }
+        });
+
+
+
+        settingsVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            /**
+             * 拖动条停止拖动的时候调用
+             */
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                sett.setText("拖动停止");
+            }
+
+            /**
+             * 拖动条开始拖动的时候调用
+             */
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+//                description.setText("开始拖动");
+            }
+
+            /**
+             * 拖动条进度改变的时候调用
+             */
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                volumeValueTV.setText(progress+"%");
+            }
+        });
+
     }
 
 
@@ -145,6 +206,7 @@ public class SettingFragment extends Fragment {
             int lowBattery = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "low_battery" + lowBattery);
             settingsElectricityQuantity.setProgress(lowBattery);
+            electricityQuantityValueTV.setText(lowBattery+"%");
         } else if (messageEvent.getState() == 20002) {
             int ledLevel = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "LED" + ledLevel);
@@ -155,19 +217,11 @@ public class SettingFragment extends Fragment {
             } else {
                 settingsLedBrightness.setSelection(2);
             }
-        } else if (messageEvent.getState() == 20003) {
-            int robotSpeed = (int) messageEvent.getT();
-            if (robotSpeed == 0) {
-                settingsRobotNavigationSpeed.setSelection(0);
-            } else if (robotSpeed == 1) {
-                settingsRobotNavigationSpeed.setSelection(1);
-            } else {
-                settingsRobotNavigationSpeed.setSelection(2);
-            }
         } else if (messageEvent.getState() == 20004) {
             int voiceLevel = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + voiceLevel);
             settingsVolume.setProgress(voiceLevel);
+            volumeValueTV.setText(voiceLevel+"%");
         } else if (messageEvent.getState() == 20005) {
             int workingMode = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + workingMode);
@@ -178,7 +232,7 @@ public class SettingFragment extends Fragment {
             } else {
                 settingsDebug.setSelection(2);
             }
-        }else if (messageEvent.getState() == 20006) {
+        } else if (messageEvent.getState() == 20006) {
             int robotSpeed = (int) messageEvent.getT();
             if (robotSpeed == 0) {
                 settingsRobotSpeed.setSelection(0);
@@ -187,7 +241,7 @@ public class SettingFragment extends Fragment {
             } else {
                 settingsRobotSpeed.setSelection(2);
             }
-    }
+        }
     }
 
 
@@ -197,9 +251,9 @@ public class SettingFragment extends Fragment {
             case R.id.settings_reset_robot:
                 NormalDialogUtil resetNormalDialog = new NormalDialogUtil();
 
-                final String dialogSettingsText1=mContext.getString(R.string.dialog_settings_text1);
-                final String allOK=mContext.getString(R.string.all_ok);
-                final String allCancel=mContext.getString(R.string.all_cancel);
+                final String dialogSettingsText1 = mContext.getString(R.string.dialog_settings_text1);
+                final String allOK = mContext.getString(R.string.all_ok);
+                final String allCancel = mContext.getString(R.string.all_cancel);
                 resetNormalDialog.showDialog(mContext, "", dialogSettingsText1, allCancel, allOK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -233,10 +287,6 @@ public class SettingFragment extends Fragment {
                 int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
                 gsonUtils.setSpeedLevel(robotSpeed);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_PLAYPATHSPEEDLEVEL));//0,1,2
-
-                int robotSpeed2 = settingsRobotNavigationSpeed.getSelectedItemPosition();
-                gsonUtils.setSpeedLevel(robotSpeed2);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_NAVIGATIONSPEEDLEVEL));
 
                 int settingDebug = settingsDebug.getSelectedItemPosition();
                 gsonUtils.setWorkingMode(settingDebug);

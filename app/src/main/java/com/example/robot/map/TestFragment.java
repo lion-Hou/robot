@@ -318,8 +318,10 @@ public class TestFragment extends Fragment {
 
             if (itemString3.equals("false")) {
                 pir3.setTextColor(color1);
+                pir4.setTextColor(color1);
             } else {
                 pir3.setTextColor(color2);
+                pir4.setTextColor(color2);
             }
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();

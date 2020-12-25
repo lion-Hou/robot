@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="MissingDefaultResource">
-
+    tools:ignore="MissingDefaultResource"
+    android:background="@drawable/background">
     <RelativeLayout
             android:id="@+id/main_fragment"
             android:layout_width="match_parent"
@@ -16,7 +16,6 @@
         android:layout_height="300dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp">
-
 
         <RelativeLayout
             android:id="@+id/title"
@@ -49,9 +48,9 @@
         <ImageView
             android:id="@+id/robot_img"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:layout_below="@id/title"
-            android:src="@drawable/batty" />
+            android:background="@drawable/robot_picture" />
 
     </RelativeLayout>
 

@@ -16,9 +16,10 @@
     <string name="settings_reset_robot">Reset</string>
     <string name="settings_volume">Volume:</string>
     <string name="settings_navigation_speed">Robot Navigation Speed:</string>
-    <string name="settings_playPathSpeed_speed">Robot Play Path Speed:</string>
+    <string name="settings_playPathSpeed_speed">Robot Speed:</string>
     <string name="settings_led_brightness">LED Brightness:</string>
-    <string name="settings_version_number">Version Number:</string>
+    <string name="settings_version_number">Robot Version Number:</string>
+    <string name="settings_version_number2">Controller Version Number:</string>
 
     <string name="please_select_map">PLEASE SELECT MAP</string>
     <string name="new_map_name_text">Map Name:</string>

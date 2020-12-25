@@ -15,9 +15,10 @@
     <string name="settings_reset_robot">恢复出厂设置</string>
     <string name="settings_volume">音量:</string>
     <string name="settings_navigation_speed">机器人任务导航速度:</string>
-    <string name="settings_playPathSpeed_speed">机器人任务跟线速度:</string>
+    <string name="settings_playPathSpeed_speed">机器人速度:</string>
     <string name="settings_led_brightness">LED亮度:</string>
-    <string name="settings_version_number">版本号:</string>
+    <string name="settings_version_number">机器人版本号:</string>
+    <string name="settings_version_number2">控制器版本号:</string>
 
 
     <string name="new_map_name_text">地图名:</string>
