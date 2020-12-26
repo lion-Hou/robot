@@ -258,7 +258,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         .commit();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.second_fragment, new RobotControlPanelFragment(), null)
+                        .replace(R.id.second_fragment, new RockerFragment(), null)
                         .addToBackStack(null)
                         .commit();
                 break;
