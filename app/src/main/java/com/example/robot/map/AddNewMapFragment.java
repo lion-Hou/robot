@@ -204,21 +204,6 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                         waitingDialog.setIndeterminate(true);
                         waitingDialog.setCancelable(false);
                         waitingDialog.show();
-
-                        Timer timer = new Timer();
-                        TimerTask task = new TimerTask() {
-                            @Override
-                            public void run() {
-                                Log.d(TAG, "onEventMsg ： "+"正在生成地图");
-                                waitingDialog.dismiss();
-                                getActivity().getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.first_fragment, new MapEditFragment(), null)
-                                        .addToBackStack(null)
-                                        .commit();
-                            }
-                        };
-                        timer.schedule(task,4000);
                     }
                 });
                 break;
@@ -279,6 +264,16 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
             for (int i=0;i< Content.list.size();i++) {
                 mapName[i] =Content.list.get(i).getMap_Name();
                 System.out.println("ZHZHZZZZ: " + mapName[i]);
+            }
+        }else if (messageEvent.getState() == 19191) {
+            String message = (String) messageEvent.getT();
+            if (message.equals("取消扫描并且保存地图successed")){
+                waitingDialog.dismiss();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.first_fragment, new MapEditFragment(), null)
+                        .addToBackStack(null)
+                        .commit();
             }
         }
     }
