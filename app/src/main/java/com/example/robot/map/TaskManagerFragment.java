@@ -330,15 +330,16 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         } else if (messageEvent.getState() == 10008) {
+            Log.d("zdzdremove", "" + imageViewArrayList.size());
             for (int i = 0; i < imageViewArrayList.size(); i++) {
                 taskManageMapRelative.removeView(imageViewArrayList.get(i));
             }
+            imageViewArrayList.clear();
             String message = (String) messageEvent.getT();
             try {
                 JSONObject jsonObject = new JSONObject(message);
                 if (jsonObject != null) {
-                    JSONArray jsonArray = jsonObject.getJSONArray(Content.SENDPOINTPOSITION);
-                    Log.d("zdzd000 ", "pointName : " + jsonArray.toString());
+
                     for (int k = 0; k < Content.list.size(); k++) {
                         if (Content.list.get(k).getMap_Name().equals(Content.first_map_Name)) {
                             Log.d("zdzd555", "" + Content.list.get(k).getResolution());
@@ -346,18 +347,19 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         }
                     }
                     Log.d("zdzd5111", "" + index);
+                    JSONArray jsonArray = jsonObject.getJSONArray(Content.SENDPOINTPOSITION);
+                    Log.d("zdzd000 ", "pointName : " + jsonArray.toString());
+
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonItem = jsonArray.getJSONObject(i);
                         Log.d("zdzd111 ", "pointName : " + jsonItem.toString());
-                        ImageView imageView = new ImageView(mContext);
-                        TextView textView = new TextView(mContext);
-                        imageView.setImageResource(R.drawable.ic_point);
-                        imageView.setOnClickListener(this);
+                        String pointName = jsonItem.getString(Content.POINT_NAME);
+                        Log.d("zdzd111 ", "pointName : " + pointName);
                         double gridHeight = Content.list.get(index).getGridHeight();
                         double gridWidth = Content.list.get(index).getGridWidth();
 
                         double pointX = jsonItem.getDouble(Content.POINT_X);
-                        String pointName = jsonItem.getString(Content.POINT_NAME);
+
                         int pointType = jsonItem.getInt(Content.POINT_TYPE);
                         double pointY = jsonItem.getDouble(Content.POINT_Y);
                         double originX = Content.list.get(index).getOriginX();
@@ -380,6 +382,10 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         }
                         if (pointType == 2) {
                             if (Content.manageTaskName == null){
+                                ImageView imageView = new ImageView(mContext);
+                                TextView textView = new TextView(mContext);
+                                imageView.setImageResource(R.drawable.ic_point);
+                                imageView.setOnClickListener(this);
                                 imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                         (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                         0, 0);
@@ -394,8 +400,15 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                                 imageViewArrayList.add(imageView);
                                 imageViewArrayList.add(textView);
                             }else {
+                                Log.d(TAG, "onEventMsg2000498 ： " + taskPoint1 +"  "+taskPoint1.size());
                                 for (int j = 0; j <taskPoint1.size() ; j++) {
+                                    ImageView imageView = new ImageView(mContext);
+                                    TextView textView = new TextView(mContext);
+                                    imageView.setImageResource(R.drawable.ic_point);
+                                    imageView.setOnClickListener(this);
                                     String a= (String) taskPoint1.get(j);
+                                    Log.d(TAG, "onEventMsg2000498889 ： " + a);
+                                    Log.d(TAG, "onEventMsg2000498888 ： " + pointName);
                                     if (a.equals(pointName)){
                                         imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                                 (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
@@ -415,6 +428,9 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                             }
                             }
                         }
+
+
+
                     }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -485,7 +501,9 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 JSONArray jsonArray1 = jsonObject.getJSONArray(Content.editTaskQueue);
                 for (int i = 0; i < jsonArray1.length(); i++) {
                     JSONObject js = jsonArray1.getJSONObject(i);
-                    taskPoint1.add(js.getString(Content.dbPointName));
+                    if (!taskPoint1.contains(js.getString(Content.dbPointName))) {
+                        taskPoint1.add(js.getString(Content.dbPointName));
+                    }
                     Log.d("details_GG", "" + taskPoint1);
                 }
                 taskPoint = message.replace("\"","");

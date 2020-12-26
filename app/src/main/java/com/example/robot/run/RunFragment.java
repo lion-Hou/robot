@@ -103,8 +103,8 @@ public class RunFragment extends Fragment {
     }
 
     private void initView() {
-//        runMapName.setText(Content.first_map_Name);
-//        runTaskName.setText(Content.task_Name);
+        runMapName.setText(Content.first_map_Name);
+        runTaskName.setText(Content.task_Name);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -145,8 +145,8 @@ public class RunFragment extends Fragment {
                 String mapName = jsonObject.getString(Content.MAP_NAME);
                 Log.d("bgbg" , taskName);
                 Log.d("bgbg" , mapName);
-                runMapName.setText(taskName);
-                runTaskName.setText(mapName);
+                runMapName.setText(mapName);
+                runTaskName.setText(taskName);
                 JSONArray stateList = jsonObject.getJSONArray(Content.ROBOT_TASK_STATE);
                 for (int i = 0; i < stateList.length(); i++) {
                     JSONObject js = stateList.getJSONObject(i);

@@ -229,7 +229,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
-                    Log.d(TAG, "strList ： " + myTaskNameList);
+                    Log.d(TAG, "zdzdstrList ： " + myTaskNameList.size());
                     for (int i = 0; i < myTaskNameList.size(); i++){
                         gsonUtils.setMapName(Content.first_map_Name);
                         gsonUtils.setTaskName(myTaskNameList.get(i));
@@ -258,14 +258,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         .commit();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.second_fragment, new RockerFragment(), null)
+                        .replace(R.id.second_fragment, new RobotControlPanelFragment(), null)
                         .addToBackStack(null)
                         .commit();
-//                getActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.second_fragment, new RockerFragment(), null)
-//                        .addToBackStack(null)
-//                        .commit();
                 break;
             case R.id.main_task:
                 getActivity().getSupportFragmentManager()
@@ -303,37 +298,88 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     SelectDialogUtil.ListViewcallback listViewcallback = new SelectDialogUtil.ListViewcallback() {
         @Override
-        public void ListViewClick(int position, String map) {
+        public void ListViewClick(int position, String map,String task) {
             listMapName = map;
             myDialog.setContent(map);
             gsonUtils.setMapName(map);
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+        }
+    };
+
+    SelectDialogUtil.CheckBoxCallback checkBoxCallback = new SelectDialogUtil.CheckBoxCallback() {
+
+        @Override
+        public void checkBoxdo(String string, List<String> myTaskList) {
+            Log.d("TaskList : " , ""+myTaskList.size());
+            selectTask = string;
+            mainSpinnerTask.setText(selectTask);
+            myTaskNameList.clear();
+            myTaskNameList.addAll(myTaskList);
 
         }
     };
+
+    //首页获取当前选定的地图的所有任务列表
+    public void requestTaskList(String[] taskNameList) {
+//        if(taskNameList.length == 0){
+//            Log.d("hhhhh","hhhhhjjj");
+//            Toast toast = Toast.makeText(mContext,"当前地图没有任务",Toast.LENGTH_SHORT);
+//            toast.show();
+//        }else{
+//            boolean[] booleans = new boolean[taskNameList.length];
+//            for (int i = 0;i<taskNameList.length;i++) {
+//                boolean flag = false;
+//                booleans[i] = flag;
+//            }
+//            Log.d("tasklistlog", "tasklist");
+//            AlertDialog.Builder week = new AlertDialog.Builder(mContext);
+//            week.setMultiChoiceItems(taskNameList, booleans, new DialogInterface.OnMultiChoiceClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+//                    if (isChecked) {
+//                        myTaskNameList.add(taskNameList[which]);
+//                        Log.d("tasklistvalue",myTaskNameList.toString());
+//                    } else {
+//                        myTaskNameList.remove(taskNameList[which]);
+//                    }
+//                }
+//            });
+//
+//            //设置正面按钮
+//            week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    selectTask = "";
+//                    for (int i = 0; i < myTaskNameList.size(); i++) {
+//                        selectTask = selectTask + myTaskNameList.get(i);
+//                    }
+//                    mainSpinnerTask.setText(selectTask);
+//                    Content.task_Name = myTaskNameList.get(0);
+//                    dialog.dismiss();
+//                }
+//            });
+//            //设置反面按钮
+//            week.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    myTaskNameList.clear();
+//                    dialog.dismiss();
+//                }
+//            });
+//            week.show();
+        myDialog = new SelectDialogUtil(mContext,R.layout.dialog_select_task);
+        myDialog.setCheckBCallback(checkBoxCallback);
+        myDialog.setListViewCallback(listViewcallback);
+        myDialog.setContent("任务列表");
+        myDialog.setCheckboxList(taskNameList);
+        myDialog.show();
+    }
 
     //首页获取所有地图名称
     public void moreMap(String[] mapName) {
         Log.d(TAG, "onEventMsgfffff" + "2");
         Log.d(TAG, "onEventMsg ： " + "2");
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//        System.out.println("which" + mapName.length);
-//        if (mapName.length == 0){
-//
-//        }else{
-//            builder.setItems(mapName, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    System.out.println("which" + which);
-//                    mainSpinnerMap.setText(mapName[which]);
-//                    Content.first_map_Name = mapName[which];
-//                    map_name = mapName[which];
-//                    mainTask.setEnabled(true);
-//                    Log.d(TAG, "onEventMsg ： " + "mapName11"+ Content.map_Name);
-//                }
-//            });
-//            builder.create().show();
-//        }
+
         if (mapName.length == 0){
             Toast.makeText(mContext, "请先加地图", Toast.LENGTH_SHORT).show();
         }else{
@@ -358,56 +404,30 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    //首页获取当前选定的地图的所有任务列表
-    public void requestTaskList(String[] taskNameList) {
-        if(taskNameList.length == 0){
-            Log.d("hhhhh","hhhhhjjj");
-            Toast toast = Toast.makeText(mContext,"当前地图没有任务",Toast.LENGTH_SHORT);
-            toast.show();
-        }else{
-            boolean[] booleans = new boolean[taskNameList.length];
-            for (int i = 0;i<taskNameList.length;i++) {
-                boolean flag = false;
-                booleans[i] = flag;
+    /**
+     * 设置mydialog需要处理的事情
+     */
+    SelectDialogUtil.Dialogcallback taskdialogcallback = new SelectDialogUtil.Dialogcallback() {
+        @Override
+        public void dialogdo(String string) {
+            if (string == "true") {
+                mainSpinnerMap.setText(listMapName);
+                Content.first_map_Name = listMapName;
+                map_name = listMapName;
+                mainTask.setEnabled(true);
             }
-            Log.d("tasklistlog", "tasklist");
-            AlertDialog.Builder week = new AlertDialog.Builder(mContext);
-            week.setMultiChoiceItems(taskNameList, booleans, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                    if (isChecked) {
-                        myTaskNameList.add(taskNameList[which]);
-                        Log.d("tasklistvalue",myTaskNameList.toString());
-                    } else {
-                        myTaskNameList.remove(taskNameList[which]);
-                    }
-                }
-            });
-
-            //设置正面按钮
-            week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    selectTask = "";
-                    for (int i = 0; i < myTaskNameList.size(); i++) {
-                        selectTask = selectTask + myTaskNameList.get(i);
-                    }
-                    mainSpinnerTask.setText(selectTask);
-                    dialog.dismiss();
-                }
-            });
-            //设置反面按钮
-            week.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    myTaskNameList.clear();
-                    dialog.dismiss();
-                }
-            });
-            week.show();
-
         }
-    }
+    };
+
+    SelectDialogUtil.ListViewcallback tasklistViewcallback = new SelectDialogUtil.ListViewcallback() {
+        @Override
+        public void ListViewClick(int position, String map, String task) {
+            listMapName = map;
+            myDialog.setContent(map);
+            gsonUtils.setMapName(map);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Subscribe(threadMode = ThreadMode.MAIN)
