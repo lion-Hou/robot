@@ -225,7 +225,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.main_execute:
                 String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
-                if (mainSpinnerTaskText.equals(name3) || mainSpinnerTaskText.equals(name4)) {
+                String a ="";
+                if (mainSpinnerTaskText.equals(name3) || mainSpinnerTaskText.equals(name4) || mainSpinnerTaskText.equals(a)) {
                     Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
                     toast.show();
                 }else{

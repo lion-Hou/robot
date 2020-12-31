@@ -102,8 +102,8 @@
     <string name="toast_settings_text1">Successful application!</string>
     <string name="toast_settings_text2">Access to the test page</string>
     <string name="toast_mainactivity_text1">Obstacle detected in front of robot!</string>
-
-
+    <string name="urgencyStoptitle">WARN</string>
+    <string name="urgencyStopmessage">URGENCY STOP</string>
 
 
 

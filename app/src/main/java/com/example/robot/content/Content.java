@@ -126,6 +126,7 @@ public final class Content {
     public static final String REQUEST_MSG = "request_msg";//返回失败结果
     public static final String CONN_OK = "conn_ok";
     public static final String CONN_NO = "no_conn";
+    public static final String DEVICES_STATUS = "devices_status";
 
     public static final String ROBOT_X = "robot_x";//x坐标
     public static final String ROBOT_Y = "robot_y";//y坐标

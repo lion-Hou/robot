@@ -127,7 +127,8 @@
     <string name="toast_settings_text1">应用成功!</string>
     <string name="toast_settings_text2">进入测试页面</string>
     <string name="toast_mainactivity_text1">检测到机器人前方存在障碍物!</string>
-
+    <string name="urgencyStoptitle">警告</string>
+    <string name="urgencyStopmessage">紧急停止</string>
 
 
     <string name="all_ok">确认</string>

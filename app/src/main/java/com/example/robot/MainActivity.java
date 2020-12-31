@@ -1,5 +1,6 @@
 package com.example.robot;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -158,10 +159,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             time.setText(batter);
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
-            if(message.contains("701")){
+            if (message.contains("701")) {
                 Toast.makeText(this, R.string.toast_mainactivity_text1, Toast.LENGTH_SHORT).show();
             }
-        }else if (messageEvent.getState() == 12345) {
+        } else if (messageEvent.getState() == 12345) {
             Log.d("fdsfsdfsd111", "String.valueOf(versionCode)");
             int versionCode = (int) messageEvent.getT();
             Log.d("fdsfsdfsd111", String.valueOf(versionCode));
@@ -169,11 +170,29 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                showOtaDialog();
 //                ota();
             }
-        }else if (messageEvent.getState() == 90009){
+        } else if (messageEvent.getState() == 90009) {
             Log.d("fdsfsdfsd111", "update");
             otaDialog.dismiss();
-        }
+        } else if (messageEvent.getState() == 20020) {
+            String stop = (String) messageEvent.getT();
+            String type = "true";
+            if (stop.equals(type)) {
 
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this)
+//                        .setTitle(R.string.urgencyStoptitle)
+//                        .setMessage(R.string.urgencyStopmessage)
+//                        .setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            }
+//                        });
+//
+//                builder.create().show();
+                Toast.makeText(this, R.string.urgencyStopmessage, Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
     /**

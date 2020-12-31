@@ -132,7 +132,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     private void initView() {
 
         newMapMapNameEditText.setText(Content.fixTaskName);
-
+        newMapMapNameEditText.setEnabled(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         mAdapter = new MyAdapter(mList, this);

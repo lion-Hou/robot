@@ -231,13 +231,16 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("ledLevel", String.valueOf(ledLevel));
                 break;
 
-            case Content.GET_SPEED_LEVEL:
+            case Content.DEVICES_STATUS:
                 jsonObject = new JSONObject(message);
                 int speedLevel = jsonObject.getInt(Content.GET_NAVIGATIONSPEEDLEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20003, speedLevel));
                 int speedLevel2 = jsonObject.getInt(Content.GET_PLAYPATHSPEEDLEVEL);
                 EventBus.getDefault().post(new EventBusMessage(20006, speedLevel2));
-                Log.d("speedLevel", String.valueOf(speedLevel));
+                String urgencyStop = jsonObject.getString(Content.DEVICES_STATUS);
+                EventBus.getDefault().post(new EventBusMessage(20020, urgencyStop));
+                Log.d("speedLevelhhhh", urgencyStop);
+
                 break;
 
             case Content.GET_WORKING_MODE:
