@@ -16,13 +16,19 @@
         <attr name="textTop" format="integer" />
     </declare-styleable>
 
-    <style name="dialog" parent="@android:style/Theme.Dialog">
+    <style name="dialog" parent="@android:style/Theme.Translucent">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:background">#FFF</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <declare-styleable name="RoundBGRelativeLayout">
+        <attr name="custom_background" format="reference"></attr>
+        <attr name="corner_radius" format="dimension"></attr>
+    </declare-styleable>
 </resources>

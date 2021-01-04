@@ -34,6 +34,7 @@ import androidx.fragment.app.Fragment;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.adapter.DialogAdapter;
+import com.example.robot.adapter.MapAdapter;
 import com.example.robot.bean.DialogCheckboxBean;
 import com.example.robot.bean.DrawLineBean;
 import com.example.robot.content.Content;
@@ -49,164 +50,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectDialogUtil {
-
-//    public SelectDialogUtil(Context context) {
-//        super(context);
-//    }
-//
-//    public SelectDialogUtil(Context context, int theme) {
-//        super(context, theme);
-//    }
-//
-//    public static class Builder {
-//        private Context context;
-//        private Bitmap image;
-//        private String positiveButtonText;
-//        private String negativeButtonText;
-//        private View contentView;
-//        private OnClickListener positiveButtonClickListener;
-//        private OnClickListener negativeButtonClickListener;
-//        private OnClickListener selectListClickListener;
-//        private Adapter adapter;
-//
-//        public Builder(Context context) {
-//            this.context = context;
-//        }
-//
-//        /**
-//         * 设置ImageView
-//         * @param bitmap
-//         * @return
-//         */
-//        public Builder setImage(Bitmap bitmap) {
-//            this.image = bitmap;
-//            return this;
-//        }
-//
-//        /**
-//         * 设置LiestView
-//         * @param adapter
-//         * @return
-//         */
-//        public Builder setListView(Adapter adapter, OnClickListener listener){
-//            this.adapter = adapter;
-//            this.selectListClickListener = listener;
-//            return this;
-//        }
-//
-//        /**
-//         * 设置积极按钮
-//         * @param positiveButtonText
-//         * @param listener
-//         * @return
-//         */
-//        public Builder setPositiveButton(String positiveButtonText,
-//                                         OnClickListener listener) {
-//            this.positiveButtonText = positiveButtonText;
-//            this.positiveButtonClickListener = listener;
-//            return this;
-//        }
-//
-//        /**
-//         * 设置消极按钮
-//         *
-//         * @param negativeButtonText
-//         * @param listener
-//         * @return
-//         */
-//        public Builder setNegativeButton(String negativeButtonText,
-//                                         OnClickListener listener) {
-//            this.negativeButtonText = negativeButtonText;
-//            this.negativeButtonClickListener = listener;
-//            return this;
-//        }
-//
-//        /**
-//         * 创建一个SelectDialog
-//         * @return
-//         */
-//
-//        public SelectDialogUtil create(){
-//
-//            LayoutInflater inflater = LayoutInflater.from(context);
-//
-//            final SelectDialogUtil dialog = new SelectDialogUtil(context);
-//
-//            View layout = null;
-//
-//            if (null != contentView) {
-//                layout = contentView;
-//            } else {
-//                Log.d("rfrf","rfrf");
-//                layout = inflater.inflate(R.layout.dialog_select, null);
-//            }
-//
-//            //加载图片
-//            ImageView imageView = (ImageView) layout.findViewById(R.id.manager_mapImage);
-//            if ( image == null) {
-//                imageView.setVisibility(View.GONE);
-//            } else {
-//                Log.d("rfrf","rfrf1");
-//                imageView.setImageBitmap(image);
-//            }
-//
-//            // 设置列表
-//            ListView listView = layout.findViewById(R.id.mylist);
-//            if (null == listView) {
-//                listView.setVisibility(View.GONE);
-//            } else {
-//                listView.setAdapter((ListAdapter) adapter);
-//            }
-//
-//            //确认button
-//            RelativeLayout sure_layout = (RelativeLayout) layout
-//                    .findViewById(R.id.sure_layout);
-//            TextView sure_text = (TextView) layout
-//                    .findViewById(R.id.sure_text);
-//            if (TextUtils.isEmpty(positiveButtonText)
-//                    || null == positiveButtonClickListener) {
-//                sure_layout.setVisibility(View.GONE);
-//            } else {
-//                sure_text.setText(positiveButtonText);
-//                sure_layout.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO Auto-generated method stub
-//                        dialog.dismiss();
-//                        positiveButtonClickListener.onClick(dialog,
-//                                DialogInterface.BUTTON_POSITIVE);
-//                    }
-//                });
-//            }
-//
-//            //取消button
-//            RelativeLayout quit_layout = (RelativeLayout) layout
-//                    .findViewById(R.id.quit_layout);
-//            TextView quit_text = (TextView) layout
-//                    .findViewById(R.id.quit_text);
-//            if (TextUtils.isEmpty(negativeButtonText)
-//                    || null == negativeButtonClickListener) {
-//                quit_layout.setVisibility(View.GONE);
-//            } else {
-//                quit_text.setText(negativeButtonText);
-//                quit_layout.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO Auto-generated method stub
-//                        dialog.dismiss();
-//                        negativeButtonClickListener.onClick(dialog,
-//                                DialogInterface.BUTTON_NEGATIVE);
-//                    }
-//                });
-//            }
-//
-//            return dialog;
-//
-//        }
-//
-//    }
 
     private Context context;
     private Dialogcallback dialogcallback;
@@ -391,17 +234,20 @@ public class SelectDialogUtil {
 
     }
 
-    public void setStrings(String[] strings) {
-        mapName = strings[0];
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, strings);
-        listView.setAdapter(arrayAdapter);
+    public void setStrings(ArrayList<String> strings) {
+        mapName = strings.get(0);
+        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, strings);
+        MapAdapter mapAdapter = new MapAdapter(context);
+        mapAdapter.refeshList(strings);
+        listView.setAdapter(mapAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listViewcallback.ListViewClick(position, strings[position], strings[position]);
-                mapName = strings[position];
+                listViewcallback.ListViewClick(position, strings.get(position), strings.get(position));
+                mapName = strings.get(position);
             }
         });
+
     }
 
 
@@ -635,13 +481,12 @@ public class SelectDialogUtil {
             dialogAdapter.refeshList(dialogCheckboxBeanList);
             listView.setAdapter(dialogAdapter);
             dialogAdapter.setAdapterCallback(adapterCallback);
-            dialogAdapter.notifyDataSetChanged();
         }
     }
 
     DialogAdapter.AdapterCallback adapterCallback = new DialogAdapter.AdapterCallback() {
         @Override
-        public void adapterCallback(int position, List<String> stringList) {
+        public void adapterCallback(int position,boolean isChecked, List<String> stringList) {
             Log.d("dialogadapter : ", "" + position + ",   " + Content.first_map_Name+"   ,   " + dialogCheckboxBeanList.size());
             listViewcallback.ListViewClick(position, Content.first_map_Name, dialogCheckboxBeanList.get(position).getTaskName());
             myTaskNameList = stringList;

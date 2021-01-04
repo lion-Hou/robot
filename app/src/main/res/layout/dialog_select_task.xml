@@ -1,88 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
     <RelativeLayout
-        android:id="@+id/dialog_title_border"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/relative"
+        android:layout_width="@dimen/dimens_825"
+        android:layout_height="@dimen/dimens_576"
+        android:layout_marginTop="@dimen/dimens_101"
+        android:background="@drawable/addmap_bg_xiangqingkuang">
+
         <TextView
+            android:id="@+id/dialog_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimens_75"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:textSize="30sp"
-            android:text="大撒大撒"
-            android:id="@+id/dialog_title"></TextView>
-    </RelativeLayout>
+            android:textAlignment="center"
+            android:text="地图名字"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_30"
+            android:gravity="center_vertical"
+            tools:ignore="RtlCompat"></TextView>
 
-    <RelativeLayout
-        android:id="@+id/map_manage_relative_border11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_title_border"
-        android:layout_above="@id/lin_button"
-        android:layout_alignParentRight="true">
+        <RelativeLayout
+            android:id="@+id/map_dialog_relative_border"
+            android:layout_width="@dimen/dimens_574"
+            android:layout_height="@dimen/dimens_484"
+            android:layout_below="@id/dialog_title"
+            android:layout_toLeftOf="@+id/mylist">
+
+            <RelativeLayout
+                android:id="@+id/map_dialog_relative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/dialog_mapImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints" />
+            </RelativeLayout>
+        </RelativeLayout>
 
         <ListView
             android:id="@+id/mylist"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"/>
-
+            android:background="@drawable/addmap_bg_xiangqingkuang"
+            android:layout_width="@dimen/dimens_219"
+            android:layout_height="@dimen/dimens_484"
+            android:layout_below="@id/dialog_title"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/map_dialog_relative_border"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/dialog_title_border"
-        android:layout_above="@id/lin_button"
-        android:layout_toLeftOf="@+id/map_manage_relative_border11">
+    <TextView
+        android:id="@+id/quit_text"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:layout_toLeftOf="@id/sure_text"
+        android:background="@drawable/home_btn_anniu"
+        android:gravity="center_vertical"
+        android:text="取消"
+        android:layout_marginRight="@dimen/dimen_26"
+        android:textAlignment="center"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"
+        android:layout_below="@+id/relative"
+        tools:ignore="RtlCompat" />
 
-        <RelativeLayout
-            android:id="@+id/map_dialog_relative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/dialog_mapImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-
-    <LinearLayout
-        android:id="@+id/lin_button"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:layout_marginLeft="450px">
-
-
-        <TextView
-            android:id="@+id/quit_text"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="取消" />
-
-
-        <TextView
-            android:id="@+id/sure_text"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="确认" />
-
-
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/sure_text"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/relative"
+        android:background="@drawable/home_btn_anniu"
+        android:gravity="center_vertical"
+        android:text="确认"
+        android:textAlignment="center"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"
+        tools:ignore="RtlCompat"/>
 
 </RelativeLayout>

@@ -15,4 +15,14 @@
     <dimen name="dimens_16px">16px</dimen>
     <dimen name="dimens_246">246px</dimen>
     <dimen name="dimens_119">119px</dimen>
+    <dimen name="dimens_30">30px</dimen>
+    <dimen name="dimens_484">484px</dimen>
+    <dimen name="dimens_219">219px</dimen>
+    <dimen name="dimens_20">20px</dimen>
+    <dimen name="dimens_75">75px</dimen>
+    <dimen name="dimens_574">574px</dimen>
+    <dimen name="dimens_825">825px</dimen>
+    <dimen name="dimens_576">576px</dimen>
+    <dimen name="dimens_101">101px</dimen>
+    <dimen name="dimen_26">26px</dimen>
 </resources>

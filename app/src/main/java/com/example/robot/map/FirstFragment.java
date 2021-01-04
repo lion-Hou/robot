@@ -72,7 +72,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private GsonUtils gsonUtils;
     private String[] taskNameList;
     public View view;
-    private String[] mapName;
+    private ArrayList<String> mapName = new ArrayList<>();
     private String task_name;
     private String map_name;
     private String name;
@@ -377,11 +377,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
     //首页获取所有地图名称
-    public void moreMap(String[] mapName) {
+    public void moreMap(ArrayList<String> mapName) {
         Log.d(TAG, "onEventMsgfffff" + "2");
         Log.d(TAG, "onEventMsg ： " + "2");
 
-        if (mapName.length == 0){
+        if (mapName.size() == 0){
             Toast.makeText(mContext, "请先加地图", Toast.LENGTH_SHORT).show();
         }else{
             myDialog = new SelectDialogUtil(mContext, R.layout.dialog_select);
@@ -389,10 +389,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             myDialog.setStrings(mapName);
             myDialog.setListViewCallback(listViewcallback);
             if (Content.first_map_Name == null) {
-                gsonUtils.setMapName(mapName[0]);
-                mainSpinnerMap.setText(mapName[0]);
-                Content.first_map_Name = mapName[0];
-                map_name = mapName[0];
+                gsonUtils.setMapName(mapName.get(0));
+                mainSpinnerMap.setText(mapName.get(0));
+                Content.first_map_Name = mapName.get(0);
+                map_name = mapName.get(0);
                 mainTask.setEnabled(true);
             } else {
                 gsonUtils.setMapName(Content.first_map_Name);
@@ -462,20 +462,20 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                     ori_size--;
                 }
             }
-            mapName = new String[Content.list.size()-null_count];
+            mapName.clear();
             System.out.println("ZHZHSSSS: " + Content.list.size());
             for (int i=0;i< Content.list.size();i++) {
-                mapName[i] =Content.list.get(i).getMap_Name();
-                System.out.println("ZHZHZZZZ: " + mapName[i]);
+                mapName.add(Content.list.get(i).getMap_Name());
+                System.out.println("ZHZHZZZZ: " + mapName.get(i));
             }
             System.out.println("ZHZHSSSS: " + Content.list.size());
             if (Content.list.size() == 1){
                 System.out.println("MG_map_nameSSSS: " + Content.list.size());
-                mainSpinnerMap.setText(mapName[0]);
-                Content.map_Name=mapName[0];
-                Content.first_map_Name = mapName[0];
+                mainSpinnerMap.setText(mapName.get(0));
+                Content.map_Name=mapName.get(0);
+                Content.first_map_Name = mapName.get(0);
                 mainTask.setEnabled(true);
-                gsonUtils.setMapName(mapName[0]);
+                gsonUtils.setMapName(mapName.get(0));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{
                 moreMap(mapName);
