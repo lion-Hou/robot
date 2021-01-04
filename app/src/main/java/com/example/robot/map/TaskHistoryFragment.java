@@ -21,6 +21,7 @@ import com.example.robot.bean.HistoryBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
+import com.example.robot.view.MyDividerItemDecoration;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -92,6 +93,11 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         historyRecyclerview.setLayoutManager(linearLayoutManager);
+        MyDividerItemDecoration divider = new MyDividerItemDecoration(mContext, MyDividerItemDecoration.VERTICAL);
+        // 设置分割线的颜色和高度，横向的时候使用方法一样
+        divider.setDrawable(getResources().getColor(R.color.list_divider), 0.3f);
+        historyRecyclerview.addItemDecoration(divider);
+
         historyRecyclerview.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         historyAdapter = new HistoryAdapter(mContext, R.layout.item_recycler);
         //historyRecyclerview.setAdapter(historyAdapter);

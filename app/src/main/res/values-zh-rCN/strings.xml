@@ -2,7 +2,7 @@
     <string name="app_name">消毒机器人</string>
     <string name="text_map">地图:</string>
     <string name="text_task">任务:</string>
-    <string name="run">执行</string>
+    <string name="run">\n\n执行</string>
     <string name="map">地图</string>
     <string name="task">任务</string>
     <string name="history">历史</string>

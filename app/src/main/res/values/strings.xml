@@ -3,7 +3,7 @@
     <string name="app_name">Robot</string>
     <string name="text_map">Map:</string>
     <string name="text_task">Task:</string>
-    <string name="run">Run</string>
+    <string name="run">\n\nRun</string>
     <string name="map">Map</string>
     <string name="task">Task</string>
     <string name="history">History</string>

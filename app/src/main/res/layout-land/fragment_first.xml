@@ -8,41 +8,71 @@
 
     <RelativeLayout
         android:id="@+id/main_title"
-        android:layout_width="500px"
-        android:layout_height="300px">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/main_text_map"
             android:layout_width="150px"
             android:layout_height="80px"
+            android:textSize="@dimen/dimens_18"
+            android:textColor="@color/text_color"
             android:text="@string/text_map"/>
         <TextView
             android:id="@+id/main_spinner_map"
-            android:layout_width="200px"
-            android:layout_height="80px"
+            android:layout_width="@dimen/dimens_345"
+            android:layout_height="@dimen/dimens_54"
             android:layout_toRightOf="@+id/main_text_map"
-            android:background="@drawable/btn_gb_normal"
+            android:background="@drawable/home_bg_xuanzekuang"
+            android:layout_marginLeft="@dimen/dimens_24"
+            android:textColor="@color/text_color"
             android:text="@string/please_select_map"/>
-
+        <ImageView
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:src="@drawable/home_ic_jiantou"
+            android:layout_toRightOf="@id/main_text_map"
+            android:layout_marginLeft="315px"
+            android:layout_marginTop="10px"
+            />
         <TextView
             android:id="@+id/main_text_task"
             android:layout_width="150px"
             android:layout_height="80px"
             android:layout_below="@id/main_text_map"
+            android:textSize="@dimen/dimens_18"
+            android:textColor="@color/text_color"
+            android:layout_marginTop="@dimen/dimens_29"
             android:text="@string/text_task"/>
+
         <TextView
             android:id="@+id/main_spinner_task"
-            android:layout_width="200px"
-            android:layout_height="80px"
+            android:layout_width="@dimen/dimens_345"
+            android:layout_height="@dimen/dimens_54"
             android:layout_below="@id/main_text_map"
+            android:textColor="@color/text_color"
+            android:layout_marginLeft="@dimen/dimens_24"
+            android:layout_marginTop="@dimen/dimens_29"
             android:layout_toRightOf="@+id/main_text_task"
-            android:background="@drawable/btn_gb_normal"
+            android:background="@drawable/home_bg_xuanzekuang"
             android:text="@string/map_manage_select_task"/>
-
+        <ImageView
+            android:layout_width="30px"
+            android:layout_height="30px"
+            android:src="@drawable/home_ic_jiantou"
+            android:layout_toRightOf="@+id/main_text_task"
+            android:layout_below="@id/main_text_map"
+            android:layout_marginLeft="315px"
+            android:layout_marginTop="40px"
+            />
         <Button
             android:id="@+id/main_execute"
-            android:layout_width="200px"
-            android:layout_height="200px"
+            android:layout_width="@dimen/dimens_137"
+            android:layout_height="@dimen/dimens_137"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_21"
+            android:layout_marginLeft="@dimen/dimens_33"
+            android:background="@drawable/home_btn_zhixing"
             android:layout_toRightOf="@+id/main_spinner_task"
             android:text="@string/run"/>
 
@@ -50,45 +80,56 @@
 
     <ListView
         android:id="@+id/main_log"
-        android:layout_width="match_parent"
-        android:layout_height="200px"
+        android:layout_width="@dimen/dimens_600"
+        android:layout_height="@dimen/dimens_247"
         android:layout_below="@+id/main_title"
-        android:background="@drawable/btn_gb_normal"/>
+        android:background="@drawable/home_bg_xiangqingkuang"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimens_23"
         android:layout_below="@+id/main_log">
 
         <Button
             android:id="@+id/main_map"
-            android:layout_width="100px"
-            android:layout_height="80px"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18"
+            android:background="@drawable/home_btn_anniu"
             android:text="@string/map"/>
 
         <Button
             android:id="@+id/main_task"
-            android:layout_width="100px"
-            android:layout_height="80px"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18"
+            android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_map"
             android:text="@string/task"/>
 
         <Button
             android:id="@+id/main_history"
-            android:layout_width="100px"
-            android:layout_height="80px"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18"
+            android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_task"
             android:text="@string/history"/>
 
         <Button
             android:id="@+id/main_settings"
-            android:layout_width="100px"
-            android:layout_height="80px"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18"
+            android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_history"
             android:text="@string/settings"/>
 
     </RelativeLayout>
-
-
 
 </RelativeLayout>

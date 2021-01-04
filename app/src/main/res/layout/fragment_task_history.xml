@@ -12,9 +12,13 @@
 
    <Button
        android:id="@+id/hitory_back"
-       android:layout_width="200px"
-       android:layout_height="100px"
+       android:layout_width="102px"
+       android:layout_height="54px"
        android:layout_below="@+id/history_recyclerview"
+       android:textColor="@color/text_color"
+       android:textSize="@dimen/dimens_18"
+       android:background="@drawable/home_btn_anniu"
+       android:layout_alignParentRight="true"
        android:text="@string/task_back"/>
 
 </RelativeLayout>

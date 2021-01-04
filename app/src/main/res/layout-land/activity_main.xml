@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="MissingDefaultResource"
-    android:background="@drawable/background">
+    android:background="@android:color/black">
     <RelativeLayout
             android:id="@+id/main_fragment"
             android:layout_width="match_parent"
@@ -24,42 +24,44 @@
 
             <TextView
                 android:id="@+id/net_time"
-                android:layout_width="70px"
-                android:layout_height="70px"
-                android:textSize="20px"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimens_24"
+                android:textColor="@color/text_color"/>
 
             <ImageView
                 android:id="@+id/battery"
-                android:layout_width="70px"
-                android:layout_height="70px"
-                android:layout_marginLeft="30px"
-                android:layout_toRightOf="@+id/net_time"
-                android:src="@drawable/batty" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toLeftOf="@id/time"
+                android:layout_marginRight="44px"
+                android:src="@drawable/home_ic_dianchi" />
 
             <TextView
                 android:id="@+id/time"
-                android:layout_width="53dp"
-                android:layout_height="37dp"
-                android:textSize="20px"
-                android:layout_toRightOf="@+id/battery" />
+                android:textColor="@color/text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/dimens_16px" />
 
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/robot_img"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:background="@drawable/robot_picture" />
+            android:background="@drawable/home_ic_robot" />
 
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/second_fragment"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="@dimen/dimens_246"
+        android:layout_height="@dimen/dimens_246"
+        android:layout_marginLeft="@dimen/dimens_119"
         android:layout_below="@id/robot"
         />
 
