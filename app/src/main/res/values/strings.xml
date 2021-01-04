@@ -26,7 +26,7 @@
     <string name="new_map_name_edit">Please enter new map name</string>
     <string name="new_map_scan">Start scanning</string>
     <string name="new_map_save">Save Map</string>
-    <string name="new_map_back">Cancel scanning</string>
+    <string name="new_map_back">BACK</string>
 
     <string name="map_manage_add_new_map_btn">New Map</string>
     <string name="map_manage_name_text">Map Name:</string>

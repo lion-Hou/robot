@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,9 +11,7 @@
         android:id="@+id/new_map_relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="400dp"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/add_point_title"
-        android:layout_above="@+id/line1"
+        android:layout_marginTop="107px"
         tools:ignore="MissingConstraints">
         <ImageView
             android:id="@+id/new_map_mapImage"
@@ -26,44 +25,56 @@
         android:layout_width="match_parent"
         android:layout_height="100px"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/new_map_relativeLayout"
-        >
+        android:layout_below="@+id/new_map_relativeLayout"
+        android:layout_marginTop="70px">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18"
             android:gravity="center"
             android:text="@string/new_map_name_text"/>
 
         <EditText
             android:id="@+id/new_map_mapName_editText"
-            android:layout_width="200px"
-            android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7px"
+            android:textColor="@color/edit_color"
+            android:textSize="@dimen/dimens_18"
             android:gravity="bottom"
             android:hint="@string/new_map_name_edit" />
 
         <Button
             android:id="@+id/new_map_scan"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:layout_height="@dimen/dimens_54"
+            android:textSize="@dimen/dimens_18"
+            android:layout_marginLeft="25px"
+            android:background="@drawable/home_btn_anniu"
+            android:textColor="@color/text_color"
             android:text="@string/new_map_scan"/>
 
         <Button
             android:id="@+id/new_map_save"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="9px"
+            android:textSize="@dimen/dimens_18"
+            android:background="@drawable/home_btn_anniu"
+            android:textColor="@color/text_color"
             android:text="@string/new_map_save"/>
 
         <Button
             android:id="@+id/new_map_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/new_map_back"
-            android:textSize="18dp" />
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="9px"
+            android:textSize="@dimen/dimens_18"
+            android:background="@drawable/home_btn_anniu"
+            android:textColor="@color/text_color"
+            android:text="@string/new_map_back"/>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

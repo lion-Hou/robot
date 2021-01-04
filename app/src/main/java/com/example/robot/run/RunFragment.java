@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -160,6 +161,15 @@ public class RunFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }else if (messageEvent.getState() == 19191) {
+            String message = (String) messageEvent.getT();
+            if (message.equals("充电") || message.equals("放电")){
+
+            }else {
+                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 }
