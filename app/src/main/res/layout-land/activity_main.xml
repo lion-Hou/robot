@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
+            android:layout_marginLeft="@dimen/dimens_119"
             android:background="@drawable/home_ic_robot" />
 
     </RelativeLayout>

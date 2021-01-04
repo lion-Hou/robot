@@ -36,11 +36,11 @@ public class RemoteView extends View {
     /**
      * 气泡的位置
      */
-    float bubbleX = 333/2, bubbleY = 333/2;
+    float bubbleX = 246/2, bubbleY = 246/2;
     /**
      * 背景圆的位置
      */
-    float backX = 333/2, backY = 333/2;
+    float backX = 246/2, backY = 246/2;
     /**
      * 气泡和背景的半径
      */
@@ -188,10 +188,10 @@ public class RemoteView extends View {
 
     private void initPaint() {
         backPaint.setAntiAlias(true);
-        backPaint.setColor(Color.parseColor("#F6D8CE"));
+        backPaint.setColor(Color.parseColor("#394655"));
 
         bubblePaint.setAntiAlias(true);
-        bubblePaint.setColor(Color.parseColor("#F5D0A9"));
+        bubblePaint.setColor(Color.parseColor("#758BA5"));
 
         rectfPaint.setAntiAlias(true);
         rectfPaint.setColor(Color.parseColor("#ffffff"));
