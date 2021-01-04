@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dimens_156"
     tools:ignore="MissingDefaultResource">
 
     <RelativeLayout
@@ -13,11 +14,12 @@
 
         <TextView
             android:id="@+id/main_text_map"
-            android:layout_width="150px"
-            android:layout_height="80px"
-            android:textSize="@dimen/dimens_18"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimens_54"
+            android:textSize="@dimen/dimens_20"
             android:textColor="@color/text_color"
-            android:text="@string/text_map"/>
+            android:text="@string/text_map"
+            android:gravity="center_vertical" />
         <TextView
             android:id="@+id/main_spinner_map"
             android:layout_width="@dimen/dimens_345"
@@ -26,7 +28,10 @@
             android:background="@drawable/home_bg_xuanzekuang"
             android:layout_marginLeft="@dimen/dimens_24"
             android:textColor="@color/text_color"
-            android:text="@string/please_select_map"/>
+            android:textAlignment="center"
+            android:text="@string/please_select_map"
+            android:textSize="@dimen/dimens_18"
+            android:gravity="center" />
         <ImageView
             android:layout_width="25px"
             android:layout_height="25px"
@@ -37,12 +42,13 @@
             />
         <TextView
             android:id="@+id/main_text_task"
-            android:layout_width="150px"
-            android:layout_height="80px"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimens_54"
             android:layout_below="@id/main_text_map"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_20"
             android:textColor="@color/text_color"
             android:layout_marginTop="@dimen/dimens_29"
+            android:gravity="center_vertical"
             android:text="@string/text_task"/>
 
         <TextView
@@ -55,7 +61,10 @@
             android:layout_marginTop="@dimen/dimens_29"
             android:layout_toRightOf="@+id/main_text_task"
             android:background="@drawable/home_bg_xuanzekuang"
-            android:text="@string/map_manage_select_task"/>
+            android:textAlignment="center"
+            android:text="@string/map_manage_select_task"
+            android:textSize="@dimen/dimens_18"
+            android:gravity="center" />
         <ImageView
             android:layout_width="30px"
             android:layout_height="30px"
@@ -83,6 +92,7 @@
         android:layout_width="@dimen/dimens_600"
         android:layout_height="@dimen/dimens_247"
         android:layout_below="@+id/main_title"
+        android:layout_marginTop="@dimen/dimens_97"
         android:background="@drawable/home_bg_xiangqingkuang"/>
 
     <RelativeLayout
@@ -106,6 +116,7 @@
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
+            android:layout_marginLeft="@dimen/dimen_26"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_map"
             android:text="@string/task"/>
@@ -116,6 +127,7 @@
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
+            android:layout_marginLeft="@dimen/dimen_26"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_task"
             android:text="@string/history"/>
@@ -126,6 +138,7 @@
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
+            android:layout_marginLeft="@dimen/dimen_26"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_history"
             android:text="@string/settings"/>

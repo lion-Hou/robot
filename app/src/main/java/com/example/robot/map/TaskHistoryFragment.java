@@ -95,7 +95,7 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
         historyRecyclerview.setLayoutManager(linearLayoutManager);
         MyDividerItemDecoration divider = new MyDividerItemDecoration(mContext, MyDividerItemDecoration.VERTICAL);
         // 设置分割线的颜色和高度，横向的时候使用方法一样
-        divider.setDrawable(getResources().getColor(R.color.list_divider), 0.3f);
+        divider.setDrawable(getResources().getColor(R.color.list_divider), 0.5f);
         historyRecyclerview.addItemDecoration(divider);
 
         historyRecyclerview.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));

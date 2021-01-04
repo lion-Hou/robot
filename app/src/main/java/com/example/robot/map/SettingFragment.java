@@ -17,11 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.robot.MainActivity;
 import com.example.robot.R;
+import com.example.robot.adapter.SpinnerArrayAdapter;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -67,10 +67,7 @@ public class SettingFragment extends Fragment {
     Button settingsOk;
     @BindView(R.id.settings_cancel)
     Button settingsCancel;
-    @BindView(R.id.settings_main_layout)
-    ConstraintLayout settingsMainLayout;
-    @BindView(R.id.test_fragment)
-    ConstraintLayout testFragment;
+
     @BindView(R.id.settings_debug)
     Spinner settingsDebug;
     @BindView(R.id.electricityQuantityValueTV)
@@ -91,6 +88,8 @@ public class SettingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private SpinnerArrayAdapter mAdapter;
+    private boolean getSpeed = false;
 
     public SettingFragment() {
 
@@ -100,6 +99,7 @@ public class SettingFragment extends Fragment {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        getSpeed = false;
         Log.d("hhhh", "edit_start");
     }
 
@@ -128,11 +128,7 @@ public class SettingFragment extends Fragment {
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_WORKING_MODE));
         initView();
-        testFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+
         return view;
     }
 
@@ -194,6 +190,14 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        String[] mStringArray = getResources().getStringArray(R.array.spinner_settings_speed);
+        mAdapter = new SpinnerArrayAdapter(mContext,mStringArray);
+        settingsRobotSpeed.setAdapter(mAdapter);
+
+        String[] mArray = getResources().getStringArray(R.array.spinner_settings_led);
+        mAdapter = new SpinnerArrayAdapter(mContext,mStringArray);
+        settingsLedBrightness.setAdapter(mAdapter);
+
     }
 
 
@@ -233,13 +237,16 @@ public class SettingFragment extends Fragment {
                 settingsDebug.setSelection(2);
             }
         } else if (messageEvent.getState() == 20006) {
-            int robotSpeed = (int) messageEvent.getT();
-            if (robotSpeed == 0) {
-                settingsRobotSpeed.setSelection(0);
-            } else if (robotSpeed == 1) {
-                settingsRobotSpeed.setSelection(1);
-            } else {
-                settingsRobotSpeed.setSelection(2);
+            if (!getSpeed) {
+                int robotSpeed = (int) messageEvent.getT();
+                if (robotSpeed == 0) {
+                    settingsRobotSpeed.setSelection(0);
+                } else if (robotSpeed == 1) {
+                    settingsRobotSpeed.setSelection(1);
+                } else {
+                    settingsRobotSpeed.setSelection(2);
+                }
+                getSpeed = true;
             }
         }
     }

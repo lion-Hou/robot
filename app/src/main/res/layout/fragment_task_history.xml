@@ -3,22 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dimens_129"
+
+    android:layout_marginRight="@dimen/dimens_84"
     tools:context=".map.TaskHistoryFragment">
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/history_recyclerview"
        android:layout_width="match_parent"
-       android:layout_height="600px"/>
+       android:layout_height="match_parent"
+       android:layout_above="@id/hitory_back"/>
 
    <Button
        android:id="@+id/hitory_back"
-       android:layout_width="102px"
-       android:layout_height="54px"
-       android:layout_below="@+id/history_recyclerview"
+       android:layout_width="@dimen/dimens_102"
+       android:layout_height="@dimen/dimens_54"
+       android:layout_marginTop="@dimen/dimens_38"
        android:textColor="@color/text_color"
        android:textSize="@dimen/dimens_18"
        android:background="@drawable/home_btn_anniu"
        android:layout_alignParentRight="true"
+       android:layout_marginRight="@dimen/dimens_102"
+       android:layout_marginBottom="@dimen/dimens_91"
+       android:layout_alignParentBottom="true"
        android:text="@string/task_back"/>
 
 </RelativeLayout>

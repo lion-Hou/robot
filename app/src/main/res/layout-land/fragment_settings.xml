@@ -1,202 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/robot_bg_beijing"
     tools:ignore="MissingDefaultResource">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="1010px"
+        android:layout_height="472px"
+        android:background="@drawable/setting_bg_kuang"
+        android:layout_marginTop="@dimen/dimens_93"
+        android:layout_marginLeft="@dimen/dimens_135">
 
         <TextView
-            android:layout_width="400dp"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:text="@string/settings_title"
-            android:textSize="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="34dp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/test_fragment"
-            >
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_main_layout"
+            android:id="@+id/settings_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
-
+            android:gravity="center"
+            android:text="@string/settings_title"
+            android:textSize="@dimen/dimens_36"
+            android:textColor="@color/text_color"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dimens_26"
+            />
             <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
+                android:layout_below="@id/settings_title"
                 android:id="@+id/electricityQuantityTV"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_electricity_quantity"
-                android:textSize="30dp" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                />
 
             <SeekBar
+                android:layout_below="@id/settings_title"
                 android:id="@+id/settings_electricityQuantity"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
                 android:max="100"
-                app:layout_constraintLeft_toRightOf="@+id/electricityQuantityTV" />
+                android:layout_toRightOf="@+id/electricityQuantityTV" />
             <TextView
                 android:id="@+id/electricityQuantityValueTV"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:text="1"
-                app:layout_constraintLeft_toRightOf="@+id/settings_electricityQuantity"
-                android:textSize="25dp" />
+                android:layout_toRightOf="@+id/settings_electricityQuantity"
+                android:textSize="@dimen/dimens_30"
+                android:layout_below="@id/settings_title"
+                android:textColor="@color/text_color" />
 
 
             <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/volumeTV"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_volume"
-                android:textSize="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/settings_electricityQuantity" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/settings_electricityQuantity" />
 
             <SeekBar
                 android:id="@+id/settings_volume"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
                 android:max="15"
-                app:layout_constraintLeft_toRightOf="@+id/electricityQuantityTV"
-                app:layout_constraintTop_toBottomOf="@+id/settings_electricityQuantity" />
+                android:layout_toRightOf="@+id/electricityQuantityTV"
+                android:layout_below="@+id/settings_electricityQuantity" />
 
             <TextView
                 android:id="@+id/volumeValueTV"
                 android:layout_width="70dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_volume"
-                android:textSize="25dp"
-                app:layout_constraintLeft_toRightOf="@+id/settings_volume"
-                app:layout_constraintTop_toBottomOf="@+id/settings_electricityQuantity" />
-
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@+id/settings_volume"
+                android:layout_below="@+id/settings_electricityQuantity" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/robotSpeedTV"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_playPathSpeed_speed"
-                android:textSize="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/volumeTV" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/volumeTV" />
 
             <Spinner
                 android:id="@+id/settings_robotSpeed"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:textSize="30dp"
-                android:entries="@array/spinner_settings_speed"
-                app:layout_constraintLeft_toRightOf="@+id/robotSpeedTV"
-                app:layout_constraintTop_toBottomOf="@+id/settings_volume" />
+                android:textColor="@color/text_color"
+                android:background="@drawable/spinner_layout"
+                android:layout_toRightOf="@+id/robotSpeedTV"
+                android:layout_below="@+id/settings_volume" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/ledBrightnessTV"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_led_brightness"
-                android:textSize="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/robotSpeedTV" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/robotSpeedTV" />
 
             <Spinner
                 android:id="@+id/settings_ledBrightness"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:textSize="30dp"
-                android:entries="@array/spinner_settings_led"
-                app:layout_constraintLeft_toRightOf="@+id/ledBrightnessTV"
-                app:layout_constraintTop_toBottomOf="@+id/settings_robotSpeed" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                style="@style/spinner_style"
+                android:background="@drawable/spinner_layout"
+                android:layout_toRightOf="@+id/ledBrightnessTV"
+                android:layout_below="@+id/settings_robotSpeed" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/versionNumberTV"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_version_number"
-                android:textSize="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/ledBrightnessTV" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/ledBrightnessTV" />
 
             <TextView
                 android:id="@+id/settings_versionNumber"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:textSize="30dp"
-                app:layout_constraintLeft_toRightOf="@+id/versionNumberTV"
-                app:layout_constraintTop_toBottomOf="@+id/ledBrightnessTV" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@+id/versionNumberTV"
+                android:layout_below="@+id/ledBrightnessTV" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/versionNumberTV2"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_version_number"
-                android:textSize="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/versionNumberTV" />
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/versionNumberTV" />
 
             <TextView
                 android:id="@+id/settings_versionNumber2"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:textSize="30dp"
-                app:layout_constraintLeft_toRightOf="@+id/versionNumberTV2"
-                app:layout_constraintTop_toBottomOf="@+id/versionNumberTV" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintCircle="@+id/settings_main_layout"
-            app:layout_constraintCircleAngle="130"
-            app:layout_constraintCircleRadius="320dp"
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@+id/versionNumberTV2"
+                android:layout_below="@+id/versionNumberTV" />
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimens_48"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimens_100"
+            android:layout_marginRight="@dimen/dimens_135"
             tools:ignore="MissingConstraints">
 
             <Button
                 android:id="@+id/settings_reset_robot"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/dimen_167"
+                android:layout_height="@dimen/dimens_48"
                 android:text="@string/settings_reset_robot"
-                tools:ignore="MissingConstraints"/>
+                android:layout_toLeftOf="@id/settings_ok"
+                android:textSize="@dimen/dimens_21"
+                android:textColor="@color/text_color"
+                android:background="@drawable/setting_btn_anniu"
+                android:layout_marginRight="@dimen/dimens_38"/>
             <Button
                 android:id="@+id/settings_ok"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/dimen_167"
+                android:layout_height="@dimen/dimens_48"
                 android:text="@string/settings_ok"
-                tools:ignore="MissingConstraints"
-                app:layout_constraintCircle="@+id/settings_reset_robot"
-                app:layout_constraintCircleAngle="90"
-                app:layout_constraintCircleRadius="140dp"
-                app:layout_constraintLeft_toRightOf="@+id/settings_reset_robot"/>
+                android:textSize="@dimen/dimens_21"
+                android:textColor="@color/text_color"
+                android:layout_toLeftOf="@id/settings_cancel"
+                android:layout_marginRight="@dimen/dimens_38"
+                android:background="@drawable/setting_btn_anniu"
+                ></Button>
             <Button
                 android:id="@+id/settings_cancel"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/dimen_167"
+                android:layout_height="@dimen/dimens_48"
                 app:layout_constraintCircle="@+id/settings_ok"
-                app:layout_constraintCircleAngle="90"
-                app:layout_constraintCircleRadius="105dp"
                 android:text="@string/settings_cancel"
-                app:layout_constraintLeft_toRightOf="@+id/settings_ok"
-                tools:ignore="MissingConstraints"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textSize="@dimen/dimens_21"
+                android:textColor="@color/text_color"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/setting_btn_anniu"
+                />
+        </RelativeLayout>
 
         <Spinner
             android:id="@+id/settings_debug"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:textSize="30dp"
+            android:textSize="@dimen/dimens_30"
+            android:textColor="@color/text_color"
             android:entries="@array/spinner_settings_debug"
             tools:ignore="MissingConstraints" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
