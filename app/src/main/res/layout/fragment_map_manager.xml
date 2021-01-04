@@ -6,47 +6,71 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".map.MapManagerFragment">
-    <LinearLayout
+
+    <RelativeLayout
         android:id="@+id/map_manage_line1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="137px"
+        android:layout_marginEnd="164px"
+        android:layout_marginRight="164px"
+        android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/title_map"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
             android:gravity="center"
-            android:text="@string/map_manage_name_text"/>
+            android:text="@string/map_manage_name_text"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
 
         <TextView
             android:id="@+id/manager_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dimens_345"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="4px"
+            android:layout_toRightOf="@+id/title_map"
+            android:background="@drawable/home_bg_xuanzekuang"
             android:gravity="center"
-            android:text="@string/map_manage_select_map"/>
+            android:text="@string/map_manage_select_map"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
+
+        <ImageView
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_marginLeft="300px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@+id/title_map"
+            android:src="@drawable/home_ic_jiantou" />
 
         <Button
             android:id="@+id/manager_newMap"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="31px"
+            android:layout_toRightOf="@+id/manager_selected"
+            android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_add_new_map_btn"
-            android:textSize="25dp" />
-    </LinearLayout>
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
+    </RelativeLayout>
 
-2    <RelativeLayout
+    <RelativeLayout
         android:id="@+id/list_border"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/map_manage_line1"
-        android:layout_above="@+id/map_manage_line2"
-        >
+        android:layout_above="@+id/map_manage_line2">
         <ListView
             android:id="@+id/point_and_wall_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
         </ListView>
     </RelativeLayout>
 
@@ -56,13 +80,11 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/map_manage_line2"
         android:layout_below="@+id/map_manage_line1"
-        android:layout_toLeftOf="@+id/list_border"
-        >
+        android:layout_toLeftOf="@+id/list_border">
         <RelativeLayout
             android:id="@+id/map_manage_relative"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/manager_mapImage"
                 android:layout_width="wrap_content"
@@ -73,38 +95,54 @@
 
     <LinearLayout
         android:id="@+id/map_manage_line2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        >
+        android:layout_marginEnd="175px"
+        android:layout_marginRight="175px"
+        android:layout_marginBottom="91px"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/manager_rename"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:text="@string/map_manage_rename" />
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:background="@drawable/home_btn_anniu"
+            android:text="@string/map_manage_rename"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
 
         <Button
             android:id="@+id/manager_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:text="@string/map_manage_delete" />
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="36px"
+            android:background="@drawable/home_btn_anniu"
+            android:text="@string/map_manage_delete"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
 
         <Button
             android:id="@+id/manager_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:text="@string/map_manage_edit" />
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="36px"
+            android:background="@drawable/home_btn_anniu"
+            android:text="@string/map_manage_edit"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
 
         <Button
             android:id="@+id/manager_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dimens_102"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="36px"
+            android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_back"
-            android:textSize="15dp" />
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
     </LinearLayout>
 
 </RelativeLayout>
