@@ -27,7 +27,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:background="@drawable/btn_gb_normal"
+        android:background="@drawable/addmap_bg_xiangqingkuang"
         android:id="@+id/map_list_border"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_below="@+id/add_point_title"
         android:layout_above="@+id/line1"
         android:layout_marginTop="10px"
-        android:background="@drawable/btn_gb_normal">
+        android:background="@drawable/addmap_bg_xiangqingkuang">
 
     <RelativeLayout
         android:id="@+id/map_relative"

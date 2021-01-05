@@ -265,7 +265,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
         popWindow.setWidth(300);
         popWindow.setHeight(400);
         popWindow.setTouchable(true);
-        popWindow.showAsDropDown(taskManageDetails);
+        popWindow.showAsDropDown(taskManageDetails,-200,0);
         popWindow.setBackgroundDrawable(new ColorDrawable(0));
         detailsTaskMap.setText(Content.first_map_Name);
         detailsTaskTask.setText(Content.fixTaskName);

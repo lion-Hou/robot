@@ -85,6 +85,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10px"
         android:layout_marginLeft="20px"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"
         android:layout_below="@+id/details_task_type_text"
         android:layout_toRightOf="@id/details_task_time_text"/>
 
@@ -93,8 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/details_task_time_text"
-        android:layout_marginTop="@dimen/dimens_20"
-        android:layout_marginLeft="20px">
+        android:layout_marginTop="@dimen/dimens_20">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/details_count_list"
             android:layout_width="match_parent"
