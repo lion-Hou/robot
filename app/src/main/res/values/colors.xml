@@ -7,4 +7,6 @@
     <color name="list_divider">#D5D4D2</color>
     <color name="text_color">#FFFFFF</color>
     <color name="edit_color">#929292</color>
+    <color name="transparent">#01000000</color>
+    <color name="spinner_bg">#3A414A</color>
 </resources>

@@ -19,24 +19,27 @@
 
         <RelativeLayout
             android:id="@+id/title"
+            android:layout_marginTop="@dimen/dimens_35"
             android:layout_width="wrap_content"
-            android:layout_height="100px">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/net_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_37"
                 android:textSize="@dimen/dimens_24"
+                android:layout_centerVertical="true"
                 android:textColor="@color/text_color"/>
 
             <ImageView
                 android:id="@+id/battery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_toLeftOf="@id/time"
-                android:layout_marginRight="44px"
-                android:src="@drawable/home_ic_dianchi" />
+                android:src="@drawable/home_ic_dianchi"
+                android:layout_marginRight="@dimen/dimens_10"
+                android:layout_centerVertical="true"/>
 
             <TextView
                 android:id="@+id/time"
@@ -44,6 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimens_10"
                 android:textSize="@dimen/dimens_16px" />
 
         </RelativeLayout>
@@ -63,6 +68,7 @@
         android:layout_width="@dimen/dimens_246"
         android:layout_height="@dimen/dimens_246"
         android:layout_marginLeft="@dimen/dimens_119"
+        android:layout_marginTop="@dimen/dimens_41"
         android:layout_below="@id/robot"
         />
 
@@ -70,10 +76,7 @@
         android:id="@+id/first_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="@dimen/dimens_132"
         android:layout_toRightOf="@+id/robot">
     </FrameLayout>
     </RelativeLayout>

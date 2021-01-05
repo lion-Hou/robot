@@ -23,8 +23,9 @@ public class DialogAdapter extends BaseAdapter {
     private Context context;
     private AdapterCallback adapterCallback;
     private List<String> stringList = new ArrayList<>();
+
     public interface AdapterCallback {
-        public void adapterCallback(int position, List<String> stringList);
+        public void adapterCallback(int position, boolean isChecked, List<String> stringList);
     }
 
     public void setAdapterCallback(AdapterCallback adapterCallback) {
@@ -57,7 +58,7 @@ public class DialogAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         mViewHolder holder = null;
-        if (convertView == null) {
+//        if (convertView == null) {
             //无缓存时进入
             holder = new mViewHolder();
             //这里要注意有一个是上下文，一个是显示每一行的行布局文件
@@ -65,24 +66,25 @@ public class DialogAdapter extends BaseAdapter {
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
             holder.checkbox_tv = (TextView) convertView.findViewById(R.id.checkbox_tv);
             convertView.setTag(holder);
-        } else {
-            //缓存时进入
-            holder = (mViewHolder) convertView.getTag();
-        }
+//        } else {
+//            //缓存时进入
+//            holder = (mViewHolder) convertView.getTag();
+//        }
         //匹配数据
-        stringList.clear();
         holder.checkbox_tv.setText(list.get(position).getTaskName());
         holder.checkBox.setChecked(list.get(position).isClick());
+        Log.d("zdzd ", "getview : " + position + list.get(position).isClick());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("dialogadapter : " , ""+ position + ",   " + isChecked);
+                Log.d("dialogadapter : ", "" + position + ",   " + isChecked);
                 if (isChecked) {
                     stringList.add(list.get(position).getTaskName());
                 } else {
                     stringList.remove(list.get(position).getTaskName());
                 }
-                adapterCallback.adapterCallback(position, stringList);
+                list.get(position).setClick(isChecked);
+                adapterCallback.adapterCallback(position, isChecked, stringList);
             }
         });
         return convertView;

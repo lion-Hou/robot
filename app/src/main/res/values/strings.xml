@@ -21,7 +21,7 @@
     <string name="settings_version_number">Robot Version Number:</string>
     <string name="settings_version_number2">Controller Version Number:</string>
 
-    <string name="please_select_map">PLEASE SELECT MAP</string>
+    <string name="please_select_map">please select map</string>
     <string name="new_map_name_text">Map Name:</string>
     <string name="new_map_name_edit">Please enter new map name</string>
     <string name="new_map_scan">Start scanning</string>
@@ -30,8 +30,8 @@
 
     <string name="map_manage_add_new_map_btn">New Map</string>
     <string name="map_manage_name_text">Map Name:</string>
-    <string name="map_manage_select_map">Please select map</string>
-    <string name="map_manage_select_task">PLEASE SELECT TASK</string>
+    <string name="map_manage_select_map">please select map</string>
+    <string name="map_manage_select_task">please select task</string>
     <string name="map_manage_rename">Rename</string>
     <string name="map_manage_delete">Delete</string>
     <string name="map_manage_edit">Edit Map</string>
