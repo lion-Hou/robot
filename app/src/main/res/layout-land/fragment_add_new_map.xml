@@ -44,8 +44,10 @@
             android:layout_marginLeft="7px"
             android:textColor="@color/edit_color"
             android:textSize="@dimen/dimens_18"
-            android:gravity="bottom"
-            android:hint="@string/new_map_name_edit" />
+            android:gravity="center"
+            android:hint="@string/new_map_name_edit"
+            android:textColorHint="@color/edit_color"
+            android:theme="@style/MyEditText"/>
 
         <Button
             android:id="@+id/new_map_scan"

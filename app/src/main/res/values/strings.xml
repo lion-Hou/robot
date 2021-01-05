@@ -43,7 +43,8 @@
     <string name="map_edit_position">Set Task Point</string>
     <string name="map_edit_save">Save Changes</string>
     <string name="map_edit_back">Back</string>
-
+    <string name="selectPoint">SelectPoint</string>
+    <string name="task_edit">PLEASE ENET TASK NAME </string>
 
     <string name="task_name">Task_name:</string>
     <string name="task_deit">EDIT</string>

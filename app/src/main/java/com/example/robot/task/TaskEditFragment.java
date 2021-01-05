@@ -144,8 +144,8 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
 
         gsonUtils.setMapName(Content.first_map_Name);
         gsonUtils.setTaskName(Content.fixTaskName);
-        Log.d("ffff",Content.first_map_Name);
-        Log.d("ffff",Content.fixTaskName);
+//        Log.d("ffff",Content.first_map_Name);
+//        Log.d("ffff",Content.fixTaskName);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
 
         taskNewSave.setOnClickListener(this);

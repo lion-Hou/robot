@@ -8,77 +8,113 @@
 
     <TextView
         android:id="@+id/task_manage_title"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150px"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"
         android:text="@string/task_name"/>
 
     <TextView
         android:id="@+id/task_manage_name"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="@dimen/dimens_345"
+        android:layout_height="@dimen/dimens_54"
+        android:layout_marginTop="137px"
         android:layout_toRightOf="@id/task_manage_title"
-        android:background="@drawable/btn_gb_normal"
-        android:text="@string/map_manage_select_task"/>
+        android:layout_marginLeft="15px"
+        android:background="@drawable/home_bg_xuanzekuang"
+        android:gravity="center"
+        android:text="@string/map_manage_select_task"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"/>
+    <ImageView
+        android:layout_width="25px"
+        android:layout_height="25px"
+        android:layout_marginLeft="400px"
+        android:layout_marginTop="148px"
+        android:src="@drawable/home_ic_jiantou" />
 
     <Button
         android:id="@+id/task_manage_new_task"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:layout_marginTop="137px"
+        android:background="@drawable/home_btn_anniu"
+        android:layout_marginLeft="21px"
         android:layout_toRightOf="@id/task_manage_name"
-        android:text="@string/task_add"/>
+        android:text="@string/task_add"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"/>
 
     <Button
         android:id="@+id/task_manage_details"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:layout_marginTop="137px"
+        android:background="@drawable/home_btn_anniu"
+        android:layout_marginLeft="15px"
         android:layout_toRightOf="@id/task_manage_new_task"
-        android:text="@string/task_details"/>
+        android:text="@string/task_details"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"/>
 
     <RelativeLayout
         android:id="@+id/task_manage_map_relative_border"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/task_manage_title"
+        android:layout_below="@+id/task_manage_name"
         android:layout_above="@+id/task_manage_edit"
-        >
-    <RelativeLayout
-        android:id="@+id/task_manage_map_relative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <ImageView
-            android:id="@+id/task_manage_map_Image"
+        android:layout_marginTop="35px">
+        <RelativeLayout
+            android:id="@+id/task_manage_map_relative"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-             />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/task_manage_map_Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                 />
+        </RelativeLayout>
     </RelativeLayout>
 
     <Button
         android:id="@+id/task_manage_edit"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:background="@drawable/home_btn_anniu"
+        android:layout_marginLeft="350px"
         android:layout_alignParentBottom="true"
-        android:text="@string/task_deit"/>
+        android:layout_marginBottom="@dimen/dimens_51"
+        android:text="@string/task_deit"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"/>
 
     <Button
         android:id="@+id/task_manage_delete"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:background="@drawable/home_btn_anniu"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="-2dp"
+        android:layout_marginBottom="@dimen/dimens_51"
+        android:layout_marginLeft="9px"
         android:layout_toRightOf="@+id/task_manage_edit"
-        android:text="@string/task_delete" />
+        android:text="@string/task_delete"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"/>
 
     <Button
         android:id="@+id/task_manage_back"
-        android:layout_width="200px"
-        android:layout_height="100px"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:background="@drawable/home_btn_anniu"
         android:layout_toRightOf="@id/task_manage_delete"
+        android:layout_marginLeft="9px"
         android:layout_alignParentBottom="true"
-        android:text="@string/task_back"/>
+        android:layout_marginBottom="@dimen/dimens_51"
+        android:text="@string/task_back"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18"/>
 
 </RelativeLayout>
 

@@ -26,8 +26,8 @@
     <string name="new_map_scan">开始扫描</string>
     <string name="new_map_save">保存</string>
     <string name="new_map_back">返回</string>
-
-
+    <string name="selectPoint">任务点</string>
+    <string name="task_edit">请输入任务名 </string>
     <string name="please_select_map">请选择地图</string>
 
     <string name="map_manage_add_new_map_btn">新建地图</string>
