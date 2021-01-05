@@ -10,8 +10,9 @@
     <RelativeLayout
         android:id="@+id/new_map_relativeLayout"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:layout_marginTop="107px"
+        android:layout_marginRight="127px"
         tools:ignore="MissingConstraints">
         <ImageView
             android:id="@+id/new_map_mapImage"
@@ -19,7 +20,7 @@
             android:layout_height="match_parent"
             tools:ignore="MissingConstraints"
             android:scaleType="fitCenter"
-            android:background="@drawable/btn_gb_normal"/>
+            android:background="@drawable/home_bg_xiangqingkuang"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

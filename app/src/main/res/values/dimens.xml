@@ -15,4 +15,5 @@
     <dimen name="dimens_16px">16px</dimen>
     <dimen name="dimens_246">246px</dimen>
     <dimen name="dimens_119">119px</dimen>
+    <dimen name="dimens_20">20px</dimen>
 </resources>
