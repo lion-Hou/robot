@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -29,7 +30,6 @@ import com.example.robot.R;
 import com.example.robot.adapter.MyAdapter;
 import com.example.robot.adapter.MyItemTouchHelperCallback;
 import com.example.robot.bean.SaveTaskBean;
-import com.example.robot.bean.TaskStateList;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
@@ -79,6 +79,12 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     TextView taskTypeSelectWeek;
     @BindView(R.id.task_new_back_edit_edit)
     Button taskNewBackEditEdit;
+    @BindView(R.id.edit_img1)
+    ImageView editImg1;
+    @BindView(R.id.edit_img2)
+    ImageView editImg2;
+    @BindView(R.id.edit_img3)
+    ImageView editImg3;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -197,7 +203,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                                     } else {
                                         gsonUtils.setTaskWeek(myWeek);//任务周期
                                     }
-                                    Log.d("fdsfsd",typeTime);
+                                    Log.d("fdsfsd", typeTime);
                                     gsonUtils.setTaskTime(typeTime);//任务时间 “20：20”
                                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TASK_ALARM));//定时任务
 
@@ -233,18 +239,21 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                             selectWeek = "";
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.GONE);
+                            editImg3.setVisibility(View.GONE);
                             typeTime = "FF:FF";
-                        }else if (which == 1) {
-                            taskTypeSelectTime.setText("请选择时间");
+                        } else if (which == 1) {
+                            taskTypeSelectTime.setText(R.string.task_type_time);
                             myWeek.clear();
                             selectWeek = "";
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.GONE);
+                            editImg3.setVisibility(View.GONE);
                         } else {
-                            taskTypeSelectTime.setText("请选择时间");
-                            taskTypeSelectWeek.setText("请选择周期");
+                            taskTypeSelectTime.setText(R.string.task_type_time);
+                            taskTypeSelectWeek.setText(R.string.task_type_week);
                             taskTypeSelect.setText(typeValue);
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
+                            editImg3.setVisibility(View.VISIBLE);
                         }
                         Log.d("taskvalue", typeValue);
                     }
@@ -330,9 +339,9 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.task_new_back_edit_edit:
                 AlertDialog.Builder back = new AlertDialog.Builder(mContext);
-                back.setMessage("当前修改未保存是否退出");
+                back.setMessage(R.string.save_hint);
                 //设置正面按钮
-                back.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                back.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getActivity().getSupportFragmentManager()
@@ -344,7 +353,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     }
                 });
                 //设置反面按钮
-                back.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                back.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -394,12 +403,14 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 if (TextUtils.isEmpty(typeArray.getString(0))) {
                     //Once
                     taskTypeSelectWeek.setVisibility(View.GONE);
+                    editImg3.setVisibility(View.GONE);
                     taskTypeSelect.setText(type[0]);
                     typeValue = type[0];
                 } else if (typeArray.length() == 7) {
                     //pre day
                     taskTypeSelect.setText(type[1]);
                     taskTypeSelectWeek.setVisibility(View.GONE);
+                    editImg3.setVisibility(View.GONE);
                     typeValue = type[1];
                 } else {
                     // pre week

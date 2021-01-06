@@ -59,7 +59,7 @@
             android:textSize="@dimen/dimens_18"
             android:background="@drawable/home_bg_xuanzekuang"/>
         <ImageView
-            android:id="@+id/img1"
+            android:id="@+id/edit_img1"
             android:layout_width="25px"
             android:layout_height="25px"
             android:layout_toRightOf="@+id/task_type_edit"
@@ -81,7 +81,7 @@
             android:textSize="@dimen/dimens_18"
             android:background="@drawable/home_bg_xuanzekuang"/>
         <ImageView
-            android:id="@+id/img2"
+            android:id="@+id/edit_img2"
             android:layout_width="25px"
             android:layout_height="25px"
             android:layout_toRightOf="@+id/task_type_edit"
@@ -103,7 +103,7 @@
             android:textSize="@dimen/dimens_18"
             android:background="@drawable/home_bg_xuanzekuang"/>
         <ImageView
-            android:id="@+id/img3"
+            android:id="@+id/edit_img3"
             android:layout_width="25px"
             android:layout_height="25px"
             android:layout_toRightOf="@+id/task_type_edit"

@@ -20,7 +20,7 @@
     <string name="settings_version_number">机器人版本号:</string>
     <string name="settings_version_number2">控制器版本号:</string>
 
-
+    <string name="save_hint">当前任务未保存是否退出</string>
     <string name="new_map_name_text">地图名:</string>
     <string name="new_map_name_edit">请输入地图名称</string>
     <string name="new_map_scan">开始扫描</string>

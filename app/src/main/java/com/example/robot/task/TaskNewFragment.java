@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -32,7 +33,6 @@ import com.example.robot.bean.SaveTaskBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
 import com.example.robot.content.GsonUtils;
-import com.example.robot.map.FirstFragment;
 import com.example.robot.map.TaskManagerFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -76,6 +76,12 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     TextView taskTypeSelectTime;
     @BindView(R.id.task_type_selectWeek)
     TextView taskTypeSelectWeek;
+    @BindView(R.id.new_img1)
+    ImageView newImg1;
+    @BindView(R.id.new_img2)
+    ImageView newImg2;
+    @BindView(R.id.new_img3)
+    ImageView newImg3;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -93,6 +99,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private List<String> myWeek = new ArrayList<>();
     private String[] taskNameList;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -159,9 +166,9 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
             case R.id.task_new_save:
                 Log.d("tasklog", "taskname");
                 boolean isRepeat = false;
-                if (taskNameList != null){
-                    for (int i = 0; i <taskNameList.length ; i++) {
-                        if (taskNameList[i].equals(newMapMapNameEditText.getText().toString())){
+                if (taskNameList != null) {
+                    for (int i = 0; i < taskNameList.length; i++) {
+                        if (taskNameList[i].equals(newMapMapNameEditText.getText().toString())) {
                             isRepeat = true;
                         }
                     }
@@ -170,7 +177,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 if (TextUtils.isEmpty(newMapMapNameEditText.getText().toString())) {
                     Toast.makeText(mContext, "先输入任务名字", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (isRepeat == false){
+                    if (isRepeat == false) {
                         new AlertDialog.Builder(mContext)
                                 .setTitle("提示")
                                 .setMessage("任务保存成功")
@@ -187,7 +194,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SAVETASKQUEUE));//保存任务
 
                                         if (typeValue.equals(type[1])) {
-                                            for (int i =0;i< weeks.length; i++) {
+                                            for (int i = 0; i < weeks.length; i++) {
                                                 myWeek.add(weeks[i]);
                                             }
                                             gsonUtils.setTaskWeek(myWeek);//任务周期
@@ -204,7 +211,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                                                 .commit();
                                     }
                                 }).show();
-                    }else if (isRepeat == true){
+                    } else if (isRepeat == true) {
                         Toast.makeText(mContext, "任务名不能重复", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -230,8 +237,10 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                         if (which == 0 || which == 1) {
                             myWeek.clear();
                             taskTypeSelectWeek.setVisibility(View.GONE);
+                            newImg3.setVisibility(View.GONE);
                         } else {
                             taskTypeSelectWeek.setVisibility(View.VISIBLE);
+                            newImg3.setVisibility(View.VISIBLE);
                         }
                         Log.d("taskvalue", typeValue);
                     }
@@ -246,14 +255,14 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        if( (hourOfDay >= 0 && hourOfDay <=9) && (minute >= 0 && minute <=9) ){
-                            typeTime = String.format("0%d:0%d",hourOfDay,minute);
-                        }else if ( (hourOfDay >= 0 && hourOfDay <=9) && (minute >= 10 && minute <=60) ){
-                            typeTime = String.format("0%d:%d",hourOfDay,minute);
-                        }else if( (hourOfDay >= 10 && hourOfDay <=24) && (minute >= 0 && minute <=9) ){
-                            typeTime = String.format("%d:0%d",hourOfDay,minute);
-                        }else {
-                            typeTime = String.format("%d:%d",hourOfDay,minute);//任务时间
+                        if ((hourOfDay >= 0 && hourOfDay <= 9) && (minute >= 0 && minute <= 9)) {
+                            typeTime = String.format("0%d:0%d", hourOfDay, minute);
+                        } else if ((hourOfDay >= 0 && hourOfDay <= 9) && (minute >= 10 && minute <= 60)) {
+                            typeTime = String.format("0%d:%d", hourOfDay, minute);
+                        } else if ((hourOfDay >= 10 && hourOfDay <= 24) && (minute >= 0 && minute <= 9)) {
+                            typeTime = String.format("%d:0%d", hourOfDay, minute);
+                        } else {
+                            typeTime = String.format("%d:%d", hourOfDay, minute);//任务时间
                         }
                         //typeTime = String.format("%d:%d",hourOfDay,minute);//任务时间
                         //typeTime = String.format("0%d:0%d",hourOfDay,minute);
@@ -261,7 +270,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                         taskTypeSelectTime.setText(typeTime);
                         Log.d("taskvalue", typeTime);
                     }
-                },00,00,true).show();
+                }, 00, 00, true).show();
                 break;
 
             /**
@@ -269,10 +278,10 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
              */
             case R.id.task_type_selectWeek:
                 boolean[] booleans = new boolean[weeks.length];
-                for (int i = 0;i<weeks.length;i++) {
+                for (int i = 0; i < weeks.length; i++) {
                     boolean flag = false;
-                    for (int j =0;j<myWeek.size();j++) {
-                        if (weeks[i].equals(myWeek.get(j))){
+                    for (int j = 0; j < myWeek.size(); j++) {
+                        if (weeks[i].equals(myWeek.get(j))) {
                             flag = true;
                         }
                     }
@@ -285,7 +294,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         if (isChecked) {
                             myWeek.add(weeks[which]);
-                            Log.d("taskvalue",myWeek.toString());
+                            Log.d("taskvalue", myWeek.toString());
                         } else {
                             myWeek.remove(weeks[which]);
                         }
@@ -316,9 +325,9 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 break;
             case R.id.task_new_back:
                 AlertDialog.Builder back = new AlertDialog.Builder(mContext);
-                back.setMessage("当前任务未保存是否退出");
+                back.setMessage(R.string.save_hint);
                 //设置正面按钮
-                back.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                back.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getActivity().getSupportFragmentManager()
@@ -330,7 +339,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                     }
                 });
                 //设置反面按钮
-                back.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                back.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -369,7 +378,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
             point_name = new String[point.length];
             pointList(point);
             Log.d(TAG, "收到点的数据大小new task ： " + point.length);
-        }else if (messageEvent.getState() == 10017) {
+        } else if (messageEvent.getState() == 10017) {
             taskNameList = (String[]) messageEvent.getT();
             Log.d("task_name", taskNameList[0]);
         }
