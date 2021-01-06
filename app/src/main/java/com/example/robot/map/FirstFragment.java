@@ -247,8 +247,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.main_spinner_task:
-                gsonUtils.setMapName(map_name);
+                gsonUtils.setMapName(mainSpinnerMap.getText().toString());
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
+                Log.d("task_name111",mainSpinnerMap.getText().toString());
                 break;
             case R.id.main_map:
                 Log.d(TAG, "onEventMsg ： " + "ditu");

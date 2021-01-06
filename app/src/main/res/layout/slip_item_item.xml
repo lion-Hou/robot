@@ -15,14 +15,14 @@
             android:layout_height="match_parent"
             android:background="#5F9EA0"
             android:gravity="center"
-            android:text="重命名" />
+            android:text="@string/list_remame" />
         <TextView
             android:id="@+id/tv_delete"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:background="#FF6347"
             android:gravity="center"
-            android:text="删除" />
+            android:text="@string/list_delete" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +37,8 @@
             android:layout_height="match_parent"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_16px"
-            android:text="name"/>
+            android:text="name"
+            android:gravity="center"/>
     </LinearLayout>
 
 

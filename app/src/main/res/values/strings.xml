@@ -111,4 +111,6 @@
 
     <string name="all_ok">OK</string>
     <string name="all_cancel">Cancel</string>
+    <string name="list_remame">rename</string>
+    <string name="list_delete">delete</string>
 </resources>

@@ -30,8 +30,8 @@
     <ImageView
         android:layout_width="25px"
         android:layout_height="25px"
-        android:layout_marginLeft="400px"
-        android:layout_marginTop="148px"
+        android:layout_marginLeft="360px"
+        android:layout_marginTop="151px"
         android:src="@drawable/home_ic_jiantou" />
 
     <Button
@@ -64,7 +64,12 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/task_manage_name"
         android:layout_above="@+id/task_manage_edit"
-        android:layout_marginTop="35px">
+        android:layout_marginTop="35px"
+        android:background="@drawable/home_bg_xiangqingkuang"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="127px"
+        android:layout_marginRight="127px">
         <RelativeLayout
             android:id="@+id/task_manage_map_relative"
             android:layout_width="wrap_content"
@@ -85,6 +90,7 @@
         android:background="@drawable/home_btn_anniu"
         android:layout_marginLeft="350px"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="35px"
         android:layout_marginBottom="@dimen/dimens_51"
         android:text="@string/task_deit"
         android:textColor="@color/text_color"

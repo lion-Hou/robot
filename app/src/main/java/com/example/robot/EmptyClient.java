@@ -46,13 +46,17 @@ public class EmptyClient extends WebSocketClient {
     public void onOpen(ServerHandshake handshake) {
         isConnected = true;
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
+
         //发送系统时间给下位机
         long time = System.currentTimeMillis();
-        Log.d("gfdfas", String.valueOf(time));
         gsonUtils.setTime(time);
-        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));//断连监听
+
+        //断连监听
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
+
         //获得上位机版本号
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.versionCode));
+
         System.out.println("connect state new connection opened"+isConnected);
     }
 

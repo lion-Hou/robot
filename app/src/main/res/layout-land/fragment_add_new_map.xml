@@ -7,20 +7,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".map.AddNewMapFragment"
     tools:ignore="MissingDefaultResource">
+
     <RelativeLayout
         android:id="@+id/new_map_relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="350dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="107px"
+        android:layout_marginEnd="127px"
         android:layout_marginRight="127px"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:background="@drawable/home_bg_xiangqingkuang">
+
         <ImageView
             android:id="@+id/new_map_mapImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:ignore="MissingConstraints"
             android:scaleType="fitCenter"
-            android:background="@drawable/home_bg_xiangqingkuang"/>
+            tools:ignore="MissingConstraints" />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +44,7 @@
 
         <EditText
             android:id="@+id/new_map_mapName_editText"
-            android:layout_width="wrap_content"
+            android:layout_width="220px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7px"
             android:textColor="@color/edit_color"

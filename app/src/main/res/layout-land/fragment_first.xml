@@ -20,18 +20,20 @@
             android:textColor="@color/text_color"
             android:text="@string/text_map"
             android:gravity="center_vertical" />
+
         <TextView
             android:id="@+id/main_spinner_map"
             android:layout_width="@dimen/dimens_345"
             android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="18dp"
             android:layout_toRightOf="@+id/main_text_map"
             android:background="@drawable/home_bg_xuanzekuang"
-            android:layout_marginLeft="@dimen/dimens_24"
-            android:textColor="@color/text_color"
-            android:textAlignment="center"
+            android:gravity="center"
             android:text="@string/please_select_map"
-            android:textSize="@dimen/dimens_18"
-            android:gravity="center" />
+            android:textAlignment="center"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18" />
+
         <ImageView
             android:layout_width="25px"
             android:layout_height="25px"
@@ -66,8 +68,8 @@
             android:textSize="@dimen/dimens_18"
             android:gravity="center" />
         <ImageView
-            android:layout_width="30px"
-            android:layout_height="30px"
+            android:layout_width="25px"
+            android:layout_height="25px"
             android:src="@drawable/home_ic_jiantou"
             android:layout_toRightOf="@+id/main_text_task"
             android:layout_below="@id/main_text_map"

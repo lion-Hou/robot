@@ -11,16 +11,14 @@
         android:id="@+id/map_manage_line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="137px"
-
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/title_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="15px"
             android:gravity="center"
             android:text="@string/map_manage_name_text"
             android:textColor="@color/text_color"
@@ -42,7 +40,7 @@
             android:layout_width="25px"
             android:layout_height="25px"
             android:layout_marginLeft="300px"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="15px"
             android:layout_toRightOf="@+id/title_map"
             android:src="@drawable/home_ic_jiantou" />
 
@@ -64,11 +62,16 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/map_manage_line2"
         android:layout_below="@+id/map_manage_line1"
-        android:layout_marginTop="@dimen/dimens_20">
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="245px"
+        android:background="@drawable/addmap_bg_xiangqingkuang">
+
         <RelativeLayout
             android:id="@+id/map_manage_relative"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/manager_mapImage"
                 android:layout_width="wrap_content"
@@ -81,18 +84,17 @@
         android:id="@+id/map_manage_line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="175px"
         android:layout_marginRight="175px"
         android:layout_marginBottom="91px"
-        android:layout_marginTop="@dimen/dimens_20"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/manager_rename"
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
+            android:layout_marginLeft="6px"
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_rename"
             android:textColor="@color/text_color"

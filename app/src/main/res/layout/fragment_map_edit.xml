@@ -27,19 +27,22 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:background="@drawable/addmap_bg_xiangqingkuang"
         android:id="@+id/map_list_border"
-        android:layout_width="150dp"
+        android:layout_width="120px"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/add_point_title"
         android:layout_above="@+id/line1"
         android:layout_marginLeft="11px"
-        android:layout_marginTop="10px">
+        android:layout_marginTop="10px"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="140px"
+        android:layout_marginRight="140px">
         <ListView
             android:id="@+id/point_and_wall_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/addmap_bg_xiangqingkuang">
         </ListView>
     </RelativeLayout>
 
@@ -51,6 +54,7 @@
         android:layout_below="@+id/add_point_title"
         android:layout_above="@+id/line1"
         android:layout_marginTop="10px"
+        android:layout_marginRight="11px"
         android:background="@drawable/addmap_bg_xiangqingkuang">
 
     <RelativeLayout
@@ -69,15 +73,16 @@
     <LinearLayout
         android:id="@+id/line1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="80px"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:layout_marginTop="17px">
+        android:layout_marginTop="17px"
+        android:layout_marginBottom="51px">
 
         <Button
             android:id="@+id/save_charging_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="123px"
+            android:layout_height="@dimen/dimens_54"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
@@ -85,8 +90,8 @@
 
         <Button
             android:id="@+id/wall_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="124px"
+            android:layout_height="@dimen/dimens_54"
             android:layout_marginLeft="11px"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
@@ -95,8 +100,8 @@
 
         <Button
             android:id="@+id/mark_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="124px"
+            android:layout_height="@dimen/dimens_54"
             android:layout_marginLeft="11px"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
@@ -105,8 +110,8 @@
 
         <Button
             android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="123px"
+            android:layout_height="@dimen/dimens_54"
             android:layout_marginLeft="11px"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
@@ -115,11 +120,11 @@
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120px"
+            android:layout_height="@dimen/dimens_54"
             android:layout_marginLeft="11px"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
-            android:text="@string/map_edit_back"
+            android:text="@string/task_back"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18" />
     </LinearLayout>

@@ -42,7 +42,7 @@
     <string name="edit_map_name_text">地图名:</string>
     <string name="map_edit_charging_btn">设置充电点</string>
     <string name="map_edit_virtual_wall">添加虚拟墙</string>
-    <string name="map_edit_position">设置当前位置为任务点</string>
+    <string name="map_edit_position">设置任务点</string>
     <string name="map_edit_save">保存</string>
     <string name="map_edit_back">返回</string>
 
@@ -133,5 +133,6 @@
 
     <string name="all_ok">确认</string>
     <string name="all_cancel">取消</string>
-
+    <string name="list_remame">重命名</string>
+    <string name="list_delete">刪除</string>
 </resources>
