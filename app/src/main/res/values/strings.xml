@@ -121,4 +121,21 @@
     <string name="first_connect2">Please check that the network connection is correct</string>
     <string name="first_connect3">Cancel</string>
     <string name="first_connect4">Reconnection</string>
+    <string name="first_connect5">Connect...</string>
+    <string name="first_connect6">Waiting...</string>
+    <string name="first_connect7">Prompt Message</string>
+    <string name="first_connect8">Upgrade the upper computer, please stay connected, after successful upgrade, please click reconnect</string>
+    <string name="task1">Please enter task name</string>
+    <string name="task2">Task save seccess</string>
+    <string name="task3">Task name cannot be repeated</string>
+    <string name="week1">Monday</string>
+    <string name="week2">Tuesday</string>
+    <string name="week3">Wednesday</string>
+    <string name="week4">Thursday</string>
+    <string name="week5">Friday</string>
+    <string name="week6">Saturday</string>
+    <string name="week7">Sunday</string>
+    <string name="type1">Once</string>
+    <string name="type2">Pre Day</string>
+    <string name="type3">Pre Week</string>
 </resources>

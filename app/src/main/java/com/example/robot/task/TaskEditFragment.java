@@ -94,11 +94,11 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     private MyAdapter mAdapter;
     private String[] point_name;
     private ItemTouchHelper itemTouchHelper;
-    private String[] type = new String[]{"Once", "Pre Day", "Pre Week"};
+//    private String[] type = new String[]{"Once", "Pre Day", "Pre Week"};
     private String selectWeek = "";
     private String typeValue;
     private String typeTime;
-    private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+//    private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
     private List<String> myWeek = new ArrayList<>();
     private AlertDialog.Builder week;
 
@@ -168,17 +168,27 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View view) {
+        String[] type = new String[]{getText(R.string.type1).toString(),
+                getText(R.string.type2).toString(),
+                getText(R.string.type3).toString()};
+        String[] weeks = new String[]{getText(R.string.week1).toString(),
+                getText(R.string.week2).toString(),
+                getText(R.string.week3).toString(),
+                getText(R.string.week4).toString(),
+                getText(R.string.week5).toString(),
+                getText(R.string.week6).toString(),
+                getText(R.string.week7).toString()};
         switch (view.getId()) {
             case R.id.task_new_save_edit:
 
                 Log.d("tasklog", "taskname");
                 if (TextUtils.isEmpty(newMapMapNameEditText.getText().toString())) {
-                    Toast.makeText(mContext, "先输入任务名字", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.task1, Toast.LENGTH_SHORT).show();
                 } else {
                     new AlertDialog.Builder(mContext)
-                            .setTitle("提示")
-                            .setMessage("任务保存成功")
-                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.first_connect7)
+                            .setMessage(R.string.task2)
+                            .setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
@@ -234,7 +244,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     public void onClick(DialogInterface dialog, int which) {
                         typeValue = type[which];//任务类型
                         if (which == 0) {
-                            taskTypeSelectTime.setText("请选择时间");
+                            taskTypeSelectTime.setText(R.string.task_type_time);
                             myWeek.clear();
                             selectWeek = "";
                             taskTypeSelect.setText(typeValue);
@@ -316,7 +326,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 });
 
                 //设置正面按钮
-                week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                week.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         selectWeek = "";
@@ -328,7 +338,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     }
                 });
                 //设置反面按钮
-                week.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                week.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         myWeek.clear();
@@ -387,6 +397,9 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d(TAG, "onEventMsgEditeTask ： " + messageEvent.getState());
+        String[] type = new String[]{getText(R.string.type1).toString(),
+                getText(R.string.type2).toString(),
+                getText(R.string.type3).toString()};
         if (messageEvent.getState() == 10007) {
             String[] point = (String[]) messageEvent.getT();
             point_name = new String[point.length];

@@ -92,11 +92,10 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     private String[] point_name;
     private ItemTouchHelper itemTouchHelper;
     private RecyclerView mRecyclerView;
-    private String[] type = new String[]{"Once", "Pre Day", "Pre Week"};
     private String selectWeek = "";
     private String typeValue = "";
     private String typeTime = "FF:FF";
-    private String[] weeks = new String[]{"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
+
     private List<String> myWeek = new ArrayList<>();
     private String[] taskNameList;
 
@@ -157,9 +156,18 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
     private void initListener() {
 
     }
-
     @Override
     public void onClick(View view) {
+        String[] type = new String[]{getText(R.string.type1).toString(),
+                getText(R.string.type2).toString(),
+                getText(R.string.type3).toString()};
+        String[] weeks = new String[]{getText(R.string.week1).toString(),
+                getText(R.string.week2).toString(),
+                getText(R.string.week3).toString(),
+                getText(R.string.week4).toString(),
+                getText(R.string.week5).toString(),
+                getText(R.string.week6).toString(),
+                getText(R.string.week7).toString()};
         switch (view.getId()) {
             case R.id.new_map_mapName_editText:
                 break;
@@ -175,13 +183,13 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 }
 
                 if (TextUtils.isEmpty(newMapMapNameEditText.getText().toString())) {
-                    Toast.makeText(mContext, "先输入任务名字", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.task1, Toast.LENGTH_SHORT).show();
                 } else {
                     if (isRepeat == false) {
                         new AlertDialog.Builder(mContext)
-                                .setTitle("提示")
-                                .setMessage("任务保存成功")
-                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                .setTitle(R.string.first_connect7)
+                                .setMessage(R.string.task2)
+                                .setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
@@ -212,7 +220,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                                     }
                                 }).show();
                     } else if (isRepeat == true) {
-                        Toast.makeText(mContext, "任务名不能重复", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, R.string.task3, Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -302,7 +310,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                 });
 
                 //设置正面按钮
-                week.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                week.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         selectWeek = "";
@@ -314,7 +322,7 @@ public class TaskNewFragment extends Fragment implements View.OnClickListener, M
                     }
                 });
                 //设置反面按钮
-                week.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                week.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         myWeek.clear();

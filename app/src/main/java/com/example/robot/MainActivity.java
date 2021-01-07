@@ -227,8 +227,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
          * @setCancelable 为使屏幕不可点击，设置为不可取消(false)
          * 下载等事件完成后，主动调用函数关闭该Dialog
          */
-        otaDialog.setTitle("提示");
-        otaDialog.setMessage("正在升级上位机，请保持连接,升级成功后，请点击重新连接");
+        otaDialog.setTitle(R.string.first_connect7);
+        otaDialog.setMessage(getText(R.string.first_connect8).toString());
         otaDialog.setIndeterminate(true);
         otaDialog.setCancelable(false);
         otaDialog.show();
@@ -293,8 +293,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
          * @setCancelable 为使屏幕不可点击，设置为不可取消(false)
          * 下载等事件完成后，主动调用函数关闭该Dialog
          */
-        waitingDialog.setTitle("连接中");
-        waitingDialog.setMessage("等待中...");
+        waitingDialog.setTitle(R.string.first_connect5);
+        waitingDialog.setMessage(getText(R.string.first_connect6).toString());
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
         waitingDialog.show();

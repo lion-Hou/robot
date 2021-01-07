@@ -143,4 +143,21 @@
     <string name="first_connect2">请检查网络连接是否正确</string>
     <string name="first_connect3">退出</string>
     <string name="first_connect4">重新连接</string>
+    <string name="first_connect5">连接中。。。</string>
+    <string name="first_connect6">等待中。。。</string>
+    <string name="first_connect7">提示</string>
+    <string name="first_connect8">正在升级上位机，请保持连接,升级成功后，请点击重新连接</string>
+    <string name="task1">先输入任务名字</string>
+    <string name="task2">任务保存成功</string>
+    <string name="task3">任务名不能重复</string>
+    <string name="week1">星期一</string>
+    <string name="week2">星期二</string>
+    <string name="week3">星期三</string>
+    <string name="week4">星期四</string>
+    <string name="week5">星期五</string>
+    <string name="week6">星期六</string>
+    <string name="week7">星期天</string>
+    <string name="type1">一次</string>
+    <string name="type2">每天</string>
+    <string name="type3">每周</string>
 </resources>
