@@ -1,9 +1,7 @@
 package com.example.robot;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,13 +31,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +47,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     TextView time;
     @BindView(R.id.net_time)
     TextView net_Time;
+    @BindView(R.id.main_batty_img)
+    ImageView mainBattyImg;
     private GsonUtils gsonUtils;
     private FirstFragment firstFragment;
     private SecoundFragment secoundFragment;
@@ -72,6 +68,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         hideBottomUIMenu();
+        ButterKnife.bind(this);
+        mainBattyImg.setVisibility(View.GONE);
         ButterKnife.bind(this);
         gsonUtils = new GsonUtils();
         connect();
@@ -161,6 +159,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             String message = (String) messageEvent.getT();
             if (message.contains("701")) {
                 Toast.makeText(this, R.string.toast_mainactivity_text1, Toast.LENGTH_SHORT).show();
+            } else if (message.contains("充电")) {
+                mainBattyImg.setVisibility(View.VISIBLE);
+            } else if (message.contains("放电")) {
+                mainBattyImg.setVisibility(View.GONE);
             }
         } else if (messageEvent.getState() == 12345) {
             Log.d("fdsfsdfsd111", "String.valueOf(versionCode)");
@@ -198,7 +200,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     /**
      * 升级上位机
      */
-    public void ota(){
+    public void ota() {
         try {
             InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
             int size = is.available();

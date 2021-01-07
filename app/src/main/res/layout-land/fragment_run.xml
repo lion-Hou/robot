@@ -8,73 +8,93 @@
     <TextView
         android:id="@+id/run_map"
         android:layout_width="wrap_content"
-        android:layout_height="80px"
-        android:textSize="18dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dimens_16px"
         android:textColor="@color/text_color"
-        android:text="@string/run_map"/>
+        android:text="@string/run_map"
+        android:layout_marginTop="@dimen/dimens_75"/>
 
     <TextView
         android:id="@+id/run_map_name"
         android:layout_width="wrap_content"
-        android:layout_height="80px"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/run_map"
         android:textColor="@color/text_color"
-        android:textSize="18dp"/>
+        android:textSize="@dimen/dimens_16px"
+        android:layout_marginLeft="@dimen/dimens_30"
+        android:layout_marginTop="@dimen/dimens_75"/>
 
     <TextView
         android:id="@+id/run_task"
         android:layout_width="wrap_content"
-        android:layout_height="80px"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/run_map"
-        android:textSize="18dp"
+        android:textSize="@dimen/dimens_16px"
         android:textColor="@color/text_color"
-        android:text="@string/run_task"/>
+        android:text="@string/run_task"
+        android:layout_marginTop="@dimen/dimens_20"/>
 
     <TextView
         android:id="@+id/run_task_name"
         android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimens_54"
         android:layout_toRightOf="@id/run_task"
         android:layout_below="@+id/run_map"
-        android:layout_height="80px"
         android:textColor="@color/text_color"
-        android:textSize="18dp" />
+        android:textSize="@dimen/dimens_16px"
+        android:layout_marginLeft="@dimen/dimens_30"
+        android:layout_marginTop="@dimen/dimens_20"/>
 
     <TextView
         android:id="@+id/point_state_time_text"
-        android:layout_width="200px"
-        android:layout_height="80px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:layout_below="@+id/run_task"
-        android:text="倒计时:"/>
+        android:layout_marginTop="@dimen/dimens_20"
+        android:text="@string/count_down"
+        android:textSize="@dimen/dimens_16px"/>
     <TextView
         android:id="@+id/point_state_time"
-        android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_16px"
         android:layout_toRightOf="@id/point_state_time_text"
-        android:layout_below="@+id/run_task"/>
+        android:layout_marginLeft="@dimen/dimens_30"
+        android:layout_below="@+id/run_task"
+        android:layout_marginTop="@dimen/dimens_20"/>
 
     <!-- 进行任务       -->
     <RelativeLayout
         android:id="@+id/run"
-        android:layout_width="match_parent"
-        android:layout_height="400px"
-        android:layout_below="@id/point_state_time_text">
+        android:layout_width="wrap_content"
+        android:layout_height="350px"
+        android:layout_below="@id/point_state_time_text"
+        android:layout_marginTop="@dimen/dimens_30"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="127px"
+        android:layout_marginRight="127px">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/count_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/btn_gb_normal"/>
+            android:background="@drawable/addmap_bg_xiangqingkuang" />
 
     </RelativeLayout>
 
     <Button
         android:id="@+id/task_run_edit"
-        android:layout_width="200px"
-        android:layout_height="50px"
-        android:layout_marginTop="650px"
+        android:layout_width="@dimen/dimens_102"
+        android:layout_height="@dimen/dimens_54"
+        android:layout_below="@+id/run"
+        android:layout_marginTop="@dimen/dimens_30"
+        android:background="@drawable/home_btn_anniu"
         android:textColor="@color/text_color"
-        android:text="@string/run_stop"/>
+        android:text="@string/run_stop"
+        android:textSize="@dimen/dimens_18"/>
 
 
 </RelativeLayout>

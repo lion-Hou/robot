@@ -41,6 +41,14 @@
                 android:layout_marginRight="@dimen/dimens_10"
                 android:layout_centerVertical="true"/>
 
+            <ImageView
+                android:id="@+id/main_batty_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="21dp"
+                android:layout_toLeftOf="@id/time"
+                android:src="@drawable/home_ic_bolt" />
+
             <TextView
                 android:id="@+id/time"
                 android:textColor="@color/text_color"
