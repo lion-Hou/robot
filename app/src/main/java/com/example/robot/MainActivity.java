@@ -237,7 +237,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     //Dialog
     private void showDisconnectDialog() {
-        disconnectDialog.showDialog(this, "网络错误", "网络连接错误，请确认当前网络状态", "退出", "重新连接", new DialogInterface.OnClickListener() {
+        disconnectDialog.showDialog(this, getText(R.string.first_connect1).toString(), getText(R.string.first_connect2).toString(), getText(R.string.first_connect3).toString(), getText(R.string.first_connect4).toString(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //取消

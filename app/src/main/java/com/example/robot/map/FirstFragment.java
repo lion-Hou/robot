@@ -227,7 +227,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
                 String a ="";
                 if (mainSpinnerTaskText.equals(name3) || mainSpinnerTaskText.equals(name4) || mainSpinnerTaskText.equals(a)) {
-                    Toast toast = Toast.makeText(mContext,"请选择任务名",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(mContext,R.string.please_task_name,Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
                     Log.d(TAG, "zdzdstrList ： " + myTaskNameList.size());
@@ -383,7 +383,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "onEventMsg ： " + "2");
 
         if (mapName.size() == 0){
-            Toast.makeText(mContext, "请先加地图", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.please_add_map, Toast.LENGTH_SHORT).show();
         }else{
             myDialog = new SelectDialogUtil(mContext, R.layout.dialog_select);
             myDialog.setDialogCallback(dialogcallback);

@@ -114,4 +114,11 @@
     <string name="list_remame">rename</string>
     <string name="list_delete">delete</string>
     <string name="count_down">COUNT DOWN</string>
+    <string name="please_task_name">Please task name</string>
+    <string name="Whether_task_delete">Whether to delete the task?</string>
+    <string name="please_add_map">Please creat map</string>
+    <string name="first_connect1">Network error</string>
+    <string name="first_connect2">Please check that the network connection is correct</string>
+    <string name="first_connect3">Cancel</string>
+    <string name="first_connect4">Reconnection</string>
 </resources>

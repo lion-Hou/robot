@@ -174,13 +174,13 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             case R.id.task_manage_delete:
                 a = (String) taskName.getText();
                 if (a.equals(select_cn) || a.equals(select_en)) {
-                    Toast toast = Toast.makeText(mContext, "请选择任务名", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(mContext, R.string.please_task_name, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     AlertDialog.Builder delete = new AlertDialog.Builder(mContext);
-                    delete.setMessage("是否删除当前任务");
+                    delete.setMessage(R.string.Whether_task_delete);
                     //设置正面按钮
-                    delete.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    delete.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Log.d("Content.fixTaskName", Content.fixTaskName);
@@ -194,7 +194,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         }
                     });
                     //设置反面按钮
-                    delete.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    delete.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -213,7 +213,7 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
             case R.id.task_manage_edit:
                 a = (String) taskName.getText();
                 if (a.equals(select_cn) || a.equals(select_en)) {
-                    Toast toast = Toast.makeText(mContext, "请选择任务名", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(mContext, R.string.please_task_name, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     getActivity().getSupportFragmentManager()

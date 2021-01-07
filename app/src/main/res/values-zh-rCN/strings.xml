@@ -136,4 +136,11 @@
     <string name="list_remame">重命名</string>
     <string name="list_delete">刪除</string>
     <string name="count_down">倒計時</string>
+    <string name="please_task_name">请选择任务名</string>
+    <string name="Whether_task_delete">是否删除此任务？</string>
+    <string name="please_add_map">请先创建地图</string>
+    <string name="first_connect1">网络错误</string>
+    <string name="first_connect2">请检查网络连接是否正确</string>
+    <string name="first_connect3">退出</string>
+    <string name="first_connect4">重新连接</string>
 </resources>
