@@ -41,7 +41,7 @@
     <string name="map_edit_charging_btn">Set Charging Point</string>
     <string name="map_edit_virtual_wall">Add Virtual Wall</string>
     <string name="map_edit_position">Set Task Point</string>
-    <string name="map_edit_save">Save Changes</string>
+    <string name="map_edit_save">Save Virtual wall</string>
     <string name="map_edit_back">Back</string>
     <string name="selectPoint">SelectPoint</string>
     <string name="task_edit">PLEASE ENET TASK NAME </string>
@@ -114,7 +114,7 @@
     <string name="list_remame">rename</string>
     <string name="list_delete">delete</string>
     <string name="count_down">COUNT DOWN</string>
-    <string name="please_task_name">Please task name</string>
+    <string name="please_task_name">Please select task</string>
     <string name="Whether_task_delete">Whether to delete the task?</string>
     <string name="please_add_map">Please creat map</string>
     <string name="first_connect1">Network error</string>
@@ -140,4 +140,5 @@
     <string name="type3">Pre Week</string>
     <string name="task_edit_save">SAVE</string>
     <string name="task_edit_back">BACK</string>
+    <string name="add_wall">Virtual wall save success</string>
 </resources>

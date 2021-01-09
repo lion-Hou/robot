@@ -91,7 +91,7 @@ public class MapEditFragment extends Fragment{
     @BindView(R.id.save_charging_btn)
     Button saveChargingBtn;
     @BindView(R.id.line1)
-    LinearLayout line1;
+    RelativeLayout line1;
     @BindView(R.id.point_and_wall_list)
     ListView pointAndWallList;
     @BindView(R.id.map_list_border)
@@ -495,6 +495,17 @@ public class MapEditFragment extends Fragment{
                 String jsondata = gsonUtils.putVirtualWallMsg(Content.UPDATA_VIRTUAL, lists);
                 Log.i(TAG,"jsondata = " + jsondata);
                 MainActivity.emptyClient.send(gsonUtils.putVirtualWallMsg(Content.UPDATA_VIRTUAL, lists));
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage(R.string.add_wall);
+                //设置正面按钮
+                builder.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
                 break;
             case R.id.back_btn:
                 getActivity().getSupportFragmentManager()

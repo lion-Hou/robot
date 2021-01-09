@@ -43,7 +43,7 @@
     <string name="map_edit_charging_btn">设置充电点</string>
     <string name="map_edit_virtual_wall">添加虚拟墙</string>
     <string name="map_edit_position">设置任务点</string>
-    <string name="map_edit_save">保存</string>
+    <string name="map_edit_save">保存虚拟墙</string>
     <string name="map_edit_back">返回</string>
 
     <string name="task_name">任务名</string>
@@ -162,4 +162,5 @@
     <string name="type3">每周</string>
     <string name="task_edit_save">保存</string>
     <string name="task_edit_back">取消</string>
+    <string name="add_wall">虚拟墙保存成功</string>
 </resources>

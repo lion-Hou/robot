@@ -70,7 +70,7 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="80px"
@@ -82,7 +82,7 @@
         <Button
             android:id="@+id/save_charging_btn"
             android:layout_width="123px"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_height="66px"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
@@ -91,8 +91,9 @@
         <Button
             android:id="@+id/wall_btn"
             android:layout_width="124px"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_height="66px"
             android:layout_marginLeft="11px"
+            android:layout_toRightOf="@+id/save_charging_btn"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
@@ -101,8 +102,9 @@
         <Button
             android:id="@+id/mark_btn"
             android:layout_width="124px"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_height="66px"
             android:layout_marginLeft="11px"
+            android:layout_toRightOf="@+id/wall_btn"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
@@ -111,8 +113,9 @@
         <Button
             android:id="@+id/save_btn"
             android:layout_width="123px"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_height="66px"
             android:layout_marginLeft="11px"
+            android:layout_toRightOf="@+id/mark_btn"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
@@ -121,12 +124,13 @@
         <Button
             android:id="@+id/back_btn"
             android:layout_width="120px"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_height="66px"
             android:layout_marginLeft="11px"
+            android:layout_toRightOf="@+id/save_btn"
             android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
             android:text="@string/task_back"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
