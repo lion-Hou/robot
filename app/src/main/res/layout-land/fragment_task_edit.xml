@@ -150,7 +150,7 @@
         android:background="@drawable/home_btn_anniu"
         android:layout_below="@+id/title3_edit"
         android:layout_marginTop="@dimen/dimens_33"
-        android:text="SAVE"
+        android:text="@string/task_edit_save"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_18"/>
 
@@ -163,7 +163,7 @@
         android:layout_marginTop="@dimen/dimens_33"
         android:layout_toRightOf="@id/task_new_save_edit"
         android:layout_marginLeft="15px"
-        android:text="BACK"
+        android:text="@string/task_edit_back"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_18"/>
 

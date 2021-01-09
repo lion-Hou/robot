@@ -169,6 +169,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             int versionCode = (int) messageEvent.getT();
             Log.d("fdsfsdfsd111", String.valueOf(versionCode));
             if (Content.version == versionCode) {
+                /**
+                 * 正式版本中用于上位机升级
+                 */
 //                showOtaDialog();
 //                ota();
             }

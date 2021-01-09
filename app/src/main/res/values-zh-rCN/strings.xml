@@ -160,4 +160,6 @@
     <string name="type1">一次</string>
     <string name="type2">每天</string>
     <string name="type3">每周</string>
+    <string name="task_edit_save">保存</string>
+    <string name="task_edit_back">取消</string>
 </resources>

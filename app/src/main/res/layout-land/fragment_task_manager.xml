@@ -15,24 +15,31 @@
         android:textSize="@dimen/dimens_18"
         android:text="@string/task_name"/>
 
-    <TextView
-        android:id="@+id/task_manage_name"
-        android:layout_width="@dimen/dimens_345"
-        android:layout_height="@dimen/dimens_54"
-        android:layout_marginTop="137px"
+    <RelativeLayout
+        android:id="@+id/title_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/task_manage_title"
-        android:layout_marginLeft="15px"
-        android:background="@drawable/home_bg_xuanzekuang"
-        android:gravity="center"
-        android:text="@string/map_manage_select_task"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
-    <ImageView
-        android:layout_width="25px"
-        android:layout_height="25px"
-        android:layout_marginLeft="360px"
-        android:layout_marginTop="151px"
-        android:src="@drawable/home_ic_jiantou" />
+        android:layout_marginLeft="15px">
+        <TextView
+            android:id="@+id/task_manage_name"
+            android:layout_width="@dimen/dimens_345"
+            android:layout_height="@dimen/dimens_54"
+            android:layout_marginTop="137px"
+            android:background="@drawable/home_bg_xuanzekuang"
+            android:gravity="center"
+            android:text="@string/map_manage_select_task"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_18"/>
+        <ImageView
+            android:layout_width="25px"
+            android:layout_height="25px"
+            android:layout_marginLeft="300px"
+            android:layout_marginTop="151px"
+            android:src="@drawable/home_ic_jiantou" />
+    </RelativeLayout>
+
+
 
     <Button
         android:id="@+id/task_manage_new_task"
@@ -41,7 +48,7 @@
         android:layout_marginTop="137px"
         android:background="@drawable/home_btn_anniu"
         android:layout_marginLeft="21px"
-        android:layout_toRightOf="@id/task_manage_name"
+        android:layout_toRightOf="@id/title_title"
         android:text="@string/task_add"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_18"/>
@@ -62,7 +69,7 @@
         android:id="@+id/task_manage_map_relative_border"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/task_manage_name"
+        android:layout_below="@+id/title_title"
         android:layout_above="@+id/task_manage_edit"
         android:layout_marginTop="35px"
         android:background="@drawable/home_bg_xiangqingkuang"

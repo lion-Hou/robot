@@ -138,4 +138,6 @@
     <string name="type1">Once</string>
     <string name="type2">Pre Day</string>
     <string name="type3">Pre Week</string>
+    <string name="task_edit_save">SAVE</string>
+    <string name="task_edit_back">BACK</string>
 </resources>
