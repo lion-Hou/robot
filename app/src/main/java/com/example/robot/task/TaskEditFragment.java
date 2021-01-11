@@ -171,13 +171,14 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
         String[] type = new String[]{getText(R.string.type1).toString(),
                 getText(R.string.type2).toString(),
                 getText(R.string.type3).toString()};
-        String[] weeks = new String[]{getText(R.string.week1).toString(),
+        String[] weeks = new String[]{getText(R.string.week7).toString(),
+                getText(R.string.week1).toString(),
                 getText(R.string.week2).toString(),
                 getText(R.string.week3).toString(),
                 getText(R.string.week4).toString(),
                 getText(R.string.week5).toString(),
                 getText(R.string.week6).toString(),
-                getText(R.string.week7).toString()};
+                };
         switch (view.getId()) {
             case R.id.task_new_save_edit:
 
@@ -206,7 +207,21 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                                     Log.d("zdzd week :", "" + myWeek.size() + ",    " + typeValue);
                                     if (typeValue.equals(type[1])) {
                                         for (int i = 0; i < weeks.length; i++) {
-                                            myWeek.add(weeks[i]);
+                                            if (weeks[i].equals(getText(R.string.week7).toString())){
+                                                myWeek.add("1");
+                                            }else if (weeks[i].equals(getText(R.string.week1).toString())){
+                                                myWeek.add("2");
+                                            }else if (weeks[i].equals(getText(R.string.week2).toString())){
+                                                myWeek.add("3");
+                                            }else if (weeks[i].equals(getText(R.string.week3).toString())){
+                                                myWeek.add("4");
+                                            }else if (weeks[i].equals(getText(R.string.week4).toString())){
+                                                myWeek.add("5");
+                                            }else if (weeks[i].equals(getText(R.string.week5).toString())){
+                                                myWeek.add("6");
+                                            }else if (weeks[i].equals(getText(R.string.week6).toString())){
+                                                myWeek.add("7");
+                                            }
                                         }
                                         gsonUtils.setTaskWeek(myWeek);//任务周期
                                     } else {
@@ -311,15 +326,46 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     }
                     booleans[i] = flag;
                 }
+                myWeek.clear();
+                String a = "";
+                taskTypeSelectWeek.setText(a);
                 week = new AlertDialog.Builder(mContext);
                 week.setMultiChoiceItems(weeks, booleans, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         if (isChecked) {
-                            myWeek.add(weeks[which]);
+                            if (weeks[which].equals(getText(R.string.week7).toString())){
+                                myWeek.add("1");
+                            }else if (weeks[which].equals(getText(R.string.week1).toString())){
+                                myWeek.add("2");
+                            }else if (weeks[which].equals(getText(R.string.week2).toString())){
+                                myWeek.add("3");
+                            }else if (weeks[which].equals(getText(R.string.week3).toString())){
+                                myWeek.add("4");
+                            }else if (weeks[which].equals(getText(R.string.week4).toString())){
+                                myWeek.add("5");
+                            }else if (weeks[which].equals(getText(R.string.week5).toString())){
+                                myWeek.add("6");
+                            }else if (weeks[which].equals(getText(R.string.week6).toString())){
+                                myWeek.add("7");
+                            }
                             Log.d("taskvalue", myWeek.toString());
                         } else {
-                            myWeek.remove(weeks[which]);
+                            if (weeks[which].equals(getText(R.string.week7).toString())){
+                                myWeek.remove("1");
+                            }else if (weeks[which].equals(getText(R.string.week1).toString())){
+                                myWeek.remove("2");
+                            }else if (weeks[which].equals(getText(R.string.week2).toString())){
+                                myWeek.remove("3");
+                            }else if (weeks[which].equals(getText(R.string.week3).toString())){
+                                myWeek.remove("4");
+                            }else if (weeks[which].equals(getText(R.string.week4).toString())){
+                                myWeek.remove("5");
+                            }else if (weeks[which].equals(getText(R.string.week5).toString())){
+                                myWeek.remove("6");
+                            }else if (weeks[which].equals(getText(R.string.week6).toString())){
+                                myWeek.remove("7");
+                            }
                         }
                     }
                 });
@@ -330,10 +376,27 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     public void onClick(DialogInterface dialog, int which) {
                         selectWeek = "";
                         for (int i = 0; i < myWeek.size(); i++) {
-                            selectWeek = selectWeek + myWeek.get(i);
+                            if (myWeek.get(i) == "1"){
+                                selectWeek = selectWeek + getText(R.string.week7).toString();
+                            }else if (myWeek.get(i) == "2"){
+                                selectWeek = selectWeek + getText(R.string.week1).toString();
+                            }else if (myWeek.get(i) == "3"){
+                                selectWeek = selectWeek + getText(R.string.week2).toString();
+                            }else if (myWeek.get(i) == "4"){
+                                selectWeek = selectWeek + getText(R.string.week3).toString();
+                            }else if (myWeek.get(i) == "5"){
+                                selectWeek = selectWeek + getText(R.string.week4).toString();
+                            }else if (myWeek.get(i) == "6"){
+                                selectWeek = selectWeek + getText(R.string.week5).toString();
+                            }else if (myWeek.get(i) == "7"){
+                                selectWeek = selectWeek + getText(R.string.week6).toString();
+                            }
                         }
-                        taskTypeSelectWeek.setText(selectWeek);
-                        dialog.dismiss();
+                        if (selectWeek != null){
+                            taskTypeSelectWeek.setText(selectWeek);
+                        }else {
+                            taskTypeSelectWeek.setText(R.string.task_type_week);
+                        }
                     }
                 });
                 //设置反面按钮
@@ -341,6 +404,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         myWeek.clear();
+                        taskTypeSelectWeek.setText(R.string.task_type_week);
                         dialog.dismiss();
                     }
                 });
@@ -430,7 +494,22 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     taskTypeSelect.setText(type[2]);
                     for (int i = 0; i < typeArray.length(); i++) {
                         myWeek.add(typeArray.getString(i));
-                        selectWeek = selectWeek + typeArray.getString(i) + "  ";
+                        //selectWeek = selectWeek + typeArray.getString(i) + "  ";
+                        if (typeArray.getString(i).equals("1")){
+                            selectWeek = selectWeek + getText(R.string.week7).toString() + "  ";
+                        }else if (typeArray.getString(i).equals("2")){
+                            selectWeek = selectWeek + getText(R.string.week1).toString() + "  ";
+                        }else if (typeArray.getString(i).equals("3")){
+                            selectWeek = selectWeek + getText(R.string.week2).toString() + "  ";
+                        }else if (typeArray.getString(i).equals("4")){
+                            selectWeek = selectWeek + getText(R.string.week3).toString() + "  ";
+                        }else if (typeArray.getString(i).equals("5")){
+                            selectWeek = selectWeek + getText(R.string.week4).toString() + "  ";
+                        }else if (typeArray.getString(i).equals("6")){
+                            selectWeek = selectWeek + getText(R.string.week5).toString() + "  ";
+                        }else if (typeArray.getString(i).equals("7")){
+                            selectWeek = selectWeek + getText(R.string.week6).toString() + "  ";
+                        }
                     }
                     taskTypeSelectWeek.setText(selectWeek);
                 }

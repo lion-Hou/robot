@@ -132,7 +132,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    @SuppressLint("ResourceAsColor")
     private void initView() {
         settingsButton.setOnClickListener(this);
         mainSpinnerMap.setOnClickListener(this);
@@ -142,14 +141,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
-        String a = (String) mainTask.getText();
         Log.d(TAG, "strList ： " + myTaskNameList);
-        if (a.equals(null) == name1.equals(null) && a.equals(null) == name2.equals(null) ){
+        String a = (String) mainSpinnerMap.getText();
+        String b = getText(R.string.please_select_map).toString();
+        if (a.equals(b)){
             mainTask.setEnabled(false);
-            mainTask.setTextColor(R.color.edit_color);
         }else {
             mainTask.setEnabled(true);
-            mainTask.setTextColor(R.color.text_color);
         }
     }
 
@@ -230,7 +228,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             case R.id.main_execute:
                 String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
                 String a ="";
-                if (mainSpinnerTaskText.equals(name3) || mainSpinnerTaskText.equals(name4) || mainSpinnerTaskText.equals(a)) {
+                String b = getText(R.string.map_manage_select_task).toString();
+                if (mainSpinnerTaskText.equals(b) || mainSpinnerTaskText.equals(a)) {
                     Toast toast = Toast.makeText(mContext,R.string.please_task_name,Toast.LENGTH_SHORT);
                     toast.show();
                 }else{
@@ -291,7 +290,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
      * 设置mydialog需要处理的事情
      */
     SelectDialogUtil.Dialogcallback dialogcallback = new SelectDialogUtil.Dialogcallback() {
-        @SuppressLint("ResourceAsColor")
         @Override
         public void dialogdo(String string) {
             if (string == "true") {
@@ -299,7 +297,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = listMapName;
                 map_name = listMapName;
                 mainTask.setEnabled(true);
-                mainTask.setTextColor(R.color.text_color);
             }
         }
     };
@@ -384,7 +381,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
     //首页获取所有地图名称
-    @SuppressLint("ResourceAsColor")
     public void moreMap(ArrayList<String> mapName) {
         Log.d(TAG, "onEventMsgfffff" + "2");
         Log.d(TAG, "onEventMsg ： " + "2");
@@ -402,7 +398,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = mapName.get(0);
                 map_name = mapName.get(0);
                 mainTask.setEnabled(true);
-                mainTask.setTextColor(R.color.text_color);
             } else {
                 gsonUtils.setMapName(Content.first_map_Name);
             }
@@ -418,7 +413,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
      * 设置mydialog需要处理的事情
      */
     SelectDialogUtil.Dialogcallback taskdialogcallback = new SelectDialogUtil.Dialogcallback() {
-        @SuppressLint("ResourceAsColor")
         @Override
         public void dialogdo(String string) {
             if (string == "true") {
@@ -426,7 +420,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = listMapName;
                 map_name = listMapName;
                 mainTask.setEnabled(true);
-                mainTask.setTextColor(R.color.text_color);
             }
         }
     };
@@ -441,7 +434,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
@@ -487,7 +479,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.map_Name=mapName.get(0);
                 Content.first_map_Name = mapName.get(0);
                 mainTask.setEnabled(true);
-                mainTask.setTextColor(R.color.text_color);
                 gsonUtils.setMapName(mapName.get(0));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{
