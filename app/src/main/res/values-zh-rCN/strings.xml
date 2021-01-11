@@ -46,11 +46,11 @@
     <string name="map_edit_save">保存虚拟墙</string>
     <string name="map_edit_back">返回</string>
 
-    <string name="task_name">任务名</string>
+    <string name="task_name">任务</string>
     <string name="task_deit">修改</string>
     <string name="task_delete">删除</string>
     <string name="task_back">返回</string>
-    <string name="task_add">新建任务</string>
+    <string name="task_add">新建</string>
     <string name="task_details">详情</string>
     <string name="task_time">时间</string>
     <string name="run_map">地图名</string>
@@ -59,7 +59,7 @@
     <string name="task_type">任务类型</string>
     <string name="task_type_select">请选择任务类型</string>
     <string name="task_type_time">请选择任务时间</string>
-    <string name="task_type_week">请选择任务周</string>
+    <string name="task_type_week">请选择任务星期</string>
     <string name="myConfirm">确认</string>
     <string name="myExc">取消</string>
 

@@ -44,23 +44,23 @@
     <string name="map_edit_save">Save Virtual wall</string>
     <string name="map_edit_back">Back</string>
     <string name="selectPoint">SelectPoint</string>
-    <string name="task_edit">PLEASE ENET TASK NAME </string>
+    <string name="task_edit">Please enet task name</string>
 
     <string name="save_hint">The current task did not save</string>
-    <string name="task_name">Task_name:</string>
-    <string name="task_deit">EDIT</string>
-    <string name="task_delete">DELETE</string>
+    <string name="task_name">Task</string>
+    <string name="task_deit">Edit</string>
+    <string name="task_delete">Delete</string>
     <string name="task_back">Back</string>
-    <string name="task_add">Add New</string>
-    <string name="task_details">DETAILS</string>
+    <string name="task_add">Add</string>
+    <string name="task_details">Detial</string>
     <string name="task_time">Time</string>
     <string name="run_map">Map Name:</string>
     <string name="run_task">Task Name:</string>
     <string name="run_stop">STOP</string>
-    <string name="task_type">Task_Type</string>
-    <string name="task_type_select">PLEASE SELECT TASK TYPE</string>
-    <string name="task_type_time">PLEASE SELECT TASK TIME</string>
-    <string name="task_type_week">PLEASE SELECT TASK WEEK</string>
+    <string name="task_type">Type</string>
+    <string name="task_type_select">Please Select Task Type</string>
+    <string name="task_type_time">Please Select Task Time</string>
+    <string name="task_type_week">Please Select Task Week</string>
     <string name="myConfirm">Confirm</string>
     <string name="myExc">exc</string>
 

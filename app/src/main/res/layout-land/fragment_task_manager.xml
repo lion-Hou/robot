@@ -51,7 +51,8 @@
         android:layout_toRightOf="@id/title_title"
         android:text="@string/task_add"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/task_manage_details"
@@ -63,7 +64,8 @@
         android:layout_toRightOf="@id/task_manage_new_task"
         android:text="@string/task_details"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
     <RelativeLayout
         android:id="@+id/task_manage_map_relative_border"
@@ -101,7 +103,8 @@
         android:layout_marginBottom="@dimen/dimens_51"
         android:text="@string/task_deit"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/task_manage_delete"
@@ -114,7 +117,8 @@
         android:layout_toRightOf="@+id/task_manage_edit"
         android:text="@string/task_delete"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/task_manage_back"
@@ -127,7 +131,8 @@
         android:layout_marginBottom="@dimen/dimens_51"
         android:text="@string/task_back"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>
 

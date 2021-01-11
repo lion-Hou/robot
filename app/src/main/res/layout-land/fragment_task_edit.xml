@@ -129,7 +129,8 @@
         android:text="@string/selectPoint"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_18"
-        android:background="@drawable/home_bg_xuanzekuang"/>
+        android:background="@drawable/home_bg_xuanzekuang"
+        android:textAllCaps="false"/>
 
     <RelativeLayout
         android:id="@+id/title3_edit"
@@ -156,9 +157,10 @@
         android:background="@drawable/home_btn_anniu"
         android:layout_below="@+id/title3_edit"
         android:layout_marginTop="@dimen/dimens_33"
-        android:text="@string/task_edit_save"
+        android:text="@string/new_map_save"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/task_new_back_edit_edit"
@@ -169,8 +171,9 @@
         android:layout_marginTop="@dimen/dimens_33"
         android:layout_toRightOf="@id/task_new_save_edit"
         android:layout_marginLeft="15px"
-        android:text="@string/task_edit_back"
+        android:text="@string/new_map_back"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

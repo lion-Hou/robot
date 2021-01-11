@@ -172,8 +172,9 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 break;
             case R.id.task_manage_delete:
-                a = (String) taskName.getText();
-                if (a.equals(select_cn) || a.equals(select_en)) {
+                String a = getText(R.string.map_manage_select_task).toString();
+                String b = (String) taskName.getText();
+                if (a.equals(b)){
                     Toast toast = Toast.makeText(mContext, R.string.please_task_name, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
@@ -211,8 +212,9 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                         .commit();
                 break;
             case R.id.task_manage_edit:
-                a = (String) taskName.getText();
-                if (a.equals(select_cn) || a.equals(select_en)) {
+                 a = getText(R.string.map_manage_select_task).toString();
+                 b = (String) taskName.getText();
+                if (a.equals(b)){
                     Toast toast = Toast.makeText(mContext, R.string.please_task_name, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
@@ -224,13 +226,22 @@ public class TaskManagerFragment extends Fragment implements View.OnClickListene
                 }
                 break;
             case R.id.task_manage_details:
-                /**
-                 * 查看task详情
-                 */
-                gsonUtils.setMapName(Content.first_map_Name);
-                gsonUtils.setTaskName(Content.fixTaskName);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
-                initPopWindow(view);
+                 a = getText(R.string.map_manage_select_task).toString();
+                 b = (String) taskName.getText();
+                if (a.equals(b)){
+                    Log.d("GGFGFG",a);
+                    Log.d("GGFGFG",b);
+                    Toast toast = Toast.makeText(mContext, R.string.please_task_name, Toast.LENGTH_SHORT);
+                    toast.show();
+                }else {
+                    /**
+                     * 查看task详情
+                     */
+                    gsonUtils.setMapName(Content.first_map_Name);
+                    gsonUtils.setTaskName(Content.fixTaskName);
+                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
+                    initPopWindow(view);
+                }
                 break;
             default:
                 break;
