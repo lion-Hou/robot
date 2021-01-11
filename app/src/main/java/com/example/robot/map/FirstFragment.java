@@ -1,5 +1,6 @@
 package com.example.robot.map;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -131,6 +132,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    @SuppressLint("ResourceAsColor")
     private void initView() {
         settingsButton.setOnClickListener(this);
         mainSpinnerMap.setOnClickListener(this);
@@ -144,8 +146,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "strList ： " + myTaskNameList);
         if (a.equals(null) == name1.equals(null) && a.equals(null) == name2.equals(null) ){
             mainTask.setEnabled(false);
+            mainTask.setTextColor(R.color.edit_color);
         }else {
             mainTask.setEnabled(true);
+            mainTask.setTextColor(R.color.text_color);
         }
     }
 
@@ -287,6 +291,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
      * 设置mydialog需要处理的事情
      */
     SelectDialogUtil.Dialogcallback dialogcallback = new SelectDialogUtil.Dialogcallback() {
+        @SuppressLint("ResourceAsColor")
         @Override
         public void dialogdo(String string) {
             if (string == "true") {
@@ -294,6 +299,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = listMapName;
                 map_name = listMapName;
                 mainTask.setEnabled(true);
+                mainTask.setTextColor(R.color.text_color);
             }
         }
     };
@@ -378,6 +384,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     }
 
     //首页获取所有地图名称
+    @SuppressLint("ResourceAsColor")
     public void moreMap(ArrayList<String> mapName) {
         Log.d(TAG, "onEventMsgfffff" + "2");
         Log.d(TAG, "onEventMsg ： " + "2");
@@ -395,6 +402,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = mapName.get(0);
                 map_name = mapName.get(0);
                 mainTask.setEnabled(true);
+                mainTask.setTextColor(R.color.text_color);
             } else {
                 gsonUtils.setMapName(Content.first_map_Name);
             }
@@ -410,6 +418,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
      * 设置mydialog需要处理的事情
      */
     SelectDialogUtil.Dialogcallback taskdialogcallback = new SelectDialogUtil.Dialogcallback() {
+        @SuppressLint("ResourceAsColor")
         @Override
         public void dialogdo(String string) {
             if (string == "true") {
@@ -417,6 +426,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = listMapName;
                 map_name = listMapName;
                 mainTask.setEnabled(true);
+                mainTask.setTextColor(R.color.text_color);
             }
         }
     };
@@ -431,6 +441,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     };
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMsg(EventBusMessage messageEvent) {
@@ -476,6 +487,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.map_Name=mapName.get(0);
                 Content.first_map_Name = mapName.get(0);
                 mainTask.setEnabled(true);
+                mainTask.setTextColor(R.color.text_color);
                 gsonUtils.setMapName(mapName.get(0));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{

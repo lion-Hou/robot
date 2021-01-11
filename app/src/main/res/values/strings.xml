@@ -1,8 +1,8 @@
 <resources>
 
     <string name="app_name">Robot</string>
-    <string name="text_map">Map:</string>
-    <string name="text_task">Task:</string>
+    <string name="text_map">Map</string>
+    <string name="text_task">Task</string>
     <string name="run">\n\nRun</string>
     <string name="map">Map</string>
     <string name="task">Task</string>
@@ -21,23 +21,23 @@
     <string name="settings_version_number">Robot Version Number:</string>
     <string name="settings_version_number2">Controller Version Number:</string>
 
-    <string name="please_select_map">PLEASE SELECT MAP</string>
-    <string name="new_map_name_text">Map Name:</string>
+    <string name="please_select_map">Please Select Map</string>
+    <string name="new_map_name_text">Map Name</string>
     <string name="new_map_name_edit">Please enter new map name</string>
-    <string name="new_map_scan">Start scanning</string>
-    <string name="new_map_save">Save Map</string>
-    <string name="new_map_back">BACK</string>
+    <string name="new_map_scan">Start</string>
+    <string name="new_map_save">Save</string>
+    <string name="new_map_back">Back</string>
 
-    <string name="map_manage_add_new_map_btn">New Map</string>
-    <string name="map_manage_name_text">Map Name:</string>
-    <string name="map_manage_select_map">PLEASE SELECT MAP</string>
-    <string name="map_manage_select_task">PLEASE SELECT TASK</string>
+    <string name="map_manage_add_new_map_btn">New</string>
+    <string name="map_manage_name_text">Map</string>
+    <string name="map_manage_select_map">Please Select Map</string>
+    <string name="map_manage_select_task">Please Select Task</string>
     <string name="map_manage_rename">Rename</string>
     <string name="map_manage_delete">Delete</string>
-    <string name="map_manage_edit">Edit Map</string>
+    <string name="map_manage_edit">Edit</string>
     <string name="map_manage_back">Back</string>
 
-    <string name="edit_map_name_text">Map Name:</string>
+    <string name="edit_map_name_text">Map Name</string>
     <string name="map_edit_charging_btn">Set Charging Point</string>
     <string name="map_edit_virtual_wall">Add Virtual Wall</string>
     <string name="map_edit_position">Set Task Point</string>
@@ -50,7 +50,7 @@
     <string name="task_name">Task_name:</string>
     <string name="task_deit">EDIT</string>
     <string name="task_delete">DELETE</string>
-    <string name="task_back">BACK</string>
+    <string name="task_back">Back</string>
     <string name="task_add">Add New</string>
     <string name="task_details">DETAILS</string>
     <string name="task_time">Time</string>
@@ -141,4 +141,6 @@
     <string name="task_edit_save">SAVE</string>
     <string name="task_edit_back">BACK</string>
     <string name="add_wall">Virtual wall save success</string>
+    <string name="reset">Whether to delete all data and revert to default Settings!</string>
+    <string name="task_edit_no_image">Please first scan map!</string>
 </resources>

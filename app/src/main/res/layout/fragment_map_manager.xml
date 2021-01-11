@@ -53,7 +53,8 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_add_new_map_btn"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_18"
+            android:textAllCaps="false"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -98,7 +99,8 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_rename"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_18"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/manager_delete"
@@ -108,7 +110,8 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_delete"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_18"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/manager_edit"
@@ -118,7 +121,8 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_edit"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_18"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/manager_back"
@@ -128,7 +132,8 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_back"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_18"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.robot.map;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -256,26 +257,25 @@ public class SettingFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.settings_reset_robot:
-                NormalDialogUtil resetNormalDialog = new NormalDialogUtil();
-
-                final String dialogSettingsText1 = mContext.getString(R.string.dialog_settings_text1);
-                final String allOK = mContext.getString(R.string.all_ok);
-                final String allCancel = mContext.getString(R.string.all_cancel);
-                resetNormalDialog.showDialog(mContext, "", dialogSettingsText1, allCancel, allOK, new DialogInterface.OnClickListener() {
+                AlertDialog.Builder back = new AlertDialog.Builder(mContext);
+                back.setMessage(R.string.reset);
+                //设置正面按钮
+                back.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //取消
-                        dialog.dismiss();
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //确定逻辑
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.RESET_ROBOT));
                         Log.d(TAG, "onEventMsg sss： " + Content.map_Name);
                         dialog.dismiss();
                     }
                 });
+                //设置反面按钮
+                back.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                back.show();
                 break;
             case R.id.settings_ok:
                 Log.d(TAG, "APPLY");

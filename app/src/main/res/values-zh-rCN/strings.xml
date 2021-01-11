@@ -21,7 +21,7 @@
     <string name="settings_version_number2">控制器版本号:</string>
 
     <string name="save_hint">当前任务未保存是否退出</string>
-    <string name="new_map_name_text">地图名:</string>
+    <string name="new_map_name_text">地图名</string>
     <string name="new_map_name_edit">请输入地图名称</string>
     <string name="new_map_scan">开始扫描</string>
     <string name="new_map_save">保存</string>
@@ -30,8 +30,8 @@
     <string name="task_edit">请输入任务名 </string>
     <string name="please_select_map">请选择地图</string>
 
-    <string name="map_manage_add_new_map_btn">新建地图</string>
-    <string name="map_manage_name_text">地图名:</string>
+    <string name="map_manage_add_new_map_btn">新建</string>
+    <string name="map_manage_name_text">地图</string>
     <string name="map_manage_select_map">请选择地图</string>
     <string name="map_manage_select_task">请选择任务</string>
     <string name="map_manage_rename">重命名</string>
@@ -39,7 +39,7 @@
     <string name="map_manage_edit">编辑</string>
     <string name="map_manage_back">返回</string>
 
-    <string name="edit_map_name_text">地图名:</string>
+    <string name="edit_map_name_text">地图名</string>
     <string name="map_edit_charging_btn">设置充电点</string>
     <string name="map_edit_virtual_wall">添加虚拟墙</string>
     <string name="map_edit_position">设置任务点</string>
@@ -163,4 +163,6 @@
     <string name="task_edit_save">保存</string>
     <string name="task_edit_back">取消</string>
     <string name="add_wall">虚拟墙保存成功</string>
+    <string name="reset">是否删除所有数据并且回复默认设置!</string>
+    <string name="task_edit_no_image">请首先扫描地图!</string>
 </resources>

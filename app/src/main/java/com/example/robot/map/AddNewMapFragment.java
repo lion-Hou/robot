@@ -176,36 +176,42 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
             case R.id.new_map_save:
-                addNewMapDialog = new NormalDialogUtil();
-                final CharSequence dialogNewMapText3=mContext.getString(R.string.dialog_new_map_text3);
-                final CharSequence allCancel=mContext.getString(R.string.all_cancel);
-                final CharSequence dialogNewMapText4=mContext.getString(R.string.dialog_new_map_text4);
-                addNewMapDialog.showDialog(mContext, "", (String)dialogNewMapText3,(String)allCancel,(String)dialogNewMapText4, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //取消
-                        dialog.dismiss();
-                    }
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //确定逻辑
-                        /**
-                         * houbo
-                         */
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
-                        dialog.dismiss();
-                        Content.map_Name=newMapName;
+                if (newMapMapImage.getDrawable() == null){
+                    Log.d("gggggg","无图片");
+                    Toast.makeText(mContext, R.string.task_edit_no_image, Toast.LENGTH_LONG).show();
+                }else {
+                    Log.d("gggggg","有图片");
+                    addNewMapDialog = new NormalDialogUtil();
+                    final CharSequence dialogNewMapText3=mContext.getString(R.string.dialog_new_map_text3);
+                    final CharSequence allCancel=mContext.getString(R.string.all_cancel);
+                    final CharSequence dialogNewMapText4=mContext.getString(R.string.dialog_new_map_text4);
+                    addNewMapDialog.showDialog(mContext, "", (String)dialogNewMapText3,(String)allCancel,(String)dialogNewMapText4, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //取消
+                            dialog.dismiss();
+                        }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //确定逻辑
+                            /**
+                             * houbo
+                             */
+                            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
+                            dialog.dismiss();
+                            Content.map_Name=newMapName;
 
-                        waitingDialog = new ProgressDialog(mContext);
-                        Log.d(TAG, "onEventMsg ： "+"dialog生成");
-                        final CharSequence strDialogBody=mContext.getString(R.string.dialog_new_map_text5);
-                        waitingDialog.setMessage(strDialogBody);
-                        waitingDialog.setIndeterminate(true);
-                        waitingDialog.setCancelable(false);
-                        waitingDialog.show();
-                    }
-                });
+                            waitingDialog = new ProgressDialog(mContext);
+                            Log.d(TAG, "onEventMsg ： "+"dialog生成");
+                            final CharSequence strDialogBody=mContext.getString(R.string.dialog_new_map_text5);
+                            waitingDialog.setMessage(strDialogBody);
+                            waitingDialog.setIndeterminate(true);
+                            waitingDialog.setCancelable(false);
+                            waitingDialog.show();
+                        }
+                    });
+                }
                 break;
             case R.id.new_map_back:
                 addNewMapDialog = new NormalDialogUtil();

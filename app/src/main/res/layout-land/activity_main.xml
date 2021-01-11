@@ -10,12 +10,6 @@
             android:id="@+id/main_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/robot"
-        android:layout_width="250dp"
-        android:layout_height="300dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
 
         <RelativeLayout
             android:id="@+id/title"
@@ -36,9 +30,9 @@
                 android:id="@+id/battery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/time"
+                android:layout_toRightOf="@id/net_time"
+                android:layout_marginLeft="220px"
                 android:src="@drawable/home_ic_dianchi"
-                android:layout_marginRight="@dimen/dimens_10"
                 android:layout_centerVertical="true"/>
 
             <ImageView
@@ -46,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="21dp"
-                android:layout_toLeftOf="@id/time"
+                android:layout_toRightOf="@id/battery"
                 android:src="@drawable/home_ic_bolt" />
 
             <TextView
@@ -54,18 +48,22 @@
                 android:textColor="@color/text_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimens_10"
+                android:layout_toRightOf="@id/battery"
                 android:textSize="@dimen/dimens_16px" />
 
         </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/robot"
+        android:layout_width="250dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/title">
         <ImageView
             android:id="@+id/robot_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
             android:layout_marginLeft="@dimen/dimens_119"
             android:background="@drawable/home_ic_robot" />
 
@@ -77,16 +75,15 @@
         android:layout_height="@dimen/dimens_246"
         android:layout_marginLeft="@dimen/dimens_119"
         android:layout_marginTop="@dimen/dimens_41"
-        android:layout_below="@id/robot"
-        />
+        android:layout_below="@id/robot"/>
 
     <FrameLayout
         android:id="@+id/first_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dimens_132"
-        android:layout_toRightOf="@+id/robot">
-    </FrameLayout>
+        android:layout_toRightOf="@+id/robot"/>
+
     </RelativeLayout>
 
 

@@ -186,7 +186,6 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                     Toast.makeText(mContext, R.string.task1, Toast.LENGTH_SHORT).show();
                 } else {
                     new AlertDialog.Builder(mContext)
-                            .setTitle(R.string.first_connect7)
                             .setMessage(R.string.task2)
                             .setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
                                 @Override

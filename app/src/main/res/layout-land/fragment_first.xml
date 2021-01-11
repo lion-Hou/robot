@@ -110,7 +110,8 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
             android:background="@drawable/home_btn_anniu"
-            android:text="@string/map"/>
+            android:text="@string/map"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/main_task"
@@ -121,7 +122,8 @@
             android:layout_marginLeft="@dimen/dimen_26"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_map"
-            android:text="@string/task"/>
+            android:text="@string/task"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/main_history"
@@ -132,7 +134,8 @@
             android:layout_marginLeft="@dimen/dimen_26"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_task"
-            android:text="@string/history"/>
+            android:text="@string/history"
+            android:textAllCaps="false"/>
 
         <Button
             android:id="@+id/main_settings"
@@ -143,7 +146,8 @@
             android:layout_marginLeft="@dimen/dimen_26"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_history"
-            android:text="@string/settings"/>
+            android:text="@string/settings"
+            android:textAllCaps="false"/>
 
     </RelativeLayout>
 
