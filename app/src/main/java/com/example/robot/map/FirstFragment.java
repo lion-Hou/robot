@@ -85,12 +85,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private String selectTask = "";
     private String get_name;
     private String get_task;
-    private SelectDialogUtil mDialog;
     private Bitmap mBitmap;
     private int mBitmapHeight;
     private int mBitmapWidth;
     private SelectDialogUtil myDialog;
     private List<View> imageViewArrayList = new ArrayList<>();
+    private boolean isMapItem = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -208,6 +208,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.main_spinner_map:
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+                isMapItem = false;
 //                SelectDialogUtil.Builder builder = new SelectDialogUtil.Builder(mContext);
 ////                builder.setImage(R.drawable.batty)
 //                  builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -252,6 +253,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             case R.id.main_spinner_task:
                 gsonUtils.setMapName(mainSpinnerMap.getText().toString());
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
+                isMapItem = true;
                 Log.d("task_name111",mainSpinnerMap.getText().toString());
                 break;
             case R.id.main_map:
@@ -303,11 +305,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
     SelectDialogUtil.ListViewcallback listViewcallback = new SelectDialogUtil.ListViewcallback() {
         @Override
-        public void ListViewClick(int position, String map,String task) {
+        public void ListViewClick(int position, String map,String task, String pointName) {
             listMapName = map;
             myDialog.setContent(map);
             gsonUtils.setMapName(map);
+            gsonUtils.setTaskName(pointName);
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+            Log.d("listViewcallback : " , ""+pointName);
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
         }
     };
 
@@ -424,19 +429,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    SelectDialogUtil.ListViewcallback tasklistViewcallback = new SelectDialogUtil.ListViewcallback() {
-        @Override
-        public void ListViewClick(int position, String map, String task) {
-            listMapName = map;
-            myDialog.setContent(map);
-            gsonUtils.setMapName(map);
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
-        }
-    };
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMsg(EventBusMessage messageEvent) {
+    public void onEventMsg(EventBusMessage messageEvent) throws JSONException {
         Log.d(TAG, "onEventMsg ： " + messageEvent.getState());
         if (messageEvent.getState() == 10001) {
             Log.d(TAG, "图片 ： " + messageEvent.getT());
@@ -451,7 +446,9 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             myDialog.setMapByte(bytes1);
 //            myDialog.setBitmap(mBitmap);
             gsonUtils.setMapName(listMapName);
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+            if (!isMapItem) {
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+            }
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         }else if (messageEvent.getState() == 10005) {
             int ori_size = Content.list.size();
@@ -514,6 +511,20 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }else if (messageEvent.getState() == 40002) {
             String message = (String) messageEvent.getT();
             myDialog.drawWall(message);
+        }else if (messageEvent.getState() == 20009){
+            Log.d(TAG, "editTaskQueue111 ： " + (String) messageEvent.getT());
+            JSONObject jsonObject = new JSONObject((String) messageEvent.getT());
+            String message = (String) messageEvent.getT();
+//            JSONArray jsonArray1 = jsonObject.getJSONArray(Content.editTaskQueue);
+//            ArrayList taskPoint1 = new ArrayList();
+//            for (int i = 0; i < jsonArray1.length(); i++) {
+//                JSONObject js = jsonArray1.getJSONObject(i);
+//                if (!taskPoint1.contains(js.getString(Content.dbPointName))) {
+//                    taskPoint1.add(js.getString(Content.dbPointName));
+//                }
+//                Log.d("details_GG", "" + taskPoint1);
+//            }
+            myDialog.setTaskPointIcon(message);
         }
     }
 

@@ -7,17 +7,20 @@
 
         <TextView
             android:id="@+id/point_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30px"
+            android:layout_width="match_parent"
+            android:layout_height="48px"
+            android:layout_marginLeft="@dimen/dimens_48"
+            android:layout_marginTop="@dimen/dimens_18"
             android:text="sdddssdssddss"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/spinner_time"/>
+            android:layout_toLeftOf="@id/spinner_time"
+            android:textSize="@dimen/dimens_16px"/>
 
     <Spinner
         android:id="@+id/spinner_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_18"
         android:layout_alignParentRight="true"
         android:entries="@array/spinner_time"
         android:layout_marginLeft="30px"/>

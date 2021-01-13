@@ -177,6 +177,8 @@ public final class Content {
 
     public static final String dbPointName = "dbPointName";//点名字
     public static final String dbSpinnerTime = "dbSpinnerTime";//点时间
+    public static final String dbPointX = "dbPointX";//点名字
+    public static final String dbPointY = "dbPointY";//点名字
 
     //test
     public static final String GET_ULTRASONIC = "get_ultrasonic";//声呐设备

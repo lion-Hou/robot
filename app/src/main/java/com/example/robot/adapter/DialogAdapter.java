@@ -25,7 +25,7 @@ public class DialogAdapter extends BaseAdapter {
     private List<String> stringList = new ArrayList<>();
 
     public interface AdapterCallback {
-        public void adapterCallback(int position, boolean isChecked, List<String> stringList);
+        public void adapterCallback(int position, boolean isChecked, List<String> stringList, String pointName);
     }
 
     public void setAdapterCallback(AdapterCallback adapterCallback) {
@@ -84,7 +84,7 @@ public class DialogAdapter extends BaseAdapter {
                     stringList.remove(list.get(position).getTaskName());
                 }
                 list.get(position).setClick(isChecked);
-                adapterCallback.adapterCallback(position, isChecked, stringList);
+                adapterCallback.adapterCallback(position, isChecked, stringList,list.get(position).getTaskName());
             }
         });
         return convertView;

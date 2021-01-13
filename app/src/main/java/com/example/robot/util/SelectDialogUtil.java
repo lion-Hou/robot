@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.robot.MainActivity;
@@ -243,7 +244,7 @@ public class SelectDialogUtil {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listViewcallback.ListViewClick(position, strings.get(position), strings.get(position));
+                listViewcallback.ListViewClick(position, strings.get(position), strings.get(position), "");
                 mapName = strings.get(position);
             }
         });
@@ -257,7 +258,7 @@ public class SelectDialogUtil {
      * @author sfshine
      */
     public interface ListViewcallback {
-        void ListViewClick(int position, String mapName, String taskName);
+        void ListViewClick(int position, String mapName, String taskName, String pointName);
     }
 
     public void setListViewCallback(ListViewcallback listViewCallback) {
@@ -343,6 +344,70 @@ public class SelectDialogUtil {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void taskDrawPoint(String message) {
+        for (int i = 0; i < imageViewArrayList.size(); i++) {
+            map_manage_relative.removeView(imageViewArrayList.get(i));
+        }
+        try {
+            JSONObject jsonObject = new JSONObject(message);
+            imageViewArrayList.clear();
+            if (jsonObject != null) {
+                String type = jsonObject.getString("type");
+                if (TextUtils.isEmpty(type)){
+                    return;
+                }
+                JSONArray jsonArray = jsonObject.getJSONArray(type);
+                Log.d("zdzd000 ", "pointName : " + jsonArray.toString());
+                for (int k = 0; k < Content.list.size(); k++) {
+                    if (Content.list.get(k).getMap_Name().equals(mapName)) {
+                        Log.d("zdzd555", "" + Content.list.get(k).getResolution());
+                        index = k;
+                    }
+                }
+                Log.d("zdzd5111", "" + index);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonItem = jsonArray.getJSONObject(i);
+                    Log.d("zdzd111 ", "pointName : " + jsonItem.toString());
+                    ImageView imageView = new ImageView(context);
+                    TextView textView = new TextView(context);
+                    imageView.setImageResource(R.drawable.ic_point);
+
+                    double gridHeight = Content.list.get(index).getGridHeight();
+                    double gridWidth = Content.list.get(index).getGridWidth();
+                        String pointName = jsonItem.getString(Content.dbPointName);
+                        double pointX = jsonItem.getDouble(Content.dbPointX);
+                        double pointY = jsonItem.getDouble(Content.dbPointY);
+
+                    Log.d("zdzd9998qwe", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "    pointy" + pointY  );
+
+
+                        Log.d("Sourire1", "gridH" + gridHeight + "        gridW" + gridWidth + "     pointX" + pointX + "    pointy" + pointY  );
+                        Log.d("SourireG", "width:" + mBitmapWidth + "height:" + mBitmapHeight);
+                        imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
+                                0, 0);
+                        textView.setText(pointName);
+                        textView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
+                                (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY)) + 1),
+                                0, 0);
+
+                        map_manage_relative.addView(imageView);
+                        map_manage_relative.addView(textView);
+                        imageViewArrayList.add(imageView);
+                        imageViewArrayList.add(imageView);
+                        imageViewArrayList.add(textView);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public void setTaskPointIcon(String message) {
+        taskDrawPoint(message);
+    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void drawWall(String message) {
         //获取虚拟墙
@@ -486,10 +551,11 @@ public class SelectDialogUtil {
 
     DialogAdapter.AdapterCallback adapterCallback = new DialogAdapter.AdapterCallback() {
         @Override
-        public void adapterCallback(int position,boolean isChecked, List<String> stringList) {
+        public void adapterCallback(int position,boolean isChecked, List<String> stringList,String pointName) {
             Log.d("dialogadapter : ", "" + position + ",   " + Content.first_map_Name+"   ,   " + dialogCheckboxBeanList.size());
-            listViewcallback.ListViewClick(position, Content.first_map_Name, dialogCheckboxBeanList.get(position).getTaskName());
+            listViewcallback.ListViewClick(position, Content.first_map_Name, dialogCheckboxBeanList.get(position).getTaskName(), pointName);
             myTaskNameList = stringList;
+
         }
     };
 

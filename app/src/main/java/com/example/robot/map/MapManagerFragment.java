@@ -272,6 +272,9 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
                         .replace(R.id.second_fragment, new SecoundFragment(), null)
                         .addToBackStack(null)
                         .commit();
+                MainActivity activity = (MainActivity) getActivity();
+                ImageView imageView = activity.findViewById(R.id.robot_img);
+                //imageView.setImageResource(R.drawable.robot_picture);
                 break;
             default:
                 break;

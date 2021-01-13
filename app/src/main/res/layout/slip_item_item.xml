@@ -34,7 +34,7 @@
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="68px"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_16px"
             android:text="name"
