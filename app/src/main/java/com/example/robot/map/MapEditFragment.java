@@ -796,7 +796,7 @@ public class MapEditFragment extends Fragment{
                                     }
                                     System.out.println("pointName1111" + input_name);
                                     if (!newPointName.equals(null)&&!newPointName.equals("")&&!newPointName.isEmpty()){
-                                        if (isRepeat = true) {
+                                        if (isRepeat == true) {
                                             Toast.makeText(mContext, R.string.toast_edit_map_text1, Toast.LENGTH_SHORT).show();
                                         }else {
                                             gsonUtils.setOldPointName(pointName.getName());
