@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -57,8 +58,11 @@ import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,6 +116,7 @@ public class MapEditFragment extends Fragment{
     private double mBitmapWidth;
     private Bitmap mBitmap;
     private List<List<DrawLineBean>> lists = new ArrayList<>();
+    private List<List<DrawLineBean>> listsUpdate = new ArrayList<>();
     private int listSize;
 
     private Set<SwipeListLayout> sets = new HashSet();
@@ -441,6 +446,8 @@ public class MapEditFragment extends Fragment{
 
                 //画虚拟墙
                // float[] point = {0, 0, 0, 0};
+                lists.clear();
+                listsUpdate.clear();
                 for (int k = 0; k < lineBeans.size(); ){
                     startX = (float) ((mBitmapWidth / gridWidth)*lineBeans.get(k).getX());
                     startY = (float) (mBitmapHeight - (mBitmapHeight / gridHeight)*lineBeans.get(k).getY());
@@ -459,10 +466,11 @@ public class MapEditFragment extends Fragment{
                     drawLineBeanEnd.setX(lineBeans.get(k+1).getX());
                     drawLineBeanEnd.setY(lineBeans.get(k+1).getY());
                     drawLineBeanList.add(drawLineBeanEnd);
-                    k = k +2 ;
+                    k = k + 2 ;
                     lists.add(drawLineBeanList);
+                    listsUpdate.add(drawLineBeanList);
                 }
-
+                Log.d("SourireL111", "onEventMsg: " + listsUpdate.size());
                 if(pointlist.size()!=0){
                     Log.i("Henly","updateVW,gridWidth = " + gridWidth + ",gridHeight = " + gridHeight );
                     updateVirtualWall(pointlist);
@@ -662,6 +670,7 @@ public class MapEditFragment extends Fragment{
         private float start_x,start_y;//声明起点坐标
         private float mov_x,mov_y;//滑动轨迹坐标
         private Paint paint;//声明画笔
+        private Paint paint1;//声明画笔
         private Canvas canvas;//画布
         private Bitmap bitmap;//位图
         private float view_X,view_Y;
@@ -669,11 +678,14 @@ public class MapEditFragment extends Fragment{
         private double scale_x = 1;
         private double scale_y = 1;
 
+        float x ;
+        float y ;
+        int newIndex = 0;
         private ArrayList<float[]> Pointlist = new ArrayList<>();//保存所画线的坐标
-
         public DrawlineFromVW(Context context,ArrayList<float[]>pointlist) {
             super(context);
             paint = new Paint(Paint.DITHER_FLAG);//创建一个画笔
+            paint1 = new Paint(Paint.DITHER_FLAG);//创建一个画笔用于选中地图上的线段
 
             bitmap = Bitmap.createBitmap( (int)mBitmapWidth, (int)mBitmapHeight, mBitmap ==null?Bitmap.Config.ARGB_8888:mBitmap.getConfig());
             bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
@@ -684,6 +696,11 @@ public class MapEditFragment extends Fragment{
             paint.setStrokeWidth(3);//笔宽3像素
             paint.setColor(Color.RED);//设置为红笔
             paint.setAntiAlias(true);//锯齿不显示
+
+            paint1.setStyle(Paint.Style.STROKE);//设置非填充
+            paint1.setStrokeWidth(6);//笔宽6像素
+            paint1.setColor(Color.BLACK);//设置为黑色
+            paint1.setAntiAlias(true);//锯齿不显示
 
             Pointlist = pointlist;
             invalidate();
@@ -702,6 +719,109 @@ public class MapEditFragment extends Fragment{
                 Log.i("Henly","updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
                 canvas.drawLine(point[0], point[1], point[2], point[3], paint);//画保存的线
             }
+        }
+
+        //获得touch的坐标
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            List<DrawLineBean> drawLineBeanList = new ArrayList<>();
+
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    x = event.getX();
+                    y = event.getY();
+                    Log.d("hbx", String.valueOf(x));
+                    Log.d("hby", String.valueOf(y));
+                    for(int i = 0;i < Pointlist.size();i++){
+                        float[] point = Pointlist.get(i);
+                        Log.i("hb","updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
+                        float AX = point[0];
+                        float BX = point[0];
+                        float CX = point[2];
+                        float DX = point[2];
+                        float AY = point[1] - 10;
+                        float BY = point[1] + 10;
+                        float CY = point[3] + 10;
+                        float DY = point[3] - 10;
+                        float a = (BX - AX) * (y - AY) - (BY - AY) * (x - AX);
+                        float b = (CX - BX) * (y - BY) - (CY - BY) * (x - BX);
+                        float c = (DX - CX) * (y - CY) - (DY - CY) * (x - CX);
+                        float d = (AX - DX) * (y - DY) - (AY - DY) * (x - DX);
+                        if ((a >= 0 && b >= 0 && c >= 0 && d >= 0) || (a <= 0 && b <= 0 && c <= 0 && d <= 0))
+                        {
+                            canvas.drawLine(point[0], point[1], point[2], point[3], paint1);//画保存的线
+                            newIndex = i;
+
+                            Log.d("hb", "OKkkkkkk" + newIndex);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("是否删除虚拟墙");
+                            /**
+                             * 确认
+                             * 用于删除虚拟墙
+                             */
+                            builder.setPositiveButton(R.string.all_ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String sdasad = gsonUtils.putVirtualWallMsg(Content.UPDATA_VIRTUAL, listsUpdate);
+                                    Log.i(TAG,"jsondata111 = " + sdasad);
+                                    listsUpdate.remove(newIndex);
+//                            double gridHeight = Content.list.get(index).getGridHeight();
+//                            double gridWidth = Content.list.get(index).getGridWidth();
+//                            double fullStartX = (float) (point[0] / (mBitmapWidth / gridWidth));
+//                            Log.d("SourireG", "OK"+point[0]);
+//                            double fullStartY = -((float) ((point[1] - mBitmapHeight) / (mBitmapHeight / gridHeight)));
+//                            double fullEndX = (float) (point[2] / (mBitmapWidth / gridWidth));
+//                            double fullEndY = -((float) ((point[3] - mBitmapHeight) / (mBitmapHeight / gridHeight)));
+//                            Log.d("full", String.valueOf(fullStartX));
+//                            Log.d("full", String.valueOf(fullStartY));
+//                            Log.d("full", String.valueOf(fullEndX));
+//                            Log.d("full", String.valueOf(fullEndY));
+//                            Log.d("full", String.valueOf(listFull.size()));
+//
+//
+//                            for (int i = 0; i < listFull.size(); i++){
+//                                Log.d("full1", "sa"+listFull.get(i).get(0).getX());
+//                                Log.d("full1", "sa"+listFull.get(i).get(0).getY());
+//                                Log.d("full1","sa"+listFull.get(i).get(1).getX());
+//                                Log.d("full1", "sa"+listFull.get(i).get(1).getY());
+////                                if (fullStartX == listFull.get(i).get(0).getX() || fullStartY == listFull.get(i).get(0).getY() ||fullEndX == listFull.get(i).get(1).getX() || fullEndY == listFull.get(i).get(1).getY()){
+//                                Log.d("listFull", String.valueOf(listFull.get(i).get(0).getX()));
+//                            }
+                                    Log.d("hb", "OK" +listsUpdate.size());
+
+                                    //更新新的list
+                                    String jsondata = gsonUtils.putVirtualWallMsg(Content.UPDATA_VIRTUAL, listsUpdate);
+                                    Log.i(TAG,"jsondata = " + jsondata);
+                                    MainActivity.emptyClient.send(gsonUtils.putVirtualWallMsg(Content.UPDATA_VIRTUAL, listsUpdate));
+                                    //重新绘制
+                                    gsonUtils.setMapName(Content.map_Name);
+                                    mapRelative.removeAllViews();
+                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
+                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
+
+                                }
+                            });
+                            /**
+                             * 取消
+                             * 取消时恢复原来状态
+                             */
+                            builder.setNegativeButton(R.string.all_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);//清掉
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.show();
+
+                        }else {
+                            Log.d("hb", "NO");
+                        }
+                    }
+                    break;
+            }
+            return true;
         }
     }
 
