@@ -54,9 +54,9 @@
     <string name="task_add">Add</string>
     <string name="task_details">Detial</string>
     <string name="task_time">Time</string>
-    <string name="run_map">Map Name:</string>
-    <string name="run_task">Task Name:</string>
-    <string name="run_stop">STOP</string>
+    <string name="run_map">Map Name</string>
+    <string name="run_task">Task Name</string>
+    <string name="run_stop">Cancel</string>
     <string name="task_type">Type</string>
     <string name="task_piont">Point</string>
     <string name="task_type_select">Task Type</string>
@@ -114,7 +114,7 @@
     <string name="all_cancel">Cancel</string>
     <string name="list_remame">rename</string>
     <string name="list_delete">delete</string>
-    <string name="count_down">COUNT DOWN</string>
+    <string name="count_down">Count Down</string>
     <string name="please_task_name">Please select task</string>
     <string name="Whether_task_delete">Whether to delete the task?</string>
     <string name="please_add_map">Please creat map</string>

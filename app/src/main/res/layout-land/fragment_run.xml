@@ -12,7 +12,7 @@
         android:textSize="@dimen/dimens_16px"
         android:textColor="@color/text_color"
         android:text="@string/run_map"
-        android:layout_marginTop="@dimen/dimens_75"/>
+        android:layout_marginTop="@dimen/dimens_100"/>
 
     <TextView
         android:id="@+id/run_map_name"
@@ -94,7 +94,8 @@
         android:background="@drawable/home_btn_anniu"
         android:textColor="@color/text_color"
         android:text="@string/run_stop"
-        android:textSize="@dimen/dimens_18"/>
+        android:textSize="@dimen/dimens_18"
+        android:textAllCaps="false"/>
 
 
 </RelativeLayout>

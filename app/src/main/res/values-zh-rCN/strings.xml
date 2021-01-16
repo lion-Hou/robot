@@ -55,7 +55,7 @@
     <string name="task_time">时间</string>
     <string name="run_map">地图名</string>
     <string name="run_task">任务名</string>
-    <string name="run_stop">停止</string>
+    <string name="run_stop">结束</string>
     <string name="task_type">任务类型</string>
     <string name="task_piont">任务点</string>
     <string name="task_type_select">任务类型</string>
