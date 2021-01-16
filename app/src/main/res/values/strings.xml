@@ -12,14 +12,14 @@
     <string name="settings_title">Settings</string>
     <string name="settings_cancel">Cancel</string>
     <string name="settings_ok">Apply</string>
-    <string name="settings_electricity_quantity">Recharge Capacity:</string>
+    <string name="settings_electricity_quantity">Recharge Capacity</string>
     <string name="settings_reset_robot">Reset</string>
-    <string name="settings_volume">Volume:</string>
+    <string name="settings_volume">Volume</string>
     <string name="settings_navigation_speed">Robot Navigation Speed:</string>
-    <string name="settings_playPathSpeed_speed">Robot Speed:</string>
-    <string name="settings_led_brightness">LED Brightness:</string>
-    <string name="settings_version_number">Robot Version Number:</string>
-    <string name="settings_version_number2">Controller Version Number:</string>
+    <string name="settings_playPathSpeed_speed">Robot Speed</string>
+    <string name="settings_led_brightness">LED Brightness</string>
+    <string name="settings_version_number">Robot Version Number</string>
+    <string name="settings_version_number2">Controller Version Number</string>
 
     <string name="please_select_map">Please Select Map</string>
     <string name="new_map_name_text">Map Name</string>
@@ -58,9 +58,10 @@
     <string name="run_task">Task Name:</string>
     <string name="run_stop">STOP</string>
     <string name="task_type">Type</string>
-    <string name="task_type_select">Please Select Task Type</string>
-    <string name="task_type_time">Please Select Task Time</string>
-    <string name="task_type_week">Please Select Task Week</string>
+    <string name="task_piont">Point</string>
+    <string name="task_type_select">Task Type</string>
+    <string name="task_type_time">Task Time</string>
+    <string name="task_type_week">Task Week</string>
     <string name="myConfirm">Confirm</string>
     <string name="myExc">exc</string>
 

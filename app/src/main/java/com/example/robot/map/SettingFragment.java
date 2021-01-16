@@ -68,17 +68,13 @@ public class SettingFragment extends Fragment {
     Button settingsOk;
     @BindView(R.id.settings_cancel)
     Button settingsCancel;
-
     @BindView(R.id.settings_debug)
     Spinner settingsDebug;
     @BindView(R.id.electricityQuantityValueTV)
     TextView electricityQuantityValueTV;
     @BindView(R.id.volumeValueTV)
     TextView volumeValueTV;
-    @BindView(R.id.versionNumberTV2)
-    TextView versionNumberTV2;
-    @BindView(R.id.settings_versionNumber2)
-    TextView settingsVersionNumber2;
+
 
     private View view;
     private GsonUtils gsonUtils;
@@ -91,7 +87,8 @@ public class SettingFragment extends Fragment {
     private String mParam2;
     private SpinnerArrayAdapter mAdapter;
     private boolean getSpeed = false;
-
+    private String robotVersionCode;
+    private String upVersionCode;
     public SettingFragment() {
 
     }
@@ -249,6 +246,16 @@ public class SettingFragment extends Fragment {
                 }
                 getSpeed = true;
             }
+        }else if (messageEvent.getState() == 20021) {
+            String emptRobotVersionCode = (String) messageEvent.getT();
+            robotVersionCode = emptRobotVersionCode;
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + robotVersionCode);
+        }else if (messageEvent.getState() == 20022) {
+            String emptUpVersionCode = (String) messageEvent.getT();
+            upVersionCode = emptUpVersionCode;
+            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + upVersionCode);
+            String number = "V" + "." + "1" + "." + upVersionCode + "." + robotVersionCode;
+            settingsVersionNumber.setText(number);
         }
     }
 

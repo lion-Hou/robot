@@ -132,33 +132,18 @@
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/ledBrightnessTV" />
 
-            <TextView
-                android:id="@+id/settings_versionNumber"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:textSize="@dimen/dimens_30"
-                android:textColor="@color/text_color"
-                android:layout_toRightOf="@+id/versionNumberTV"
-                android:layout_below="@+id/ledBrightnessTV" />
+        <TextView
+            android:id="@+id/settings_versionNumber"
+            android:layout_width="350dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/ledBrightnessTV"
+            android:layout_marginLeft="13px"
+            android:layout_marginTop="8px"
+            android:layout_toRightOf="@+id/versionNumberTV"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimens_21" />
 
-            <TextView
-                android:layout_marginLeft="@dimen/dimens_51"
-                android:id="@+id/versionNumberTV2"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:text="@string/settings_version_number"
-                android:textSize="@dimen/dimens_30"
-                android:textColor="@color/text_color"
-                android:layout_below="@+id/versionNumberTV" />
 
-            <TextView
-                android:id="@+id/settings_versionNumber2"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:textSize="@dimen/dimens_30"
-                android:textColor="@color/text_color"
-                android:layout_toRightOf="@+id/versionNumberTV2"
-                android:layout_below="@+id/versionNumberTV" />
     </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -177,7 +162,9 @@
                 android:textSize="@dimen/dimens_21"
                 android:textColor="@color/text_color"
                 android:background="@drawable/setting_btn_anniu"
-                android:layout_marginRight="@dimen/dimens_38"/>
+                android:layout_marginRight="@dimen/dimens_38"
+                android:textAllCaps="false"/>
+
             <Button
                 android:id="@+id/settings_ok"
                 android:layout_width="@dimen/dimen_167"
@@ -188,7 +175,8 @@
                 android:layout_toLeftOf="@id/settings_cancel"
                 android:layout_marginRight="@dimen/dimens_38"
                 android:background="@drawable/setting_btn_anniu"
-                ></Button>
+                android:textAllCaps="false"/>
+
             <Button
                 android:id="@+id/settings_cancel"
                 android:layout_width="@dimen/dimen_167"
@@ -199,7 +187,7 @@
                 android:textColor="@color/text_color"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/setting_btn_anniu"
-                />
+                android:textAllCaps="false"/>
         </RelativeLayout>
 
         <Spinner

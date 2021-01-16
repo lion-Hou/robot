@@ -45,4 +45,5 @@
     <dimen name="dimens_135">135px</dimen>
     <dimen name="dimens_26">26px</dimen>
     <dimen name="dimens_51">51px</dimen>
+    <dimen name="dimens_496">496px</dimen>
 </resources>

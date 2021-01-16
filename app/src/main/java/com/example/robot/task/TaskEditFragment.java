@@ -296,7 +296,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                             typeTime = String.format("0%d:0%d", hourOfDay, minute);
                         } else if ((hourOfDay >= 0 && hourOfDay <= 9) && (minute >= 10 && minute <= 60)) {
                             typeTime = String.format("0%d:%d", hourOfDay, minute);
-                        } else if ((hourOfDay >= 10 && hourOfDay <= 12) && (minute >= 0 && minute <= 9)) {
+                        } else if ((hourOfDay >= 10 && hourOfDay <= 24) && (minute >= 0 && minute <= 9)) {
                             typeTime = String.format("%d:0%d", hourOfDay, minute);
                         } else {
                             typeTime = String.format("%d:%d", hourOfDay, minute);//任务时间

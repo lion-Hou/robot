@@ -144,10 +144,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "strList ： " + myTaskNameList);
         String a = (String) mainSpinnerMap.getText();
         String b = getText(R.string.please_select_map).toString();
-        if (a.equals(b)){
+        if (a.equals(b) && a == null){
             mainTask.setEnabled(false);
+            mainTask.setBackgroundResource(R.drawable.add_btn_disable_bianji);
         }else {
             mainTask.setEnabled(true);
+            mainTask.setBackgroundResource(R.drawable.home_btn_anniu);
         }
     }
 
@@ -299,6 +301,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = listMapName;
                 map_name = listMapName;
                 mainTask.setEnabled(true);
+                mainTask.setBackgroundResource(R.drawable.home_btn_anniu);
             }
         }
     };
@@ -403,6 +406,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = mapName.get(0);
                 map_name = mapName.get(0);
                 mainTask.setEnabled(true);
+                mainTask.setBackgroundResource(R.drawable.home_btn_anniu);
             } else {
                 gsonUtils.setMapName(Content.first_map_Name);
             }
@@ -425,6 +429,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.first_map_Name = listMapName;
                 map_name = listMapName;
                 mainTask.setEnabled(true);
+                mainTask.setBackgroundResource(R.drawable.home_btn_anniu);
             }
         }
     };
@@ -476,6 +481,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Content.map_Name=mapName.get(0);
                 Content.first_map_Name = mapName.get(0);
                 mainTask.setEnabled(true);
+                mainTask.setBackgroundResource(R.drawable.home_btn_anniu);
                 gsonUtils.setMapName(mapName.get(0));
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{

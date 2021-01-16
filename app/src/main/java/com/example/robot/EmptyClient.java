@@ -50,7 +50,7 @@ public class EmptyClient extends WebSocketClient {
         //发送系统时间给下位机
         long time = System.currentTimeMillis();
         gsonUtils.setTime(time);
-
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SYSTEM_DATE));
         //断连监听
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
 
@@ -211,8 +211,11 @@ public class EmptyClient extends WebSocketClient {
             case Content.BATTERY_DATA:
                 jsonObject = new JSONObject(message);
                 String batty = jsonObject.getString(Content.BATTERY_DATA);
+                String regEx="[\n`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？]";
+                String aa = " ";
+                String str = batty.replaceAll(regEx,aa);
                 EventBus.getDefault().post(new EventBusMessage(40003, batty));
-                Log.d("batter",batty);
+                Log.d("batter",str);
                 break;
 
             case Content.GET_VOICE_LEVEL:
@@ -243,6 +246,10 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(20006, speedLevel2));
                 String urgencyStop = jsonObject.getString(Content.DEVICES_STATUS);
                 EventBus.getDefault().post(new EventBusMessage(20020, urgencyStop));
+                String robotVersionCode = jsonObject.getString(Content.ROBOT_VERSION_CODE);
+                EventBus.getDefault().post(new EventBusMessage(20021, robotVersionCode));
+                String upVersionCode = jsonObject.getString(Content.UP_VERSION_CODE);
+                EventBus.getDefault().post(new EventBusMessage(20022, upVersionCode));
                 Log.d("speedLevelhhhh", urgencyStop);
 
                 break;

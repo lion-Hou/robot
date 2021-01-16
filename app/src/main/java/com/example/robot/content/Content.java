@@ -174,6 +174,8 @@ public final class Content {
     public static final String RESET_ROBOT = "reset_robot";//重命名点
     public static final String OLD_POSITION_NAME = "old_position_name";//原始点
     public static final String NEW_POSITION_NAME = "new_position_name";//新点
+    public static final String ROBOT_VERSION_CODE = "robotVersionCode";//导航版本号
+    public static final String UP_VERSION_CODE = "versionCode";//上位机版本号
 
     public static final String dbPointName = "dbPointName";//点名字
     public static final String dbSpinnerTime = "dbSpinnerTime";//点时间

@@ -27,9 +27,29 @@
             android:textSize="@dimen/dimens_20" />
     </LinearLayout>
 
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/map_list_border"-->
+<!--        android:layout_width="120px"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_below="@+id/add_point_title"-->
+<!--        android:layout_above="@+id/line1"-->
+<!--        android:layout_marginLeft="11px"-->
+<!--        android:layout_marginTop="10px"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginEnd="140px"-->
+<!--        android:layout_marginRight="140px">-->
+<!--        <ListView-->
+<!--            android:id="@+id/point_and_wall_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@drawable/addmap_bg_xiangqingkuang">-->
+<!--        </ListView>-->
+<!--    </RelativeLayout>-->
+
     <RelativeLayout
         android:id="@+id/map_list_border"
-        android:layout_width="120px"
+        android:layout_width="170px"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/add_point_title"
@@ -37,13 +57,14 @@
         android:layout_marginLeft="11px"
         android:layout_marginTop="10px"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="140px"
-        android:layout_marginRight="140px">
+        android:layout_marginEnd="102px"
+        android:layout_marginRight="102px"
+        android:background="@drawable/dituxiangqing_bg_list">
         <ListView
             android:id="@+id/point_and_wall_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/addmap_bg_xiangqingkuang">
+            >
         </ListView>
     </RelativeLayout>
 
@@ -78,65 +99,136 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:layout_marginTop="17px"
-        android:layout_marginBottom="51px">
+        android:layout_marginBottom="51px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="102px"
+        android:layout_marginRight="102px">
 
-        <Button
-            android:id="@+id/save_charging_btn"
-            android:layout_width="123px"
-            android:layout_height="66px"
-            android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:text="@string/map_edit_charging_btn"
-            android:textAllCaps="false"/>
+<!--        <Button-->
+<!--            android:id="@+id/save_charging_btn"-->
+<!--            android:layout_width="126px"-->
+<!--            android:layout_height="66px"-->
+<!--            android:background="@drawable/dituxiangqing_btn_back"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="@dimen/dimens_18"-->
+<!--            android:text="@string/map_edit_charging_btn"-->
+<!--            android:textAllCaps="false"/>-->
 
-        <Button
-            android:id="@+id/wall_btn"
-            android:layout_width="124px"
-            android:layout_height="66px"
-            android:layout_marginLeft="11px"
-            android:layout_toRightOf="@+id/save_charging_btn"
-            android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:text="@string/map_edit_virtual_wall"
-            android:textAllCaps="false"/>
+<!--        <Button-->
+<!--            android:id="@+id/wall_btn"-->
+<!--            android:layout_width="126px"-->
+<!--            android:layout_height="66px"-->
+<!--            android:layout_marginLeft="11px"-->
+<!--            android:layout_toRightOf="@+id/save_charging_btn"-->
+<!--            android:background="@drawable/dituxiangqing_btn_back"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="@dimen/dimens_18"-->
+<!--            android:text="@string/map_edit_virtual_wall"-->
+<!--            android:textAllCaps="false"/>-->
 
-        <Button
-            android:id="@+id/mark_btn"
-            android:layout_width="124px"
-            android:layout_height="66px"
-            android:layout_marginLeft="11px"
-            android:layout_toRightOf="@+id/wall_btn"
-            android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:text="@string/map_edit_position"
-            android:textAllCaps="false"/>
+<!--        <Button-->
+<!--            android:id="@+id/mark_btn"-->
+<!--            android:layout_width="126px"-->
+<!--            android:layout_height="66px"-->
+<!--            android:layout_marginLeft="11px"-->
+<!--            android:layout_toRightOf="@+id/wall_btn"-->
+<!--            android:background="@drawable/dituxiangqing_btn_back"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="@dimen/dimens_18"-->
+<!--            android:text="@string/map_edit_position"-->
+<!--            android:textAllCaps="false"/>-->
 
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="123px"
-            android:layout_height="66px"
-            android:layout_marginLeft="11px"
-            android:layout_toRightOf="@+id/mark_btn"
-            android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:text="@string/map_edit_save"
-            android:textAllCaps="false"/>
+<!--        <Button-->
+<!--            android:id="@+id/save_btn"-->
+<!--            android:layout_width="126px"-->
+<!--            android:layout_height="66px"-->
+<!--            android:layout_marginLeft="11px"-->
+<!--            android:layout_toRightOf="@+id/mark_btn"-->
+<!--            android:background="@drawable/dituxiangqing_btn_back"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="@dimen/dimens_18"-->
+<!--            android:text="@string/map_edit_save"-->
+<!--            android:textAllCaps="false"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/back_btn"-->
+<!--            android:layout_width="170px"-->
+<!--            android:layout_height="66px"-->
+<!--            android:layout_marginLeft="11px"-->
+<!--            android:layout_toRightOf="@+id/save_btn"-->
+<!--            android:background="@drawable/dituxiangqing_btn_back"-->
+<!--            android:text="@string/task_back"-->
+<!--            android:textColor="@color/text_color"-->
+<!--            android:textSize="@dimen/dimens_18"-->
+<!--            android:textAllCaps="false"/>-->
+
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="120px"
+            android:layout_width="170px"
             android:layout_height="66px"
-            android:layout_marginLeft="11px"
-            android:layout_toRightOf="@+id/save_btn"
-            android:background="@drawable/dituxiangqing_btn_disable_xuniqiang"
+            android:background="@drawable/dituxiangqing_btn_back"
             android:text="@string/task_back"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_18"
             android:textAllCaps="false"/>
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="116px"
+        android:layout_height="66px"
+        android:layout_toLeftOf="@+id/line1"
+        android:layout_marginRight="11px"
+        android:layout_below="@+id/map_relative_border"
+        android:layout_marginTop="17px"
+        android:background="@drawable/dituxiangqing_btn_back"
+        android:text="@string/map_edit_save"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18" />
+
+    <Button
+        android:id="@+id/wall_btn"
+        android:layout_width="116px"
+        android:layout_height="66px"
+        android:layout_toLeftOf="@+id/save_btn"
+        android:layout_marginRight="11px"
+        android:layout_below="@+id/map_relative_border"
+        android:layout_marginTop="17px"
+        android:background="@drawable/dituxiangqing_btn_back"
+        android:text="@string/map_edit_virtual_wall"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18" />
+
+    <Button
+        android:id="@+id/mark_btn"
+        android:layout_width="116px"
+        android:layout_height="66px"
+        android:layout_toLeftOf="@+id/wall_btn"
+        android:layout_marginRight="11px"
+        android:layout_below="@+id/map_relative_border"
+        android:layout_marginTop="17px"
+        android:background="@drawable/dituxiangqing_btn_back"
+        android:text="@string/map_edit_position"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18" />
+
+    <Button
+        android:id="@+id/save_charging_btn"
+        android:layout_width="116px"
+        android:layout_height="66px"
+        android:layout_toLeftOf="@+id/mark_btn"
+        android:layout_marginRight="11px"
+        android:layout_below="@+id/map_relative_border"
+        android:layout_marginTop="17px"
+        android:background="@drawable/dituxiangqing_btn_back"
+        android:text="@string/map_edit_charging_btn"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_18" />
 
 </RelativeLayout>

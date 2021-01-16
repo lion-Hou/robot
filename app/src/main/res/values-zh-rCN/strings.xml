@@ -11,14 +11,14 @@
     <string name="settings_title">设置</string>
     <string name="settings_cancel">取消</string>
     <string name="settings_ok">应用</string>
-    <string name="settings_electricity_quantity">回充电量:</string>
+    <string name="settings_electricity_quantity">回充电量</string>
     <string name="settings_reset_robot">恢复出厂设置</string>
-    <string name="settings_volume">音量:</string>
+    <string name="settings_volume">音量</string>
     <string name="settings_navigation_speed">机器人任务导航速度:</string>
-    <string name="settings_playPathSpeed_speed">机器人速度:</string>
-    <string name="settings_led_brightness">LED亮度:</string>
-    <string name="settings_version_number">机器人版本号:</string>
-    <string name="settings_version_number2">控制器版本号:</string>
+    <string name="settings_playPathSpeed_speed">机器人速度</string>
+    <string name="settings_led_brightness">LED亮度</string>
+    <string name="settings_version_number">机器人版本号</string>
+    <string name="settings_version_number2">控制器版本号</string>
 
     <string name="save_hint">当前任务未保存是否退出</string>
     <string name="new_map_name_text">地图名</string>
@@ -57,9 +57,10 @@
     <string name="run_task">任务名</string>
     <string name="run_stop">停止</string>
     <string name="task_type">任务类型</string>
-    <string name="task_type_select">请选择任务类型</string>
-    <string name="task_type_time">请选择任务时间</string>
-    <string name="task_type_week">请选择任务星期</string>
+    <string name="task_piont">任务点</string>
+    <string name="task_type_select">任务类型</string>
+    <string name="task_type_time">任务时间</string>
+    <string name="task_type_week">任务星期</string>
     <string name="myConfirm">确认</string>
     <string name="myExc">取消</string>
 

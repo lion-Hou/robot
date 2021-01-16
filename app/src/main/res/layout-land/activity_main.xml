@@ -21,17 +21,18 @@
                 android:id="@+id/net_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimens_37"
+                android:layout_marginLeft="@dimen/dimens_48"
                 android:textSize="@dimen/dimens_24"
                 android:layout_centerVertical="true"
                 android:textColor="@color/text_color"/>
+
 
             <ImageView
                 android:id="@+id/battery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/net_time"
-                android:layout_marginLeft="220px"
+                android:layout_marginLeft="260px"
                 android:src="@drawable/home_ic_dianchi"
                 android:layout_centerVertical="true"/>
 
@@ -48,6 +49,8 @@
                 android:textColor="@color/text_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5px"
+                android:layout_marginLeft="@dimen/dimens_10"
                 android:layout_toRightOf="@id/battery"
                 android:textSize="@dimen/dimens_16px" />
 
