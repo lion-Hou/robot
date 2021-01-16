@@ -144,7 +144,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "strList ： " + myTaskNameList);
         String a = (String) mainSpinnerMap.getText();
         String b = getText(R.string.please_select_map).toString();
-        if (a.equals(b) && a == null){
+        if (a.equals(b)){
             mainTask.setEnabled(false);
             mainTask.setBackgroundResource(R.drawable.add_btn_disable_bianji);
         }else {

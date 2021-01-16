@@ -158,9 +158,13 @@ public class MapEditFragment extends Fragment{
         robot_Img = new ImageView(mContext);
         editMapname.setText(Content.map_Name);
         wallBtn.setEnabled(false);
+        wallBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_disable_xuniqiang);
         markBtn.setEnabled(false);
+        markBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_disable_xuniqiang);
         saveBtn.setEnabled(false);
+        saveBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_disable_xuniqiang);
         saveChargingBtn.setEnabled(false);
+        saveChargingBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_disable_xuniqiang);
         Toast.makeText(mContext, R.string.toast_edit_map_text7, Toast.LENGTH_LONG).show();
         gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
@@ -300,8 +304,12 @@ public class MapEditFragment extends Fragment{
                             imageViewArrayList.add(charging_Img);
                             saveChargingBtn.setEnabled(false);
                             wallBtn.setEnabled(true);
+                            wallBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_back);
                             markBtn.setEnabled(true);
+                            markBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_back);
                             saveBtn.setEnabled(true);
+                            saveBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_back);
+
                             charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX )),
                                     (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
@@ -383,6 +391,7 @@ public class MapEditFragment extends Fragment{
                 if (init.equals("初始化完成")){
                     if (saveChargingBtn.isEnabled()==false){
                         saveChargingBtn.setEnabled(true);
+                        saveChargingBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_back);
                         Toast.makeText(mContext, R.string.toast_edit_map_text8, Toast.LENGTH_SHORT).show();
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
                     }
