@@ -194,6 +194,7 @@ public class EmptyClient extends WebSocketClient {
                 arrayList.remove("End");
                 arrayList.remove("Current");
                 arrayList.remove("charging");
+                arrayList.remove("Initialize");
                 Log.d("arrayList.size", arrayList.toString());
                 String [] stockArr = arrayList.toArray(new String[arrayList.size()]);
                 EventBus.getDefault().post(new EventBusMessage(10007, stockArr));
