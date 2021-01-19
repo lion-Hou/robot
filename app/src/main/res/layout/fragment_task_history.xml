@@ -26,6 +26,7 @@
        android:layout_marginRight="@dimen/dimens_102"
        android:layout_marginBottom="@dimen/dimens_91"
        android:layout_alignParentBottom="true"
-       android:text="@string/task_back"/>
+       android:text="@string/task_back"
+       android:textAllCaps="false"/>
 
 </RelativeLayout>

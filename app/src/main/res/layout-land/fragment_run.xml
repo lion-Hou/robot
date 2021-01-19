@@ -22,7 +22,7 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_16px"
         android:layout_marginLeft="@dimen/dimens_30"
-        android:layout_marginTop="@dimen/dimens_75"/>
+        android:layout_marginTop="@dimen/dimens_100"/>
 
     <TextView
         android:id="@+id/run_task"

@@ -166,6 +166,7 @@ public class MapEditFragment extends Fragment{
         saveChargingBtn.setEnabled(false);
         saveChargingBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_disable_xuniqiang);
         Toast.makeText(mContext, R.string.toast_edit_map_text7, Toast.LENGTH_LONG).show();
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
         gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
         gsonUtils.setMapName(Content.map_Name);
@@ -302,7 +303,7 @@ public class MapEditFragment extends Fragment{
                             ImageView charging_Img = new ImageView(mContext);
                             charging_Img.setImageResource(R.drawable.charging);
                             imageViewArrayList.add(charging_Img);
-                            saveChargingBtn.setEnabled(false);
+
                             wallBtn.setEnabled(true);
                             wallBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_back);
                             markBtn.setEnabled(true);
@@ -310,17 +311,18 @@ public class MapEditFragment extends Fragment{
                             saveBtn.setEnabled(true);
                             saveBtn.setBackgroundResource(R.drawable.dituxiangqing_btn_back);
 
-                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX )),
+                            charging_Img.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                     (int)(mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                     0, 0);
                             mapRelative.addView(charging_Img);
-                            Log.d("zdzd999222", "gridH" + gridHeight + "  gridW" + gridWidth + "  pointX" + pointX + "  pointY" + pointY + "   originX" + originX + "   originY" + originY + "   Content.ROBOT_SIZE " + Content.ROBOT_SIZE);
-                            Log.d("zdzd999222", " resolution * angleX" + resolution * angleX);
-                            Log.d("zdzd999222", "angleX" + angleX);
+                            Log.d("zdzdS", "PointX:" + pointX + "  PointY:" + pointY);
+                            Log.d("zdzdS", "gridH:"+gridHeight+"        gridW:"+gridWidth);
+                            Log.d("zdzdS", "width:" + mBitmapWidth+"height:"+mBitmapHeight);
                         }
                             if (pointType == 2) {
-                                Log.d("Sourire1", "gridH"+gridHeight+"        gridW"+gridWidth + "     pointX"+pointX+"    pointy"+pointY+ "   originX"+originX);
-                                Log.d("SourireG", "width:"+mBitmapWidth+"height:"+mBitmapHeight);
+//                                Log.d("zdzdS", "PointX:" + pointX + "  PointY:" + pointY);
+//                                Log.d("zdzdS", "gridH:"+gridHeight+"        gridW:"+gridWidth);
+//                                Log.d("zdzdS", "width:"+mBitmapWidth+"height:"+mBitmapHeight);
                                 imageView.setPaddingRelative((int) (mBitmapWidth / gridWidth * (pointX)),
                                         (int) (mBitmapHeight - (mBitmapHeight / gridHeight * (pointY))),
                                         0, 0);
@@ -535,6 +537,7 @@ public class MapEditFragment extends Fragment{
                 if (charging.equals("充电")) {
                     Log.d("SourireG", "ggg"+charging);
                     MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ADD_POWER_POINT));
+                    saveChargingBtn.setEnabled(false);
                     Toast.makeText(mContext, R.string.toast_edit_map_text9, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(mContext,R.string.toast_edit_map_text10, Toast.LENGTH_SHORT).show();

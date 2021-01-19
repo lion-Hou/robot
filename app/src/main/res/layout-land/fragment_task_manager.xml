@@ -97,7 +97,7 @@
         android:layout_width="@dimen/dimens_102"
         android:layout_height="@dimen/dimens_54"
         android:background="@drawable/home_btn_anniu"
-        android:layout_marginLeft="350px"
+        android:layout_marginLeft="310px"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="35px"
         android:layout_marginBottom="@dimen/dimens_51"

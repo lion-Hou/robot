@@ -15,8 +15,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="107px"
-        android:layout_marginEnd="127px"
-        android:layout_marginRight="127px"
+        android:layout_marginEnd="95px"
+        android:layout_marginRight="95px"
         tools:ignore="MissingConstraints"
         android:background="@drawable/home_bg_xiangqingkuang">
 
