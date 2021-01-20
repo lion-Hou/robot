@@ -903,8 +903,8 @@ public class MapEditFragment extends Fragment{
             Log.i("SourireG","GETNAME()"+pointName.getName());
             final SwipeListLayout sll_main = (SwipeListLayout) view
                     .findViewById(R.id.sll_main);
-            TextView tv_rename = (TextView) view.findViewById(R.id.tv_top);
-            TextView tv_delete = (TextView) view.findViewById(R.id.tv_delete);
+            ImageView tv_rename = (ImageView) view.findViewById(R.id.tv_top);
+            ImageView tv_delete = (ImageView) view.findViewById(R.id.tv_delete);
             sll_main.setOnSwipeStatusListener(new MyOnSlipStatusListener(
                     sll_main));
             tv_rename.setOnClickListener(new View.OnClickListener() {
