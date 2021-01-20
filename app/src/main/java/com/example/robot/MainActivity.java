@@ -95,6 +95,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("GGGG","GGGG");
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("GGGG","GGGG");
+    }
+
     public void connect() {
         try {
             if (emptyClient == null) {

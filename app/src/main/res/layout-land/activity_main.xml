@@ -56,30 +56,47 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/robot_img"
-            android:layout_width="@dimen/dimens_246"
-            android:layout_height="346px"
-            android:layout_marginTop="30dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_marginLeft="@dimen/dimens_119"
-            android:background="@drawable/home_ic_robot" />
+            android:id="@+id/relative_main_image">
+            <ImageView
+                android:id="@+id/robot_img"
+                android:layout_width="@dimen/dimens_246"
+                android:layout_height="346px"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="@dimen/dimens_119"
+                android:visibility="gone"
+                android:background="@drawable/home_ic_robot" />
 
 
-    <FrameLayout
-        android:id="@+id/second_fragment"
-        android:layout_width="@dimen/dimens_246"
-        android:layout_height="@dimen/dimens_246"
-        android:layout_marginLeft="@dimen/dimens_119"
-        android:layout_marginTop="@dimen/dimens_41"
-        android:layout_below="@id/robot_img"/>
-
+            <FrameLayout
+                android:id="@+id/second_fragment"
+                android:layout_width="@dimen/dimens_246"
+                android:layout_height="@dimen/dimens_246"
+                android:layout_marginLeft="@dimen/dimens_119"
+                android:layout_marginTop="@dimen/dimens_41"
+                android:visibility="gone"
+                android:layout_below="@id/robot_img"/>
+            <ImageView
+                android:id="@+id/main_image"
+                android:layout_width="290px"
+                android:layout_height="560px"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="72dp"
+                android:layout_marginLeft="72dp"
+                android:src="@drawable/addmap_big_robot"
+                android:layout_marginTop="60dp" />
+        </RelativeLayout>
     <FrameLayout
         android:id="@+id/first_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dimens_132"
-        android:layout_toRightOf="@+id/robot_img"/>
+        android:layout_toRightOf="@id/relative_main_image"/>
+
 
     </RelativeLayout>
 

@@ -23,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.robot.EmptyClient;
 import com.example.robot.MainActivity;
@@ -96,6 +99,9 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     @Override
     public void onStart() {
         super.onStart();
+        getActivity().findViewById(R.id.main_image).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.robot_img).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.second_fragment).setVisibility(View.VISIBLE);
         EventBus.getDefault().register(this);
         gsonUtils.setMapName(Content.map_Name);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
@@ -109,17 +115,21 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
         super.onStop();
         EventBus.getDefault().unregister(this);
         Log.d("hhhh",  "manger_stop");
+        getActivity().findViewById(R.id.main_image).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.robot_img).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.second_fragment).setVisibility(View.GONE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_map_manager, container, false);
         ButterKnife.bind(this, view);
+        mContext = view.getContext();
         gsonUtils = new GsonUtils();
         initListener();
         initView();
 
-        mContext = view.getContext();
+
         return view;
     }
 
@@ -132,6 +142,14 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
     }
 
     private void initView() {
+        MainActivity activity = (MainActivity) getActivity();
+        ImageView imageView = activity.findViewById(R.id.robot_img);
+        imageView.setBackgroundResource(R.drawable.home_ic_robot);
+//        FirstImageFragment firstImageFragment = new FirstImageFragment();
+        //firstImageFragment.getFragmentManager().beginTransaction().hide(firstImageFragment);
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.hide(firstImageFragment);
         managerNewMap.setOnClickListener(this);
         managerSelected.setOnClickListener(this);
         managerEdit.setOnClickListener(this);

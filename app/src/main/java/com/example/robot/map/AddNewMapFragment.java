@@ -84,6 +84,9 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        getActivity().findViewById(R.id.main_image).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.robot_img).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.second_fragment).setVisibility(View.VISIBLE);
         Log.d("hhhh",  "add_start");
     }
 
