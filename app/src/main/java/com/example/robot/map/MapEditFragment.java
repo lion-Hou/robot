@@ -769,7 +769,7 @@ public class MapEditFragment extends Fragment{
 
                             Log.d("hb", "OKkkkkkk" + newIndex);
                             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                            builder.setMessage("是否删除虚拟墙");
+                            builder.setMessage(R.string.delete_Wall);
                             /**
                              * 确认
                              * 用于删除虚拟墙

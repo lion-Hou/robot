@@ -63,6 +63,7 @@
     <string name="task_type_week">任务星期</string>
     <string name="myConfirm">确认</string>
     <string name="myExc">取消</string>
+    <string name="delete_Wall">是否删除虚拟墙</string>
 
 
     <string-array name="spinner_time">
