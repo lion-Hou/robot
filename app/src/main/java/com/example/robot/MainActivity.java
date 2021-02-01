@@ -193,8 +193,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             otaDialog.dismiss();
         } else if (messageEvent.getState() == 20020) {
             String stop = (String) messageEvent.getT();
-            String type = "true";
-            if (stop.equals(type)) {
+            Content.urgencyStopmessage = Boolean.getBoolean(stop);
+            if (Content.urgencyStopmessage) {
 
 //                AlertDialog.Builder builder = new AlertDialog.Builder(this)
 //                        .setTitle(R.string.urgencyStoptitle)

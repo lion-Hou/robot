@@ -12,6 +12,7 @@ public final class Content {
     public static String task_Name = null;
     public static String fixTaskName = null;
     public static String manageTaskName = null;
+    public static boolean urgencyStopmessage = false;
 
     /**
      * robotState：

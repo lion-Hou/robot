@@ -181,7 +181,10 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                 };
         switch (view.getId()) {
             case R.id.task_new_save_edit:
-
+                //删除之前的任务
+                gsonUtils.setMapName(Content.first_map_Name);
+                gsonUtils.setTaskName(Content.fixTaskName);
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));
                 Log.d("tasklog", "taskname");
                 if (TextUtils.isEmpty(newMapMapNameEditText.getText().toString())) {
                     Toast.makeText(mContext, R.string.task1, Toast.LENGTH_SHORT).show();
@@ -195,10 +198,7 @@ public class TaskEditFragment extends Fragment implements View.OnClickListener, 
                                     /**
                                      * 保存任务
                                      */
-                                    //删除之前的任务
-                                    gsonUtils.setMapName(Content.first_map_Name);
-                                    gsonUtils.setTaskName(Content.fixTaskName);
-                                    MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.DELETETASKQUEUE));
+
                                     //保存新的任务
                                     gsonUtils.setMapName(Content.first_map_Name);
                                     gsonUtils.setTaskName(newMapMapNameEditText.getText().toString());//任务名
