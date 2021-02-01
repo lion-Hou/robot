@@ -193,8 +193,12 @@ public class SettingFragment extends Fragment {
         settingsRobotSpeed.setAdapter(mAdapter);
 
         String[] mArray = getResources().getStringArray(R.array.spinner_settings_led);
-        mAdapter = new SpinnerArrayAdapter(mContext,mStringArray);
+        mAdapter = new SpinnerArrayAdapter(mContext,mArray);
         settingsLedBrightness.setAdapter(mAdapter);
+
+        String[] mDebugArray = getResources().getStringArray(R.array.spinner_settings_debug);
+        mAdapter = new SpinnerArrayAdapter(mContext,mDebugArray);
+        settingsDebug.setAdapter(mAdapter);
 
     }
 

@@ -292,39 +292,22 @@ public class TestFragment extends Fragment {
 
         } else if (messageEvent.getState() == 19198) {
             String message = (String) messageEvent.getT();
-            String message1 = message.replace("\"", "");
-            int i = message1.indexOf(",");
-            int j = message1.indexOf(",", i + 1);
-            String itemString1 = message1.substring(0, i);
-            String itemString2 = message1.substring(i + 1, j);
-            String itemString3 = message1.substring(j + 1, message1.length());
-            Log.d(TAG, "onEventMsg 19198： " + "  " + i + message1 + "  " + itemString1);
-            Log.d(TAG, "onEventMsg 191981：" + j + itemString2);
-            Log.d(TAG, "onEventMsg 191982：" + itemString3);
-
-//            Toast.makeText(mContext, "PIR" + itemString1 + "," + itemString2 + "," + itemString3, Toast.LENGTH_SHORT).show();
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
-            if (itemString1.equals("false")) {
+            if (message.equals("false")) {
                 pir1.setTextColor(color1);
-            } else {
-                pir1.setTextColor(color2);
-            }
-            if (itemString2.equals("false")) {
                 pir2.setTextColor(color1);
-            } else {
-                pir2.setTextColor(color2);
-            }
-
-            if (itemString3.equals("false")) {
                 pir3.setTextColor(color1);
                 pir4.setTextColor(color1);
             } else {
+                pir1.setTextColor(color2);
+                pir2.setTextColor(color2);
                 pir3.setTextColor(color2);
                 pir4.setTextColor(color2);
             }
         } else if (messageEvent.getState() == 19191) {
             String message = (String) messageEvent.getT();
+            Log.d("GGGGGGG",message);
             int color1 = Color.parseColor("#00FF00");
             int color2 = Color.parseColor("#FF0000");
             if (message.contains("701")) {

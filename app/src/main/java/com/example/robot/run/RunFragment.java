@@ -132,7 +132,8 @@ public class RunFragment extends Fragment {
     public void onEventMsg(EventBusMessage messageEvent) {
         Log.d("run", "onEventMsgrun ： " + messageEvent.getState());
         if (messageEvent.getState() == 10002) {
-            String time = (String) messageEvent.getT();
+            String secound = mContext.getResources().getString(R.string.time_second);
+            String time = (String) messageEvent.getT() + secound;
             Log.d("timehhhh", time);
             pointStateTime.setText(time);
         }

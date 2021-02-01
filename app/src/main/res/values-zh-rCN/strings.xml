@@ -19,6 +19,8 @@
     <string name="settings_led_brightness">LED亮度</string>
     <string name="settings_version_number">机器人版本号</string>
     <string name="settings_version_number2">控制器版本号</string>
+    <string name="settings_work_model">工作模式</string>
+    <string name="setting_charging_pile">充电桩</string>
 
     <string name="save_hint">当前任务未保存是否退出</string>
     <string name="new_map_name_text">地图名</string>
@@ -29,6 +31,8 @@
     <string name="selectPoint">任务点</string>
     <string name="task_edit">请输入任务名 </string>
     <string name="please_select_map">请选择地图</string>
+    <string name="time_second">秒</string>
+    <string name="time_minute">分钟</string>
 
     <string name="map_manage_add_new_map_btn">新建</string>
     <string name="map_manage_name_text">地图</string>
@@ -84,6 +88,12 @@
         <item>慢</item>
         <item>中</item>
         <item>快</item>
+    </string-array>
+
+    <string-array name="spinner_settings_debug">
+        <item>调试</item>
+        <item>演示</item>
+        <item>正常</item>
     </string-array>
 
 

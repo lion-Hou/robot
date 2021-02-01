@@ -91,7 +91,6 @@
                 android:textSize="@dimen/dimens_30"
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/volumeTV" />
-
             <Spinner
                 android:id="@+id/settings_robotSpeed"
                 android:layout_width="300dp"
@@ -110,7 +109,6 @@
                 android:textSize="@dimen/dimens_30"
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/robotSpeedTV" />
-
             <Spinner
                 android:id="@+id/settings_ledBrightness"
                 android:layout_width="300dp"
@@ -124,24 +122,61 @@
 
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
+                android:id="@+id/work_model"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:text="@string/settings_work_model"
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/ledBrightnessTV" />
+            <Spinner
+                android:id="@+id/settings_debug"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                style="@style/spinner_style"
+                android:background="@drawable/spinner_layout"
+                android:layout_toRightOf="@+id/work_model"
+                android:layout_below="@+id/ledBrightnessTV"/>
+
+            <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
+                android:id="@+id/setting_charging_pile"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:text="@string/setting_charging_pile"
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/work_model" />
+            <Switch
+                android:id="@+id/switch_voice"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:textSize="@dimen/dimens_30"
+                android:textColor="@color/text_color"
+                android:layout_toRightOf="@+id/setting_charging_pile"
+                android:layout_below="@+id/work_model"/>
+
+            <TextView
+                android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/versionNumberTV"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:text="@string/settings_version_number"
                 android:textSize="@dimen/dimens_30"
                 android:textColor="@color/text_color"
-                android:layout_below="@+id/ledBrightnessTV" />
-
-        <TextView
-            android:id="@+id/settings_versionNumber"
-            android:layout_width="350dp"
-            android:layout_height="45dp"
-            android:layout_below="@+id/ledBrightnessTV"
-            android:layout_marginLeft="13px"
-            android:layout_marginTop="8px"
-            android:layout_toRightOf="@+id/versionNumberTV"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_21" />
+                android:layout_below="@+id/setting_charging_pile" />
+            <TextView
+                android:id="@+id/settings_versionNumber"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_below="@+id/setting_charging_pile"
+                android:layout_marginLeft="13px"
+                android:layout_marginTop="8px"
+                android:layout_toRightOf="@+id/versionNumberTV"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/dimens_21" />
 
 
     </RelativeLayout>
@@ -189,14 +224,5 @@
                 android:background="@drawable/setting_btn_anniu"
                 android:textAllCaps="false"/>
         </RelativeLayout>
-
-        <Spinner
-            android:id="@+id/settings_debug"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:textSize="@dimen/dimens_30"
-            android:textColor="@color/text_color"
-            android:entries="@array/spinner_settings_debug"
-            tools:ignore="MissingConstraints" />
 
 </RelativeLayout>
