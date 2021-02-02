@@ -113,7 +113,7 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
             try {
                 JSONObject jsonObject = new JSONObject(message);
                 JSONArray jsonArray = jsonObject.getJSONArray(Content.ROBOT_TASK_HISTORY);
-                for (int i = 0; i < jsonArray.length(); i++) {
+                for (int i = jsonArray.length() - 1; i > 0; i--) {
                     String minute = mContext.getResources().getString(R.string.time_minute);
                     HistoryBean historyBean = new HistoryBean(jsonArray.getJSONObject(i).getString(Content.dbTaskMapName),
                             jsonArray.getJSONObject(i).getString(Content.dbTaskName),
