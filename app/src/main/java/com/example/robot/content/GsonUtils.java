@@ -36,6 +36,7 @@ public class GsonUtils {
     private int voiceLevel;
     private int speedLevel;
     private int workingMode;
+    private boolean pile;
     private long time;
 
     public int getWorkingMode() {
@@ -44,6 +45,14 @@ public class GsonUtils {
 
     public void setWorkingMode(int workingMode) {
         this.workingMode = workingMode;
+    }
+
+    public boolean getPile(){
+        return pile;
+    }
+
+    public void setPile(boolean pile){
+        this.pile = pile;
     }
 
     public int getVoiceLevel() {
@@ -181,6 +190,7 @@ public class GsonUtils {
             jsonObject.put(Content.NEW_POINT_NAME,newPointName);
             jsonObject.put(Content.WORKING_MODE,workingMode);
             jsonObject.put(Content.SYSTEM_DATE,time);
+            jsonObject.put(Content.SET_CHARGING_MODE,pile);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {

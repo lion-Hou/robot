@@ -182,7 +182,8 @@ public final class Content {
     public static final String dbSpinnerTime = "dbSpinnerTime";//点时间
     public static final String dbPointX = "dbPointX";//点名字
     public static final String dbPointY = "dbPointY";//点名字
-
+    public static final String GET_CHARGING_MODE = "get_charging_mode";//有无充电桩模式
+    public static final String SET_CHARGING_MODE = "set_charging_mode";
     //test
     public static final String GET_ULTRASONIC = "get_ultrasonic";//声呐设备
     public static final String GET_ULTRASONIC_X = "get_ultrasonic_x";//声呐设备x

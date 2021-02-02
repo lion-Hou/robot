@@ -239,6 +239,13 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("ledLevel", String.valueOf(ledLevel));
                 break;
 
+            case Content.GET_CHARGING_MODE:
+                jsonObject = new JSONObject(message);
+                String pile = jsonObject.getString(Content.GET_CHARGING_MODE);
+                EventBus.getDefault().post(new EventBusMessage(20007, pile));
+                Log.d("pile", pile);
+                break;
+
             case Content.DEVICES_STATUS:
                 jsonObject = new JSONObject(message);
                 int speedLevel = jsonObject.getInt(Content.GET_NAVIGATIONSPEEDLEVEL);

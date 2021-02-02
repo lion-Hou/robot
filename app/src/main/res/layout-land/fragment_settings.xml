@@ -150,7 +150,7 @@
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/work_model" />
             <Switch
-                android:id="@+id/switch_voice"
+                android:id="@+id/switch_pile"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:textSize="@dimen/dimens_30"

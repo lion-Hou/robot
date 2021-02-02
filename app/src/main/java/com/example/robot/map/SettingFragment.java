@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +76,8 @@ public class SettingFragment extends Fragment {
     TextView electricityQuantityValueTV;
     @BindView(R.id.volumeValueTV)
     TextView volumeValueTV;
-
+    @BindView(R.id.switch_pile)
+    Switch switchPile;
 
     private View view;
     private GsonUtils gsonUtils;
@@ -89,6 +92,7 @@ public class SettingFragment extends Fragment {
     private boolean getSpeed = false;
     private String robotVersionCode;
     private String upVersionCode;
+    private boolean swichPile;
     public SettingFragment() {
 
     }
@@ -125,6 +129,7 @@ public class SettingFragment extends Fragment {
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VOICE_LEVEL));
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_LOW_BATTERY));//30-80
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_WORKING_MODE));
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_CHARGING_MODE));//充电桩模式
         initView();
 
         return view;
@@ -159,8 +164,6 @@ public class SettingFragment extends Fragment {
             }
         });
 
-
-
         settingsVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             /**
              * 拖动条停止拖动的时候调用
@@ -185,6 +188,21 @@ public class SettingFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
                 volumeValueTV.setText(progress+"%");
+            }
+        });
+
+        switchPile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchPile.isChecked()) {
+                    swichPile = true;
+                    Log.d("switchPile","开");
+                    Log.d("switchPile",String.valueOf(swichPile));
+                } else {
+                    swichPile = false;
+                    Log.d("switchPile","关");
+                    Log.d("switchPile",String.valueOf(swichPile));
+                }
             }
         });
 
@@ -260,6 +278,14 @@ public class SettingFragment extends Fragment {
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + upVersionCode);
             String number = "V" + "." + "1" + "." + upVersionCode + "." + robotVersionCode;
             settingsVersionNumber.setText(number);
+        }else if (messageEvent.getState() == 20007) {
+            String pile = (String) messageEvent.getT();
+            if (pile.equals("true")){
+                switchPile.setChecked(true);
+            }else {
+                switchPile.setChecked(false);
+            }
+
         }
     }
 
@@ -310,6 +336,10 @@ public class SettingFragment extends Fragment {
                 gsonUtils.setWorkingMode(settingDebug);
                 Log.d(TAG, "workingmode" + settingDebug);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.WORKING_MODE));
+
+                gsonUtils.setPile(swichPile);
+                Log.d("switchPile1111",String.valueOf(swichPile));
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_CHARGING_MODE));
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
