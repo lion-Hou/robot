@@ -41,8 +41,10 @@
                 android:id="@+id/settings_electricityQuantity"
                 android:layout_width="280dp"
                 android:layout_height="45dp"
-                android:max="100"
+                android:max="90"
+                android:min="20"
                 android:layout_toRightOf="@+id/electricityQuantityTV" />
+
             <TextView
                 android:id="@+id/electricityQuantityValueTV"
                 android:layout_width="70dp"
@@ -100,25 +102,25 @@
                 android:layout_toRightOf="@+id/robotSpeedTV"
                 android:layout_below="@+id/settings_volume" />
 
-            <TextView
-                android:layout_marginLeft="@dimen/dimens_51"
-                android:id="@+id/ledBrightnessTV"
-                android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:text="@string/settings_led_brightness"
-                android:textSize="@dimen/dimens_30"
-                android:textColor="@color/text_color"
-                android:layout_below="@+id/robotSpeedTV" />
-            <Spinner
-                android:id="@+id/settings_ledBrightness"
-                android:layout_width="300dp"
-                android:layout_height="45dp"
-                android:textSize="@dimen/dimens_30"
-                android:textColor="@color/text_color"
-                style="@style/spinner_style"
-                android:background="@drawable/spinner_layout"
-                android:layout_toRightOf="@+id/ledBrightnessTV"
-                android:layout_below="@+id/settings_robotSpeed" />
+<!--            <TextView-->
+<!--                android:layout_marginLeft="@dimen/dimens_51"-->
+<!--                android:id="@+id/ledBrightnessTV"-->
+<!--                android:layout_width="350dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:text="@string/settings_led_brightness"-->
+<!--                android:textSize="@dimen/dimens_30"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                android:layout_below="@+id/robotSpeedTV" />-->
+<!--            <Spinner-->
+<!--                android:id="@+id/settings_ledBrightness"-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:textSize="@dimen/dimens_30"-->
+<!--                android:textColor="@color/text_color"-->
+<!--                style="@style/spinner_style"-->
+<!--                android:background="@drawable/spinner_layout"-->
+<!--                android:layout_toRightOf="@+id/ledBrightnessTV"-->
+<!--                android:layout_below="@+id/settings_robotSpeed" />-->
 
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
@@ -128,7 +130,7 @@
                 android:text="@string/settings_work_model"
                 android:textSize="@dimen/dimens_30"
                 android:textColor="@color/text_color"
-                android:layout_below="@+id/ledBrightnessTV" />
+                android:layout_below="@+id/robotSpeedTV" />
             <Spinner
                 android:id="@+id/settings_debug"
                 android:layout_width="300dp"
@@ -138,7 +140,7 @@
                 style="@style/spinner_style"
                 android:background="@drawable/spinner_layout"
                 android:layout_toRightOf="@+id/work_model"
-                android:layout_below="@+id/ledBrightnessTV"/>
+                android:layout_below="@+id/robotSpeedTV"/>
 
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"

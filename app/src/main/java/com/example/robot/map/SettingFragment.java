@@ -58,10 +58,10 @@ public class SettingFragment extends Fragment {
     TextView robotSpeedTV;
     @BindView(R.id.settings_robotSpeed)
     Spinner settingsRobotSpeed;
-    @BindView(R.id.ledBrightnessTV)
-    TextView ledBrightnessTV;
-    @BindView(R.id.settings_ledBrightness)
-    Spinner settingsLedBrightness;
+//    @BindView(R.id.ledBrightnessTV)
+//    TextView ledBrightnessTV;
+//    @BindView(R.id.settings_ledBrightness)
+//    Spinner settingsLedBrightness;
     @BindView(R.id.versionNumberTV)
     TextView versionNumberTV;
     @BindView(R.id.settings_versionNumber)
@@ -212,7 +212,7 @@ public class SettingFragment extends Fragment {
 
         String[] mArray = getResources().getStringArray(R.array.spinner_settings_led);
         mAdapter = new SpinnerArrayAdapter(mContext,mArray);
-        settingsLedBrightness.setAdapter(mAdapter);
+        //settingsLedBrightness.setAdapter(mAdapter);
 
         String[] mDebugArray = getResources().getStringArray(R.array.spinner_settings_debug);
         mAdapter = new SpinnerArrayAdapter(mContext,mDebugArray);
@@ -231,16 +231,16 @@ public class SettingFragment extends Fragment {
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "low_battery" + lowBattery);
             settingsElectricityQuantity.setProgress(lowBattery);
             electricityQuantityValueTV.setText(lowBattery+"%");
-        } else if (messageEvent.getState() == 20002) {
-            int ledLevel = (int) messageEvent.getT();
-            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "LED" + ledLevel);
-            if (ledLevel == 0) {
-                settingsLedBrightness.setSelection(0);
-            } else if (ledLevel == 1) {
-                settingsLedBrightness.setSelection(1);
-            } else {
-                settingsLedBrightness.setSelection(2);
-            }
+//        } else if (messageEvent.getState() == 20002) {
+//            int ledLevel = (int) messageEvent.getT();
+//            Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "LED" + ledLevel);
+//            if (ledLevel == 0) {
+//                settingsLedBrightness.setSelection(0);
+//            } else if (ledLevel == 1) {
+//                settingsLedBrightness.setSelection(1);
+//            } else {
+//                settingsLedBrightness.setSelection(2);
+//            }
         } else if (messageEvent.getState() == 20004) {
             int voiceLevel = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + voiceLevel);
@@ -324,9 +324,9 @@ public class SettingFragment extends Fragment {
                 gsonUtils.setVoiceLevel(voiceLevel);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_VOICE_LEVEL));//0-15
 
-                int ledLevel = settingsLedBrightness.getSelectedItemPosition();
-                gsonUtils.setLedLevel(ledLevel);
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LED_LEVEL));//0,1,2
+//                int ledLevel = settingsLedBrightness.getSelectedItemPosition();
+//                gsonUtils.setLedLevel(ledLevel);
+//                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SET_LED_LEVEL));//0,1,2
 
                 int robotSpeed = settingsRobotSpeed.getSelectedItemPosition();
                 gsonUtils.setSpeedLevel(robotSpeed);
