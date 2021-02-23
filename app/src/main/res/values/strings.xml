@@ -4,6 +4,7 @@
     <string name="text_map">Map</string>
     <string name="text_task">Task</string>
     <string name="run">\n\nRun</string>
+    <string name="stop_run">\n\nStop</string>
     <string name="map">Map</string>
     <string name="task">Task</string>
     <string name="history">History</string>
@@ -22,6 +23,9 @@
     <string name="settings_version_number2">Controller Version Number</string>
     <string name="settings_work_model">Work Model</string>
     <string name="setting_charging_pile">Charging Pile</string>
+    <string name="run_all_task">Task</string>
+    <string name="run_all_time">Hours</string>
+    <string name="run_all_area">M2</string>
 
     <string name="please_select_map">Please Select Map</string>
     <string name="new_map_name_text">Map Name</string>

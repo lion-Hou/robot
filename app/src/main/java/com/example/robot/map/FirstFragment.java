@@ -229,6 +229,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 //                mDialog.show();
                 break;
             case R.id.main_execute:
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
                 String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
                 String a ="";
                 String b = getText(R.string.map_manage_select_task).toString();

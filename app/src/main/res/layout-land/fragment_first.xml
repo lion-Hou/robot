@@ -96,13 +96,96 @@
 
     </RelativeLayout>
 
-    <ListView
+    <RelativeLayout
         android:id="@+id/main_log"
         android:layout_width="@dimen/dimens_600"
         android:layout_height="@dimen/dimens_247"
         android:layout_below="@+id/main_title"
         android:layout_marginTop="@dimen/dimens_97"
-        android:background="@drawable/home_bg_xiangqingkuang"/>
+        android:background="@drawable/home_bg_xiangqingkuang">
+
+        <RelativeLayout
+            android:id="@+id/main_history_task"
+            android:layout_width="180px"
+            android:layout_height="200px"
+            android:layout_marginTop="@dimen/dimens_30"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:background="@drawable/btn_gb_main_history">
+            <TextView
+                android:id="@+id/run_all_task_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimens_20"
+                android:textColor="@color/text_color"
+                android:text="50"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/run_all_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/run_all_task_size"
+                android:textSize="@dimen/dimens_20"
+                android:textColor="@color/text_color"
+                android:text="@string/run_all_task"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/main_history_time"
+            android:layout_width="180px"
+            android:layout_height="200px"
+            android:background="@drawable/btn_gb_main_history"
+            android:layout_marginTop="@dimen/dimens_30"
+            android:layout_toRightOf="@+id/main_history_task"
+            android:layout_marginLeft="@dimen/dimens_24">
+            <TextView
+                android:id="@+id/run_all_time_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimens_20"
+                android:textColor="@color/text_color"
+                android:text="30000"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/run_all_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/run_all_time_size"
+                android:textSize="@dimen/dimens_20"
+                android:textColor="@color/text_color"
+                android:text="@string/run_all_time"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/main_history_area"
+            android:layout_width="180px"
+            android:layout_height="200px"
+            android:background="@drawable/btn_gb_main_history"
+            android:layout_marginTop="@dimen/dimens_30"
+            android:layout_toRightOf="@+id/main_history_time"
+            android:layout_marginLeft="@dimen/dimens_24">
+            <TextView
+                android:id="@+id/run_all_area_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dimens_20"
+                android:textColor="@color/text_color"
+                android:text="10000"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/run_all_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/run_all_area_size"
+                android:textSize="@dimen/dimens_20"
+                android:textColor="@color/text_color"
+                android:text="@string/run_all_area"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

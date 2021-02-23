@@ -3,6 +3,7 @@
     <string name="text_map">地图:</string>
     <string name="text_task">任务:</string>
     <string name="run">\n\n执行</string>
+    <string name="stop_run">\n\n停止</string>
     <string name="map">地图</string>
     <string name="task">任务</string>
     <string name="history">历史</string>
@@ -177,4 +178,8 @@
     <string name="add_wall">虚拟墙保存成功</string>
     <string name="reset">是否删除所有数据并且回复默认设置!</string>
     <string name="task_edit_no_image">请首先扫描地图!</string>
+
+    <string name="run_all_task">任务</string>
+    <string name="run_all_time">时间</string>
+    <string name="run_all_area">面积</string>
 </resources>

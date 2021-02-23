@@ -52,7 +52,9 @@ public class EmptyClient extends WebSocketClient {
         gsonUtils.setTime(time);
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.SYSTEM_DATE));
         //断连监听
+        Log.d("HOUH111","GET_TASK_STATE");
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
+
 
         //获得上位机版本号
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.versionCode));

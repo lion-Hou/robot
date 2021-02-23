@@ -152,10 +152,15 @@ public class RunFragment extends Fragment {
                 JSONArray stateList = jsonObject.getJSONArray(Content.ROBOT_TASK_STATE);
                 for (int i = 0; i < stateList.length(); i++) {
                     JSONObject js = stateList.getJSONObject(i);
-                    TaskStateList taskStateList = new TaskStateList(js.getString(Content.POINT_NAME),
-                            js.getString(Content.POINT_STATE));
+                    TaskStateList taskStateList = new TaskStateList(
+                            i+1,
+                            js.getString(Content.POINT_NAME),
+                            js.getString(Content.POINT_TIME),
+                            js.getString(Content.POINT_STATE)
+                    );
                     listPointName.add(taskStateList);
                 }
+                Log.d("RunFragment : " , ""+listPointName.size());
                 mAdapter.refeshList(listPointName);
                 recyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();

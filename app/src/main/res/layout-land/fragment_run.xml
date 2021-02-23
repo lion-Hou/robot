@@ -12,7 +12,7 @@
         android:textSize="@dimen/dimens_16px"
         android:textColor="@color/text_color"
         android:text="@string/run_map"
-        android:layout_marginTop="@dimen/dimens_100"/>
+        android:layout_marginTop="120px"/>
 
     <TextView
         android:id="@+id/run_map_name"
@@ -22,7 +22,7 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_16px"
         android:layout_marginLeft="@dimen/dimens_30"
-        android:layout_marginTop="@dimen/dimens_100"/>
+        android:layout_marginTop="120px"/>
 
     <TextView
         android:id="@+id/run_task"
@@ -32,7 +32,7 @@
         android:textSize="@dimen/dimens_16px"
         android:textColor="@color/text_color"
         android:text="@string/run_task"
-        android:layout_marginTop="@dimen/dimens_20"/>
+        android:layout_marginTop="@dimen/dimens_24"/>
 
     <TextView
         android:id="@+id/run_task_name"
@@ -43,7 +43,7 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_16px"
         android:layout_marginLeft="@dimen/dimens_30"
-        android:layout_marginTop="@dimen/dimens_20"/>
+        android:layout_marginTop="@dimen/dimens_24"/>
 
     <TextView
         android:id="@+id/point_state_time_text"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:layout_below="@+id/run_task"
-        android:layout_marginTop="@dimen/dimens_20"
+        android:layout_marginTop="@dimen/dimens_24"
         android:text="@string/count_down"
         android:textSize="@dimen/dimens_16px"/>
     <TextView
@@ -63,7 +63,7 @@
         android:layout_toRightOf="@id/point_state_time_text"
         android:layout_marginLeft="@dimen/dimens_30"
         android:layout_below="@+id/run_task"
-        android:layout_marginTop="@dimen/dimens_20"/>
+        android:layout_marginTop="@dimen/dimens_24"/>
 
     <!-- 进行任务       -->
     <RelativeLayout
@@ -87,15 +87,17 @@
 
     <Button
         android:id="@+id/task_run_edit"
-        android:layout_width="@dimen/dimens_102"
-        android:layout_height="@dimen/dimens_54"
-        android:layout_below="@+id/run"
-        android:layout_marginTop="@dimen/dimens_30"
-        android:background="@drawable/home_btn_anniu"
+        android:layout_width="@dimen/dimens_137"
+        android:layout_height="@dimen/dimens_137"
         android:textColor="@color/text_color"
-        android:text="@string/run_stop"
-        android:textSize="@dimen/dimens_18"
-        android:textAllCaps="false"/>
+        android:textSize="@dimen/dimens_21"
+        android:background="@drawable/home_btn_zhixing"
+        android:layout_marginTop="@dimen/dimens_100"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="127px"
+        android:layout_marginRight="127px"
+        android:text="@string/run_stop"/>
 
 
 </RelativeLayout>

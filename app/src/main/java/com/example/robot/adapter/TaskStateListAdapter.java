@@ -44,7 +44,9 @@ public class TaskStateListAdapter extends RecyclerView.Adapter<RecycleHolder> {
     }
 
     public void convert(RecycleHolder holder, TaskStateList taskStateList, int position) {
+        holder.setText(R.id.state_number, taskStateList.getNumber() + "");
         holder.setText(R.id.state_name, taskStateList.getPointName());
+        holder.setText(R.id.state_time, taskStateList.getPointTime());
         if (taskStateList.getTaskState() == null){
             holder.setText(R.id.state_state, mContext.getResources().getStringArray(R.array.spinner_time)[taskStateList.getSpinnerTime()]);
         } else {

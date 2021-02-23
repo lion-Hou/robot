@@ -1,8 +1,10 @@
 package com.example.robot.bean;
 
 public class TaskStateList {
+    private int number;
     private String pointName;
     private String taskState;
+    private String pointTime;
     private int spinnerTime;
 
     public TaskStateList(String pointName, int spinnerTime) {
@@ -10,8 +12,10 @@ public class TaskStateList {
         this.spinnerTime = spinnerTime;
     }
 
-    public TaskStateList(String pointName, String taskState) {
+    public TaskStateList(int number, String pointName, String pointTime, String taskState) {
+        this.number = number;
         this.pointName = pointName;
+        this.pointTime = pointTime;
         this.taskState = taskState;
     }
 
@@ -31,6 +35,14 @@ public class TaskStateList {
         return taskState;
     }
 
+    public String getPointTime() {
+        return pointTime;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
 
     public void setPointName(String pointName) {
         this.pointName = pointName;
@@ -38,5 +50,13 @@ public class TaskStateList {
 
     public void setTaskState(String taskState) {
         this.taskState = taskState;
+    }
+
+    public void setTPointTime(String pointTime) {
+        this.pointTime = pointTime;
+    }
+
+    public void setTNumber(int number) {
+        this.number = number;
     }
 }
