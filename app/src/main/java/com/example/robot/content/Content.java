@@ -37,7 +37,7 @@ public final class Content {
     public static int taskIndex = 0;
     public static int version = 1;//初始版本号
 
-    public static final String MAP_NAME = "map_Name";//地图名字
+    public static final String MAP_NAME = "map_Name";//run地图名字
 
     public static final String BATTERY_LOW = "battery_low";//地图名字
     public static final String OLD_MAP_NAME = "old_map_name";//老地图名字

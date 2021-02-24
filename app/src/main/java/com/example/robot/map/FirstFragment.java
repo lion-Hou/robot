@@ -229,7 +229,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 //                mDialog.show();
                 break;
             case R.id.main_execute:
-                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
                 String mainSpinnerTaskText = (String) mainSpinnerTask.getText();
                 String a ="";
                 String b = getText(R.string.map_manage_select_task).toString();
@@ -243,6 +242,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         gsonUtils.setTaskName(myTaskNameList.get(i));
 
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
+                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
 //                        Log.d(TAG, "strList ： " + myTaskNameList.get(0));
 //                        Log.d(TAG, "strList ： " + myTaskNameList.get(1));
                     }
@@ -494,24 +494,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             taskNameList = (String[]) messageEvent.getT();
             Log.d("task_name", taskNameList[0]);
             requestTaskList(taskNameList);
-        }else if(messageEvent.getState() == 90001){
-            JSONObject jsonObject = (JSONObject) messageEvent.getT();
-            try {
-                get_name = jsonObject.getString(Content.MAP_NAME);
-                get_task = jsonObject.getString(Content.GET_TASK_STATE);
-                Log.d("gdgdg",get_name);
-                Log.d("gdgdg",get_task);
-                gsonUtils.setMapName(get_name);
-                gsonUtils.setTaskName(get_task);
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.first_fragment, new RunFragment(), null)
-                        .addToBackStack(null)
-                        .commit();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else if (messageEvent.getState() == 10008) {
+        }else if (messageEvent.getState() == 10008) {
             Log.d(TAG, "获取点列表 ： " + (String) messageEvent.getT());
             myDialog.setPointIcon((String) messageEvent.getT());
 

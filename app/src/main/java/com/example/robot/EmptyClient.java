@@ -283,7 +283,12 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.GET_TASK_STATE:
                 Log.d("HOUH111",message );
-                EventBus.getDefault().post(new EventBusMessage(90001, message));
+                jsonObject = new JSONObject(message);
+                String map_name = jsonObject.getString(Content.MAP_NAME);
+                String task_name = jsonObject.getString(Content.TASK_NAME);
+                Log.d("HOUH111",map_name);
+                EventBus.getDefault().post(new EventBusMessage(90001, task_name));
+                Log.d("HOUH111",task_name);
                 break;
             case Content.UPDATE:
                 EventBus.getDefault().post(new EventBusMessage(90009, message));

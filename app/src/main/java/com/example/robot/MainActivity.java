@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
@@ -24,6 +25,7 @@ import com.example.robot.map.FirstFragment;
 import com.example.robot.map.MainFragment;
 import com.example.robot.map.MapManagerFragment;
 import com.example.robot.map.SecoundFragment;
+import com.example.robot.run.RunFragment;
 import com.example.robot.util.NormalDialogUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -208,6 +210,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //
 //                builder.create().show();
                 Toast.makeText(this, R.string.urgencyStopmessage, Toast.LENGTH_SHORT).show();
+            }
+
+        }else if(messageEvent.getState() == 90001) {
+            Log.d("gdgdg", "get_name");
+            String task_name = (String) messageEvent.getT();
+            Log.d("gdgdg", task_name);
+            if (task_name != null){
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.first_fragment,new RunFragment());
+                fragmentTransaction.commit();
             }
 
         }
