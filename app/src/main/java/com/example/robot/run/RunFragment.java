@@ -176,6 +176,15 @@ public class RunFragment extends Fragment {
             }
 
 
+        }else if (messageEvent.getState() == 11001){
+            String message = (String) messageEvent.getT();
+            Log.d("run_link", message);
+            runMapName.setText(message);
+
+        }else if (messageEvent.getState() == 11002){
+            String message = (String) messageEvent.getT();
+            Log.d("run_link", message);
+            runTaskName.setText(message);
         }
     }
 }

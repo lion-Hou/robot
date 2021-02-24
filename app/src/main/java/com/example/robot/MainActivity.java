@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -213,10 +214,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
 
         }else if(messageEvent.getState() == 90001) {
-            Log.d("gdgdg", "get_name");
+            Log.d("gdgdg", "gdgdg");
             String task_name = (String) messageEvent.getT();
             Log.d("gdgdg", task_name);
-            if (task_name != null){
+            if (!TextUtils.isEmpty(task_name)){
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.first_fragment,new RunFragment());
                 fragmentTransaction.commit();

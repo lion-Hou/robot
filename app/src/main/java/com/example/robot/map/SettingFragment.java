@@ -187,7 +187,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                volumeValueTV.setText(progress+"%");
+                volumeValueTV.setText(progress+"/15");
             }
         });
 
@@ -276,7 +276,7 @@ public class SettingFragment extends Fragment {
             String emptUpVersionCode = (String) messageEvent.getT();
             upVersionCode = emptUpVersionCode;
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + upVersionCode);
-            String number = "V" + "." + "1" + "." + upVersionCode + "." + robotVersionCode;
+            String number = "V" + "." + "pda_" + "1" + "." + "swj_" + upVersionCode + "." + robotVersionCode;
             settingsVersionNumber.setText(number);
         }else if (messageEvent.getState() == 20007) {
             String pile = (String) messageEvent.getT();

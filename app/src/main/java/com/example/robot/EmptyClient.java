@@ -207,6 +207,11 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.ROBOT_TASK_HISTORY:
                 EventBus.getDefault().post(new EventBusMessage(40001, message));
+                JSONObject jsonObject = new JSONObject(message);
+                JSONArray jsonArray = jsonObject.getJSONArray(Content.ROBOT_TASK_HISTORY);
+                int allSize = jsonArray.length();
+                Log.d("allsize",String.valueOf(allSize));
+                EventBus.getDefault().post(new EventBusMessage(11003, message));
                 break;
             case Content.SEND_VIRTUAL:
                 EventBus.getDefault().post(new EventBusMessage(40002, message));
@@ -289,6 +294,8 @@ public class EmptyClient extends WebSocketClient {
                 Log.d("HOUH111",map_name);
                 EventBus.getDefault().post(new EventBusMessage(90001, task_name));
                 Log.d("HOUH111",task_name);
+                EventBus.getDefault().post(new EventBusMessage(11001, map_name));
+                EventBus.getDefault().post(new EventBusMessage(11002, task_name));
                 break;
             case Content.UPDATE:
                 EventBus.getDefault().post(new EventBusMessage(90009, message));

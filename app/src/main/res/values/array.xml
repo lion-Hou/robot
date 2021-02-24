@@ -16,15 +16,15 @@
     </string-array>
 
     <string-array name="spinner_settings_speed">
-        <item>slow</item>
-        <item>medium</item>
-        <item>fast</item>
+        <item>Slow</item>
+        <item>Medium</item>
+        <item>Fast</item>
     </string-array>
 
     <string-array name="spinner_settings_debug">
-        <item>debug</item>
-        <item>demo</item>
-        <item>formal</item>
+        <item>Debug</item>
+        <item>Demo</item>
+        <item>Normal</item>
     </string-array>
 
     <string-array name="spinner_settings_language">
