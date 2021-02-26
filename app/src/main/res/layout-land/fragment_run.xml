@@ -89,15 +89,12 @@
         android:id="@+id/task_run_edit"
         android:layout_width="@dimen/dimens_137"
         android:layout_height="@dimen/dimens_137"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_21"
-        android:background="@drawable/home_btn_zhixing"
+        android:layout_marginLeft="1015px"
         android:layout_marginTop="@dimen/dimens_100"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="127px"
-        android:layout_marginRight="127px"
-        android:text="@string/run_stop"/>
+        android:background="@drawable/home_btn_zhixing"
+        android:text="\n\nStop"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimens_21" />
 
 
 </RelativeLayout>

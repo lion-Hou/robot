@@ -104,8 +104,8 @@ public class RunFragment extends Fragment {
     }
 
     private void initView() {
+        Log.d("run_link",  "3");
         runMapName.setText(Content.first_map_Name);
-        runTaskName.setText(Content.task_Name);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -183,7 +183,7 @@ public class RunFragment extends Fragment {
 
         }else if (messageEvent.getState() == 11002){
             String message = (String) messageEvent.getT();
-            Log.d("run_link", message);
+            Log.d("run_link",  "1"+message);
             runTaskName.setText(message);
         }
     }
