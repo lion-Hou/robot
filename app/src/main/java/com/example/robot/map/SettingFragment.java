@@ -245,7 +245,7 @@ public class SettingFragment extends Fragment {
             int voiceLevel = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + voiceLevel);
             settingsVolume.setProgress(voiceLevel);
-            volumeValueTV.setText(voiceLevel+"%");
+            volumeValueTV.setText(voiceLevel+"/15");
         } else if (messageEvent.getState() == 20005) {
             int workingMode = (int) messageEvent.getT();
             Log.d(TAG, "onEventMsg setting： " + messageEvent.getState() + "voiceLevel" + workingMode);

@@ -66,6 +66,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     Button mainHistory;
     @BindView(R.id.main_execute)
     Button mainExecute;
+    @BindView(R.id.run_all_task_size)
+    TextView allTaskSize;
+    @BindView(R.id.hours)
+    TextView allTaskhours;
+    @BindView(R.id.run_all_area_size)
+    TextView allTaskArea;
+
 
 
     private Context mContext;
@@ -141,6 +148,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TOTAL_AREA));
         Log.d(TAG, "strList ： " + myTaskNameList);
         String a = (String) mainSpinnerMap.getText();
         String b = getText(R.string.please_select_map).toString();
@@ -515,6 +524,21 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 //                Log.d("details_GG", "" + taskPoint1);
 //            }
             myDialog.setTaskPointIcon(message);
+        }else if (messageEvent.getState() == 11003) {
+            String message = (String) messageEvent.getT();
+            Log.d("allTaskSize",message);
+            allTaskSize.setText(message);
+        }else if (messageEvent.getState() == 11004) {
+            Log.d("allTaskhours", "message");
+            int message = (int)messageEvent.getT();
+            int time = message / 60;
+            Log.d("allTaskhours", "" +time);
+            allTaskhours.setText(String.valueOf(time));
+        }else if (messageEvent.getState() == 11005) {
+            Log.d("allTaskArea","message");
+            String message = (String) messageEvent.getT();
+            Log.d("allTaskArea",message);
+            allTaskArea.setText(message);
         }
     }
 

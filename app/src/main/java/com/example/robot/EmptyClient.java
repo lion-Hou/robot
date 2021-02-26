@@ -2,6 +2,7 @@ package com.example.robot;
 
 import android.util.Log;
 
+import com.example.robot.bean.HistoryBean;
 import com.example.robot.bean.RobotMapBean;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
@@ -207,11 +208,19 @@ public class EmptyClient extends WebSocketClient {
                 break;
             case Content.ROBOT_TASK_HISTORY:
                 EventBus.getDefault().post(new EventBusMessage(40001, message));
+
                 JSONObject jsonObject = new JSONObject(message);
                 JSONArray jsonArray = jsonObject.getJSONArray(Content.ROBOT_TASK_HISTORY);
-                int allSize = jsonArray.length();
-                Log.d("allsize",String.valueOf(allSize));
-                EventBus.getDefault().post(new EventBusMessage(11003, message));
+                String allSize = Integer.toString(jsonArray.length());
+                EventBus.getDefault().post(new EventBusMessage(11003, allSize));
+                Log.d("allsize11",String.valueOf(allSize));
+
+                int time = 0;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    time = time + jsonArray.getJSONObject(i).getInt(Content.dbTime);
+                }
+                Log.d("allsize33",String.valueOf(time));
+                EventBus.getDefault().post(new EventBusMessage(11004, time));
                 break;
             case Content.SEND_VIRTUAL:
                 EventBus.getDefault().post(new EventBusMessage(40002, message));
@@ -280,6 +289,13 @@ public class EmptyClient extends WebSocketClient {
                 jsonObject = new JSONObject(message);
                 EventBus.getDefault().post(new EventBusMessage(20009, message));
                 Log.d("edit_Queue",message );
+                break;
+
+            case Content.TOTAL_AREA:
+                jsonObject = new JSONObject(message);
+                String totalArea = jsonObject.getString(Content.TOTAL_AREA);
+                EventBus.getDefault().post(new EventBusMessage(11005, totalArea));
+                Log.d("totalArea", String.valueOf(totalArea));
                 break;
 
             case Content.ROBOT_TASK_STATE:
