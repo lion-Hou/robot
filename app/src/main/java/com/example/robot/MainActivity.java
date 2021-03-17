@@ -309,6 +309,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     CharSequence sysTimeStr = DateFormat
                             .format("hh:mm", sysTime);
                     net_Time.setText(sysTimeStr);
+//                    emptyClient.send(gsonUtils.putJsonMessage(Content.PING));
+//                    gsonUtils.setIp("10.71.255.6");
+                    try {
+                        emptyClient.send(gsonUtils.putJsonMessage(Content.PING));
+                        gsonUtils.setIp("10.71.255.6");
+                    }catch (Exception e){
+                        Log.d(TAG,"LINK_ERROR");
+                    }
+
                     break;
                 default:
                     break;

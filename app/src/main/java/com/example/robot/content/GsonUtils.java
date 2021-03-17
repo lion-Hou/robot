@@ -38,6 +38,7 @@ public class GsonUtils {
     private int workingMode;
     private boolean pile;
     private long time;
+    private String ip;
 
     public int getWorkingMode() {
         return workingMode;
@@ -144,6 +145,15 @@ public class GsonUtils {
         this.mapName = mapName;
     }
 
+    public String getIp(){
+        return ip;
+    }
+
+    public void setIp(String ip){
+        this.ip = ip;
+        System.out.println("rrrrrr"+ip);
+    }
+
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
@@ -191,6 +201,7 @@ public class GsonUtils {
             jsonObject.put(Content.WORKING_MODE,workingMode);
             jsonObject.put(Content.SYSTEM_DATE,time);
             jsonObject.put(Content.SET_CHARGING_MODE,pile);
+            jsonObject.put(Content.ADDRESS,ip);
             if (list != null) {
                 JSONArray jsonArray = new JSONArray();
                 for (int i = 0; i < list.size(); i++) {

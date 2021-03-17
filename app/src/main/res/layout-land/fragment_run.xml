@@ -43,7 +43,8 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_16px"
         android:layout_marginLeft="@dimen/dimens_30"
-        android:layout_marginTop="@dimen/dimens_24"/>
+        android:layout_marginTop="@dimen/dimens_24"
+        android:text="text"/>
 
     <TextView
         android:id="@+id/point_state_time_text"
@@ -89,7 +90,10 @@
         android:id="@+id/task_run_edit"
         android:layout_width="@dimen/dimens_137"
         android:layout_height="@dimen/dimens_137"
-        android:layout_marginLeft="1015px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="127px"
+        android:layout_marginRight="127px"
         android:layout_marginTop="@dimen/dimens_100"
         android:background="@drawable/home_btn_zhixing"
         android:text="\n\nStop"

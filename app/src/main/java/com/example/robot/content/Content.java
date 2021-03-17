@@ -44,6 +44,11 @@ public final class Content {
     public static final String NEW_MAP_NAME = "new_map_name";//新地图名字
     public static final String TASK_NAME = "task_Name";//任务名字
     public static final String TOTAL_AREA = "total_area";//总面积
+    public static final String PING = "ping";//本机ip
+    public static final String ADDRESS = "address";
+    public static final String TOTAL_CONTENT = "total_content";//历史面积
+    public static final String CURRENT_CONTENT = "current_content";//首页面积
+
 
 
     public static final String OLD_POINT_NAME = "old_point_name";//老地图名字
