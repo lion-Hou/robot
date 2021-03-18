@@ -147,11 +147,15 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainHistory.setOnClickListener(this);
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
+//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
+//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TOTALCOUNT));
+//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENTCOUNT));
         if (emptyClient==null){
             Log.d(TAG,"LINK_ERROR");
         }else {
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENT_CONTENT));
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TOTALCOUNT));
+            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENTCOUNT));
         }
         Log.d(TAG, "strList ： " + myTaskNameList);
         String a = (String) mainSpinnerMap.getText();
@@ -269,7 +273,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 gsonUtils.setMapName(mainSpinnerMap.getText().toString());
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETTASKQUEUE));//请求任务列表
                 isMapItem = true;
-                Log.d("task_name111",mainSpinnerMap.getText().toString());
+                Log.d("main_spinner_task",mainSpinnerMap.getText().toString());
                 break;
             case R.id.main_map:
                 Log.d(TAG, "onEventMsg ： " + "ditu");
@@ -527,20 +531,23 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 //                Log.d("details_GG", "" + taskPoint1);
 //            }
             myDialog.setTaskPointIcon(message);
-        }else if (messageEvent.getState() == 11003) {
+        }else if (messageEvent.getState() == 88883) {
             String message = (String) messageEvent.getT();
             Log.d("allTaskSize",message);
+            //当月任务数
             allTaskSize.setText(message);
-        }else if (messageEvent.getState() == 11004) {
+        }else if (messageEvent.getState() == 88884) {
             Log.d("allTaskhours", "message");
             int message = (int)messageEvent.getT();
             int time = message / 60;
             Log.d("allTaskhours", "" +time);
+            //当月时间
             allTaskhours.setText(String.valueOf(time));
-        }else if (messageEvent.getState() == 11005) {
+        }else if (messageEvent.getState() == 88885) {
             Log.d("allTaskArea","message");
             String message = (String) messageEvent.getT();
             Log.d("allTaskArea",message);
+            //当月面积
             allTaskArea.setText(message);
         }
     }

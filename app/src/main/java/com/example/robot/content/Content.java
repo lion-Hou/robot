@@ -46,8 +46,16 @@ public final class Content {
     public static final String TOTAL_AREA = "total_area";//总面积
     public static final String PING = "ping";//本机ip
     public static final String ADDRESS = "address";
-    public static final String TOTAL_CONTENT = "total_content";//历史面积
-    public static final String CURRENT_CONTENT = "current_content";//首页面积
+    public static final String TOTALCOUNT = "totalCount";//历史面积
+    public static final String CURRENTCOUNT = "currentCount";//首页面积
+
+    public static final String DBAREATOTALCOUNT = "dbAreaTotalCount";
+    public static final String DBTASKTOTALCOUNT = "dbTaskTotalCount";
+    public static final String DBTIMETOTALCOUNT = "dbTimeTotalCount";
+
+    public static final String DBAREACURRENTCOUNT = "dbAreaCurrentCount";
+    public static final String DBTASKCURRENTCOUNT = "dbTaskCurrentCount";
+    public static final String DBTIMECURRENTCOUNT = "dbTimeCurrentCount";
 
 
 

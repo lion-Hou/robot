@@ -276,6 +276,30 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(20022, upVersionCode));
                 Log.d("speedLevelhhhh", urgencyStop);
 
+                String dbTaskTotalCount = jsonObject.getString(Content.DBTASKTOTALCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88880, dbTaskTotalCount));
+                Log.d("DB88880", dbTaskTotalCount);
+
+                String dbTimeTotalCount = jsonObject.getString(Content.DBTIMETOTALCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88881, dbTimeTotalCount));
+                Log.d("DB88881", dbTimeTotalCount);
+
+                String dbAreaTotalCount = jsonObject.getString(Content.DBAREATOTALCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88882, dbAreaTotalCount));
+                Log.d("DB88882", dbAreaTotalCount);
+
+                String dbTaskCurrentCount = jsonObject.getString(Content.DBTASKCURRENTCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88883, dbTaskCurrentCount));
+                Log.d("DB88883", dbTaskCurrentCount);
+
+                String dbTimeCurrentCount = jsonObject.getString(Content.DBTIMECURRENTCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88884, dbTimeCurrentCount));
+                Log.d("DB88884", dbTimeCurrentCount);
+
+                String dbAreaCurrentCount = jsonObject.getString(Content.DBAREACURRENTCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88885, dbAreaCurrentCount));
+                Log.d("DB88885", dbAreaCurrentCount);
+
                 break;
 
             case Content.GET_WORKING_MODE:
