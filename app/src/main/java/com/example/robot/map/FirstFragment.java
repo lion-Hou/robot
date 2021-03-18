@@ -147,16 +147,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainHistory.setOnClickListener(this);
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
-        //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPLIST));
-//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
-//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENT_CONTENT));
-        try {
+        if (emptyClient==null){
+            Log.d(TAG,"LINK_ERROR");
+        }else {
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENT_CONTENT));
-        }catch (Exception e){
-            Log.d(TAG,"LINK_ERROR");
         }
-
         Log.d(TAG, "strList ： " + myTaskNameList);
         String a = (String) mainSpinnerMap.getText();
         String b = getText(R.string.please_select_map).toString();

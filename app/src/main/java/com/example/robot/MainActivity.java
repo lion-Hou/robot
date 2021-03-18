@@ -1,7 +1,10 @@
 package com.example.robot;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -309,21 +312,34 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     CharSequence sysTimeStr = DateFormat
                             .format("hh:mm", sysTime);
                     net_Time.setText(sysTimeStr);
-//                    emptyClient.send(gsonUtils.putJsonMessage(Content.PING));
-//                    gsonUtils.setIp("10.71.255.6");
-                    try {
+                    if (emptyClient == null){
+                        Log.d("ffff","" +"ipAd");
+                    }else {
                         emptyClient.send(gsonUtils.putJsonMessage(Content.PING));
-                        gsonUtils.setIp("10.71.255.6");
-                    }catch (Exception e){
-                        Log.d(TAG,"LINK_ERROR");
+                        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+                        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                        int ipAd = wifiInfo.getIpAddress();
+                        String ipAddress = int2ip(ipAd);
+                        Log.d("ffff","" +ipAddress);
+                        gsonUtils.setIp(ipAddress);
                     }
-
                     break;
                 default:
                     break;
             }
         }
     };
+
+    public static String int2ip(int ipInt) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ipInt & 0xFF).append(".");
+        sb.append((ipInt >> 8) & 0xFF).append(".");
+        sb.append((ipInt >> 16) & 0xFF).append(".");
+        sb.append((ipInt >> 24) & 0xFF);
+        return sb.toString();
+    }
+
+
 
 
     private void showWaitingDialog() {
