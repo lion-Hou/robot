@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -30,7 +32,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,11 +48,22 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
     RecyclerView historyRecyclerview;
     @BindView(R.id.hitory_back)
     Button hitoryBack;
+    @BindView(R.id.datePicker)
+    DatePicker datePicker;
+    @BindView(R.id.his_task_size)
+    TextView hisTaskSize;
+    @BindView(R.id.his_hours)
+    TextView hisHours;
+    @BindView(R.id.his_area_size)
+    TextView hisAreaSize;
     private View view;
     private Context mContext;
     private HistoryAdapter historyAdapter;
     public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
+    private int countYear;//当前年
+    private int countMonth;//当前月
+    private int countDay;//当前日期
 
     @Override
     public void onStart() {
@@ -89,6 +105,7 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
     }
 
     private void initView() {
+        selectData();
         hitoryBack.setOnClickListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -101,6 +118,24 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
         historyRecyclerview.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
         historyAdapter = new HistoryAdapter(mContext, R.layout.item_recycler);
         //historyRecyclerview.setAdapter(historyAdapter);
+    }
+
+    public void selectData(){
+        Calendar calendar = Calendar.getInstance();
+        countYear = calendar.get(Calendar.YEAR);
+        countMonth=calendar.get(Calendar.MONTH);
+        countDay=calendar.get(Calendar.DATE);
+        datePicker.init(countYear,countMonth,countDay,new DatePicker.OnDateChangedListener(){
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Log.e("datepicker—你选择的日期是：",year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                countYear = year;
+                countMonth = monthOfYear;
+                countDay = dayOfMonth;
+                historyRecyclerview.removeAllViews();
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
+            }
+        });
     }
 
 
@@ -119,7 +154,17 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
                             jsonArray.getJSONObject(i).getString(Content.dbTaskName),
                             jsonArray.getJSONObject(i).getString(Content.dbTime) + minute,
                             jsonArray.getJSONObject(i).getString(Content.dbData));
-                    list.add(historyBean);
+                    String m1 = jsonArray.getJSONObject(i).getString(Content.dbData);
+                    Log.d("month_month1",m1);
+                    int a = Integer.valueOf(m1.substring(0,4)).intValue();
+                    int b = Integer.valueOf(m1.substring(5,7)).intValue();
+                    int c = Integer.valueOf(m1.substring(8,10)).intValue();
+                    int d = countMonth+1;
+                    Log.d("month_month1","" + a + ":" +b + ":" + c);
+                    Log.d("month_month2","" + countYear + ":" +d + ":" + countDay);
+                    if((a == countYear)&&(b == d)&&(c == countDay)){
+                        list.add(historyBean);
+                    }
                 }
                 historyRecyclerview.setAdapter(historyAdapter);
                 historyAdapter.refeshList(list);
@@ -127,6 +172,22 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }else if (messageEvent.getState() == 88880) {
+            String message = (String) messageEvent.getT();
+            Log.d("hisTaskSize",message);
+            //历史任务数
+            hisTaskSize.setText(message);
+        }else if (messageEvent.getState() == 88881) {
+            long message = (long)messageEvent.getT();
+            long time = message / 100 / 60 /60;
+            Log.d("hisHours",""+message);
+            //历史时间
+            hisHours.setText(String.valueOf(time));
+        }else if (messageEvent.getState() == 88882) {
+            String message = (String) messageEvent.getT();
+            Log.d("hisAreaSize",message);
+            //历史面积
+            hisAreaSize.setText(message);
         }
     }
 

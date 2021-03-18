@@ -4,15 +4,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/dimens_129"
-
     android:layout_marginRight="@dimen/dimens_84"
     tools:context=".map.TaskHistoryFragment">
+
+   <RelativeLayout
+       android:id="@+id/history_log"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+      <RelativeLayout
+          android:id="@+id/his_history_task"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/colorAccent">
+         <TextView
+             android:id="@+id/his_task_size"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@+id/his_run_all_task"
+             android:textSize="30px"
+             android:textColor="@color/text_color"
+             android:text="0"/>
+         <TextView
+             android:id="@+id/his_run_all_task"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="30px"
+             android:textColor="@color/text_color"
+             android:text="@string/run_all_task"/>
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/his_history_time"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/colorAccent"
+          android:layout_toRightOf="@+id/his_history_task"
+          android:layout_marginLeft="@dimen/dimens_21">
+
+         <TextView
+             android:id="@+id/his_run_all_time"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="30px"
+             android:textColor="@color/text_color"
+             android:text="@string/run_all_time"/>
+         <TextView
+             android:id="@+id/his_hours"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@+id/his_run_all_time"
+             android:textSize="30px"
+             android:textColor="@color/text_color"
+             android:text="0"/>
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/his_history_area"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/colorAccent"
+          android:layout_toRightOf="@+id/his_history_time"
+          android:layout_marginLeft="@dimen/dimens_21">
+         <TextView
+             android:id="@+id/his_area_size"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@+id/his_run_all_area"
+             android:textSize="30px"
+             android:textColor="@color/text_color"
+             android:text="0"/>
+         <TextView
+             android:id="@+id/his_run_all_area"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="30px"
+             android:textColor="@color/text_color"
+             android:text="@string/run_all_area"/>
+      </RelativeLayout>
+   </RelativeLayout>
+
+   <DatePicker
+       android:id="@+id/datePicker"
+       android:layout_width="wrap_content"
+       android:layout_height="208dp"
+       android:layout_below="@+id/history_log"
+       android:layout_marginTop="@dimen/dimens_21"
+       android:background="@color/list_divider" />
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/history_recyclerview"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:layout_above="@id/hitory_back"/>
+       android:layout_below="@+id/datePicker"
+       android:layout_above="@id/hitory_back"
+       android:layout_marginTop="@dimen/dimens_21"/>
 
    <Button
        android:id="@+id/hitory_back"

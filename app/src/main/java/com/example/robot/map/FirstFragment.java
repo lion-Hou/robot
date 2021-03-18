@@ -147,12 +147,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainHistory.setOnClickListener(this);
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
-//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
-//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TOTALCOUNT));
-//        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENTCOUNT));
-        if (emptyClient==null){
+        Log.d(TAG, "initView: SourireG"+MainActivity.emptyClient.toString());
+        if (!MainActivity.emptyClient.isConnecting()){
             Log.d(TAG,"LINK_ERROR");
         }else {
+            Log.d(TAG,"LINK_ok");
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TOTALCOUNT));
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CURRENTCOUNT));
@@ -538,8 +537,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             allTaskSize.setText(message);
         }else if (messageEvent.getState() == 88884) {
             Log.d("allTaskhours", "message");
-            int message = (int)messageEvent.getT();
-            int time = message / 60;
+            long message = (long)messageEvent.getT();
+            long time = message / 100 / 60 /60;
             Log.d("allTaskhours", "" +time);
             //当月时间
             allTaskhours.setText(String.valueOf(time));
