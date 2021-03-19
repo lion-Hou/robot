@@ -282,6 +282,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 showWaitingDialog();
                 emptyClient.reconnect();
                 disconnectDialog.dismiss();
+                waitingDialog.dismiss();
             }
         });
     }
