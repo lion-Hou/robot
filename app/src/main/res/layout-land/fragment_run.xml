@@ -9,7 +9,7 @@
         android:id="@+id/run_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dimens_16px"
+        android:textSize="@dimen/dimens_textsize_16"
         android:textColor="@color/text_color"
         android:text="@string/run_map"
         android:layout_marginTop="120px"/>
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/run_map"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_16px"
+        android:textSize="@dimen/dimens_textsize_16"
         android:layout_marginLeft="@dimen/dimens_30"
         android:layout_marginTop="120px"/>
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/run_map"
-        android:textSize="@dimen/dimens_16px"
+        android:textSize="@dimen/dimens_textsize_16"
         android:textColor="@color/text_color"
         android:text="@string/run_task"
         android:layout_marginTop="@dimen/dimens_24"/>
@@ -41,7 +41,7 @@
         android:layout_toRightOf="@id/run_task"
         android:layout_below="@+id/run_map"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_16px"
+        android:textSize="@dimen/dimens_textsize_16"
         android:layout_marginLeft="@dimen/dimens_30"
         android:layout_marginTop="@dimen/dimens_24"
         android:text="text"/>
@@ -54,13 +54,13 @@
         android:layout_below="@+id/run_task"
         android:layout_marginTop="@dimen/dimens_24"
         android:text="@string/count_down"
-        android:textSize="@dimen/dimens_16px"/>
+        android:textSize="@dimen/dimens_textsize_16"/>
     <TextView
         android:id="@+id/point_state_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_16px"
+        android:textSize="@dimen/dimens_textsize_16"
         android:layout_toRightOf="@id/point_state_time_text"
         android:layout_marginLeft="@dimen/dimens_30"
         android:layout_below="@+id/run_task"
@@ -98,7 +98,7 @@
         android:background="@drawable/home_btn_zhixing"
         android:text="\n\nStop"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_21" />
+        android:textSize="@dimen/dimens_textsize_21" />
 
 
 </RelativeLayout>

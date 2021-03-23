@@ -7,8 +7,8 @@
 
     <RelativeLayout
         android:id="@+id/relative"
-        android:layout_width="@dimen/dimens_825"
-        android:layout_height="@dimen/dimens_576"
+        android:layout_width="@dimen/dialog_select_width"
+        android:layout_height="@dimen/dialog_select_height"
         android:layout_marginTop="@dimen/dimens_101"
         android:background="@drawable/addmap_bg_xiangqingkuang">
 
@@ -20,14 +20,14 @@
             android:textAlignment="center"
             android:text="地图名字"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_30"
+            android:textSize="@dimen/dimens_textsize_30"
             android:gravity="center_vertical"
             tools:ignore="RtlCompat"></TextView>
 
         <RelativeLayout
             android:id="@+id/map_dialog_relative_border"
-            android:layout_width="@dimen/dimens_574"
-            android:layout_height="@dimen/dimens_484"
+            android:layout_width="@dimen/map_dialog_relative_border_width"
+            android:layout_height="@dimen/map_dialog_relative_border_height"
             android:layout_below="@id/dialog_title"
             android:layout_toLeftOf="@+id/mylist">
 
@@ -65,7 +65,7 @@
         android:layout_marginRight="@dimen/dimen_26"
         android:textAlignment="center"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:layout_below="@+id/relative"
         tools:ignore="RtlCompat" />
 
@@ -80,7 +80,7 @@
         android:text="@string/all_ok"
         android:textAlignment="center"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         tools:ignore="RtlCompat"/>
 
 </RelativeLayout>

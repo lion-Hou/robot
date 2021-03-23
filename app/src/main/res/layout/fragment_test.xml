@@ -15,7 +15,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/test_relative1"
-        android:layout_width="400dp"
+        android:layout_width="@dimen/test_relative1_width"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
         >
@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/test_self_inspection"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="@dimen/test_self_inspection_height"
             android:textSize="15dp"
             android:scrollbars="vertical"
             android:singleLine="false"
@@ -41,8 +41,8 @@
 
         <RelativeLayout
             android:id="@+id/ultraSonic"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="@dimen/test_relative1_width"
+            android:layout_height="@dimen/ultraSonic_height"
             android:layout_below="@+id/test_self_inspection">
 
             <RelativeLayout
@@ -185,7 +185,7 @@
 
         <RelativeLayout
             android:id="@+id/test_relative3"
-            android:layout_width="140dp"
+            android:layout_width="@dimen/test_relative3_width"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_below="@+id/upper_computer_check">
@@ -193,57 +193,57 @@
         <Switch
             android:id="@+id/switch_voice"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="Voice"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             />
 
         <Switch
             android:id="@+id/switch_led"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="Led"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             android:layout_below="@+id/switch_voice"/>
 
         <Switch
             android:id="@+id/switch_uvc_all"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="UVC ALL"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             android:layout_below="@+id/switch_led"/>
 
         <Switch
             android:id="@+id/switch_uvc1"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="UVC A"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             android:layout_below="@+id/switch_uvc_all"/>
 
         <Switch
             android:id="@+id/switch_uvc2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="UVC B"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             android:layout_below="@+id/switch_uvc1"/>
 
         <Switch
             android:id="@+id/switch_uvc3"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="UVC C"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             android:layout_below="@+id/switch_uvc2"/>
 
         <Switch
             android:id="@+id/switch_uvc4"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/switch_voice_height"
             android:text="UVC D"
-            android:textSize="20dp"
+            android:textSize="@dimen/switch_voice_textsize"
             android:layout_below="@+id/switch_uvc3"/>
         </RelativeLayout>
 

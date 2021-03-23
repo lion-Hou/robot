@@ -11,7 +11,7 @@
         android:textColor="@color/text_color"
         android:text="wqewe"
         android:textAlignment="center"
-        android:textSize="@dimen/dimens_20"
+        android:textSize="@dimen/dimens_textsize_20"
         android:gravity="center_vertical"
         tools:ignore="RtlCompat" />
 </RelativeLayout>

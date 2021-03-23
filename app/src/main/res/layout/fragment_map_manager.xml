@@ -22,7 +22,7 @@
             android:gravity="center"
             android:text="@string/map_manage_name_text"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_textsize_18" />
 
         <TextView
             android:id="@+id/manager_selected"
@@ -34,13 +34,13 @@
             android:gravity="center"
             android:text="@string/map_manage_select_map"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_textsize_18" />
 
         <ImageView
-            android:layout_width="25px"
-            android:layout_height="25px"
-            android:layout_marginLeft="300px"
-            android:layout_marginTop="15px"
+            android:layout_width="@dimen/arrow_width"
+            android:layout_height="@dimen/arrow_width"
+            android:layout_marginLeft="@dimen/map_manager_arrow_marginLeft"
+            android:layout_marginTop="@dimen/map_manager_arrow_marginTop"
             android:layout_toRightOf="@+id/title_map"
             android:src="@drawable/home_ic_jiantou" />
 
@@ -53,7 +53,7 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_add_new_map_btn"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:textAllCaps="false"/>
     </RelativeLayout>
 
@@ -99,7 +99,7 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_rename"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:textAllCaps="false"/>
 
         <Button
@@ -110,7 +110,7 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_delete"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:textAllCaps="false"/>
 
         <Button
@@ -121,7 +121,7 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_edit"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:textAllCaps="false"/>
 
         <Button
@@ -132,7 +132,7 @@
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_back"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:textAllCaps="false"/>
     </LinearLayout>
 

@@ -17,17 +17,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:gravity="center"
             android:layout_marginTop="15px"
             android:text="@string/task_name"/>
         <EditText
             android:id="@+id/new_map_mapName_editText"
-            android:layout_width="@dimen/dimens_496"
+            android:layout_width="@dimen/new_task_editText_width"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"
             android:textColor="@color/edit_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:gravity="center"
             android:hint="@string/task_edit"
             android:textColorHint="@color/edit_color"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:text="@string/task_type"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:layout_marginTop="15px"/>
 
         <TextView
@@ -62,7 +62,7 @@
             android:gravity="center"
             android:text="@string/task_type_select"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_textsize_18" />
 
         <ImageView
             android:id="@+id/new_img1"
@@ -83,7 +83,7 @@
             android:gravity="center"
             android:text="@string/task_type_time"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_textsize_18" />
 
         <ImageView
             android:id="@+id/new_img2"
@@ -112,7 +112,7 @@
             android:singleLine="true"
             android:text="@string/task_type_week"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_textsize_18" />
 
         <ImageView
             android:id="@+id/new_img3"
@@ -133,7 +133,7 @@
         android:textColor="@color/text_color"
         android:layout_below="@+id/title2"
         android:layout_marginTop="30px"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:text="@string/task_piont"/>
 
     <Button
@@ -146,7 +146,7 @@
         android:layout_marginTop="15px"
         android:text="@string/selectPoint"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:background="@drawable/renwu_btn_xuandian"
         android:textAllCaps="false"/>
 
@@ -177,7 +177,7 @@
         android:layout_marginTop="15px"
         android:text="@string/new_map_save"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
     <Button
@@ -191,7 +191,7 @@
         android:layout_marginLeft="15px"
         android:text="@string/new_map_back"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
 </RelativeLayout>

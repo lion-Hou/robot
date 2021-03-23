@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150px"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:text="@string/task_name"/>
 
     <RelativeLayout
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:text="@string/map_manage_select_task"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"/>
+            android:textSize="@dimen/dimens_textsize_18"/>
         <ImageView
             android:layout_width="25px"
             android:layout_height="25px"
@@ -51,7 +51,7 @@
         android:layout_toRightOf="@id/title_title"
         android:text="@string/task_add"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
     <Button
@@ -64,7 +64,7 @@
         android:layout_toRightOf="@id/task_manage_new_task"
         android:text="@string/task_details"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
     <RelativeLayout
@@ -103,7 +103,7 @@
         android:layout_marginBottom="@dimen/dimens_51"
         android:text="@string/task_deit"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
     <Button
@@ -117,7 +117,7 @@
         android:layout_toRightOf="@+id/task_manage_edit"
         android:text="@string/task_delete"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
     <Button
@@ -131,7 +131,7 @@
         android:layout_marginBottom="@dimen/dimens_51"
         android:text="@string/task_back"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/dimens_18"
+        android:textSize="@dimen/dimens_textsize_18"
         android:textAllCaps="false"/>
 
 </RelativeLayout>

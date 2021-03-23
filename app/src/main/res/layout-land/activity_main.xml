@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimens_48"
-                android:textSize="@dimen/dimens_24"
+                android:textSize="@dimen/dimens_textsize_24"
                 android:layout_centerVertical="true"
                 android:textColor="@color/text_color"/>
 
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/net_time"
-                android:layout_marginLeft="260px"
+                android:layout_marginLeft="@dimen/dimens_260"
                 android:src="@drawable/home_ic_dianchi"
                 android:layout_centerVertical="true"/>
 
@@ -49,10 +49,10 @@
                 android:textColor="@color/text_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5px"
+                android:layout_marginTop="@dimen/dimens_5"
                 android:layout_marginLeft="@dimen/dimens_10"
                 android:layout_toRightOf="@id/battery"
-                android:textSize="@dimen/dimens_16px" />
+                android:textSize="@dimen/dimens_textsize_16" />
 
         </RelativeLayout>
 
@@ -63,32 +63,32 @@
             android:id="@+id/relative_main_image">
             <ImageView
                 android:id="@+id/robot_img"
-                android:layout_width="@dimen/dimens_246"
-                android:layout_height="346px"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="@dimen/dimens_119"
+                android:layout_width="@dimen/robot_img_width"
+                android:layout_height="@dimen/robot_img_height"
+                android:layout_marginTop="@dimen/robot_img_marginTop"
+                android:layout_marginLeft="@dimen/robot_img_marginLeft"
                 android:visibility="gone"
                 android:background="@drawable/home_ic_robot" />
 
 
             <FrameLayout
                 android:id="@+id/second_fragment"
-                android:layout_width="@dimen/dimens_246"
-                android:layout_height="@dimen/dimens_246"
-                android:layout_marginLeft="@dimen/dimens_119"
-                android:layout_marginTop="@dimen/dimens_41"
+                android:layout_width="@dimen/second_fragment_width"
+                android:layout_height="@dimen/second_fragment_width"
+                android:layout_marginLeft="@dimen/second_fragment_marginLeft"
+                android:layout_marginTop="@dimen/second_fragment_marginTop"
                 android:visibility="gone"
                 android:layout_below="@id/robot_img"/>
             <ImageView
                 android:id="@+id/main_image"
-                android:layout_width="290px"
-                android:layout_height="560px"
+                android:layout_width="@dimen/main_image_width"
+                android:layout_height="@dimen/main_image_height"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginStart="72dp"
-                android:layout_marginLeft="72dp"
+                android:layout_marginStart="@dimen/main_image_marginLeft"
+                android:layout_marginLeft="@dimen/main_image_marginLeft"
                 android:src="@drawable/addmap_big_robot"
-                android:layout_marginTop="60dp" />
+                android:layout_marginTop="@dimen/main_image_marginTop" />
         </RelativeLayout>
     <FrameLayout
         android:id="@+id/first_fragment"

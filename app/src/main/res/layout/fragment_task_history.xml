@@ -21,14 +21,14 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_toRightOf="@+id/his_run_all_task"
-             android:textSize="30px"
+             android:textSize="@dimen/dimens_textsize_30"
              android:textColor="@color/text_color"
              android:text="0"/>
          <TextView
              android:id="@+id/his_run_all_task"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:textSize="30px"
+             android:textSize="@dimen/dimens_textsize_30"
              android:textColor="@color/text_color"
              android:text="@string/run_all_task"/>
       </RelativeLayout>
@@ -45,7 +45,7 @@
              android:id="@+id/his_run_all_time"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:textSize="30px"
+             android:textSize="@dimen/dimens_textsize_30"
              android:textColor="@color/text_color"
              android:text="@string/run_all_time"/>
          <TextView
@@ -53,7 +53,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_toRightOf="@+id/his_run_all_time"
-             android:textSize="30px"
+             android:textSize="@dimen/dimens_textsize_30"
              android:textColor="@color/text_color"
              android:text="0"/>
       </RelativeLayout>
@@ -70,14 +70,14 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_toRightOf="@+id/his_run_all_area"
-             android:textSize="30px"
+             android:textSize="@dimen/dimens_textsize_30"
              android:textColor="@color/text_color"
              android:text="0"/>
          <TextView
              android:id="@+id/his_run_all_area"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:textSize="30px"
+             android:textSize="@dimen/dimens_textsize_30"
              android:textColor="@color/text_color"
              android:text="@string/run_all_area"/>
       </RelativeLayout>
@@ -105,7 +105,7 @@
        android:layout_height="@dimen/dimens_54"
        android:layout_marginTop="@dimen/dimens_38"
        android:textColor="@color/text_color"
-       android:textSize="@dimen/dimens_18"
+       android:textSize="@dimen/dimens_textsize_18"
        android:background="@drawable/home_btn_anniu"
        android:layout_alignParentRight="true"
        android:layout_marginRight="@dimen/dimens_102"

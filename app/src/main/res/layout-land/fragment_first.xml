@@ -16,7 +16,7 @@
             android:id="@+id/main_text_map"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimens_54"
-            android:textSize="@dimen/dimens_20"
+            android:textSize="@dimen/dimens_textsize_20"
             android:textColor="@color/text_color"
             android:text="@string/text_map"
             android:gravity="center_vertical" />
@@ -32,22 +32,22 @@
             android:text="@string/please_select_map"
             android:textAlignment="center"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18" />
+            android:textSize="@dimen/dimens_textsize_18" />
 
         <ImageView
-            android:layout_width="25px"
-            android:layout_height="25px"
+            android:layout_width="@dimen/arrow_width"
+            android:layout_height="@dimen/arrow_width"
             android:src="@drawable/home_ic_jiantou"
             android:layout_toRightOf="@id/main_text_map"
-            android:layout_marginLeft="315px"
-            android:layout_marginTop="10px"
+            android:layout_marginLeft="@dimen/dimens_315"
+            android:layout_marginTop="@dimen/dimens_10"
             />
         <TextView
             android:id="@+id/main_text_task"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimens_54"
             android:layout_below="@id/main_text_map"
-            android:textSize="@dimen/dimens_20"
+            android:textSize="@dimen/dimens_textsize_20"
             android:textColor="@color/text_color"
             android:layout_marginTop="@dimen/dimens_29"
             android:gravity="center_vertical"
@@ -59,13 +59,13 @@
             android:layout_height="@dimen/dimens_54"
             android:layout_below="@id/main_text_map"
             android:textColor="@color/text_color"
-            android:layout_marginLeft="@dimen/dimens_24"
+            android:layout_marginLeft="@dimen/main_spinner_task_marginleft"
             android:layout_marginTop="@dimen/dimens_29"
             android:layout_toRightOf="@+id/main_text_task"
             android:background="@drawable/home_bg_xuanzekuang"
             android:textAlignment="center"
             android:text="@string/map_manage_select_task"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_20"
             android:gravity="center"
             android:singleLine="true"
             android:scrollHorizontally="true"
@@ -75,20 +75,20 @@
             android:marqueeRepeatLimit="marquee_forever"/>
 
         <ImageView
-            android:layout_width="25px"
-            android:layout_height="25px"
+            android:layout_width="@dimen/arrow_width"
+            android:layout_height="@dimen/arrow_width"
             android:src="@drawable/home_ic_jiantou"
             android:layout_toRightOf="@+id/main_text_task"
             android:layout_below="@id/main_text_map"
-            android:layout_marginLeft="315px"
-            android:layout_marginTop="40px"
+            android:layout_marginLeft="@dimen/dimens_315"
+            android:layout_marginTop="@dimen/dimens_40"
             />
         <Button
             android:id="@+id/main_execute"
             android:layout_width="@dimen/dimens_137"
             android:layout_height="@dimen/dimens_137"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_21"
+            android:textSize="@dimen/dimens_textsize_21"
             android:layout_marginLeft="@dimen/dimens_33"
             android:background="@drawable/home_btn_zhixing"
             android:layout_toRightOf="@+id/main_spinner_task"
@@ -106,8 +106,8 @@
 
         <RelativeLayout
             android:id="@+id/main_history_task"
-            android:layout_width="180px"
-            android:layout_height="200px"
+            android:layout_width="@dimen/dimens_180"
+            android:layout_height="@dimen/dimens_200"
             android:layout_marginTop="@dimen/dimens_26"
             android:layout_marginLeft="@dimen/dimens_10"
             android:background="@drawable/btn_gb_main_history">
@@ -115,7 +115,7 @@
                 android:id="@+id/run_all_task_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="80px"
+                android:textSize="@dimen/dimens_textsize_80"
                 android:textColor="@color/text_color"
                 android:layout_centerHorizontal="true"
                 android:text="0"/>
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/run_all_task_size"
-                android:textSize="40px"
+                android:textSize="@dimen/dimens_textsize_40"
                 android:textColor="@color/text_color"
                 android:text="@string/run_all_task"
                 android:layout_centerHorizontal="true"/>
@@ -132,19 +132,19 @@
 
         <RelativeLayout
             android:id="@+id/main_history_time"
-            android:layout_width="180px"
-            android:layout_height="200px"
+            android:layout_width="@dimen/dimens_180"
+            android:layout_height="@dimen/dimens_200"
             android:background="@drawable/btn_gb_main_history"
             android:layout_marginTop="@dimen/dimens_26"
             android:layout_toRightOf="@+id/main_history_task"
-            android:layout_marginLeft="@dimen/dimens_21">
+            android:layout_marginLeft="@dimen/main_history_time_marginleft">
 
             <TextView
                 android:id="@+id/run_all_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hours"
-                android:textSize="40px"
+                android:textSize="@dimen/dimens_textsize_40"
                 android:textColor="@color/text_color"
                 android:text="@string/run_all_time"
                 android:layout_centerHorizontal="true"/>
@@ -152,7 +152,7 @@
                 android:id="@+id/hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="80px"
+                android:textSize="@dimen/dimens_textsize_80"
                 android:textColor="@color/text_color"
                 android:layout_centerHorizontal="true"
                 android:text="0"/>
@@ -160,17 +160,17 @@
 
         <RelativeLayout
             android:id="@+id/main_history_area"
-            android:layout_width="180px"
-            android:layout_height="200px"
+            android:layout_width="@dimen/dimens_180"
+            android:layout_height="@dimen/dimens_200"
             android:background="@drawable/btn_gb_main_history"
             android:layout_marginTop="@dimen/dimens_26"
             android:layout_toRightOf="@+id/main_history_time"
-            android:layout_marginLeft="@dimen/dimens_21">
+            android:layout_marginLeft="@dimen/main_history_time_marginleft">
             <TextView
                 android:id="@+id/run_all_area_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="80px"
+                android:textSize="@dimen/dimens_textsize_80"
                 android:textColor="@color/text_color"
                 android:layout_centerHorizontal="true"
                 android:text="0"/>
@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/run_all_area_size"
-                android:textSize="40px"
+                android:textSize="@dimen/dimens_textsize_40"
                 android:textColor="@color/text_color"
                 android:text="@string/run_all_area"
                 android:layout_centerHorizontal="true"/>
@@ -199,7 +199,7 @@
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
+            android:textSize="@dimen/dimens_textsize_18"
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map"
             android:textAllCaps="false"/>
@@ -209,8 +209,8 @@
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:layout_marginLeft="@dimen/dimen_26"
+            android:textSize="@dimen/dimens_textsize_18"
+            android:layout_marginLeft="@dimen/main_task_marginleft"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_map"
             android:text="@string/task"
@@ -221,8 +221,8 @@
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:layout_marginLeft="@dimen/dimen_26"
+            android:textSize="@dimen/dimens_textsize_18"
+            android:layout_marginLeft="@dimen/main_task_marginleft"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_task"
             android:text="@string/history"
@@ -233,8 +233,8 @@
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_18"
-            android:layout_marginLeft="@dimen/dimen_26"
+            android:textSize="@dimen/dimens_textsize_18"
+            android:layout_marginLeft="@dimen/main_task_marginleft"
             android:background="@drawable/home_btn_anniu"
             android:layout_toRightOf="@+id/main_history"
             android:text="@string/settings"
