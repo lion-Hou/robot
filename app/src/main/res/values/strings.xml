@@ -46,6 +46,7 @@
     <string name="edit_map_name_text">Map Name</string>
     <string name="map_edit_charging_btn">Set Charging Point</string>
     <string name="map_edit_virtual_wall">Add Virtual Wall</string>
+    <string name="map_exit_edit_virtual_wall">Exit virtual wall editing</string>
     <string name="map_edit_position">Set Task Point</string>
     <string name="map_edit_save">Save Virtual wall</string>
     <string name="map_edit_back">Back</string>
