@@ -47,7 +47,6 @@ import androidx.fragment.app.Fragment;
 import com.example.robot.MainActivity;
 import com.example.robot.R;
 import com.example.robot.bean.DrawLineBean;
-import com.example.robot.bean.MapOperationStepsBean;
 import com.example.robot.bean.Point;
 import com.example.robot.content.Content;
 import com.example.robot.content.EventBusMessage;
