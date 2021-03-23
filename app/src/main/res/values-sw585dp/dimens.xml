@@ -104,4 +104,24 @@
     <dimen name="arrow_width">25px</dimen>
     <dimen name="map_manager_arrow_marginLeft">300px</dimen>
     <dimen name="map_manager_arrow_marginTop">15px</dimen>
+    <dimen name="add_point_title_marginTop">80px</dimen>
+    <dimen name="edit_mapname_marginLeft">20px</dimen>
+    <dimen name="map_list_border_width">170px</dimen>
+    <dimen name="map_list_border_marginEnd">102px</dimen>
+    <dimen name="save_charging_btn_width">116px</dimen>
+    <dimen name="history_recyclerview_marginTop">21px</dimen>
+    <dimen name="dialog_select_listview_width">219px</dimen>
+    <dimen name="dialog_select_listview_height">484px</dimen>
+    <dimen name="edit_img1_marginLeft">240px</dimen>
+    <dimen name="edit_img1_marginTop">15px</dimen>
+    <dimen name="task_type_select_edit_width">246px</dimen>
+    <dimen name="task_type_select_edit_height">54px</dimen>
+    <dimen name="task_type_select_edit_marginLeft">40px</dimen>
+    <dimen name="task_type_selectTime_edit_marginLeft">18px</dimen>
+    <dimen name="edit_img2_marginLeft">240px</dimen>
+    <dimen name="edit_img2_marginTop">15px</dimen>
+    <dimen name="task_type_selectWeek_edit_marginLeft">18px</dimen>
+    <dimen name="task_type_selectWeek_edit_marginTop">15px</dimen>
+    <dimen name="edit_img3_marginLeft">240px</dimen>
+    <dimen name="edit_img3_marginTop">45px</dimen>
 </resources>

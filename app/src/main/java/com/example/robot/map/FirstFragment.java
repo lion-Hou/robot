@@ -76,7 +76,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 
 
     private Context mContext;
-    public static EmptyClient emptyClient;
+//    public static EmptyClient emptyClient;
     private GsonUtils gsonUtils;
     private String[] taskNameList;
     public View view;
@@ -148,7 +148,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         Log.d(TAG, "initView: SourireG"+MainActivity.emptyClient.toString());
-        if (!MainActivity.emptyClient.isConnecting()){
+        if (MainActivity.emptyClient == null || !MainActivity.emptyClient.isConnecting()){
             Log.d(TAG,"LINK_ERROR");
         }else {
             Log.d(TAG,"LINK_ok");

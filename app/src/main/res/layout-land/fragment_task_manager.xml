@@ -32,9 +32,9 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_textsize_18"/>
         <ImageView
-            android:layout_width="25px"
-            android:layout_height="25px"
-            android:layout_marginLeft="300px"
+            android:layout_width="@dimen/arrow_width"
+            android:layout_height="@dimen/arrow_width"
+            android:layout_marginLeft="@dimen/map_manager_arrow_marginLeft"
             android:layout_marginTop="151px"
             android:src="@drawable/home_ic_jiantou" />
     </RelativeLayout>

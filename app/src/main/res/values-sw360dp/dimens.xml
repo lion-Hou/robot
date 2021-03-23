@@ -57,7 +57,7 @@
     <dimen name="dimens_40">11dp</dimen>
     <dimen name="dimens_180">90dp</dimen>
     <dimen name="dimens_200">100dp</dimen>
-    <dimen name="dimens_textsize_16">10sp</dimen>
+    <dimen name="dimens_textsize_16">12sp</dimen>
     <dimen name="dimens_textsize_18">12sp</dimen>
     <dimen name="dimens_textsize_20">12sp</dimen>
     <dimen name="dimens_textsize_21">12sp</dimen>
@@ -104,4 +104,24 @@
     <dimen name="arrow_width">12dp</dimen>
     <dimen name="map_manager_arrow_marginLeft">210dp</dimen>
     <dimen name="map_manager_arrow_marginTop">6dp</dimen>
+    <dimen name="add_point_title_marginTop">30dp</dimen>
+    <dimen name="edit_mapname_marginLeft">10dp</dimen>
+    <dimen name="map_list_border_width">60dp</dimen>
+    <dimen name="map_list_border_marginEnd">60dp</dimen>
+    <dimen name="save_charging_btn_width">100dp</dimen>
+    <dimen name="history_recyclerview_marginTop">5dp</dimen>
+    <dimen name="dialog_select_listview_width">90dp</dimen>
+    <dimen name="dialog_select_listview_height">250dp</dimen>
+    <dimen name="edit_img1_marginLeft">108dp</dimen>
+    <dimen name="edit_img1_marginTop">3dp</dimen>
+    <dimen name="task_type_select_edit_width">120dp</dimen>
+    <dimen name="task_type_select_edit_height">30dp</dimen>
+    <dimen name="task_type_select_edit_marginLeft">40px</dimen>
+    <dimen name="task_type_selectTime_edit_marginLeft">10dp</dimen>
+    <dimen name="edit_img2_marginLeft">120dp</dimen>
+    <dimen name="edit_img2_marginTop">3dp</dimen>
+    <dimen name="task_type_selectWeek_edit_marginLeft">10dp</dimen>
+    <dimen name="task_type_selectWeek_edit_marginTop">10dp</dimen>
+    <dimen name="edit_img3_marginLeft">120dp</dimen>
+    <dimen name="edit_img3_marginTop">28dp</dimen>
 </resources>

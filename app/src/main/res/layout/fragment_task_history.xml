@@ -97,7 +97,7 @@
        android:layout_height="match_parent"
        android:layout_below="@+id/datePicker"
        android:layout_above="@id/hitory_back"
-       android:layout_marginTop="@dimen/dimens_21"/>
+       android:layout_marginTop="@dimen/history_recyclerview_marginTop"/>
 
    <Button
        android:id="@+id/hitory_back"
