@@ -621,6 +621,7 @@ public class MapEditFragment extends Fragment {
                 e.printStackTrace();
             }
         } else if (messageEvent.getState() == 40002) {//获取虚拟墙
+            mapRelative.removeView(bDrawlVW);
             for (int k = 0; k < Content.list.size(); k++) {
                 if (Content.list.get(k).getMap_Name().equals(Content.map_Name)) {
                     Log.d("zdzd555", "" + Content.list.get(k).getResolution());
@@ -725,6 +726,7 @@ public class MapEditFragment extends Fragment {
                 } else {
                     addVirtualWall();
                 }
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
                 break;
             case R.id.back_btn:
                 getActivity().getSupportFragmentManager()
