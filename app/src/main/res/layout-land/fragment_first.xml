@@ -85,8 +85,8 @@
             />
         <Button
             android:id="@+id/main_execute"
-            android:layout_width="@dimen/dimens_137"
-            android:layout_height="@dimen/dimens_137"
+            android:layout_width="@dimen/run_button_width"
+            android:layout_height="@dimen/run_button_width"
             android:textColor="@color/text_color"
             android:textSize="@dimen/dimens_textsize_21"
             android:layout_marginLeft="@dimen/dimens_33"

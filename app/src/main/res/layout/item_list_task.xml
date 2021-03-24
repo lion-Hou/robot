@@ -13,7 +13,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_16px"/>
+            android:textSize="@dimen/dimens_textsize_16"/>
 
         <TextView
             android:id="@+id/state_name"
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_16px"/>
+            android:textSize="@dimen/dimens_textsize_16"/>
 
         <TextView
             android:id="@+id/state_time"
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_16px"/>
+            android:textSize="@dimen/dimens_textsize_16"/>
 
         <TextView
             android:id="@+id/state_state"
@@ -43,7 +43,7 @@
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimens_16px"/>
+            android:textSize="@dimen/dimens_textsize_16"/>
 
 
 </LinearLayout>

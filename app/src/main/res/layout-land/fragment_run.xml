@@ -70,13 +70,13 @@
     <RelativeLayout
         android:id="@+id/run"
         android:layout_width="wrap_content"
-        android:layout_height="350px"
+        android:layout_height="@dimen/run_list_height"
         android:layout_below="@id/point_state_time_text"
         android:layout_marginTop="@dimen/dimens_30"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="127px"
-        android:layout_marginRight="127px">
+        android:layout_marginEnd="@dimen/run_list_marginEnd"
+        android:layout_marginRight="@dimen/run_list_marginEnd">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/count_list"
@@ -88,12 +88,12 @@
 
     <Button
         android:id="@+id/task_run_edit"
-        android:layout_width="@dimen/dimens_137"
-        android:layout_height="@dimen/dimens_137"
+        android:layout_width="@dimen/run_button_width"
+        android:layout_height="@dimen/run_button_width"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="127px"
-        android:layout_marginRight="127px"
+        android:layout_marginEnd="@dimen/run_list_marginEnd"
+        android:layout_marginRight="@dimen/run_list_marginEnd"
         android:layout_marginTop="@dimen/dimens_100"
         android:background="@drawable/home_btn_zhixing"
         android:text="\n\nStop"

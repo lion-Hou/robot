@@ -124,4 +124,9 @@
     <dimen name="task_type_selectWeek_edit_marginTop">15px</dimen>
     <dimen name="edit_img3_marginLeft">240px</dimen>
     <dimen name="edit_img3_marginTop">45px</dimen>
+    <dimen name="run_list_height">350px</dimen>
+    <dimen name="run_list_marginEnd">127px</dimen>
+    <dimen name="run_button_width">137px</dimen>
+    <dimen name="details_popup_width">300px</dimen>
+    <dimen name="details_popup_height">400px</dimen>
 </resources>
