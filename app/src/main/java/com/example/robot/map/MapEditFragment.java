@@ -816,8 +816,8 @@ public class MapEditFragment extends Fragment {
         public boolean onTouchEvent(MotionEvent event) {
             List<DrawLineBean> drawLineBeanList = new ArrayList<>();
 
-            double mapWidth = (double) editMapImage.getWidth();
-            double mapHeight = (double) editMapImage.getHeight();
+            double mapWidth = (double) mBitmapWidth;
+            double mapHeight = (double) mBitmapHeight;
             double gridHeight = Content.list.get(index).getGridHeight();
             double gridWidth = Content.list.get(index).getGridWidth();
             //double originX = Content.list.get(index).getOriginX();
@@ -1271,9 +1271,9 @@ public class MapEditFragment extends Fragment {
     private void loadMap(Bitmap mBitmap) {
 
         editMapImage.setImageBitmap(mBitmap);
-        mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        editMapImage.setLayoutParams(layoutParams);
+      //  mapRelative.setLayoutParams(new RelativeLayout.LayoutParams((int) mBitmapWidth, (int) mBitmapHeight));
+      //  RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+      //  editMapImage.setLayoutParams(layoutParams);
 
 
     }
