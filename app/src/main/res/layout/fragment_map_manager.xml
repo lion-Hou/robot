@@ -11,7 +11,7 @@
         android:id="@+id/map_manage_line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="137px"
+        android:layout_marginTop="@dimen/map_manage_line1_marginTop"
         android:orientation="horizontal">
 
         <TextView
@@ -26,8 +26,8 @@
 
         <TextView
             android:id="@+id/manager_selected"
-            android:layout_width="@dimen/dimens_345"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_spinner_map_width"
+            android:layout_height="@dimen/main_spinner_map_height"
             android:layout_marginLeft="10px"
             android:layout_toRightOf="@+id/title_map"
             android:background="@drawable/home_bg_xuanzekuang"
@@ -46,8 +46,8 @@
 
         <Button
             android:id="@+id/manager_newMap"
-            android:layout_width="@dimen/dimens_102"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginLeft="31px"
             android:layout_toRightOf="@+id/manager_selected"
             android:background="@drawable/home_btn_anniu"
@@ -93,8 +93,8 @@
 
         <Button
             android:id="@+id/manager_rename"
-            android:layout_width="@dimen/dimens_102"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginLeft="6px"
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_rename"
@@ -104,8 +104,8 @@
 
         <Button
             android:id="@+id/manager_delete"
-            android:layout_width="@dimen/dimens_102"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginLeft="36px"
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_delete"
@@ -115,8 +115,8 @@
 
         <Button
             android:id="@+id/manager_edit"
-            android:layout_width="@dimen/dimens_102"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginLeft="36px"
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_edit"
@@ -126,8 +126,8 @@
 
         <Button
             android:id="@+id/manager_back"
-            android:layout_width="@dimen/dimens_102"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
             android:layout_marginLeft="36px"
             android:background="@drawable/home_btn_anniu"
             android:text="@string/map_manage_back"

@@ -22,8 +22,8 @@
         <TextView
             android:id="@+id/test_self_inspection_title"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:textSize="25dp"
+            android:layout_height="@dimen/test_self_inspection_title_height"
+            android:textSize="@dimen/test_self_inspection_title_textSize"
             android:gravity="center"
             android:text="@string/self_test_of_lower_computer"/>
         
@@ -178,8 +178,8 @@
         <TextView
             android:id="@+id/upper_computer_check"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:textSize="25dp"
+            android:layout_height="@dimen/test_self_inspection_title_height"
+            android:textSize="@dimen/test_self_inspection_title_textSize"
             android:gravity="center"
             android:text="@string/upper_computer_check"/>
 

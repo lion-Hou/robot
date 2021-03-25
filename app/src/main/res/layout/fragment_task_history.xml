@@ -86,7 +86,7 @@
    <DatePicker
        android:id="@+id/datePicker"
        android:layout_width="wrap_content"
-       android:layout_height="208dp"
+       android:layout_height="@dimen/dataPicker_height"
        android:layout_below="@+id/history_log"
        android:layout_marginTop="@dimen/dimens_21"
        android:background="@color/list_divider" />
@@ -101,8 +101,8 @@
 
    <Button
        android:id="@+id/hitory_back"
-       android:layout_width="@dimen/dimens_102"
-       android:layout_height="@dimen/dimens_54"
+       android:layout_width="@dimen/main_button_width"
+       android:layout_height="@dimen/main_button_height"
        android:layout_marginTop="@dimen/dimens_38"
        android:textColor="@color/text_color"
        android:textSize="@dimen/dimens_textsize_18"

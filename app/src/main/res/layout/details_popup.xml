@@ -9,8 +9,8 @@
         android:id="@+id/details_task_map_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop1"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
         android:text="@string/map"/>
@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
-        android:layout_marginTop="50px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop1"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:layout_toRightOf="@id/details_task_map_text"/>
 
 
@@ -29,8 +29,8 @@
         android:id="@+id/details_task_task_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop2"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
         android:layout_below="@+id/details_task_map_text"
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop2"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:layout_below="@+id/details_task_map_text"
         android:layout_toRightOf="@id/details_task_map_text" />
 
@@ -54,8 +54,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop2"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:layout_below="@+id/details_task_task_text"
         android:text="@string/task_type"/>
     <TextView
@@ -64,8 +64,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop2"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:layout_below="@+id/details_task_task_text"
         android:layout_toRightOf="@id/details_task_type_text"/>
 
@@ -75,16 +75,16 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop2"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:layout_below="@+id/details_task_type_text"
         android:text="@string/task_time"/>
     <TextView
         android:id="@+id/details_task_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="20px"
+        android:layout_marginTop="@dimen/details_popup_marginTop2"
+        android:layout_marginLeft="@dimen/details_popup_marginLeft"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"
         android:layout_below="@+id/details_task_type_text"

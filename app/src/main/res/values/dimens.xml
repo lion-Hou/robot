@@ -130,6 +130,35 @@
     <dimen name="run_button_width">137px</dimen>
     <dimen name="details_popup_width">300px</dimen>
     <dimen name="details_popup_height">400px</dimen>
-
+    <dimen name="fragment_first_marginTop">156px</dimen>
+    <dimen name="main_text_map_height">54px</dimen>
+    <dimen name="main_spinner_map_width">345px</dimen>
+    <dimen name="main_spinner_map_height">54px</dimen>
+    <dimen name="main_spinner_map_marginLeft">18dp</dimen>
+    <dimen name="main_spinner_task_marginTop">29px</dimen>
+    <dimen name="main_arrow_marginTop">10px</dimen>
+    <dimen name="main_arrow_marginLeft">315px</dimen>
+    <dimen name="main_task_arrow_marginTop">40px</dimen>
+    <dimen name="main_execute_marginLeft">33px</dimen>
+    <dimen name="main_log_width">600px</dimen>
+    <dimen name="main_log_height">247px</dimen>
+    <dimen name="main_log_marginTop">97px</dimen>
+    <dimen name="main_history_task_width">180px</dimen>
+    <dimen name="main_history_task_height">200px</dimen>
+    <dimen name="main_history_task_marginLeft">10px</dimen>
+    <dimen name="main_history_task_marginTop">26px</dimen>
+    <dimen name="main_buttons_marginTop">23px</dimen>
+    <dimen name="main_button_width">102px</dimen>
+    <dimen name="main_button_height">54px</dimen>
+    <dimen name="main_button_marginTop">23px</dimen>
+    <dimen name="main_button_marginLeft">26px</dimen>
+    <dimen name="details_popup_marginTop1">50px</dimen>
+    <dimen name="details_popup_marginTop2">10px</dimen>
+    <dimen name="details_popup_marginLeft">20px</dimen>
+    <dimen name="history_item_height">50dp</dimen>
+    <dimen name="dataPicker_height">208dp</dimen>
+    <dimen name="map_manage_line1_marginTop">137px</dimen>
+    <dimen name="test_self_inspection_title_height">80dp</dimen>
+    <dimen name="test_self_inspection_title_textSize">25dp</dimen>
 
 </resources>
