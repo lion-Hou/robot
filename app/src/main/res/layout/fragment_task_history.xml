@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/dimens_129"
-    android:layout_marginRight="@dimen/dimens_84"
+    android:layout_marginRight="@dimen/fragment_task_history_marginRight"
     tools:context=".map.TaskHistoryFragment">
 
    <RelativeLayout
@@ -108,8 +108,8 @@
        android:textSize="@dimen/dimens_textsize_18"
        android:background="@drawable/home_btn_anniu"
        android:layout_alignParentRight="true"
-       android:layout_marginRight="@dimen/dimens_102"
-       android:layout_marginBottom="@dimen/dimens_91"
+       android:layout_marginRight="@dimen/hitory_back_marginRight"
+       android:layout_marginBottom="@dimen/hitory_back_marginBottom"
        android:layout_alignParentBottom="true"
        android:text="@string/task_back"
        android:textAllCaps="false"/>

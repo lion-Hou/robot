@@ -160,5 +160,23 @@
     <dimen name="map_manage_line1_marginTop">137px</dimen>
     <dimen name="test_self_inspection_title_height">80dp</dimen>
     <dimen name="test_self_inspection_title_textSize">25dp</dimen>
+    <dimen name="map_manage_line2_button_marginLeft">36px</dimen>
+    <dimen name="map_new_buttons_marginTop">70px</dimen>
+    <dimen name="new_map_scan_marginLeft">25px</dimen>
+    <dimen name="line1_marginBottom">51px</dimen>
+    <dimen name="line1_marginTop">17px</dimen>
+    <dimen name="line1_marginEnd">102px</dimen>
+    <dimen name="line1_marginRight">102px</dimen>
+    <dimen name="save_btn_marginTop">17px</dimen>
+    <dimen name="save_btn_marginRight">11px</dimen>
+    <dimen name="fragment_task_history_marginRight">84px</dimen>
+    <dimen name="hitory_back_marginRight">102px</dimen>
+    <dimen name="hitory_back_marginBottom">51px</dimen>
+    <dimen name="task_manage_map_relative_border_marginEnd">127px</dimen>
+    <dimen name="task_manage_edit_marginLeft">310px</dimen>
+    <dimen name="task_manage_edit_marginBottom">51px</dimen>
+    <dimen name="task_manage_delete_marginLeft">9px</dimen>
+
+
 
 </resources>

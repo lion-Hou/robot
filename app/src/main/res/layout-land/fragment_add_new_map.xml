@@ -32,7 +32,7 @@
         android:layout_height="@dimen/new_map_linearlayout_height"
         android:orientation="horizontal"
         android:layout_below="@+id/new_map_relativeLayout"
-        android:layout_marginTop="70px">
+        android:layout_marginTop="@dimen/map_new_buttons_marginTop">
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,10 +56,10 @@
 
         <Button
             android:id="@+id/new_map_scan"
-            android:layout_width="@dimen/dimens_102"
-            android:layout_height="@dimen/dimens_54"
+            android:layout_width="@dimen/main_button_width"
+            android:layout_height="@dimen/main_button_height"
             android:textSize="@dimen/dimens_textsize_18"
-            android:layout_marginLeft="25px"
+            android:layout_marginLeft="@dimen/new_map_scan_marginLeft"
             android:background="@drawable/home_btn_anniu"
             android:textColor="@color/text_color"
             android:text="@string/new_map_scan"
@@ -69,7 +69,7 @@
             android:id="@+id/new_map_save"
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
-            android:layout_marginLeft="9px"
+            android:layout_marginLeft="@dimen/details_popup_marginLeft"
             android:textSize="@dimen/dimens_textsize_18"
             android:background="@drawable/home_btn_anniu"
             android:textColor="@color/text_color"
@@ -80,7 +80,7 @@
             android:id="@+id/new_map_back"
             android:layout_width="@dimen/dimens_102"
             android:layout_height="@dimen/dimens_54"
-            android:layout_marginLeft="9px"
+            android:layout_marginLeft="@dimen/new_map_scan_marginLeft"
             android:textSize="@dimen/dimens_textsize_18"
             android:background="@drawable/home_btn_anniu"
             android:textColor="@color/text_color"
