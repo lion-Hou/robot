@@ -138,8 +138,8 @@
 
     <Button
         android:id="@+id/addtask_select_point_edit"
-        android:layout_width="@dimen/dimens_496"
-        android:layout_height="@dimen/dimens_54"
+        android:layout_width="@dimen/addtask_select_point_width"
+        android:layout_height="@dimen/addtask_select_point_height"
         android:layout_below="@+id/title2_edit"
         android:layout_marginLeft="40px"
         android:layout_toRightOf="@+id/edit_text1"
@@ -152,7 +152,7 @@
 
     <RelativeLayout
         android:id="@+id/title3_edit"
-        android:layout_width="580px"
+        android:layout_width="@dimen/title3_width"
         android:layout_height="280px"
         android:layout_below="@+id/addtask_select_point_edit"
         android:layout_marginTop="33px"
@@ -169,9 +169,9 @@
 
     <Button
         android:id="@+id/task_new_save_edit"
-        android:layout_width="@dimen/dimens_102"
-        android:layout_height="@dimen/dimens_54"
-        android:layout_marginLeft="363px"
+        android:layout_width="@dimen/main_button_width"
+        android:layout_height="@dimen/main_button_height"
+        android:layout_marginLeft="@dimen/task_new_save_marginLeft"
         android:background="@drawable/home_btn_anniu"
         android:layout_below="@+id/title3_edit"
         android:layout_marginTop="15px"
@@ -182,13 +182,13 @@
 
     <Button
         android:id="@+id/task_new_back_edit_edit"
-        android:layout_width="@dimen/dimens_102"
-        android:layout_height="@dimen/dimens_54"
+        android:layout_width="@dimen/main_button_width"
+        android:layout_height="@dimen/main_button_height"
         android:background="@drawable/home_btn_anniu"
         android:layout_below="@+id/title3_edit"
         android:layout_marginTop="15px"
         android:layout_toRightOf="@id/task_new_save_edit"
-        android:layout_marginLeft="15px"
+        android:layout_marginLeft="@dimen/task_new_back_marginLeft"
         android:text="@string/new_map_back"
         android:textColor="@color/text_color"
         android:textSize="@dimen/dimens_textsize_18"

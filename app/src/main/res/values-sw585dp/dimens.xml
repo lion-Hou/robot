@@ -81,6 +81,7 @@
     <dimen name="settings_fragment_width">1010px</dimen>
     <dimen name="settings_fragment_height">472px</dimen>
     <dimen name="settings_button_height">48px</dimen>
+    <dimen name="settings_button_width">167px</dimen>
     <dimen name="test_self_inspection_height">300dp</dimen>
     <dimen name="ultraSonic_height">400dp</dimen>
     <dimen name="test_relative1_width">400dp</dimen>
@@ -160,4 +161,35 @@
     <dimen name="map_manage_line1_marginTop">137px</dimen>
     <dimen name="test_self_inspection_title_height">80dp</dimen>
     <dimen name="test_self_inspection_title_textSize">25dp</dimen>
+    <dimen name="map_manage_line2_button_marginLeft">36px</dimen>
+    <dimen name="map_new_buttons_marginTop">70px</dimen>
+    <dimen name="new_map_scan_marginLeft">25px</dimen>
+    <dimen name="line1_marginBottom">51px</dimen>
+    <dimen name="line1_marginTop">17px</dimen>
+    <dimen name="line1_marginEnd">102px</dimen>
+    <dimen name="line1_marginRight">102px</dimen>
+    <dimen name="save_btn_marginTop">17px</dimen>
+    <dimen name="save_btn_marginRight">11px</dimen>
+    <dimen name="fragment_task_history_marginRight">84px</dimen>
+    <dimen name="hitory_back_marginRight">102px</dimen>
+    <dimen name="hitory_back_marginBottom">51px</dimen>
+    <dimen name="task_manage_map_relative_border_marginEnd">127px</dimen>
+    <dimen name="task_manage_edit_marginLeft">310px</dimen>
+    <dimen name="task_manage_edit_marginBottom">51px</dimen>
+    <dimen name="task_manage_delete_marginLeft">9px</dimen>
+    <dimen name="addtask_select_point_width">496px</dimen>
+    <dimen name="title3_width">580px</dimen>
+    <dimen name="task_new_save_marginLeft">363px</dimen>
+    <dimen name="task_new_back_marginLeft">15px</dimen>
+    <dimen name="addtask_select_point_height">54px</dimen>
+    <dimen name="settings_fragment_marginTop">93px</dimen>
+    <dimen name="settings_fragment_marginLeft">135px</dimen>
+    <dimen name="settings_electricityQuantity_width">280dp</dimen>
+    <dimen name="settings_item_title_width">350dp</dimen>
+    <dimen name="settings_robotSpeed_width">300dp</dimen>
+    <dimen name="settings_debug_width">300dp</dimen>
+    <dimen name="switch_pile_width">300dp</dimen>
+    <dimen name="settings_button_marginRight">135px</dimen>
+    <dimen name="settings_reset_robot_marginRight">38px</dimen>
+
 </resources>

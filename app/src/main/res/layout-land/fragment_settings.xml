@@ -11,8 +11,8 @@
         android:layout_width="@dimen/settings_fragment_width"
         android:layout_height="@dimen/settings_fragment_height"
         android:background="@drawable/setting_bg_kuang"
-        android:layout_marginTop="@dimen/dimens_93"
-        android:layout_marginLeft="@dimen/dimens_135">
+        android:layout_marginTop="@dimen/settings_fragment_marginTop"
+        android:layout_marginLeft="@dimen/settings_fragment_marginLeft">
 
         <TextView
             android:id="@+id/settings_title"
@@ -29,7 +29,7 @@
                 android:layout_marginLeft="@dimen/dimens_51"
                 android:layout_below="@id/settings_title"
                 android:id="@+id/electricityQuantityTV"
-                android:layout_width="350dp"
+                android:layout_width="@dimen/settings_item_title_width"
                 android:layout_height="45dp"
                 android:text="@string/settings_electricity_quantity"
                 android:textSize="@dimen/dimens_textsize_30"
@@ -39,7 +39,7 @@
             <SeekBar
                 android:layout_below="@id/settings_title"
                 android:id="@+id/settings_electricityQuantity"
-                android:layout_width="280dp"
+                android:layout_width="@dimen/settings_electricityQuantity_width"
                 android:layout_height="45dp"
                 android:max="90"
                 android:min="20"
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/volumeTV"
-                android:layout_width="350dp"
+                android:layout_width="@dimen/settings_item_title_width"
                 android:layout_height="45dp"
                 android:text="@string/settings_volume"
                 android:textSize="@dimen/dimens_textsize_30"
@@ -68,7 +68,7 @@
 
             <SeekBar
                 android:id="@+id/settings_volume"
-                android:layout_width="280dp"
+                android:layout_width="@dimen/settings_electricityQuantity_width"
                 android:layout_height="45dp"
                 android:max="15"
                 android:layout_toRightOf="@+id/electricityQuantityTV"
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/robotSpeedTV"
-                android:layout_width="350dp"
+                android:layout_width="@dimen/settings_item_title_width"
                 android:layout_height="45dp"
                 android:text="@string/settings_playPathSpeed_speed"
                 android:textSize="@dimen/dimens_textsize_30"
@@ -95,7 +95,7 @@
                 android:layout_below="@+id/volumeTV" />
             <Spinner
                 android:id="@+id/settings_robotSpeed"
-                android:layout_width="300dp"
+                android:layout_width="@dimen/settings_robotSpeed_width"
                 android:layout_height="45dp"
                 android:textColor="@color/text_color"
                 android:background="@drawable/spinner_layout"
@@ -125,7 +125,7 @@
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/work_model"
-                android:layout_width="350dp"
+                android:layout_width="@dimen/settings_item_title_width"
                 android:layout_height="45dp"
                 android:text="@string/settings_work_model"
                 android:textSize="@dimen/dimens_textsize_30"
@@ -133,7 +133,7 @@
                 android:layout_below="@+id/robotSpeedTV" />
             <Spinner
                 android:id="@+id/settings_debug"
-                android:layout_width="300dp"
+                android:layout_width="@dimen/settings_debug_width"
                 android:layout_height="45dp"
                 android:textSize="@dimen/dimens_textsize_30"
                 android:textColor="@color/text_color"
@@ -145,7 +145,7 @@
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/setting_charging_pile"
-                android:layout_width="350dp"
+                android:layout_width="@dimen/settings_item_title_width"
                 android:layout_height="45dp"
                 android:text="@string/setting_charging_pile"
                 android:textSize="@dimen/dimens_textsize_30"
@@ -153,7 +153,7 @@
                 android:layout_below="@+id/work_model" />
             <Switch
                 android:id="@+id/switch_pile"
-                android:layout_width="300dp"
+                android:layout_width="@dimen/switch_pile_width"
                 android:layout_height="45dp"
                 android:textSize="@dimen/dimens_textsize_30"
                 android:textColor="@color/text_color"
@@ -163,7 +163,7 @@
             <TextView
                 android:layout_marginLeft="@dimen/dimens_51"
                 android:id="@+id/versionNumberTV"
-                android:layout_width="350dp"
+                android:layout_width="@dimen/settings_item_title_width"
                 android:layout_height="45dp"
                 android:text="@string/settings_version_number"
                 android:textSize="@dimen/dimens_textsize_30"
@@ -187,36 +187,36 @@
             android:layout_height="@dimen/settings_button_height"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dimens_100"
-            android:layout_marginRight="@dimen/dimens_135"
+            android:layout_marginRight="@dimen/settings_button_marginRight"
             tools:ignore="MissingConstraints">
 
             <Button
                 android:id="@+id/settings_reset_robot"
-                android:layout_width="@dimen/dimen_167"
+                android:layout_width="@dimen/settings_button_width"
                 android:layout_height="@dimen/settings_button_height"
                 android:text="@string/settings_reset_robot"
                 android:layout_toLeftOf="@id/settings_ok"
                 android:textSize="@dimen/dimens_textsize_21"
                 android:textColor="@color/text_color"
                 android:background="@drawable/setting_btn_anniu"
-                android:layout_marginRight="@dimen/dimens_38"
+                android:layout_marginRight="@dimen/settings_reset_robot_marginRight"
                 android:textAllCaps="false"/>
 
             <Button
                 android:id="@+id/settings_ok"
-                android:layout_width="@dimen/dimen_167"
+                android:layout_width="@dimen/settings_button_width"
                 android:layout_height="@dimen/settings_button_height"
                 android:text="@string/settings_ok"
                 android:textSize="@dimen/dimens_textsize_21"
                 android:textColor="@color/text_color"
                 android:layout_toLeftOf="@id/settings_cancel"
-                android:layout_marginRight="@dimen/dimens_38"
+                android:layout_marginRight="@dimen/settings_reset_robot_marginRight"
                 android:background="@drawable/setting_btn_anniu"
                 android:textAllCaps="false"/>
 
             <Button
                 android:id="@+id/settings_cancel"
-                android:layout_width="@dimen/dimen_167"
+                android:layout_width="@dimen/settings_button_width"
                 android:layout_height="@dimen/settings_button_height"
                 app:layout_constraintCircle="@+id/settings_ok"
                 android:text="@string/settings_cancel"
