@@ -331,7 +331,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             gsonUtils.setTaskName(pointName);
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             Log.d("listViewcallback : " , ""+pointName);
-            MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
+
         }
     };
 
@@ -470,6 +470,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             gsonUtils.setMapName(listMapName);
             if (!isMapItem) {
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETPOINTPOSITION));
+            }else {
+                MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.editTaskQueue));
             }
             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_VIRTUAL));
         }else if (messageEvent.getState() == 10005) {
