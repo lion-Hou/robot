@@ -250,6 +250,10 @@ public class SelectDialogUtil {
         });
 
     }
+    
+    public void setMapString(String string) {
+        mapName = string;
+    }
 
 
     /**
