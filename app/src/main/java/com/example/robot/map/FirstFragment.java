@@ -397,6 +397,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 //            });
 //            week.show();
         myDialog = new SelectDialogUtil(mContext,R.layout.dialog_select_task);
+        myDialog.setMapString(Content.first_map_Name);
         myDialog.setCheckBCallback(checkBoxCallback);
         myDialog.setListViewCallback(listViewcallback);
         myDialog.setContent("任务列表");

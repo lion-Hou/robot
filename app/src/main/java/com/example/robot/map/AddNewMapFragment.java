@@ -203,7 +203,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                              */
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
                             dialog.dismiss();
-                            Content.map_Name=newMapName;
+                            Content.map_Name=null;
 
                             waitingDialog = new ProgressDialog(mContext);
                             Log.d(TAG, "onEventMsg ： "+"dialog生成");

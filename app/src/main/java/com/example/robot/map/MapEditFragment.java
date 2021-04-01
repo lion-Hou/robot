@@ -163,7 +163,8 @@ public class MapEditFragment extends Fragment {
 
     //即时点坐标
     ArrayList<PointF> arrayPointList;
-
+    
+    private AlertDialog deleteVWDialog;
 
     @Override
     public void onStart() {
@@ -975,7 +976,10 @@ public class MapEditFragment extends Fragment {
                         if ((a >= 0 && b >= 0 && c >= 0 && d >= 0) || (a <= 0 && b <= 0 && c <= 0 && d <= 0)) {
                             canvas.drawLine(point[0], point[1], point[2], point[3], paint1);//画保存的线
                             newIndex = i;
-
+                            if (deleteVWDialog != null && deleteVWDialog.isShowing()){
+                                break;
+                            }
+                            
                             Log.d("hb", "OKkkkkkk" + newIndex);
                             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                             builder.setMessage(R.string.delete_Wall);
@@ -1036,7 +1040,10 @@ public class MapEditFragment extends Fragment {
                                     dialog.dismiss();
                                 }
                             });
-                            builder.show();
+                            deleteVWDialog = builder.create();
+                            deleteVWDialog.show();
+                            
+                            //builder.show();
 
                         } else {
                             Log.d("hb", "NO");
