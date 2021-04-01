@@ -960,10 +960,10 @@ public class MapEditFragment extends Fragment {
                     for (int i = 0; i < Pointlist.size(); i++) {
                         float[] point = Pointlist.get(i);
                         Log.i("hb", "updateVW,drawline,start_x:" + point[0] + ",start_y:" + point[1] + ", end_x:" + point[2] + " ,end_y:" + point[3]);
-                        float AX = point[0];
-                        float BX = point[0];
-                        float CX = point[2];
-                        float DX = point[2];
+                        float AX = point[0] - 10;
+                        float BX = point[0] - 10;
+                        float CX = point[2] + 10;
+                        float DX = point[2] + 10;
                         float AY = point[1] - 10;
                         float BY = point[1] + 10;
                         float CY = point[3] + 10;
