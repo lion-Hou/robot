@@ -15,7 +15,7 @@
           android:id="@+id/his_history_task"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:background="@color/colorAccent">
+          android:background="@drawable/btn_gb_main_history">
          <TextView
              android:id="@+id/his_task_size"
              android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
           android:id="@+id/his_history_time"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:background="@color/colorAccent"
+          android:background="@drawable/btn_gb_main_history"
           android:layout_toRightOf="@+id/his_history_task"
           android:layout_marginLeft="@dimen/dimens_21">
 
@@ -62,7 +62,7 @@
           android:id="@+id/his_history_area"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:background="@color/colorAccent"
+          android:background="@drawable/btn_gb_main_history"
           android:layout_toRightOf="@+id/his_history_time"
           android:layout_marginLeft="@dimen/dimens_21">
          <TextView
