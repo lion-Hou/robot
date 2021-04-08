@@ -97,7 +97,8 @@ public class EmptyClient extends WebSocketClient {
             case Content.GET_ULTRASONIC:
                 jsonObject = new JSONObject(message);
                 String get_ultrasonic = jsonObject.getString(Content.GET_ULTRASONIC);
-                EventBus.getDefault().post(new EventBusMessage<>(19197,get_ultrasonic));
+                String world_ultrasonic = jsonObject.getString("world_ultrasonic");
+                EventBus.getDefault().post(new EventBusMessage<>(19197,world_ultrasonic));
                 break;
             case Content.TEST_SENSOR:
                 jsonObject = new JSONObject(message);

@@ -398,9 +398,12 @@ public class MapManagerFragment extends Fragment implements View.OnClickListener
             }
             System.out.println("ZHZHSSSS: " + Content.list.size());
             if (Content.list.size() == 1){
-                System.out.println("MG_map_nameSSSS: " + Content.list.size());
-                managerSelected.setText(mapName[0]);
                 Content.map_Name=mapName[0];
+                if (Content.map_Name!=null) {
+                    managerEdit.setEnabled(true);
+                    managerDelete.setEnabled(true);
+                    managerRename.setEnabled(true);
+                }
                 gsonUtils.setMapName(mapName[0]);
                 MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GETMAPPIC));
             }else{

@@ -52,6 +52,7 @@
             android:gravity="center"
             android:hint="@string/new_map_name_edit"
             android:textColorHint="@color/edit_color"
+            android:imeOptions="actionDone"
             android:theme="@style/MyEditText"/>
 
         <Button

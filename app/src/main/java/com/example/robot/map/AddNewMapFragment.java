@@ -137,9 +137,11 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.new_map_scan:
                 boolean isRepeat = false;
-                for (int i = 0; i <mapName.length ; i++) {
-                    if (mapName[i].equals(newMapMapNameEditText.getText().toString())){
-                        isRepeat = true;
+                if (mapName!=null) {
+                    for (int i = 0; i < mapName.length; i++) {
+                        if (mapName[i].equals(newMapMapNameEditText.getText().toString())) {
+                            isRepeat = true;
+                        }
                     }
                 }
 
