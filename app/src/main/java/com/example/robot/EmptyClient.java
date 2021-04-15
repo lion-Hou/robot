@@ -46,8 +46,9 @@ public class EmptyClient extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshake) {
         isConnected = true;
-        EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
         Content.isConnected = true;
+        EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
+
         //发送系统时间给下位机
         long time = System.currentTimeMillis();
         gsonUtils.setTime(time);
@@ -123,6 +124,7 @@ public class EmptyClient extends WebSocketClient {
             case Content.CONN_OK:
                 jsonObject = new JSONObject(message);
                 Log.d("fdsfsdfsd", String.valueOf(jsonObject));
+
                 isConnected = true;
                 EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
                 //20201207.121212+
@@ -281,18 +283,9 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(20022, upVersionCode));
                 Log.d("speedLevelhhhh", urgencyStop);
 
-                String dbTaskTotalCount = jsonObject.getString(Content.DBTASKTOTALCOUNT);
-                EventBus.getDefault().post(new EventBusMessage(88880, dbTaskTotalCount));
-                Log.d("DB88880", dbTaskTotalCount);
-
-                String dbTimeTotalCount = jsonObject.getString(Content.DBTIMETOTALCOUNT);
-                EventBus.getDefault().post(new EventBusMessage(88881, dbTimeTotalCount));
-                Log.d("DB88881", dbTimeTotalCount);
-
-                String dbAreaTotalCount = jsonObject.getString(Content.DBAREATOTALCOUNT);
-                EventBus.getDefault().post(new EventBusMessage(88882, dbAreaTotalCount));
-                Log.d("DB88882", dbAreaTotalCount);
-
+                break;
+            case Content.CURRENTCOUNT:
+                jsonObject = new JSONObject(message);
                 String dbTaskCurrentCount = jsonObject.getString(Content.DBTASKCURRENTCOUNT);
                 EventBus.getDefault().post(new EventBusMessage(88883, dbTaskCurrentCount));
                 Log.d("DB88883", dbTaskCurrentCount);
@@ -304,7 +297,20 @@ public class EmptyClient extends WebSocketClient {
                 String dbAreaCurrentCount = jsonObject.getString(Content.DBAREACURRENTCOUNT);
                 EventBus.getDefault().post(new EventBusMessage(88885, dbAreaCurrentCount));
                 Log.d("DB88885", dbAreaCurrentCount);
+                break;
+            case Content.TOTALCOUNT:
+                jsonObject = new JSONObject(message);
+                String dbTaskTotalCount = jsonObject.getString(Content.DBTASKTOTALCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88880, dbTaskTotalCount));
+                Log.d("DB88880", dbTaskTotalCount);
 
+                String dbTimeTotalCount = jsonObject.getString(Content.DBTIMETOTALCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88881, dbTimeTotalCount));
+                Log.d("DB88881", dbTimeTotalCount);
+
+                String dbAreaTotalCount = jsonObject.getString(Content.DBAREATOTALCOUNT);
+                EventBus.getDefault().post(new EventBusMessage(88882, dbAreaTotalCount));
+                Log.d("DB88882", dbAreaTotalCount);
                 break;
 
             case Content.GET_WORKING_MODE:
