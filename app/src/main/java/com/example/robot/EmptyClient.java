@@ -47,7 +47,7 @@ public class EmptyClient extends WebSocketClient {
     public void onOpen(ServerHandshake handshake) {
         isConnected = true;
         EventBus.getDefault().post(new EventBusMessage<>(11120,isConnected));
-
+        Content.isConnected = true;
         //发送系统时间给下位机
         long time = System.currentTimeMillis();
         gsonUtils.setTime(time);
@@ -66,6 +66,7 @@ public class EmptyClient extends WebSocketClient {
     @Override
     public void onClose(int code, String reason, boolean remote) {
         isConnected = false;
+        Content.isConnected = false;
         EventBus.getDefault().post(new EventBusMessage<>(11119,isConnected));
         System.out.println("connect state closed with exit code " + code + " additional info: " + reason+"boolean"+isConnected);
     }
@@ -122,12 +123,15 @@ public class EmptyClient extends WebSocketClient {
             case Content.CONN_OK:
                 jsonObject = new JSONObject(message);
                 Log.d("fdsfsdfsd", String.valueOf(jsonObject));
-                int versionCode = jsonObject.getInt(Content.versionCode);
-                Log.d("fdsfsdfsd", String.valueOf(versionCode));
-                EventBus.getDefault().post(new EventBusMessage(12345, versionCode));
                 isConnected = true;
                 EventBus.getDefault().post(new EventBusMessage<>(11111,isConnected));
                 //20201207.121212+
+                break;
+            case Content.UP_VERSION_CODE:
+                jsonObject = new JSONObject(message);
+                int versionCode = jsonObject.getInt(Content.versionCode);
+                Log.d("fdsfsdfsd", String.valueOf(versionCode));
+                EventBus.getDefault().post(new EventBusMessage(12345, versionCode));
                 break;
             case Content.TV_TIME:
                 String string = null;
