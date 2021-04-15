@@ -191,8 +191,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 /**
                  * 正式版本中用于上位机升级
                  */
-//                showOtaDialog();
-//                ota();
+                showOtaDialog();
+                ota();
             }
         } else if (messageEvent.getState() == 90009) {
             Log.d("fdsfsdfsd111", "update");
@@ -234,13 +234,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
      */
     public void ota() {
         try {
-            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/app-debug.apk");
+            InputStream is = MainActivity.this.getClass().getClassLoader().getResourceAsStream("assets/robot.apk");
             int size = is.available();
             Log.d("ggg111", String.valueOf(size));
-//            ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-//            while (is.available() > 0) {
-//                byteBuffer.put((byte) is.read());
-//            }
             ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
             byte[] buff = new byte[100];
             int rc = 0;
