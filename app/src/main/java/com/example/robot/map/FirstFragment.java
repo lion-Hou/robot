@@ -148,7 +148,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         mainExecute.setOnClickListener(this);
         mainSpinnerTask.setOnClickListener(this);
         Log.d(TAG, "initView: SourireG"+MainActivity.emptyClient.toString());
-        if (MainActivity.emptyClient == null || !MainActivity.emptyClient.isConnecting()){
+        if (!Content.isConnected){
             Log.d(TAG,"LINK_ERROR");
         }else {
             Log.d(TAG,"LINK_ok");
