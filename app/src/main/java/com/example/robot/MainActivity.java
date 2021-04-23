@@ -309,7 +309,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     CharSequence sysTimeStr = DateFormat
                             .format("hh:mm", sysTime);
                     net_Time.setText(sysTimeStr);
-                    if (emptyClient == null || !emptyClient.isConnecting()){
+                    if (!Content.isConnected){
                         Log.d("ffff","" +"ipAd");
                     }else {
                         emptyClient.send(gsonUtils.putJsonMessage(Content.PING));
