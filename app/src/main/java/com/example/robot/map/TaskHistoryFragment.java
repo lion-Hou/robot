@@ -101,6 +101,7 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
         gsonUtils = new GsonUtils();
         initView();
         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.ROBOT_TASK_HISTORY));
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.TOTALCOUNT));
         return view;
     }
 
@@ -178,10 +179,13 @@ public class TaskHistoryFragment extends Fragment implements View.OnClickListene
             //历史任务数
             hisTaskSize.setText(message);
         }else if (messageEvent.getState() == 88881) {
-            long message = (long)messageEvent.getT();
-            long time = message / 100 / 60 /60;
-            Log.d("hisHours",""+message);
-            //历史时间
+            String message1 = (String) messageEvent.getT();
+            Log.d("allTaskhours", "message"+message1);
+            double message = Double.valueOf(message1);
+            Log.d("allTaskhours", "message"+message);
+            int time = (int) (message / 100 / 60 /60);
+            Log.d("allTaskhours", "" +time);
+            //当月时间
             hisHours.setText(String.valueOf(time));
         }else if (messageEvent.getState() == 88882) {
             String message = (String) messageEvent.getT();
