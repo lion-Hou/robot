@@ -136,7 +136,9 @@ public class TestFragment extends Fragment {
         super.onStop();
         EventBus.getDefault().unregister(this);
         switchVoice.setChecked(false);
-        switchLed.setChecked(true);
+        if (switchLed.isChecked()==false){
+            switchLed.setChecked(true);
+        }
         switchUvcAll.setChecked(false);
         switchUvc1.setChecked(false);
         switchUvc2.setChecked(false);
@@ -184,7 +186,7 @@ public class TestFragment extends Fragment {
 
     private void initView() {
         switchVoice.setChecked(false);
-        switchLed.setChecked(false);
+        switchLed.setChecked(true);
         switchUvcAll.setChecked(false);
         switchUvc1.setChecked(false);
         switchUvc2.setChecked(false);
