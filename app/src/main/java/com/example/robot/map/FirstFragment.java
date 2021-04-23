@@ -539,9 +539,11 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
             //当月任务数
             allTaskSize.setText(message);
         }else if (messageEvent.getState() == 88884) {
-            Log.d("allTaskhours", "message");
-            long message = (long)messageEvent.getT();
-            long time = message / 100 / 60 /60;
+            String message1 = (String) messageEvent.getT();
+            Log.d("allTaskhours", "message"+message1);
+            double message = Double.valueOf(message1);
+            Log.d("allTaskhours", "message"+message);
+            int time = (int) (message / 100 / 60 /60);
             Log.d("allTaskhours", "" +time);
             //当月时间
             allTaskhours.setText(String.valueOf(time));
