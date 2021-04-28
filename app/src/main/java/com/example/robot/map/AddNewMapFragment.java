@@ -116,6 +116,7 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initView() {
+        newMapName = null;
         newMapMapNameEditText.setOnClickListener(this);
         newMapScan.setOnClickListener(this);
         newMapSave.setOnClickListener(this);
@@ -205,8 +206,9 @@ public class AddNewMapFragment extends Fragment implements View.OnClickListener{
                              */
                             MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.CANCEL_SCAN_MAP));
                             dialog.dismiss();
-                            Content.map_Name=null;
-
+                            if (newMapName!=null) {
+                                Content.map_Name = newMapName;
+                            }
                             waitingDialog = new ProgressDialog(mContext);
                             Log.d(TAG, "onEventMsg ： "+"dialog生成");
                             final CharSequence strDialogBody=mContext.getString(R.string.dialog_new_map_text5);
