@@ -257,7 +257,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                         gsonUtils.setTaskName(myTaskNameList.get(i));
 
                         MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.STARTTASKQUEUE));
-                        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
+                        //MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
 //                        Log.d(TAG, "strList ： " + myTaskNameList.get(0));
 //                        Log.d(TAG, "strList ： " + myTaskNameList.get(1));
                     }
