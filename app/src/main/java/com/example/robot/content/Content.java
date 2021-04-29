@@ -35,10 +35,11 @@ public final class Content {
     */
     public static int taskState = 0;//机器人执行任务的状态
     public static int taskIndex = 0;
-    public static int version = 1;//初始版本号
+    public static int version = 3;//初始版本号
     public static boolean isConnected = false;
     public static final String MAP_NAME = "map_Name";//run地图名字
-
+    public static final String ROBOT_ERROR = "Robot_Error";
+    
     public static final String BATTERY_LOW = "battery_low";//地图名字
     public static final String OLD_MAP_NAME = "old_map_name";//老地图名字
     public static final String NEW_MAP_NAME = "new_map_name";//新地图名字
