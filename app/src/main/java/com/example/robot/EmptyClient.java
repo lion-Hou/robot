@@ -325,6 +325,11 @@ public class EmptyClient extends WebSocketClient {
                 EventBus.getDefault().post(new EventBusMessage(20009, message));
                 Log.d("edit_Queue",message );
                 break;
+                
+           case Content.ROBOT_ERROR:
+                jsonObject = new JSONObject(message);
+                EventBus.getDefault().post(new EventBusMessage(112244, message));
+                break;
 
             case Content.TOTAL_AREA:
                 jsonObject = new JSONObject(message);
