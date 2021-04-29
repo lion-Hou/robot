@@ -66,6 +66,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private static final int msgKey = 1;
     private ProgressDialog waitingDialog;
     private ProgressDialog otaDialog;
+    private RunFragment runFragment;
 
 
     @Override
@@ -86,7 +87,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         secoundFragment = new SecoundFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.second_fragment, secoundFragment).commit();
         mapManagerFragment = new MapManagerFragment();
-
+        runFragment = new RunFragment();
         mainFragment = new MainFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, mainFragment).commit();
 
@@ -162,8 +163,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         } else if (messageEvent.getState() == 11111) {
             Log.d(TAG, "connect state：connect 1111" + messageEvent.getT());
             waitingDialog.dismiss();
-            showDisconnectDialog();
-            disconnectDialog.dismiss();
+            if (disconnectDialog.isDialogShow()) {
+                disconnectDialog.dismiss();
+            }
         } else if (messageEvent.getState() == 11110) {
             Log.d(TAG, "connect state：connect 11110" + messageEvent.getT());
             waitingDialog.dismiss();
@@ -222,10 +224,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             Log.d("gdgdg", task_name);
             if (!TextUtils.isEmpty(task_name)){
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.first_fragment,new RunFragment());
+                fragmentTransaction.replace(R.id.first_fragment,runFragment);
                 fragmentTransaction.commit();
             }
-
+        }else if (messageEvent.getState() == 112244){
+            Toast.makeText(this, R.string.toast_mainactivity_RobotError, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -288,6 +291,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         public void run() {
             do {
                 try {
+                    Log.d("PING","PING");
                     Thread.sleep(1000);
                     Message msg = new Message();
                     msg.what = msgKey;
@@ -310,14 +314,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             .format("hh:mm", sysTime);
                     net_Time.setText(sysTimeStr);
                     if (!Content.isConnected){
-                        Log.d("ffff","" +"ipAd");
+                        Log.d("PING","" +"ipAd");
                     }else {
                         emptyClient.send(gsonUtils.putJsonMessage(Content.PING));
                         WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
                         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                         int ipAd = wifiInfo.getIpAddress();
                         String ipAddress = int2ip(ipAd);
-                        Log.d("ffff","" +ipAddress);
+                        Log.d("PING SUCCESS","" +ipAddress);
                         gsonUtils.setIp(ipAddress);
                     }
                     break;
