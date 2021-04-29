@@ -136,11 +136,13 @@
     <string name="toast_edit_map_text6">请输入新导航点的名字：</string>
     <string name="toast_edit_map_text7">正在初始化中，请在确保机器人周围无障碍物，请稍后...</string>
     <string name="toast_edit_map_text8">初始化完成！</string>
+    <string name="toast_edit_map_error">初始化失败！请确认地图与机器人周围环境是否正常！</string>
     <string name="toast_edit_map_text9">充电点添加成功，请稍后...</string>
     <string name="toast_edit_map_text10">请确认机器人是否连接上充电点</string>
     <string name="toast_settings_text1">应用成功!</string>
     <string name="toast_settings_text2">进入测试页面</string>
     <string name="toast_mainactivity_text1">检测到机器人前方存在障碍物!</string>
+    <string name="toast_mainactivity_RobotError">机器人的状态异常，请联系供应商!</string>
     <string name="urgencyStoptitle">警告</string>
     <string name="urgencyStopmessage">紧急停止</string>
 
