@@ -109,11 +109,13 @@
     <string name="toast_edit_map_text6">Please enter the name of the new navigation point：</string>
     <string name="toast_edit_map_text7">Initialization is in progress. Please make sure there are no obstacles around the robot. Please wait a moment...</string>
     <string name="toast_edit_map_text8">Initialization successful！</string>
+    <string name="toast_edit_map_error">Initialization failed! Please confirm whether the map and the environment around the robot are normal!</string>
     <string name="toast_edit_map_text9">Charging point added successfully, please wait a moment...</string>
     <string name="toast_edit_map_text10">Please check whether the charging point is connected to the robot!</string>
     <string name="toast_settings_text1">Successful application!</string>
     <string name="toast_settings_text2">Access to the test page</string>
     <string name="toast_mainactivity_text1">Obstacle detected in front of robot!</string>
+    <string name="toast_mainactivity_RobotError">The status of the robot is abnormal, please contact the supplier!</string>
     <string name="urgencyStoptitle">WARN</string>
     <string name="urgencyStopmessage">URGENCY STOP</string>
 
