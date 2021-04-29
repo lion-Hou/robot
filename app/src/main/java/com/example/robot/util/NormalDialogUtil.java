@@ -17,6 +17,18 @@ public class NormalDialogUtil {
     public void dismiss(){
         dialog.dismiss();
     }
+    
+     public boolean isDialogShow(){
+        if (dialog != null) {
+            if (dialog.isShowing()) {
+                return true;
+            } else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
     public synchronized AlertDialog showDialog(Context context, String title, String content,
                                                       String btnCancleText, String btnSureText, DialogInterface.OnClickListener cancleListener,
                                                       DialogInterface.OnClickListener sureListener) {
