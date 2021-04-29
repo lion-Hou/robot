@@ -101,6 +101,7 @@ public class RunFragment extends Fragment {
 
         super.onResume();
         initView();
+        MainActivity.emptyClient.send(gsonUtils.putJsonMessage(Content.GET_TASK_STATE));
     }
 
     private void initView() {
@@ -111,6 +112,10 @@ public class RunFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new TaskStateListAdapter(mContext, R.layout.item_list_task);
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+        TaskStateList taskStateList = new TaskStateList(0, "point", "60","start");
+        listPointName.add(taskStateList);
+        mAdapter.refeshList(listPointName);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @OnClick(R.id.task_run_edit)
@@ -143,12 +148,14 @@ public class RunFragment extends Fragment {
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject((String) messageEvent.getT());
+                if (jsonObject.has(Content.TASK_NAME)){
                 String taskName = jsonObject.getString(Content.TASK_NAME);
-                String mapName = jsonObject.getString(Content.MAP_NAME);
+                runTaskName.setText(taskName);
                 Log.d("bgbg" , taskName);
+                }
+                String mapName = jsonObject.getString(Content.MAP_NAME);
                 Log.d("bgbg" , mapName);
                 runMapName.setText(mapName);
-                runTaskName.setText(taskName);
                 JSONArray stateList = jsonObject.getJSONArray(Content.ROBOT_TASK_STATE);
                 for (int i = 0; i < stateList.length(); i++) {
                     JSONObject js = stateList.getJSONObject(i);
@@ -162,7 +169,6 @@ public class RunFragment extends Fragment {
                 }
                 Log.d("RunFragment : " , ""+listPointName.size());
                 mAdapter.refeshList(listPointName);
-                recyclerView.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
             } catch (JSONException e) {
                 e.printStackTrace();
